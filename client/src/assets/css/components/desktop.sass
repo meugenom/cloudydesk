@@ -1,0 +1,122 @@
+
+.desktop
+  display: none
+  overflow: hidden
+  height: calc(100vh - 60px)
+  width: 100%
+  display: grid
+  grid-template-rows: repeat(auto-fill, 110px)
+  grid-auto-flow: column
+  grid-template-columns: repeat(auto-fill, 120px)
+
+.device-phone .desktop
+  padding-top: 30px
+
+
+.item
+  width: 110px
+  height: 70px
+  user-select: none !important
+  -moz-user-select: none !important
+  -webkit-user-select: none
+  text-align: center
+  margin: 15px 5px 30px 5px
+  float: left
+  position: relative
+  scroll-margin: 15px 15px 100px 15px
+
+.item-disabled
+  .item-icon, .item-name
+    opacity: .7
+    pointer-events: none
+
+.item-icon
+  display: block
+  margin: 0 auto
+  padding: 5px
+  height: 45px
+  width: 45px
+  filter: drop-shadow(1px 1px 1px rgba(102, 102, 102, 0.5))
+  display: flex
+  justify-content: center
+  align-items: center
+
+  img
+    max-height: 45px
+    max-width: 45px
+
+.item-icon-thumb
+  padding: 1px
+  background-color: #fff
+  border: 1px solid #eee
+  border-radius: 3px
+
+.item-selected .item-icon
+  background-color: #d4d4d430
+  border-radius: 3px
+  filter: drop-shadow(0 0 1px rgba(102, 102, 102, 1))
+
+.item-badges
+  position: absolute
+  height: 15px
+  width: 55px
+  text-align: center
+  justify-content: right
+  display: flex
+  top: 38px
+  left: 28px
+  right: 50%
+
+.item-badge
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4))
+  display: none
+  margin: 1px
+  width: 15px
+  height: 15px
+  box-sizing: border-box
+  border-radius: 100%
+
+  &.item-shortcut
+    border-radius: 1px
+    background: #fff
+
+.item-has-website-badge
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4))
+  display: none
+
+.item-name, .item-name-editor, .item-name-shadow
+  font-size: 13px
+  color: #fff
+  text-shadow: 0 0 3px #1d1d1d, 0 0 3px #1d1d1d, 0 0 3px #1d1d1d
+  -webkit-font-smoothing: antialiased
+  padding: 3px
+  margin-top: 4px
+  display: inline-block
+  font-weight: 700
+  border-radius: 4px
+  line-break: anywhere
+
+.item-name
+  transition: opacity .2s ease-in-out
+  cursor: default
+  max-width: 110px
+
+.item-name-shadow
+  display: none
+  max-width: 110px
+
+.item-name-editor
+  background: 0 0
+  text-align: center
+  border: none
+  max-width: 100%
+  padding: 1px 3px
+  resize: none
+  display: none
+  margin: 6px auto
+  max-height: 45px
+  user-select: initial
+  box-sizing: border-box
+
+.item-name-editor-active
+  display: block
