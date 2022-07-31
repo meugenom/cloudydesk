@@ -1,0 +1,161 @@
+.button
+  color: #666
+  background-color: #eee
+  border-color: #eee
+  font-size: 14px
+  text-decoration: none
+  text-align: center
+  line-height: 40px
+  height: 35px
+  padding: 0 30px
+  margin: 0
+  display: inline-block
+  appearance: none
+  cursor: pointer
+  border: none
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+  border-color: #b9b9b9
+  border-style: solid
+  border-width: 1px
+  line-height: 35px
+  background: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#e1e1e1))
+  background: linear-gradient(#f6f6f6, #e1e1e1)
+  -webkit-box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 1px 2px rgb(0 0 0 / 15%)
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 1px 2px rgb(0 0 0 / 15%)
+  border-radius: 4px
+  outline: 0
+
+  &:focus-visible
+    border-color: rgb(118 118 118)
+
+  &.active, &.has-open-contextmenu, &.is-active, &:active
+    text-decoration: none
+    background-color: #eee
+    border-color: #cfcfcf
+    color: #a9a9a9
+    -webkit-transition-duration: 0s
+    transition-duration: 0s
+    -webkit-box-shadow: inset 0 1px 3px rgb(0 0 0 / 20%)
+    box-shadow: inset 0 2px 3px rgb(0 0 0 / 36%), 0 1px 0 #fff
+
+  &.disabled, &.is-disabled, &:disabled
+    top: 0 !important
+    background: #eee !important
+    border: 1px solid #ddd !important
+    text-shadow: 0 1px 1px #fff !important
+    color: #ccc !important
+    cursor: default !important
+    appearance: none !important
+    pointer-events: none
+
+.button-action
+  &.disabled, &.is-disabled, &:disabled
+    background: #55a975 !important
+    border: 1px solid #60ab7d !important
+    text-shadow: none !important
+    color: #ccc !important
+
+.button-primary
+  &.disabled, &.is-disabled, &:disabled
+    background: #8fc2e7 !important
+    border: 1px solid #98adbd !important
+    text-shadow: none !important
+    color: #f5f5f5 !important
+
+.button-block
+  width: 100%
+
+.button-primary
+  border-color: #088ef0
+  background: -webkit-gradient(linear, left top, left bottom, from(#34a5f8), to(#088ef0))
+  background: linear-gradient(#34a5f8, #088ef0)
+  color: #fff
+
+.button-primary-flat
+  &.active, &.is-active, &:active
+    background-color: #2798eb
+    border-color: #2798eb
+    color: #bedef5
+
+.button-primary
+  &.active, &.is-active, &:active
+    background-color: #2798eb
+    border-color: #2798eb
+    color: #bedef5
+
+.button-action
+  border-color: #08bf4e
+  background: -webkit-gradient(linear, left top, left bottom, from(#29d55d), to(#1ccd60))
+  background: linear-gradient(#29d55d, #1ccd60)
+  color: #fff
+
+.button-action-flat
+  &.active, &.is-active, &:active
+    background-color: #27eb41
+    border-color: #27eb41
+    color: #bef5ca
+
+.button-action
+  &.active, &.is-active, &:active
+    background-color: #27eb41
+    border-color: #27eb41
+    color: #bef5ca
+
+.button-giant
+  font-size: 28px
+  height: 70px
+  line-height: 70px
+  padding: 0 70px
+
+.button-jumbo
+  font-size: 24px
+  height: 60px
+  line-height: 60px
+  padding: 0 60px
+
+.button-large
+  font-size: 20px
+  height: 50px
+  line-height: 50px
+  padding: 0 50px
+
+.button-normal
+  font-size: 16px
+  height: 40px
+  line-height: 38px
+  padding: 0 40px
+
+.button-small
+  height: 30px
+  line-height: 29px
+  padding: 0 30px
+
+.button-tiny
+  font-size: 9.6px
+  height: 24px
+  line-height: 24px
+  padding: 0 24px
+
+.fullscreen-btn, .user-options-menu-btn
+  padding: 4px
+  cursor: pointer
+  font-size: 14px
+  width: auto
+  padding: 0 10px
+  margin-left: 10px
+  overflow-y: hidden !important
+  overflow-x: hidden !important
+
+.fullscreen-btn img, .user-options-menu-btn img
+  width: 17px
+  margin-bottom: -4px
+
+.user-options-menu-username
+  color: #000
+  margin-left: 5px
+
+  &:empty
+    margin-left: 0
+
