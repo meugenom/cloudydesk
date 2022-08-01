@@ -12,6 +12,6 @@ What do we have just now? A little bit, but still:
 - ability to select regions on the web view(let's see in web console)
 - capable full-window mode
 
-![web desktop screenshot](./assets/Screenshot.png)
+![web desktop screenshot](./assets/screenshot.png)
 
 All icons uploaded from https://www.svgrepo.com and will be changed later in our versions.
