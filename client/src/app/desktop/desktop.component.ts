@@ -1,21 +1,24 @@
-import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import SelectionArea from "@viselect/vanilla";
+import { Globals } from '../global';
 
 
 @Component({
 	selector: 'app-desktop',
+	providers: [ Globals ],
 	templateUrl: './desktop.component.html',
-	styleUrls: ['./desktop.component.sass']
+	styleUrls: ['./desktop.component.sass'],
 })
-export class DesktopComponent implements AfterViewInit {
+export class DesktopComponent implements AfterViewInit{
 
 
-	fullScreen: boolean = false;
+	fullScreen: boolean;
 
 	@ViewChild('container') input: ElementRef | undefined;
 
 
-	constructor(private renderer: Renderer2) {
+	constructor(private renderer: Renderer2, public globals: Globals) {
+		this.fullScreen = this.globals.fullScreen;
 	}
 
 	ngAfterViewInit() {
@@ -70,55 +73,5 @@ export class DesktopComponent implements AfterViewInit {
 			)
 			.on("stop", ({ store: { stored } }) => console.log(stored.length));
 	}
-
-	goFullScreen(fullScreen: boolean) {
-		if (fullScreen) {
-			this.openFullscreen();
-		} else {
-			this.closeFullscreen();
-		}
-	}
-
-
-	openFullscreen() {
-
-		// Trigger fullscreen
-		const docElmWithBrowsersFullScreenFunctions = document.documentElement as HTMLElement & {
-			mozRequestFullScreen(): Promise<void>;
-			webkitRequestFullscreen(): Promise<void>;
-			msRequestFullscreen(): Promise<void>;
-		};
-		if (docElmWithBrowsersFullScreenFunctions.requestFullscreen) {
-			docElmWithBrowsersFullScreenFunctions.requestFullscreen();
-		} else if (docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen) { /* Firefox */
-			docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen();
-		} else if (docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-			docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen();
-		} else if (docElmWithBrowsersFullScreenFunctions.msRequestFullscreen) { /* IE/Edge */
-			docElmWithBrowsersFullScreenFunctions.msRequestFullscreen();
-		}
-		this.fullScreen = true;
-	}
-
-	closeFullscreen() {
-		const docWithBrowsersExitFunctions = document as Document & {
-			mozCancelFullScreen(): Promise<void>;
-			webkitExitFullscreen(): Promise<void>;
-			msExitFullscreen(): Promise<void>;
-		};
-		if (docWithBrowsersExitFunctions.exitFullscreen) {
-			docWithBrowsersExitFunctions.exitFullscreen();
-		} else if (docWithBrowsersExitFunctions.mozCancelFullScreen) { /* Firefox */
-			docWithBrowsersExitFunctions.mozCancelFullScreen();
-		} else if (docWithBrowsersExitFunctions.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-			docWithBrowsersExitFunctions.webkitExitFullscreen();
-		} else if (docWithBrowsersExitFunctions.msExitFullscreen) { /* IE/Edge */
-			docWithBrowsersExitFunctions.msExitFullscreen();
-		}
-
-		this.fullScreen = false;
-	}
-
-
 }
 

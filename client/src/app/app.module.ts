@@ -5,13 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DesktopComponent } from './desktop/desktop.component';
-import { FullscreenDirective } from './fullscreen/fullscreen.directive';
+import { Fullscreen } from './fullscreen/fullscreen.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     DesktopComponent,
-    FullscreenDirective
+	Fullscreen
   ],
   imports: [
     BrowserModule,

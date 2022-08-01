@@ -12,15 +12,12 @@
           margin-left: 10px;
           filter: drop-shadow(0px 0px 1px rgb(51, 51, 51));"/>
 	</a>
-
-    <button
+	<button counting
       class="fullscreen-btn button button-small"
-      title="Enter Full Screen"
-      (click)="goFullScreen(!fullScreen)">
-      <img src="./../../assets/img/fullscreen.svg" *ngIf="!fullScreen" />
-      <img src="./../../assets/img/screen.svg" *ngIf="fullScreen" />
+      title="Enter Full Screen">
+      <img src="./../../assets/img/fullscreen.svg" *ngIf="!globals.fullScreen" />
+      <img src="./../../assets/img/screen.svg" *ngIf="globals.fullScreen" />
     </button>
-
     <button class="user-options-menu-btn button button-small">
       <img src="./../../assets/img/profile.svg" />
       <span class="user-options-menu-username"> user </span>
