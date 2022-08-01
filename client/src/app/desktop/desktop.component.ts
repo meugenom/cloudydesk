@@ -24,7 +24,7 @@ export class DesktopComponent implements AfterViewInit {
 
 		for (let i = 0; i < 400; i++) {
 			const div = document.createElement("div");
-			//div.style.background =  '#aaccff'
+			div.style.background = '#aaccff'
 			div.style.border = "dashed"
 			div.style.opacity = "0.2"
 			div.style.zIndex = "-1"
@@ -44,6 +44,7 @@ export class DesktopComponent implements AfterViewInit {
 						el.classList.remove("selected");
 						//console.log(el.attributes[1]);
 						//el.attributes[1].value = "background-color: #aaccff; border-radius: 0.25rem;"
+						el.attributes[1].value = "background-color: ; border-radius: 0.25rem;"
 					}
 					selection.clearSelection();
 				}
@@ -57,12 +58,13 @@ export class DesktopComponent implements AfterViewInit {
 				}) => {
 					for (const el of added) {
 						el.classList.add("selected");
-						//el.attributes[1].value = "background-color: #5f9efc; border-radius: 0.25rem;"
+						el.attributes[1].value = "background-color: #5f9efc; border-radius: 0.25rem;"
 					}
 
 					for (const el of removed) {
 						el.classList.remove("selected");
 						//el.attributes[1].value = "background-color: #aaccff; border-radius: 0.25rem;"
+						el.attributes[1].value = "background-color: ; border-radius: 0.25rem;"
 					}
 				}
 			)
