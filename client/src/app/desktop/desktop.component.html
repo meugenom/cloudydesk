@@ -1,6 +1,8 @@
 <div
   class="screen"
   [style.background-image]="'url(./../../assets/img/background.jpg)'">
+  
+  <!--top right region-->
   <div
     class="user-options-wrapper"
     style="position: absolute; right: 7px; top: 7px">
@@ -12,105 +14,25 @@
           margin-left: 10px;
           filter: drop-shadow(0px 0px 1px rgb(51, 51, 51));"/>
 	</a>
-	<button counting
+	<!--fullscreen button-->
+	<button FullScreenOpening
       class="fullscreen-btn button button-small"
       title="Enter Full Screen">
       <img src="./../../assets/img/fullscreen.svg" *ngIf="!globals.fullScreen" />
       <img src="./../../assets/img/screen.svg" *ngIf="globals.fullScreen" />
     </button>
+	
+	<!--user information button-->
     <button class="user-options-menu-btn button button-small">
       <img src="./../../assets/img/profile.svg" />
       <span class="user-options-menu-username"> user </span>
     </button>
   </div>
-  <div class="container" #container>
 
-  </div>
+  <!--container for files-->
+  <div class="container" #container></div>
+  
+  <!--taskbar component-->
+  <app-taskbar></app-taskbar>
 
-  <div class="taskbar" style="height: 50px">
-    <div
-      class="taskbar-item disable-user-select"
-      id="taskbar-item-2"
-      data-taskbar-item-id="2"
-      data-name="Explorer"
-      data-app="explorer"
-      data-keep-in-taskbar="true"
-      data-open-windows="0"
-      title="Explorer">
-      <div class="taskbar-icon">
-        <img src="./../../assets/img/folders.svg" style=""/>
-      </div>
-      <span class="active-taskbar-indicator"></span>
-	</div>
-    <div
-      class="taskbar-item disable-user-select"
-      id="taskbar-item-3"
-      data-taskbar-item-id="3"
-      data-name="Editor"
-      data-app="editor"
-      data-keep-in-taskbar="true"
-      data-open-windows="0"
-      title="Editor">
-      <div class="taskbar-icon">
-        <img src="./../../assets/img/app-editor.svg" style="" />
-      </div>
-      <span class="active-taskbar-indicator"></span>
-    </div>
-    <div
-      class="taskbar-item disable-user-select"
-      id="taskbar-item-4"
-      data-taskbar-item-id="4"
-      data-name="Draw"
-      data-app="draw"
-      data-keep-in-taskbar="true"
-      data-open-windows="0"
-      title="Draw">
-      <div class="taskbar-icon">
-        <img src="./../../assets/img/app-draw.svg" style="" />
-      </div>
-      <span class="active-taskbar-indicator"></span>
-    </div>
-    <div
-      class="taskbar-item disable-user-select"
-      id="taskbar-item-5"
-      data-taskbar-item-id="5"
-      data-name="Terminal"
-      data-app="terminal"
-      data-keep-in-taskbar="true"
-      data-open-windows="0"
-      title="Terminal">
-      <div class="taskbar-icon">
-        <img src="./../../assets/img/app-terminal.svg" style="" />
-      </div>
-      <span class="active-taskbar-indicator"></span>
-    </div>
-    <div
-      class="taskbar-item disable-user-select"
-      id="taskbar-item-6"
-      data-taskbar-item-id="6"
-      data-name="Camera"
-      data-app="camera"
-      data-keep-in-taskbar="true"
-      data-open-windows="0"
-      title="Camera">
-      <div class="taskbar-icon">
-        <img src="./../../assets/img/app-camera.svg" style="" />
-      </div>
-      <span class="active-taskbar-indicator"></span>
-    </div>
-    <div
-      class="taskbar-item disable-user-select"
-      id="taskbar-item-7"
-      data-taskbar-item-id="7"
-      data-name="Settings"
-      data-app="settings"
-      data-keep-in-taskbar="true"
-      data-open-windows="0"
-      title="Settings">
-      <div class="taskbar-icon">
-        <img src="./../../assets/img/app-settings.svg" style="" />
-      </div>
-      <span class="active-taskbar-indicator"></span>
-    </div>
-  </div>
 </div>

@@ -23,7 +23,7 @@ export class DesktopComponent implements AfterViewInit{
 
 	ngAfterViewInit() {
 
-		console.log(this.input?.nativeElement);
+		//console.log(this.input?.nativeElement);
 
 		for (let i = 0; i < 400; i++) {
 			const div = document.createElement("div");

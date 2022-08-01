@@ -2,7 +2,7 @@ import { Directive, HostListener, Renderer2 } from '@angular/core';
 import { Globals } from '../global';
 
 @Directive({
-	selector: 'button[counting]'
+	selector: 'button[FullScreenOpening]'
 })
 export class Fullscreen {
 	
@@ -12,7 +12,8 @@ export class Fullscreen {
 	
 	@HostListener('click', ['$event.target'])
 	onClick() {
-		console.log("Fullscreen = " + this.globals.fullScreen);
+		
+		//console.log("Fullscreen = " + this.globals.fullScreen);
 		if (this.globals.fullScreen == false) {
 			this.openFullscreen();
 		} else {
