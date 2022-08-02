@@ -12,8 +12,10 @@ A little bit, but still:
 - web view with background, taskbar, and app icons
 - ability to select regions on the web view(let's see in web console)
 - capable full-window mode
+- modal for explorer
 
 ![web desktop screenshot](./assets/screenshot01072022.png)
+![web desktop screenshot](./assets/screenshot02072022.png)
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 
@@ -33,6 +35,12 @@ src
 	 |--desktop.component.spec.ts
 	 |--desktop.component.html
 	 |--desktop.component.sass
+ |--modal
+	 |--modal.module.ts
+	 |--modal.service.ts
+	 |--modal.component.ts
+	 |--modal.component.sass
+	 |--modal.component.html
  |--taskbar
 	 |--taskbar.component.ts
 	 |--taskbar.component.spec.ts
