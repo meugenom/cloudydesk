@@ -8,6 +8,8 @@ import { DesktopComponent } from './desktop/desktop.component';
 import { Fullscreen } from './fullscreen/fullscreen.directive';
 import { TaskbarComponent } from './taskbar/taskbar.component';
 
+import { ModalModule } from './modal/modal.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,8 @@ import { TaskbarComponent } from './taskbar/taskbar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+	ModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]
