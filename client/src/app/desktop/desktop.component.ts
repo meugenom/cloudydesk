@@ -2,7 +2,6 @@ import { AfterViewInit, Component, OnInit, ElementRef, Renderer2, ViewChild } fr
 import SelectionArea from "@viselect/vanilla";
 import { Globals } from '../global';
 
-
 @Component({
 	selector: 'app-desktop',
 	providers: [ Globals ],
@@ -10,7 +9,6 @@ import { Globals } from '../global';
 	styleUrls: ['./desktop.component.sass'],
 })
 export class DesktopComponent implements AfterViewInit{
-
 
 	fullScreen: boolean;
 
@@ -21,6 +19,8 @@ export class DesktopComponent implements AfterViewInit{
 		this.fullScreen = this.globals.fullScreen;
 	}
 
+
+	//begin select cells
 	ngAfterViewInit() {
 
 		//console.log(this.input?.nativeElement);

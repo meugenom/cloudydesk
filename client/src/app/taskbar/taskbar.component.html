@@ -1,5 +1,19 @@
+<app-modal id="explorer">
+	<span class="window-action-btn">
+		<img (click)="closeModal('explorer');" src="../../assets/img/btn-close.svg" alt=""/>
+	</span>
+	<span class="window-action-btn" style="left: 20px;">
+		<img src="../../assets/img/btn-minimize.svg" alt=""/>
+	</span>
+	<span class="window-action-btn" style="left: 40px;">
+		<img src="../../assets/img/btn-open.svg" alt=""/>
+	</span>
+</app-modal>
+
 <div class="taskbar" style="height: 50px">
-    <div
+    
+	<div
+	  (click)="openModal('explorer')"
       class="taskbar-item disable-user-select"
       id="taskbar-item-2"
       data-taskbar-item-id="2"
@@ -13,7 +27,8 @@
       </div>
       <span class="active-taskbar-indicator"></span>
 	</div>
-    <div
+    
+	<div
       class="taskbar-item disable-user-select"
       id="taskbar-item-3"
       data-taskbar-item-id="3"
