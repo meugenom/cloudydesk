@@ -2,19 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ModalService } from '../modal/modal.service';
 
 @Component({
-	selector: 'app-editor',
-	templateUrl: './editor.component.html',
-	styleUrls: ['./editor.component.sass']
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.sass']
 })
-export class EditorComponent implements OnInit {
+export class SettingsComponent implements OnInit {
 
-	constructor(private modalService: ModalService) { }
+  constructor(private modalService: ModalService) { }
 
-	ngOnInit(): void {
-	}
+  ngOnInit(): void {
+  }
 
-
-	//modals
+  //modals
 	openModal(id: string) {
 		this.modalService.open(id);
 	}
@@ -30,4 +29,5 @@ export class EditorComponent implements OnInit {
 	maximizeModal(id : string){
 		this.modalService.maximize(id);
 	}
+
 }

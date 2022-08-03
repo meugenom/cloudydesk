@@ -51,13 +51,41 @@ export class ModalComponent implements OnInit, OnDestroy {
 
     // open modal
     open(): void {
-        this.element.style.display = 'block';
-		
-		this.setNewPosition(this.element);
-		this.element.classList.add('app-modal-opened');
-		this.element.style.zIndex = 1;
-	
+		//console.log(this.element.classList.contains('minimized'))
+
+		//if window minimized
+		if(this.element.classList.contains('minimized')){
+			this.element.style.width = '600px';
+			this.element.style.height = '350px';
+			this.element.classList.remove('minimized');
+
+		}else{
+			
+			//open new window	
+			this.element.style.display = 'block';
+			this.setNewPosition(this.element);
+			this.element.classList.add('app-modal-opened');
+			this.element.style.zIndex = 1;
+			
+			//make taskbar indicator active
+			const taskbars = document.getElementsByClassName('taskbar-item')
+			for (let i = 0; i < taskbars.length; i++) {
+				const el = taskbars[i];
+				if(el.getAttribute('data-app') == this.element.id){
+					//console.log(el.getElementsByTagName('span')[0].style)
+					el.getElementsByTagName('span')[0].style.display = 'inline';
+				}
+			}
+		}
     }
+
+	//default settings for window
+	/*
+	width: 600px;
+	height: 350px;
+	top: calc(15% + 0px);
+	left: 405px;
+	*/
 
     // close modal
     close(): void {
@@ -66,6 +94,12 @@ export class ModalComponent implements OnInit, OnDestroy {
 		this.element.classList.remove('app-modal-opened');
 		this.element.classList.remove('focused');
 		this.element.style.zIndex = 0;
+		
+		//default 
+		this.element.style.width = '600px';
+		this.element.style.height = '350px';
+		this.element.style.top = 'calc(15% + 0px)';
+		this.element.style.left = '405px';
 
 		//need focus on previous opened window
 		const opened = document.getElementsByClassName('app-modal-opened');
@@ -74,7 +108,46 @@ export class ModalComponent implements OnInit, OnDestroy {
 			opened[opened.length - 1].classList.add('focused')
 		}
 
+		//make taskbar indicator inactive
+		const taskbars = document.getElementsByClassName('taskbar-item')
+		for (let i = 0; i < taskbars.length; i++) {
+			const el = taskbars[i];
+			if(el.getAttribute('data-app') == this.element.id){
+				//console.log(el.getElementsByTagName('span')[0].style)
+				el.getElementsByTagName('span')[0].style.display = '';
+			}
+		}
+
     }
+
+	minimize():void {
+		//minimized window
+		//console.log('minimize')
+		this.element.style.width = '0px';
+		this.element.style.height = '0px';
+		this.element.classList.add('minimized');
+	}
+
+	maximize():void{
+		//if window was maximized
+		if(this.element.classList.contains('maximized')){
+			this.element.classList.remove('maximized');
+			this.element.style.top = 'calc(15% + 0px)';
+			this.element.style.left = '405px';
+			this.element.style.width = '600px';
+			this.element.style.height = '350px';
+		}else{
+			this.element.style.top = 0;
+			this.element.style.left = 0;
+			const calcWidth =  document.body.clientWidth
+			const calcHeight = document.body.clientHeight;
+			this.element.style.width = calcHeight + 'px';
+			this.element.style.height = calcWidth + 'px';
+			this.element.classList.add('maximized');
+			console.log("width = " + document.body.clientWidth)
+			console.log("height = " + document.body.clientHeight)
+		}
+	}
 
 	setNewPosition(element: HTMLElement){
 
@@ -107,8 +180,8 @@ export class ModalComponent implements OnInit, OnDestroy {
 		}
 		*/
 
-		//window isn't opened
-		if(!flag && opened.length != 0){
+		//window isn't opened and last window is not maximized
+		if(!flag && opened.length != 0 && !focused[0].classList.contains('maximized')){
 			//get position for a last opened window
 			const top = focused[0];
 			//const zIndex = window.getComputedStyle(top).zIndex;

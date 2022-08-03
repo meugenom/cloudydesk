@@ -13,6 +13,8 @@ import { ExplorerComponent } from './explorer/explorer.component';
 import { DrawComponent } from './draw/draw.component';
 import { TerminalComponent } from './terminal/terminal.component';
 import { EditorComponent } from './editor/editor.component';
+import { CameraComponent } from './camera/camera.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { EditorComponent } from './editor/editor.component';
   ExplorerComponent,
   DrawComponent,
   TerminalComponent,
-  EditorComponent
+  EditorComponent,
+  CameraComponent,
+  SettingsComponent
   ],
   imports: [
     BrowserModule,

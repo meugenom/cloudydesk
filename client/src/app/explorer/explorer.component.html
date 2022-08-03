@@ -7,10 +7,14 @@
     />
   </span>
   <span class="window-action-btn" style="left: 20px">
-    <img src="../../assets/img/btn-minimize.svg" alt="" />
+    <img 
+	(click)="minimizeModal('explorer')"
+	src="../../assets/img/btn-minimize.svg" alt="" />
   </span>
   <span class="window-action-btn" style="left: 40px">
-    <img src="../../assets/img/btn-open.svg" alt="" />
+    <img 
+	(click)="maximizeModal('explorer')"
+	src="../../assets/img/btn-open.svg" alt="" />
   </span>
   <div class="window-head">
     <div class="window-head-draggable">
