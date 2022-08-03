@@ -14,7 +14,6 @@ export class DrawComponent implements OnInit {
 		
 	}
 
-
 	//modals
 	openModal(id: string) {
 		this.modalService.open(id);
@@ -24,5 +23,11 @@ export class DrawComponent implements OnInit {
 		this.modalService.close(id);
 	}
 
+	minimizeModal(id : string){
+		this.modalService.minimize(id);
+	}
 
+	maximizeModal(id : string){
+		this.modalService.maximize(id);
+	}
 }

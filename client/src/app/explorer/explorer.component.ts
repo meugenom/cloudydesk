@@ -22,4 +22,12 @@ export class ExplorerComponent implements OnInit {
 		this.modalService.close(id);
 	}
 
+	minimizeModal(id : string){
+		this.modalService.minimize(id);
+	}
+
+	maximizeModal(id : string){
+		this.modalService.maximize(id);
+	}
+
 }

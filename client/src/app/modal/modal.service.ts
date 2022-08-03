@@ -26,4 +26,16 @@ export class ModalService {
         modal.close();
 		//console.dir(this.modals);
     }
+
+	minimize(id: string){
+		//minimize modal window
+		const modal = this.modals.find(x => x.id === id);
+		modal.minimize();
+	}
+
+	maximize(id: string){
+		//maximize modal window
+		const modal = this.modals.find(x => x.id === id);
+		modal.maximize();
+	}
 }

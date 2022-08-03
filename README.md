@@ -11,11 +11,14 @@ Best Regards!
 A little bit, but still:
 - web view with background, taskbar, and app icons
 - ability to select regions on the web view(let's see in web console)
-- capable full-window mode
-- modals for explorer, editor, draw, terminal
+- capable desktop's full-window mode
+- modals from taskbar apps (explorer, editor, draw, terminal, camera, settings) with options:
+	- close app window
+	- maximize app's window / back to small app's window
+	- minimize app's window / back to small app's window
 
 ![web desktop screenshot](./assets/screenshot01082022.png)
-![web desktop screenshot](./assets/screenshot03082022.png)
+![web desktop screenshot](./assets/screenshot03082022last.png)
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 
@@ -30,6 +33,12 @@ src
 	 |--app.component.sass
 	 |--app-routing.module.ts
 	 |--app-component.spec.ts
+
+ |--camera
+     |--camera.component.ts
+	 |--camera.component.spec.ts
+	 |--camera.component.html
+	 |--camera.component.sass
 
  |--desktop
 	 |--desktop.component.ts
@@ -77,6 +86,12 @@ src
 	 |--terminal.component.spec.ts
 	 |--terminal.component.html
 	 |--terminal.component.sass
+
+ |--settings
+     |--settings.component.ts
+	 |--settings.component.spec.ts
+	 |--settings.component.html
+	 |--settings.component.sass
 
  |--assets
 	 |--css
