@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskComponentComponent } from './taskbar.component';
+import { DrawComponent } from './draw.component';
 
-describe('TaskComponentComponent', () => {
-  let component: TaskComponentComponent;
-  let fixture: ComponentFixture<TaskComponentComponent>;
+describe('DrawComponent', () => {
+  let component: DrawComponent;
+  let fixture: ComponentFixture<DrawComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaskComponentComponent ]
+      declarations: [ DrawComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TaskComponentComponent);
+    fixture = TestBed.createComponent(DrawComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

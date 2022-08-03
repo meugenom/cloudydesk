@@ -12,10 +12,10 @@ A little bit, but still:
 - web view with background, taskbar, and app icons
 - ability to select regions on the web view(let's see in web console)
 - capable full-window mode
-- modal for explorer
+- modals for explorer, editor, draw, terminal
 
-![web desktop screenshot](./assets/screenshot01072022.png)
-![web desktop screenshot](./assets/screenshot02072022.png)
+![web desktop screenshot](./assets/screenshot01082022.png)
+![web desktop screenshot](./assets/screenshot03082022.png)
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 
@@ -30,27 +30,59 @@ src
 	 |--app.component.sass
 	 |--app-routing.module.ts
 	 |--app-component.spec.ts
+
  |--desktop
 	 |--desktop.component.ts
 	 |--desktop.component.spec.ts
 	 |--desktop.component.html
 	 |--desktop.component.sass
+
+ |--draw
+     |--draw.component.ts
+	 |--draw.component.spec.ts
+	 |--draw.component.html
+	 |--draw.component.sass
+
+ |--editor
+     |--editor.component.ts
+	 |--editor.component.spec.ts
+	 |--editor.component.html
+	 |--editor.component.sass
+
+ |--explorer
+     |--explorer.component.ts
+	 |--explorer.component.spec.ts
+	 |--explorer.component.html
+	 |--explorer.component.sass
+
+ |--fullscreen
+	 |--fullscreen.directive.ts
+	 |--fullscreen.directive.spec.ts
+
  |--modal
 	 |--modal.module.ts
 	 |--modal.service.ts
 	 |--modal.component.ts
 	 |--modal.component.sass
 	 |--modal.component.html
+
  |--taskbar
 	 |--taskbar.component.ts
 	 |--taskbar.component.spec.ts
 	 |--taskbar.component.sass
 	 |--taskbar.component.html
- |--fullscreen
-	 |--fullscreen.directive.ts
-	 |--fullscreen.directive.spec.ts
+
+ |--terminal
+     |--terminal.component.ts
+	 |--terminal.component.spec.ts
+	 |--terminal.component.html
+	 |--terminal.component.sass
+
  |--assets
-	 |--css/
+	 |--css
+	 	 |-- styles.sass
+		 |--components/...
+
 	 |--img/
  |--index.html
  |--main.ts

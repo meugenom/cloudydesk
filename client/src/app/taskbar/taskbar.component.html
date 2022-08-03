@@ -1,15 +1,3 @@
-<app-modal id="explorer">
-	<span class="window-action-btn">
-		<img (click)="closeModal('explorer');" src="../../assets/img/btn-close.svg" alt=""/>
-	</span>
-	<span class="window-action-btn" style="left: 20px;">
-		<img src="../../assets/img/btn-minimize.svg" alt=""/>
-	</span>
-	<span class="window-action-btn" style="left: 40px;">
-		<img src="../../assets/img/btn-open.svg" alt=""/>
-	</span>
-</app-modal>
-
 <div class="taskbar" style="height: 50px">
     
 	<div
@@ -23,12 +11,13 @@
       data-open-windows="0"
       title="Explorer">
       <div class="taskbar-icon">
-        <img src="./../../assets/img/folders.svg" style=""/>
+        <img src="./../../assets/img/folders.svg" />
       </div>
       <span class="active-taskbar-indicator"></span>
 	</div>
     
 	<div
+	(click)="openModal('editor')"
       class="taskbar-item disable-user-select"
       id="taskbar-item-3"
       data-taskbar-item-id="3"
@@ -43,6 +32,7 @@
       <span class="active-taskbar-indicator"></span>
     </div>
     <div
+	(click)="openModal('draw')"
       class="taskbar-item disable-user-select"
       id="taskbar-item-4"
       data-taskbar-item-id="4"
@@ -56,7 +46,9 @@
       </div>
       <span class="active-taskbar-indicator"></span>
     </div>
-    <div
+    
+	<div
+	(click)="openModal('terminal')"
       class="taskbar-item disable-user-select"
       id="taskbar-item-5"
       data-taskbar-item-id="5"
@@ -70,7 +62,9 @@
       </div>
       <span class="active-taskbar-indicator"></span>
     </div>
+
     <div
+	  (click)="openModal('camera')"
       class="taskbar-item disable-user-select"
       id="taskbar-item-6"
       data-taskbar-item-id="6"
@@ -84,7 +78,9 @@
       </div>
       <span class="active-taskbar-indicator"></span>
     </div>
-    <div
+    
+	<div
+	  (click)="openModal('settings')"
       class="taskbar-item disable-user-select"
       id="taskbar-item-7"
       data-taskbar-item-id="7"
