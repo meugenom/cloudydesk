@@ -20,7 +20,7 @@ A little bit, but still:
 	- make window-app active with click on the head when we have opened window-apps
 
 ![web desktop screenshot](./assets/screenshot01082022.png)
-![web desktop screenshot](./assets/screenshot04082022.png)
+![web desktop screenshot](./assets/screenshot04082022last.png)
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 
