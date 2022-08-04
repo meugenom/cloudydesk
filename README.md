@@ -13,9 +13,11 @@ A little bit, but still:
 - ability to select regions on the web view(let's see in web console)
 - capable desktop's full-window mode
 - modals from taskbar apps (explorer, editor, draw, terminal, camera, settings) with options:
-	- close app window
-	- maximize app's window / back to small app's window
-	- minimize app's window / back to small app's window
+	- close window-app
+	- maximize window-app / back to small window-app
+	- minimize window-app / back to small window-app
+	- moving window-app by head on the desktop screen
+	- make window-app active with click on the head when we have opened window-apps
 
 ![web desktop screenshot](./assets/screenshot01082022.png)
 ![web desktop screenshot](./assets/screenshot03082022last.png)

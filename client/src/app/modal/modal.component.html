@@ -1,5 +1,5 @@
-<div
-(mousedown)="startMove($event)">
+<!--start moving and make active window-->
+<div>
 <span class="window-action-btn">
 	<img
 	  (click)="close()"
@@ -17,5 +17,18 @@
 	(click)="maximize()"
 	src="../../assets/img/btn-open.svg" alt="" />
   </span>
+  <div class="window-head"
+  	(mousedown)="startMove($event)"
+	(click)="open()">
+	<div class="window-head-draggable">
+	   <img
+		*ngIf="id == 'explorer'"
+		src="../../assets/img/folder-home.svg"
+		alt=""
+		class="window-head-icon"/>
+	  <span class="window-head-title">{{id}}
+	  </span>
+	</div>
+  </div>
 	<ng-content></ng-content>
 </div>

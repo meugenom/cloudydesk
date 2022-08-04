@@ -229,10 +229,10 @@ export class ModalComponent implements OnInit, OnDestroy {
 	move(event: MouseEvent) {
 
 		if (this.moving) {
-
-			//console.log("mouse y: " + event.clientY)
-			this.element.style.top = (event.clientY - this.shift.y) + 'px';
-			this.element.style.left = (event.clientX - this.shift.x) + 'px';
+			if(event.clientY - this.shift.y > 0 && event.clientX - this.shift.x > 0){
+				this.element.style.top = (event.clientY - this.shift.y) + 'px';
+				this.element.style.left = (event.clientX - this.shift.x) + 'px';
+			}
 		}
 	}
 
