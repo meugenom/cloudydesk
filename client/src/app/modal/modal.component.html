@@ -1,2 +1,34 @@
-<ng-content></ng-content>
-
+<!--start moving and make active window-->
+<div>
+<span class="window-action-btn">
+	<img
+	  (click)="close()"
+	  src="../../assets/img/btn-close.svg"
+	  alt=""
+	/>
+  </span>
+  <span class="window-action-btn" style="left: 20px">
+	<img 
+	(click)="minimize()"
+	src="../../assets/img/btn-minimize.svg" alt="" />
+  </span>
+  <span class="window-action-btn" style="left: 40px">
+	<img 
+	(click)="maximize()"
+	src="../../assets/img/btn-open.svg" alt="" />
+  </span>
+  <div class="window-head"
+  	(mousedown)="startMove($event)"
+	(click)="open()">
+	<div class="window-head-draggable">
+	   <img
+		*ngIf="id == 'explorer'"
+		src="../../assets/img/folder-home.svg"
+		alt=""
+		class="window-head-icon"/>
+	  <span class="window-head-title">{{id}}
+	  </span>
+	</div>
+  </div>
+	<ng-content></ng-content>
+</div>

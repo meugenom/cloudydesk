@@ -14,6 +14,7 @@ export class ExplorerComponent implements OnInit {
   }
 
 	//modals
+	/*
 	openModal(id: string) {
 		this.modalService.open(id);
 	}
@@ -29,5 +30,6 @@ export class ExplorerComponent implements OnInit {
 	maximizeModal(id : string){
 		this.modalService.maximize(id);
 	}
+	*/
 
 }

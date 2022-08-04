@@ -1,32 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalService } from '../modal/modal.service';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-terminal',
   templateUrl: './terminal.component.html',
   styleUrls: ['./terminal.component.sass']
 })
-export class TerminalComponent implements OnInit {
+export class TerminalComponent implements OnInit, AfterViewInit {
 
-  constructor(private modalService: ModalService) { }
 
-  ngOnInit(): void {
-  }
-
-	//modals
-	openModal(id: string) {
-		this.modalService.open(id);
+  	constructor(private element: ElementRef) { 
 	}
 
-	closeModal(id: string) {
-		this.modalService.close(id);
+  	ngOnInit(): void {
+		
 	}
 
-	minimizeModal(id : string){
-		this.modalService.minimize(id);
-	}
-
-	maximizeModal(id : string){
-		this.modalService.maximize(id);
+	ngAfterViewInit() {
+	
 	}
 }

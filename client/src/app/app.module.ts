@@ -16,22 +16,23 @@ import { EditorComponent } from './editor/editor.component';
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     DesktopComponent,
 	Fullscreen,
  	TaskbarComponent,
-  ExplorerComponent,
-  DrawComponent,
-  TerminalComponent,
-  EditorComponent,
-  CameraComponent,
-  SettingsComponent
+  	ExplorerComponent,
+  	DrawComponent,
+  	TerminalComponent,
+  	EditorComponent,
+  	CameraComponent,
+  	SettingsComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+	BrowserModule,
 	ModalModule
   ],
   providers: [],

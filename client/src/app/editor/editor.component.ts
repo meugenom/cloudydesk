@@ -13,21 +13,4 @@ export class EditorComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-
-	//modals
-	openModal(id: string) {
-		this.modalService.open(id);
-	}
-
-	closeModal(id: string) {
-		this.modalService.close(id);
-	}
-
-	minimizeModal(id : string){
-		this.modalService.minimize(id);
-	}
-
-	maximizeModal(id : string){
-		this.modalService.maximize(id);
-	}
 }
