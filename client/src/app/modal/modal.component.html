@@ -1,5 +1,21 @@
-<div (mousedown)="startMove($event)">
+<div
+(mousedown)="startMove($event)">
+<span class="window-action-btn">
+	<img
+	  (click)="close()"
+	  src="../../assets/img/btn-close.svg"
+	  alt=""
+	/>
+  </span>
+  <span class="window-action-btn" style="left: 20px">
+	<img 
+	(click)="minimize()"
+	src="../../assets/img/btn-minimize.svg" alt="" />
+  </span>
+  <span class="window-action-btn" style="left: 40px">
+	<img 
+	(click)="maximize()"
+	src="../../assets/img/btn-open.svg" alt="" />
+  </span>
 	<ng-content></ng-content>
 </div>
-
-

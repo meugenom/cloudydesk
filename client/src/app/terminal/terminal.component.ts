@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ModalService } from '../modal/modal.service';
 
 @Component({
   selector: 'app-terminal',
@@ -9,7 +8,7 @@ import { ModalService } from '../modal/modal.service';
 export class TerminalComponent implements OnInit, AfterViewInit {
 
 
-  	constructor(private modalService: ModalService, private element: ElementRef) { 
+  	constructor(private element: ElementRef) { 
 	}
 
   	ngOnInit(): void {
@@ -18,22 +17,5 @@ export class TerminalComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit() {
 	
-	}
-
-	//modals
-	openModal(id: string) {
-		this.modalService.open(id);
-	}
-
-	closeModal(id: string) {
-		this.modalService.close(id);
-	}
-
-	minimizeModal(id : string){
-		this.modalService.minimize(id);
-	}
-
-	maximizeModal(id : string){
-		this.modalService.maximize(id);
 	}
 }
