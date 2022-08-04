@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import SelectionArea from "@viselect/vanilla";
 import { Globals } from '../global';
 
@@ -12,10 +12,10 @@ export class DesktopComponent implements AfterViewInit{
 
 	fullScreen: boolean;
 
+
 	@ViewChild('container') input: ElementRef | undefined;
 
-
-	constructor(private renderer: Renderer2, public globals: Globals) {
+	constructor(private renderer: Renderer2, public globals: Globals, private elRef: ElementRef) {
 		this.fullScreen = this.globals.fullScreen;
 	}
 
@@ -73,5 +73,5 @@ export class DesktopComponent implements AfterViewInit{
 			)
 			.on("stop", ({ store: { stored } }) => console.log(stored.length));
 	}
-}
 
+}

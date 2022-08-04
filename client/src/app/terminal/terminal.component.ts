@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ModalService } from '../modal/modal.service';
 
 @Component({
@@ -6,12 +6,19 @@ import { ModalService } from '../modal/modal.service';
   templateUrl: './terminal.component.html',
   styleUrls: ['./terminal.component.sass']
 })
-export class TerminalComponent implements OnInit {
+export class TerminalComponent implements OnInit, AfterViewInit {
 
-  constructor(private modalService: ModalService) { }
 
-  ngOnInit(): void {
-  }
+  	constructor(private modalService: ModalService, private element: ElementRef) { 
+	}
+
+  	ngOnInit(): void {
+		
+	}
+
+	ngAfterViewInit() {
+	
+	}
 
 	//modals
 	openModal(id: string) {
