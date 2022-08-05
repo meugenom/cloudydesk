@@ -69,6 +69,8 @@ export class ModalComponent implements OnInit, OnDestroy {
 
 		//if window minimized
 		if (this.element.classList.contains('minimized')) {
+			this.element.style.minWidth = '300px'; //we need this hack for resizing
+			this.element.style.minHeight = '200px'; //we need this hack for resizing
 			this.element.style.width = '600px';
 			this.element.style.height = '350px';
 			this.element.classList.remove('minimized');
@@ -140,6 +142,8 @@ export class ModalComponent implements OnInit, OnDestroy {
 	minimize(): void {
 		//minimized window
 		//console.log('minimize')
+		this.element.style.minWidth = '0px';
+		this.element.style.minHeight = '0px';
 		this.element.style.width = '0px';
 		this.element.style.height = '0px';
 		this.element.classList.add('minimized');
