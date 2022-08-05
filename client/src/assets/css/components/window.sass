@@ -18,7 +18,8 @@ app-modal
   display: block
   top: calc(15% + 0px)
   left: 405px
-
+  min-width: 300px
+  min-height: 200px
 .focused
   z-index: 1
 
@@ -102,9 +103,35 @@ app-modal
   right: 0
   background-color: #00000052
 
-.window.ui-resizable-resizing, .window-dragging
-  transition: none
 
+//
+.ui-resizable-e, .ui-resizable-w
+  cursor: ew-resize
+
+.ui-resizable-n, .ui-resizable-s
+  cursor: ns-resize
+
+.ui-resizable-ne, .ui-resizable-sw
+  cursor: nesw-resize
+
+.ui-resizable-nw, .ui-resizable-se
+  cursor: nwse-resize
+
+.ui-resizable-se
+  position: absolute
+  bottom: 0
+  right: 0
+  -webkit-user-drag: none
+  z-index: 90
+
+.ui-resizable-ne, .ui-resizable-nw, .ui-resizable-se, .ui-resizable-sw
+  width: 12px
+  height: 12px
+  z-index: 95 !important
+
+
+.ui-resizable-nw, .ui-resizable-se
+  cursor: nwse-resize
 
 
 .window-active .window-head-title

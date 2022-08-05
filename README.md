@@ -17,7 +17,8 @@ A little bit, but still:
 	- maximize window-app / back to small window-app
 	- minimize window-app / back to small window-app
 	- moving window-app by head on the desktop screen
-	- make window-app active with click on the head when we have opened window-apps
+	- make window-app active with click when we have other opened window-apps
+	- resizing window-app by left-bottom icon
 
 ![web desktop screenshot](./assets/screenshot01082022.png)
 ![web desktop screenshot](./assets/screenshot04082022last.png)
