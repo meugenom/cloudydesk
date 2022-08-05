@@ -1,11 +1,12 @@
 import { Component, ViewEncapsulation, ElementRef, Input, OnInit, OnDestroy, ComponentFactoryResolver, HostListener } from '@angular/core';
+import { of } from 'rxjs';
 import { ModalService } from './modal.service';
 
 const enum Status {
 	OFF = 0,
 	RESIZE = 1,
 	MOVE = 2
-  }
+}
 
 
 @Component({
@@ -25,7 +26,8 @@ export class ModalComponent implements OnInit, OnDestroy {
 
 	//moving window on the desktop
 	moving = false
-	shift = { x: 0, y: 0}
+	resizing = false
+	shift = { x: 0, y: 0 }
 
 	constructor(private modalService: ModalService, private el: ElementRef) {
 		this.element = el.nativeElement;
@@ -65,14 +67,12 @@ export class ModalComponent implements OnInit, OnDestroy {
 	open(): void {
 		//console.log(this.element.classList.contains('minimized'))
 
-
-
 		//if window minimized
 		if (this.element.classList.contains('minimized')) {
 			this.element.style.width = '600px';
 			this.element.style.height = '350px';
 			this.element.classList.remove('minimized');
-			
+
 
 		} else {
 
@@ -105,7 +105,7 @@ export class ModalComponent implements OnInit, OnDestroy {
 
 	// close modal
 	close(): void {
-		
+
 		this.element.classList.remove('app-modal-opened');
 		this.element.classList.remove('focused');
 		this.element.style.zIndex = 0;
@@ -225,30 +225,51 @@ export class ModalComponent implements OnInit, OnDestroy {
 	 * moving modals
 	 * @param event 
 	 */
-	startMove(event: MouseEvent) {
-		let target: any = event.currentTarget
-		let position = getPosition(target);
-		this.shift = {
-			x: event.pageX - position.left,
-			y: event.pageY - position.top
+	startMove(event: MouseEvent, status: number) {
+		if (status == 2) {
+			let target: any = event.currentTarget
+			let position = getPosition(target);
+			this.shift = {
+				x: event.pageX - position.left,
+				y: event.pageY - position.top
+			}
+			this.moving = true
 		}
-		this.moving = true
+
+		if (status == 1) {
+			event.stopPropagation();
+			this.resizing = true;
+		}
+
 	}
 
 	@HostListener("document:mousemove", ["$event"])
 	move(event: MouseEvent) {
 
 		if (this.moving) {
-			if(event.clientY - this.shift.y > 0 && event.clientX - this.shift.x > 0){
+			if (event.clientY - this.shift.y > 0 && event.clientX - this.shift.x > 0) {
 				this.element.style.top = (event.clientY - this.shift.y) + 'px';
 				this.element.style.left = (event.clientX - this.shift.x) + 'px';
+			}
+		}
+		if (this.resizing) {
+			if (event.clientY > 0 && event.clientX > 0) {
+				//find current left and top of the modal window
+				let top = this.element.getBoundingClientRect().top;
+				let left = this.element.getBoundingClientRect().left;
+
+				//resize element
+				this.element.style.width = event.clientX - left + 'px';
+				this.element.style.height = event.clientY - top + 'px';
+				//min-width and min-height was set in css (by default 300px and 200px)
 			}
 		}
 	}
 
 	@HostListener("document:mouseup")
 	stopMove() {
-		this.moving = false
+		this.moving = false;
+		this.resizing = false;
 	}
 }
 

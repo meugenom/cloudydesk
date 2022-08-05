@@ -1,15 +1,27 @@
 <!--start moving and make active window-->
-<div>
+<div (click)="open()">
   <span class="window-action-btn">
-    <img (click)="close()" src="../../assets/img/btn-close.svg" alt="btn-close-icon" />
+    <img
+      (click)="close()"
+      src="../../assets/img/btn-close.svg"
+      alt="btn-close-icon"
+    />
   </span>
   <span class="window-action-btn" style="left: 20px">
-    <img (click)="minimize()" src="../../assets/img/btn-minimize.svg" alt="btn-minimize-icon" />
+    <img
+      (click)="minimize()"
+      src="../../assets/img/btn-minimize.svg"
+      alt="btn-minimize-icon"
+    />
   </span>
   <span class="window-action-btn" style="left: 40px">
-    <img (click)="maximize()" src="../../assets/img/btn-open.svg" alt="btn-maximize-icon" />
+    <img
+      (click)="maximize()"
+      src="../../assets/img/btn-open.svg"
+      alt="btn-maximize-icon"
+    />
   </span>
-  <div class="window-head" (mousedown)="startMove($event)" (click)="open()">
+  <div class="window-head" (mousedown)="startMove($event, 2)">
     <div class="window-head-draggable">
       <img
         *ngIf="id == 'explorer'"
@@ -22,6 +34,7 @@
   </div>
   <ng-content></ng-content>
   <img
+    (mousedown)="startMove($event, 1)"
     class="ui-resizable-se"
     src="../../assets/img/app-resize-right.svg"
     alt="app-resize-icon"
