@@ -11,6 +11,7 @@ export class ExplorerComponent implements OnInit {
   constructor(private modalService: ModalService) { }
 
   ngOnInit(): void {
+	
   }
 
 	//modals
