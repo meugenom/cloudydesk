@@ -54,15 +54,6 @@ export class ModalComponent implements OnInit, OnDestroy {
 		// add self (this modal instance) to the modal service so it's accessible from controllers
 		this.modalService.add(this);
 
-
-		//add precise eventListener
-		//const em = this.element.getElementById('app-resize-icon');
-		//em.addEventListener('mousedown', function handleClick(event: any) {
-		//	console.log('box clicked', event);
-		
-			//box.setAttribute('style', 'background-color: yellow;');
-		//});
-
 	}
 
 
@@ -171,8 +162,8 @@ export class ModalComponent implements OnInit, OnDestroy {
 			this.element.style.left = 0;
 			const calcWidth = document.body.clientWidth
 			const calcHeight = document.body.clientHeight;
-			this.element.style.width = calcHeight + 'px';
-			this.element.style.height = calcWidth + 'px';
+			this.element.style.width = calcWidth + 'px';
+			this.element.style.height = calcHeight + 'px';
 			this.element.classList.add('maximized');
 			console.log("width = " + document.body.clientWidth)
 			console.log("height = " + document.body.clientHeight)
