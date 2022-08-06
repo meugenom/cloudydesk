@@ -54,6 +54,15 @@ export class ModalComponent implements OnInit, OnDestroy {
 		// add self (this modal instance) to the modal service so it's accessible from controllers
 		this.modalService.add(this);
 
+
+		//add precise eventListener
+		//const em = this.element.getElementById('app-resize-icon');
+		//em.addEventListener('mousedown', function handleClick(event: any) {
+		//	console.log('box clicked', event);
+		
+			//box.setAttribute('style', 'background-color: yellow;');
+		//});
+
 	}
 
 
@@ -79,7 +88,7 @@ export class ModalComponent implements OnInit, OnDestroy {
 		} else {
 
 			//open new window	
-			this.element.style.display = 'grid';
+			this.element.style.display = 'block';
 			this.setNewPosition(this.element);
 			this.element.classList.add('app-modal-opened');
 			this.element.classList.add('scale-in-center');
@@ -229,7 +238,8 @@ export class ModalComponent implements OnInit, OnDestroy {
 	 * moving modals
 	 * @param event 
 	 */
-	startMove(event: MouseEvent, status: number) {
+	startMove(event: any, status: number) {
+
 		if (status == 2) {
 			let target: any = event.currentTarget
 			let position = getPosition(target);
@@ -245,18 +255,38 @@ export class ModalComponent implements OnInit, OnDestroy {
 			this.resizing = true;
 		}
 
+		if(status == 0) {
+			event.stopPropagation();
+			this.resizing = false;
+			this.moving = false;
+		}
+
+	}
+	
+	
+	@HostListener("document:mousedown", ["$event"])
+	@HostListener("document:click", ["$event"])
+	down(event: any){
+		console.log('mouse down')
+		this.resizing = false;
 	}
 
+	
 	@HostListener("document:mousemove", ["$event"])
-	move(event: MouseEvent) {
 
-		if (this.moving) {
+	move(event: any) {
+
+		console.log(event.type)
+
+		if (this.moving && event.type != 'click') {
 			if (event.clientY - this.shift.y > 0 && event.clientX - this.shift.x > 0) {
+
 				this.element.style.top = (event.clientY - this.shift.y) + 'px';
 				this.element.style.left = (event.clientX - this.shift.x) + 'px';
 			}
 		}
-		if (this.resizing) {
+
+		if (this.resizing && event.type != 'click') {
 			if (event.clientY > 0 && event.clientX > 0) {
 				//find current left and top of the modal window
 				let top = this.element.getBoundingClientRect().top;
@@ -270,11 +300,13 @@ export class ModalComponent implements OnInit, OnDestroy {
 		}
 	}
 
+	
 	@HostListener("document:mouseup")
 	stopMove() {
 		this.moving = false;
 		this.resizing = false;
 	}
+	
 }
 
 

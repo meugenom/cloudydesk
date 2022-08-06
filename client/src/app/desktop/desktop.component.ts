@@ -15,7 +15,7 @@ export class DesktopComponent implements AfterViewInit{
 
 	@ViewChild('container') input: ElementRef | undefined;
 
-	constructor(private renderer: Renderer2, public globals: Globals, private elRef: ElementRef) {
+	constructor(private renderer: Renderer2, public globals: Globals) {
 		this.fullScreen = this.globals.fullScreen;
 	}
 
@@ -34,7 +34,7 @@ export class DesktopComponent implements AfterViewInit{
 			div.style.borderRadius = '0.25rem'
 			this.input?.nativeElement.appendChild(div);
 		}
-
+		
 		//viselect
 		const selection = new SelectionArea({
 			selectables: [".container > div"],
