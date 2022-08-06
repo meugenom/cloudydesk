@@ -1,69 +1,77 @@
-<div
-  class="screen"
-  [style.background-image]="'url(./../../assets/img/background.jpg)'">
+<!---->
+<div class="screen" 
+	[style.background-image]="'url(./../../assets/img/background.jpg)'">
+  <!--container for files-->
+  <div class="item-container" #container>
+  </div>
 
   <!--modals explorer-->
   <app-modal id="explorer">
-	<app-explorer></app-explorer>
+    <app-explorer></app-explorer>
   </app-modal>
 
   <!--modal editor-->
   <app-modal id="editor">
-	<app-editor></app-editor>
+    <app-editor></app-editor>
   </app-modal>
 
   <!--modal draw-->
   <app-modal id="draw">
-	<app-draw></app-draw>
+    <app-draw></app-draw>
   </app-modal>
-  
 
   <!--modal terminal-->
   <app-modal id="terminal">
-	<app-terminal></app-terminal>
+    <app-terminal></app-terminal>
   </app-modal>
 
   <!--modal camera-->
   <app-modal id="camera">
-	<app-camera></app-camera>
+    <app-camera></app-camera>
   </app-modal>
 
-	    <!--modal settings-->
+  <!--modal settings-->
   <app-modal id="settings">
-	<app-settings></app-settings>
+    <app-settings></app-settings>
   </app-modal>
 
   <!--top right region-->
   <div
     class="user-options-wrapper"
-    style="position: absolute; right: 7px; top: 7px">
+    style="position: absolute; right: 7px; top: 7px"
+  >
     <a target="_blank" href="https://github.com/meugenom/webdesktop">
-      <img src="./../../assets/img/github.svg" style="
+      <img
+        src="./../../assets/img/github.svg"
+        style="
           width: 30px;
           margin-bottom: -10px;
           display: inline-block;
           margin-left: 10px;
-          filter: drop-shadow(0px 0px 1px rgb(51, 51, 51));"/>
-	</a>
-	<!--fullscreen button-->
-	<button FullScreenOpening
+          filter: drop-shadow(0px 0px 1px rgb(51, 51, 51));
+        "
+      />
+    </a>
+    <!--fullscreen button-->
+    <button
+      FullScreenOpening
       class="fullscreen-btn button button-small"
-      title="Enter Full Screen">
-      <img src="./../../assets/img/fullscreen.svg" *ngIf="!globals.fullScreen" />
+      title="Enter Full Screen"
+    >
+      <img
+        src="./../../assets/img/fullscreen.svg"
+        *ngIf="!globals.fullScreen"
+      />
       <img src="./../../assets/img/screen.svg" *ngIf="globals.fullScreen" />
     </button>
-	
-	<!--user information button-->
+
+    <!--user information button-->
     <button class="user-options-menu-btn button button-small">
       <img src="./../../assets/img/profile.svg" />
       <span class="user-options-menu-username"> user </span>
     </button>
   </div>
 
-  <!--container for files-->
-  <div class="container" #container></div>
-  
   <!--taskbar component-->
   <app-taskbar></app-taskbar>
-
 </div>

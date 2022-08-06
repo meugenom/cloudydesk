@@ -238,7 +238,7 @@ export class ModalComponent implements OnInit, OnDestroy {
 	 * moving modals
 	 * @param event 
 	 */
-	startMove(event: any, status: number) {
+	startMove(event: MouseEvent, status: number) {
 
 		if (status == 2) {
 			let target: any = event.currentTarget
@@ -265,19 +265,18 @@ export class ModalComponent implements OnInit, OnDestroy {
 	
 	
 	@HostListener("document:mousedown", ["$event"])
-	@HostListener("document:click", ["$event"])
-	down(event: any){
-		console.log('mouse down')
+	//@HostListener("document:touchend", ["$event"])
+	down(event: MouseEvent){
+		//console.log('mouse down')
 		this.resizing = false;
 	}
 
 	
 	@HostListener("document:mousemove", ["$event"])
+	//@HostListener("document:touchstart", ["$event"])
+	move(event: MouseEvent) {
 
-	move(event: any) {
-
-		console.log(event.type)
-
+		//console.log(event.type)
 		if (this.moving && event.type != 'click') {
 			if (event.clientY - this.shift.y > 0 && event.clientX - this.shift.x > 0) {
 

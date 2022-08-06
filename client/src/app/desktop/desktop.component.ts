@@ -1,3 +1,4 @@
+import { identifierName } from '@angular/compiler';
 import { AfterViewInit, Component, HostListener, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import SelectionArea from "@viselect/vanilla";
 import { Globals } from '../global';
@@ -13,7 +14,7 @@ export class DesktopComponent implements AfterViewInit{
 	fullScreen: boolean;
 
 
-	@ViewChild('container') input: ElementRef | undefined;
+	@ViewChild('	container') input: ElementRef | undefined;
 
 	constructor(private renderer: Renderer2, public globals: Globals) {
 		this.fullScreen = this.globals.fullScreen;
@@ -23,22 +24,23 @@ export class DesktopComponent implements AfterViewInit{
 	//begin select cells
 	ngAfterViewInit() {
 
-		//console.log(this.input?.nativeElement);
+		//console.log(window.innerWidth)
+		//console.log(window.innerHeight)
+		const filesInRow : number = window.innerWidth/110
 
-		for (let i = 0; i < 400; i++) {
-			const div = document.createElement("div");
-			div.style.background = '#aaccff'
-			div.style.border = "dashed"
-			div.style.opacity = "0.2"
-			div.style.zIndex = "-1"
-			div.style.borderRadius = '0.25rem'
+		//need to know numbers of icons
+
+		for (let i = 0; i < 20; i++) {
+			const div : HTMLElement = document.createElement("div");
+			div.classList.add('item')
+			div.setAttribute('id', "item-" + i.toString())
 			this.input?.nativeElement.appendChild(div);
 		}
 		
 		//viselect
 		const selection = new SelectionArea({
-			selectables: [".container > div"],
-			boundaries: [".container"]
+			selectables: [".item-container > div"],
+			boundaries: [".item-container"]
 
 		})
 			.on("start", ({ store, event }) => {
