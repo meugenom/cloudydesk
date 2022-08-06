@@ -1,5 +1,32 @@
 app-modal
 	display: none
+	position: absolute
+	background: white
+	padding: 0
+	border: 1px solid #9a9a9a
+	box-shadow: 0 0 15px #00000066
+	overflow: hidden
+	border-radius: 4px
+	border: none
+	//smooth moving
+	transition: opacity 0.2s, margin-top 0.2s, margin-bottom 0.2s, margin-left 0.2s, margin-right 0.2s
+	-webkit-transition: opacity 0.2s, margin-top 0.2s, margin-bottom 0.2s, margin-left 0.2s, margin-right 0.2s
+	transform: none
+	user-select: none !important
+	-moz-user-select: none !important
+	-webkit-user-select: none
+	
+	//default values
+	z-index: 0
+	width: 600px
+	height: 350px
+	top: calc(15% + 0px)
+	left: 405px
+	min-width: 300px
+	min-height: 200px
+	
+	.focused
+		z-index: 1
 
 .scale-in-center
 	-webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both

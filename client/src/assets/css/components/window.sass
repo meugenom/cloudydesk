@@ -1,28 +1,3 @@
-app-modal
-  position: absolute
-  background: white
-  padding: 0
-  border: 1px solid #9a9a9a
-  box-shadow: 0 0 15px #00000066
-  overflow: hidden
-  border-radius: 4px
-  border: none
-  transition: opacity .2s
-  user-select: none !important
-  -moz-user-select: none !important
-  -webkit-user-select: none
-  //default values
-  z-index: 0
-  width: 600px
-  height: 350px
-  display: block
-  top: calc(15% + 0px)
-  left: 405px
-  min-width: 300px
-  min-height: 200px
-.focused
-  z-index: 1
-
 .window-head
   overflow: hidden
   padding: 0
@@ -144,7 +119,11 @@ app-modal
   margin-left: 8px
   margin-top: 7px
   margin-right: -5px
-  filter: drop-shadow(0 0 0.5px rgb(51, 51, 51))
+  filter: drop-shadow(0 0 0.5px rgb(51, 51, 51))  
+  user-select: none !important
+  -moz-user-select: none !important
+  -webkit-user-select: none !important
+  -ms-user-select: none !important
 
 .window-navbar
   overflow: hidden

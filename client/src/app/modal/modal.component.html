@@ -1,6 +1,6 @@
 <!--start moving and make active window-->
 <div
-(click)="open()">
+(click)="open();$event.stopPropagation();">
   <span class="window-action-btn">
     <img (click)="close();$event.stopPropagation()" src="../../assets/img/btn-close.svg" alt="btn-close-icon" />
   </span>
@@ -14,6 +14,7 @@
   	(mousedown)="startMove($event, 2)">
     <div class="window-head-draggable">
       <img
+		draggable="false"
         *ngIf="id == 'explorer'"
         src="../../assets/img/folder-home.svg"
         alt="folder-home-icon"
@@ -23,8 +24,10 @@
     </div>
   </div>
   <ng-content></ng-content>
+  <!--for webkit option draggable is false-->
   <img
-  	(mousedown)="startMove($event, 1)" 
+  	draggable="false"
+  	(mousedown)="startMove($event, 1)"
     class="ui-resizable-se"
     src="../../assets/img/app-resize-right.svg"
     alt="app-resize-icon"
