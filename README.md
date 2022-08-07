@@ -21,7 +21,7 @@ A little bit, but still:
 	- resizing window-app by left-bottom icon
 
 ![web desktop screenshot](./assets/screenshot01082022.png)
-![web desktop screenshot](./assets/screenshot04082022last.png)
+![web desktop screenshot](./assets/screenshot07082022.png)
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 
@@ -86,6 +86,7 @@ src
 
  |--terminal
      |--terminal.component.ts
+	 |--terminal-core.js
 	 |--terminal.component.spec.ts
 	 |--terminal.component.html
 	 |--terminal.component.sass

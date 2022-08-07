@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ElementRef, Input, OnInit, OnDestroy, ComponentFactoryResolver, HostListener } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, Input, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { of } from 'rxjs';
 import { ModalService } from './modal.service';
 

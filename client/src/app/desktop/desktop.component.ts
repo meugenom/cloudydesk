@@ -14,7 +14,7 @@ export class DesktopComponent implements AfterViewInit{
 	fullScreen: boolean;
 
 
-	@ViewChild('	container') input: ElementRef | undefined;
+	@ViewChild('container') input: ElementRef | undefined;
 
 	constructor(private renderer: Renderer2, public globals: Globals) {
 		this.fullScreen = this.globals.fullScreen;
