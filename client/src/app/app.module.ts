@@ -17,6 +17,7 @@ import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,7 @@ import { SettingsComponent } from './settings/settings.component';
   	TerminalComponent,
   	EditorComponent,
   	CameraComponent,
-  	SettingsComponent
+  	SettingsComponent,
   ],
   imports: [
     AppRoutingModule,
