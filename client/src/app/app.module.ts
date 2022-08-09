@@ -18,7 +18,6 @@ import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FileComponent } from './file/file.component';
 
-import {NgxWigModule} from 'ngx-wig';
 import { ModComponent } from './mod/mod.component';
 import { ModService } from './shared/mod.service';
 
@@ -44,8 +43,7 @@ import { ModService } from './shared/mod.service';
 	BrowserModule,
 	ModalModule,
 	HttpClientModule,
-	FormsModule,
-	NgxWigModule
+	FormsModule
   ],
   providers: [ModService],
   bootstrap: [AppComponent]
