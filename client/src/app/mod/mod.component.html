@@ -1,0 +1,8 @@
+<div class="mod">
+	<div class="mod-overlay" (click)="close($event)"></div>
+	<div class="mod--mod-content">
+		<h2 [innerHTML]="modTitle"></h2>
+		<div [innerHTML]="modText"></div>
+		<a class="mod--close-btn" (click)="close($event)">X</a>
+	</div>
+</div>

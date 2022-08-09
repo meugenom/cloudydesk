@@ -1,22 +1,25 @@
-import { identifierName } from '@angular/compiler';
-import { AfterViewInit, Component, HostListener, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ElementRef, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import SelectionArea from "@viselect/vanilla";
 import { Globals } from '../global';
+import { ModService } from '../shared/mod.service';
 
 @Component({
 	selector: 'app-desktop',
-	providers: [ Globals ],
+	providers: [Globals],
 	templateUrl: './desktop.component.html',
 	styleUrls: ['./desktop.component.sass'],
 })
-export class DesktopComponent implements AfterViewInit{
+export class DesktopComponent implements AfterViewInit {
 
 	fullScreen: boolean;
-
-
 	@ViewChild('container') input: ElementRef | undefined;
 
-	constructor(private renderer: Renderer2, public globals: Globals) {
+	constructor(
+		private renderer: Renderer2,
+		private modService: ModService,
+		private viewContainerRef: ViewContainerRef,
+		public globals: Globals) {
+
 		this.fullScreen = this.globals.fullScreen;
 	}
 
@@ -26,17 +29,17 @@ export class DesktopComponent implements AfterViewInit{
 
 		//console.log(window.innerWidth)
 		//console.log(window.innerHeight)
-		const filesInRow : number = window.innerWidth/110
+		const filesInRow: number = window.innerWidth / 110
 
 		//need to know numbers of icons
 
 		for (let i = 0; i < 20; i++) {
-			const div : HTMLElement = document.createElement("div");
+			const div: HTMLElement = document.createElement("div");
 			div.classList.add('item')
 			div.setAttribute('id', "item-" + i.toString())
 			this.input?.nativeElement.appendChild(div);
 		}
-		
+
 		//viselect
 		const selection = new SelectionArea({
 			selectables: [".item-container > div"],
@@ -74,6 +77,13 @@ export class DesktopComponent implements AfterViewInit{
 				}
 			)
 			.on("stop", ({ store: { stored } }) => console.log(stored.length));
+	}
+
+
+	openMod(e: MouseEvent, modTitle: String, modText: String) {
+		e.preventDefault();
+		this.modService.setRootViewContainerRef(this.viewContainerRef);
+		this.modService.addDynamicComponent(modTitle.toString(), modText.toString());
 	}
 
 }
