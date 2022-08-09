@@ -2,9 +2,14 @@
 	[style.background-image]="'url(./../../assets/img/background.jpg)'">
   
   <!--container for files-->
-  <div class="item-container" #container></div>
 
-  <!--modals explorer-->
+  <div class="item-container" #container>
+	<app-file></app-file>
+  </div>
+  
+  
+  
+	<!--modals explorer-->
   <app-modal id="explorer">
     <app-explorer></app-explorer>
   </app-modal>
@@ -61,7 +66,9 @@
         src="./../../assets/img/fullscreen.svg"
         *ngIf="!globals.fullScreen"
       />
-      <img src="./../../assets/img/screen.svg" *ngIf="globals.fullScreen" />
+      <img 
+	  	src="./../../assets/img/screen.svg" 
+	  	*ngIf="globals.fullScreen" />
     </button>
 
     <!--user information button-->
