@@ -1,0 +1,90 @@
+<!--start moving and make active window-->
+<div
+	class="window">
+  <span class="window-action-btn">
+    <img
+      (click)="closeMe(); $event.stopPropagation()"
+      src="../../assets/img/btn-close.svg"
+      alt="btn-close-icon"
+    />
+  </span>
+  <span class="window-action-btn" style="left: 20px">
+    <img
+      src="../../assets/img/btn-minimize.svg"
+      alt="btn-minimize-icon"
+    />
+  </span>
+  <span class="window-action-btn" style="left: 40px">
+    <img
+      src="../../assets/img/btn-open.svg"
+      alt="btn-maximize-icon"
+    />
+  </span>
+  <!--
+  <div class="window-head" (mousedown)="startMove($event, 2)">
+	-->
+	<div class="window-head"></div>
+    <div class="window-head-draggable">
+	<!--
+      <img
+        draggable="false"
+        *ngIf="id == 'explorer'"
+        src="../../assets/img/folder-home.svg"
+        alt="folder-home-icon"
+        class="window-head-icon"
+      />
+	-->
+		<img
+        draggable="false"
+        src="../../assets/img/folder-home.svg"
+        alt="folder-home-icon"
+        class="window-head-icon"
+      	/>
+    <span class="window-head-title"> Id </span>
+    </div>
+  </div>
+
+  <ng-content></ng-content>
+
+  <!--for webkit option draggable is false-->
+  <!--
+  <img
+    draggable="false"
+    (mousedown)="startMove($event, 1);"
+    class="ui-resizable-se"
+    src="../../assets/img/app-resize-right.svg"
+    alt="app-resize-icon"
+  />
+  -->
+  <img
+    draggable="false"
+    class="ui-resizable-se"
+    src="../../assets/img/app-resize-right.svg"
+    alt="app-resize-icon"
+  />
+
+
+
+<!--
+<div class="modal-container">
+	
+	<div
+	  style="
+		width: 500px;
+		height: auto;
+		border: olive 1px solid;
+		background-color: white;
+		border-radius: 15px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;">
+	  <h1 class="title">{{ title }}</h1>
+	  <p class="body">{{ body }}</p>
+	  <div class="btn-container">
+		<button (click)="closeMe()">close</button>
+		<button (click)="confirm()">Confirm</button>
+	  </div>
+	</div>
+  </div>
+  -->
