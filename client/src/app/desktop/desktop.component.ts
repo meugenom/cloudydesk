@@ -29,20 +29,18 @@ export class DesktopComponent implements AfterViewInit {
 
 		//console.log(window.innerWidth)
 		//console.log(window.innerHeight)
-		const filesInRow: number = window.innerWidth / 110
+		//const filesInRow: number = window.innerWidth / 110
 
-		//need to know numbers of icons
-
-		for (let i = 0; i < 20; i++) {
-			const div: HTMLElement = document.createElement("div");
-			div.classList.add('item')
-			div.setAttribute('id', "item-" + i.toString())
-			this.input?.nativeElement.appendChild(div);
-		}
+		//for (let i = 0; i < 20; i++) {
+			//const div: HTMLElement = document.createElement("div");
+			//div.classList.add('item')
+			//div.setAttribute('id', "item-" + i.toString())
+			//this.input?.nativeElement.appendChild(div);
+		//}
 
 		//viselect
 		const selection = new SelectionArea({
-			selectables: [".item-container > div"],
+			selectables: [".item-container > app-file >div"],
 			boundaries: [".item-container"]
 
 		})
@@ -50,9 +48,9 @@ export class DesktopComponent implements AfterViewInit {
 				if (!(event as MouseEvent).ctrlKey && !(event as MouseEvent).metaKey) {
 					for (const el of store.stored) {
 						el.classList.remove("selected");
-						//console.log(el.attributes[1]);
-						//el.attributes[1].value = "background-color: #aaccff; border-radius: 0.25rem;"
-						el.attributes[1].value = "background-color: ; border-radius: 0.25rem;"
+						//console.log(el.children[1].attributes[2])
+						el.children[1].attributes[2].value = " drop-shadow(1px 1px 1px rgba(102, 102, 102, 0.5))"
+						
 					}
 					selection.clearSelection();
 				}
@@ -66,13 +64,13 @@ export class DesktopComponent implements AfterViewInit {
 				}) => {
 					for (const el of added) {
 						el.classList.add("selected");
-						el.attributes[1].value = "background-color: #5f9efc; border-radius: 0.25rem;"
+						//console.log(el.children[1].attributes[2])
+						el.children[1].attributes[2].value = "background-color: #cdcdcd30; border-radius: 3px ; filter: drop-shadow(0 0 1px rgba(102, 102, 102, 1))"
 					}
 
 					for (const el of removed) {
 						el.classList.remove("selected");
-						//el.attributes[1].value = "background-color: #aaccff; border-radius: 0.25rem;"
-						el.attributes[1].value = "background-color: ; border-radius: 0.25rem;"
+						el.children[1].attributes[2].value = " drop-shadow(1px 1px 1px rgba(102, 102, 102, 0.5))"
 					}
 				}
 			)
@@ -87,3 +85,10 @@ export class DesktopComponent implements AfterViewInit {
 	}
 
 }
+
+/**
+ *  background: #8080809c;
+  	border-radius: 10%;
+  	opacity: .7;
+}
+ */

@@ -19,9 +19,12 @@ A little bit, but still:
 	- moving window-app by head on the desktop screen
 	- make window-app active with click when we have other opened window-apps
 	- resizing window-app by left-bottom icon
+- added file objects on the desktop, and ability of the selection of files in progress
+- added terminal-app (visual), command "clear" works, in progress
+- added typical modal window for next implementation
 
 ![web desktop screenshot](./assets/screenshot01082022.png)
-![web desktop screenshot](./assets/screenshot07082022.png)
+![web desktop screenshot](./assets/screenshot09082022.png)
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 
@@ -66,6 +69,12 @@ src
 	 |--explorer.component.spec.ts
 	 |--explorer.component.html
 	 |--explorer.component.sass
+
+ |--file
+     |--file.component.ts
+	 |--file.component.spec.ts
+	 |--file.component.html
+	 |--file.component.sass
 
  |--fullscreen
 	 |--fullscreen.directive.ts
