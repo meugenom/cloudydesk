@@ -1,35 +1,37 @@
 import {
-  ComponentRef,
-  Injectable,
-  ViewContainerRef,
+	Injectable,
+	ViewContainerRef,
+	ComponentFactoryResolver
 } from '@angular/core';
-import { Subject } from 'rxjs';
 import { ModComponent } from '../mod/mod.component';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ModService {
-  private componentRef!: ComponentRef<ModComponent>;
-  private componentSubscriber!: Subject<string>;
-  constructor() {}
 
-  openMod(entry: ViewContainerRef, modTitle: string, modBody: string) {
-	console.log('call openMod')
-	this.componentRef = entry.createComponent(ModComponent);
-    this.componentRef.instance.title = modTitle;
-    this.componentRef.instance.body = modBody;
-    this.componentRef.instance.closeMeEvent.subscribe(() => this.closeMod());
-    this.componentRef.instance.confirmEvent.subscribe(() => this.confirm());
-    this.componentSubscriber = new Subject<string>();
-    return this.componentSubscriber.asObservable();
-  }
+	private rootViewContainer: ViewContainerRef | undefined;
 
-  closeMod() {
-    this.componentSubscriber.complete();
-    this.componentRef.destroy();
-  }
 
-  confirm() {
-    this.componentSubscriber.next('confirm');
-    this.closeMod();
-  }
+	constructor(private factoryResolver: ComponentFactoryResolver) { 
+		this.factoryResolver = factoryResolver;
+	}
+
+	setRootViewContainerRef(viewContainerRef : ViewContainerRef) {
+		this.rootViewContainer = viewContainerRef;
+	}
+	addDynamicComponent(modTitle: any, modText: any) {
+		if(this.rootViewContainer != undefined){
+			const factory = this.factoryResolver.resolveComponentFactory(ModComponent);
+			const component = factory.create(this.rootViewContainer.parentInjector);
+			component.instance.modTitle = modTitle;
+			component.instance.modText = modText;
+			
+			// Subscribe to the closeModal event and destroy the component
+			component.instance.closeModal.subscribe(() => this.removeDynamicComponent(component));
+			this.rootViewContainer.insert(component.hostView);
+		}
+	}
+
+	removeDynamicComponent(component : any) {
+		component.destroy();
+	}
 }

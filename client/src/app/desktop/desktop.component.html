@@ -1,9 +1,8 @@
-<!---->
 <div class="screen" 
 	[style.background-image]="'url(./../../assets/img/background.jpg)'">
+  
   <!--container for files-->
-  <div class="item-container" #container>
-  </div>
+  <div class="item-container" #container></div>
 
   <!--modals explorer-->
   <app-modal id="explorer">
@@ -66,12 +65,15 @@
     </button>
 
     <!--user information button-->
-    <button class="user-options-menu-btn button button-small">
+    <button class="user-options-menu-btn button button-small"
+	(click)="openMod($event, 'Typical Modal', 'Modal Content')">
       <img src="./../../assets/img/profile.svg" />
       <span class="user-options-menu-username"> user </span>
     </button>
+
   </div>
 
   <!--taskbar component-->
   <app-taskbar></app-taskbar>
+
 </div>

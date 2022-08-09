@@ -20,6 +20,7 @@ import { FileComponent } from './file/file.component';
 
 import {NgxWigModule} from 'ngx-wig';
 import { ModComponent } from './mod/mod.component';
+import { ModService } from './shared/mod.service';
 
 
 
@@ -46,7 +47,7 @@ import { ModComponent } from './mod/mod.component';
 	FormsModule,
 	NgxWigModule
   ],
-  providers: [],
+  providers: [ModService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

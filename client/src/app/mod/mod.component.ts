@@ -1,38 +1,20 @@
-import {
-	Component,
-	Input,
-	OnInit,
-	Output,
-	EventEmitter,
-	OnDestroy,
-  } from '@angular/core';
-  
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+
 @Component({
-  selector: 'app-mod',
-  templateUrl: './mod.component.html',
-  styleUrls: ['./mod.component.sass']
+    selector: "app-mod",
+    templateUrl: "./mod.component.html",
+    styleUrls: ["./mod.component.sass"]
 })
-export class ModComponent implements OnInit, OnDestroy {
+export class ModComponent implements OnInit {
+    @Input() modTitle: string | undefined;
+    @Input() modText: string | undefined;
+    @Output() closeModal: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
+    constructor() {}
 
-  @Input() title: string = '';
-  @Input() body: string = '';
-  @Output() closeMeEvent = new EventEmitter();
-  @Output() confirmEvent = new EventEmitter();
-  ngOnInit(): void {
-    console.log('Modal init');
-  }
+    ngOnInit() {}
 
-  closeMe() {
-    this.closeMeEvent.emit();
-  }
-  confirm() {
-    this.confirmEvent.emit();
-  }
-  ngOnDestroy(): void {
-    console.log(' Modal destroyed');
-  }
-
-
+    close(event : MouseEvent) {
+        this.closeModal.emit(event);
+    }
 }
