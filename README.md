@@ -22,6 +22,7 @@ A little bit, but still:
 - added file objects on the desktop, and ability of the selection of files in progress
 - added terminal-app (visual), command "clear" works, in progress
 - added typical modal window for next implementation
+- added drag and drop options for files on the desktop
 
 ![web desktop screenshot](./assets/screenshot01082022.png)
 ![web desktop screenshot](./assets/screenshot09082022.png)
