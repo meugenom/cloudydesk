@@ -14,19 +14,27 @@ body
 	align-items: center 
 	justify-content: center 
 
-.container 
+.item-container 
 	padding: 0.3rem 
 	display: grid
 	grid-gap: 0.5rem 
-	grid-template-columns: repeat(20, 1fr) 
-	//flex-wrap: wrap 
+	grid-template-columns: repeat(5, 20fr) 
+	flex-wrap: wrap 
 	width: 98vmax
-	height: 98vmax
+	height: calc(100vh)
 	//background: $container_background
 	border-radius: 0.3rem 
-	user-select: none
 	z-index: 0
-	& > div 
+	//.disable-user-select
+	cursor: default
+	-webkit-touch-callout: none !important
+	-webkit-user-select: none !important
+	-khtml-user-select: none !important
+	-moz-user-select: none !important
+	-ms-user-select: none !important
+	user-select: none !important
+
+	& > div
 		//background: $div_element_background
 		border-style: dashed
 		border-radius: 0.25rem

@@ -26,28 +26,20 @@ export class DesktopComponent implements AfterViewInit {
 
 	//begin select cells
 	ngAfterViewInit() {
-
-		//console.log(window.innerWidth)
-		//console.log(window.innerHeight)
-		//const filesInRow: number = window.innerWidth / 110
-
-		//for (let i = 0; i < 20; i++) {
-			//const div: HTMLElement = document.createElement("div");
-			//div.classList.add('item')
-			//div.setAttribute('id', "item-" + i.toString())
-			//this.input?.nativeElement.appendChild(div);
-		//}
-
+		
 		//viselect
 		const selection = new SelectionArea({
-			selectables: [".item-container > app-file >div"],
+			selectables: [".item-container > div"],
 			boundaries: [".item-container"]
 
 		})
-			.on("start", ({ store, event }) => {
+			.on("start", ({ store, event,selection }) => {
+				event?.stopPropagation();
+				console.log(event)
 				if (!(event as MouseEvent).ctrlKey && !(event as MouseEvent).metaKey) {
 					for (const el of store.stored) {
 						el.classList.remove("selected");
+
 						//console.log(el.children[1].attributes[2])
 						el.children[1].attributes[2].value = " drop-shadow(1px 1px 1px rgba(102, 102, 102, 0.5))"
 						
@@ -59,19 +51,45 @@ export class DesktopComponent implements AfterViewInit {
 				"move",
 				({
 					store: {
-						changed: { added, removed }
-					}
-				}) => {
-					for (const el of added) {
-						el.classList.add("selected");
-						//console.log(el.children[1].attributes[2])
-						el.children[1].attributes[2].value = "background-color: #cdcdcd30; border-radius: 3px ; filter: drop-shadow(0 0 1px rgba(102, 102, 102, 1))"
-					}
+						changed: { added, removed },
 
-					for (const el of removed) {
-						el.classList.remove("selected");
-						el.children[1].attributes[2].value = " drop-shadow(1px 1px 1px rgba(102, 102, 102, 0.5))"
-					}
+					},
+					event,
+					selection
+				}) => {
+
+							
+						for (const el of added) {
+							
+							//cancel selecton when we drag-drop files
+							//console.log(el.attributes)
+							//.selection-area
+  							//	background-color: #afafaf36
+  							//	border: 1px solid #ccc							
+
+							if(el.attributes[12].value){
+								
+								//selection.getSelectionArea().style.backgroundColor = 'rgba(243, 156, 18, 0.2)'
+								//selection.getSelectionArea().style.border = '0px solid #ccc'
+
+							}else{
+
+								//selection.getSelectionArea().style.backgroundColor = '#afafaf36'
+								//selection.getSelectionArea().style.border = '1px solid #ccc'
+							}
+
+							el.classList.add("selected");
+							el.children[1].attributes[2].value = "background-color: #cdcdcd30; border-radius: 3px ; filter: drop-shadow(0 0 1px rgba(102, 102, 102, 1))"
+
+						}
+	
+						for (const el of removed) {
+
+							el.classList.remove("selected");
+							el.children[1].attributes[2].value = " drop-shadow(1px 1px 1px rgba(102, 102, 102, 0.5))"
+						}
+					
+			
 				}
 			)
 			.on("stop", ({ store: { stored } }) => console.log(stored.length));
@@ -84,11 +102,6 @@ export class DesktopComponent implements AfterViewInit {
 		this.modService.addDynamicComponent(modTitle.toString(), modText.toString());
 	}
 
+
 }
 
-/**
- *  background: #8080809c;
-  	border-radius: 10%;
-  	opacity: .7;
-}
- */
