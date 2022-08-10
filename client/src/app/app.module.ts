@@ -21,6 +21,8 @@ import { FileComponent } from './file/file.component';
 import { ModComponent } from './mod/mod.component';
 import { ModService } from './shared/mod.service';
 
+import { DragDropSwapDirective } from './file/drag-drop-swap.directive';
+
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import { ModService } from './shared/mod.service';
   	SettingsComponent,
    FileComponent,
    ModComponent,
+   DragDropSwapDirective
   ],
   imports: [
     AppRoutingModule,
