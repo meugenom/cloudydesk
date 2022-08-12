@@ -16,12 +16,10 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { EditorComponent } from './editor/editor.component';
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
-import { FileComponent } from './file/file.component';
-
 import { ModComponent } from './mod/mod.component';
 import { ModService } from './shared/mod.service';
 
-import { DragDropSwapDirective } from './file/drag-drop-swap.directive';
+import { DragDropSwapDirective } from './desktop/drag-drop-swap.directive';
 
 
 
@@ -37,7 +35,6 @@ import { DragDropSwapDirective } from './file/drag-drop-swap.directive';
   	EditorComponent,
   	CameraComponent,
   	SettingsComponent,
-   FileComponent,
    ModComponent,
    DragDropSwapDirective
   ],
