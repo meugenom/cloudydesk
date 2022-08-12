@@ -19,7 +19,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { ModComponent } from './mod/mod.component';
 import { ModService } from './shared/mod.service';
 
-import { DragDropSwapDirective } from './file/drag-drop-swap.directive';
+import { DragDropSwapDirective } from './desktop/drag-drop-swap.directive';
 
 
 
