@@ -10,21 +10,16 @@ Best Regards!
 **What do we have just now?** 
 A little bit, but still:
 - web view with background, taskbar, and app icons
-- ability to select regions on the web view(let's see in web console)
 - capable desktop's full-window mode
-- modals from taskbar apps (explorer, editor, draw, terminal, camera, settings) with options:
-	- close window-app
-	- maximize window-app / back to small window-app
-	- minimize window-app / back to small window-app
-	- moving window-app by head on the desktop screen
+- modals start from taskbar icons:
+	- closing, maximize, minimize, moving window-app / back to small window-app
 	- make window-app active with click when we have other opened window-apps
 	- resizing window-app by left-bottom icon
-- added file objects on the desktop, and ability of the selection of files in progress
-- added terminal-app (visual), command "clear" works, in progress
-- added typical modal window for next implementation
-- added drag and drop options for files on the desktop
+- in app terminal ability to input commands, "clear" for example, others in progress
+- selection files on the desktop and change places between (drag and drop)
 
-![web desktop screenshot](./assets/screenshot01082022.png)
+- added typical modal window for next implementation
+
 ![web desktop screenshot](./assets/screenshot09082022.png)
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
@@ -70,12 +65,6 @@ src
 	 |--explorer.component.spec.ts
 	 |--explorer.component.html
 	 |--explorer.component.sass
-
- |--file
-     |--file.component.ts
-	 |--file.component.spec.ts
-	 |--file.component.html
-	 |--file.component.sass
 
  |--fullscreen
 	 |--fullscreen.directive.ts
