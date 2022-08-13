@@ -1,4 +1,10 @@
-<div class="window-sidebar disable-user-select"></div>
+<div class="window-sidebar"></div>
 <div class="window-navbar"></div>
-<div class="window-body item-container"></div>
-<div class="explorer-footer"></div>
+<div class="window-body item-container">
+	<app-file-list
+	#container
+	[attr.childToMaster]="this.path"
+	></app-file-list>
+</div>
+<div class="explorer-footer">
+</div>

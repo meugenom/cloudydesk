@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalService } from '../modal/modal.service';
 
 
 @Component({
@@ -11,7 +10,7 @@ import { ModalService } from '../modal/modal.service';
 export class EditorComponent implements OnInit {
 	text1 = ``;
 	
-	constructor(private modalService: ModalService) { }
+	constructor() { }
 
 
 	ngOnInit(): void {

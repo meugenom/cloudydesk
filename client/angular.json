@@ -96,7 +96,8 @@
 			  "src/assets/img"
             ],
             "styles": [
-              "src/assets/css/styles.sass"
+              "src/assets/css/styles.sass",
+			  "../node_modules/dragula/dist/dragula.css"
             ],
             "scripts": []
           }

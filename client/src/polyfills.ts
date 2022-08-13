@@ -57,3 +57,6 @@ import 'zone.js';  // Included with Angular CLI.
  * Needed for: All but Chrome, Firefox, Edge, IE11 and Safari 10
  */
 // import 'intl';  // Run `npm install --save intl`.
+
+//ng-dragula drag and drop lib
+(window as any).global = window;

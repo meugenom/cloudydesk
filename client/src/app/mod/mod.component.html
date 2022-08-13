@@ -1,8 +1,60 @@
-<div class="mod">
-	<div class="mod-overlay" (click)="close($event)"></div>
-	<div class="mod--mod-content">
-		<h2 [innerHTML]="modTitle"></h2>
-		<div [innerHTML]="modText"></div>
-		<a class="mod--close-btn" (click)="close($event)">X</a>
-	</div>
+<!--start moving and make active window-->
+<div class="window" [attr.id]="id" (click)="active(); $event.stopPropagation()">
+  <span class="window-action-btn">
+    <img
+      (click)="close($event); $event.stopPropagation()"
+      src="../../assets/img/btn-close.svg"
+      alt="btn-close-icon"
+    />
+  </span>
+  <span class="window-action-btn" style="left: 20px">
+    <img
+      (click)="minimize(); $event.stopPropagation()"
+      src="../../assets/img/btn-minimize.svg"
+      alt="btn-minimize-icon"
+    />
+  </span>
+  <span class="window-action-btn" style="left: 40px">
+    <img
+      (click)="maximize(); $event.stopPropagation()"
+      src="../../assets/img/btn-open.svg"
+      alt="btn-maximize-icon"
+    />
+  </span>
+  <div class="window-head" (mousedown)="startMove($event, 2)">
+    <div class="window-head-draggable">
+      <img
+        draggable="false"
+        *ngIf="id == 'explorer'"
+        src="../../assets/img/folder-home.svg"
+        alt="folder-home-icon"
+        class="window-head-icon"
+      />
+      <span class="window-head-title" [innerHTML]="name"></span>
+    </div>
+  </div>
+  <ng-container *ngIf="id == 'explorer'">
+    <app-explorer></app-explorer>
+  </ng-container>
+  <ng-container *ngIf="id == 'draw'">
+    <app-draw></app-draw>
+  </ng-container>
+  <ng-container *ngIf="id == 'terminal'">
+    <app-terminal></app-terminal>
+  </ng-container>
+  <ng-container *ngIf="id == 'camera'">
+    <app-camera></app-camera>
+  </ng-container>
+  <ng-container *ngIf="id == 'settings'">
+    <app-settings></app-settings>
+  </ng-container>
+
+  <!--for webkit option draggable is false-->
+  <img
+    draggable="false"
+    (mousedown)="startMove($event, 1)"
+    class="ui-resizable-se"
+    src="../../assets/img/app-resize-right.svg"
+    alt="app-resize-icon"
+  />
 </div>

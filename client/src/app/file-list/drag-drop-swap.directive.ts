@@ -18,7 +18,7 @@ import {
   
 	@HostBinding('attr.draggable') draggable = true;
 	@Input('elemPosition')
-	  elemPosition!: number;
+	elemPosition!: number;
 	@Input('list') list: any;
 	@Output('returnUpdatedList') returnUpdatedList = new EventEmitter<any>();
   
@@ -26,14 +26,15 @@ import {
 	@HostListener('mousedown', ['$event'])
 	onMouseDown(e: any) {
 		
-		console.log('mouse down from drag element')
+		//console.log('mouse down from drag element')
 		
 		//need stop this event but set selected for item
-		e.stopPropagation();
-		console.log(e.srcElement.attributes)
+		//e.stopPropagation();
+		//console.log(e.srcElement.attributes)
+		/*
 		if(e.srcElement.attributes != undefined){
 			for (let index = 0; index < e.srcElement.attributes.length; index++) {
-				const element = e.srcElement.attributes[index];
+				const element = e.srcElement.attributes[index];				
 				if(element.name == 'data-dataitem'){
 					console.log(element.nodeValue)
 					let item = document.getElementById(element.nodeValue);
@@ -51,31 +52,35 @@ import {
 				}
 				
 			}
-		}
+		}*/
 	}
 
 
 	@HostListener('dragstart', ['$event'])
 	onDragStart(e: any) {
-
+		//e.preventDefault();
 		//need add transit class
-		const id  = e.srcElement.id
-		let elem = document.getElementById(id)
+		//const id  = e.srcElement.id
+		//let elem = document.getElementById(id)
 		//elem?.classList.add('item-transit')
 
 		//move parameter to cancel selection
-		elem?.setAttribute('dragstart','true');
-		
-
+		//elem?.setAttribute('dragstart','true');
+		//console.log('dragStart')
+		//console.log(this.elemPosition)
 	  	e.dataTransfer.setData('text', this.elemPosition);
 	}
   
 	@HostListener('drop', ['$event'])
 	onDrop(e : any) {
-	  e.preventDefault();
+	  //e.preventDefault();
 	  let sourceElementIndex = e.dataTransfer.getData('text');
 	  let destElementIndex = this.elemPosition;
+	  console.log('event Drop')
+	  console.log('sourceElementIndex = '+ sourceElementIndex)
+	  console.log('destElementIndex = '+ destElementIndex)
 	  let clonedList = [...this.list];
+	  //console.log(sourceElementIndex)
 	  if (sourceElementIndex !== destElementIndex) {
 		clonedList.splice(destElementIndex, 1, this.list[sourceElementIndex]);
 		clonedList.splice(sourceElementIndex, 1, this.list[destElementIndex]);
@@ -95,7 +100,7 @@ import {
   
 	@HostListener('dragover', ['$event'])
 	onDragOver(e: any) {
-	  e.preventDefault();
+	  //e.preventDefault();
 
 	  //const id  = e.srcElement.id
 	  //let elem = document.getElementById(id)

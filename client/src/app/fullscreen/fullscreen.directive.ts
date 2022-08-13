@@ -4,7 +4,7 @@ import { Globals } from '../global';
 @Directive({
 	selector: 'button[FullScreenOpening]'
 })
-export class Fullscreen {
+export class FullscreenDirective {
 	
 	constructor(private renderer: Renderer2, private globals: Globals) {		
 	}

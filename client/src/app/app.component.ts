@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModService } from './shared/mod.service';
+import { ModService } from './mod/mod.service';
 
 @Component({
   selector: 'app-root',
