@@ -1,18 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalService } from '../modal/modal.service';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-explorer',
-  templateUrl: './explorer.component.html',
-  styleUrls: ['./explorer.component.sass']
+	selector: 'app-explorer',
+	templateUrl: './explorer.component.html',
+	styleUrls: ['./explorer.component.sass']
 })
 export class ExplorerComponent implements OnInit {
 
-  constructor(private modalService: ModalService) { }
-
-  ngOnInit(): void {
+	path : String;
 	
-  }
+
+	constructor() { 
+			this.path = 'desktop';
+		}
+
+	
+	
+	ngOnInit(): void {
+
+	}
 
 	//modals
 	/*

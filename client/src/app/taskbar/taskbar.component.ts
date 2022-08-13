@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 
-import { ModalService } from '../modal/modal.service';
-import { ModService } from '../shared/mod.service';
+import { ModService } from '../mod/mod.service';
 import { Globals } from '../global';
 
 @Component({
@@ -12,7 +11,6 @@ import { Globals } from '../global';
 export class TaskbarComponent implements OnInit {
 
 	constructor(
-		private modalService: ModalService,
 		private modService: ModService,
 		private viewContainerRef: ViewContainerRef,
 		public globals: Globals
@@ -21,19 +19,11 @@ export class TaskbarComponent implements OnInit {
 
 	ngOnInit(): void { 
 	}
-
-	openModal(id: string) {
-		this.modalService.open(id);
-	}
-
-	closeModal(id: string) {
-		this.modalService.close(id);
-	}
-
-	openMod(e: MouseEvent, modTitle: String, modText: String) {
+	
+	openMod(e: MouseEvent, id: String, name: String) {
 		e.preventDefault();
 		this.modService.setRootViewContainerRef(this.viewContainerRef);
-		this.modService.addDynamicComponent(modTitle.toString(), modText.toString());
+		this.modService.addDynamicComponent(id.toString(), name.toString());
 	}
 
 }

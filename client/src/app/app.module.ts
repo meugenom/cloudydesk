@@ -6,10 +6,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DesktopComponent } from './desktop/desktop.component';
-import { Fullscreen } from './fullscreen/fullscreen.directive';
+import { FullscreenDirective } from './fullscreen/fullscreen.directive';
 import { TaskbarComponent } from './taskbar/taskbar.component';
-
-import { ModalModule } from './modal/modal.module';
 import { ExplorerComponent } from './explorer/explorer.component';
 import { DrawComponent } from './draw/draw.component';
 import { TerminalComponent } from './terminal/terminal.component';
@@ -17,35 +15,32 @@ import { EditorComponent } from './editor/editor.component';
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ModComponent } from './mod/mod.component';
-import { ModService } from './shared/mod.service';
-
-import { DragDropSwapDirective } from './desktop/drag-drop-swap.directive';
-
+import { ModService } from './mod/mod.service';
+import { FileListModule } from './file-list/file-list.module'
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DesktopComponent,
-	Fullscreen,
- 	TaskbarComponent,
-  	ExplorerComponent,
-  	DrawComponent,
-  	TerminalComponent,
-  	EditorComponent,
-  	CameraComponent,
-  	SettingsComponent,
-   ModComponent,
-   DragDropSwapDirective
-  ],
-  imports: [
-    AppRoutingModule,
-	BrowserModule,
-	ModalModule,
-	HttpClientModule,
-	FormsModule
-  ],
-  providers: [ModService],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		DesktopComponent,
+		FullscreenDirective,
+		TaskbarComponent,
+		ExplorerComponent,
+		DrawComponent,
+		TerminalComponent,
+		EditorComponent,
+		CameraComponent,
+		SettingsComponent,
+		ModComponent,
+	],
+	imports: [
+		AppRoutingModule,
+		BrowserModule,
+		HttpClientModule,
+		FormsModule,
+		FileListModule
+	],
+	providers: [ModService],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
