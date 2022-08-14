@@ -18,6 +18,7 @@ import { ModComponent } from './mod/mod.component';
 import { ModService } from './mod/mod.service';
 import { FileListModule } from './file-list/file-list.module'
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { Globals } from './global';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 		FileListModule,
 		AngularEditorModule
 	],
-	providers: [ModService],
+	providers: [ModService, Globals],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
