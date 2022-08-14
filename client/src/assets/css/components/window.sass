@@ -210,7 +210,7 @@
 
 .window-body
   width: 100%
-  height: calc(100% - 77px)
+  height: calc(100% - 110px)
   background-color: #fff
   overflow: auto
 
@@ -271,7 +271,7 @@
   width: 147px
 
 .window-sidebar-item-active
-  background-color: #fefeff
+  background-color: #f0f0f0
 
   &:hover
     background-color: #fefeff
@@ -288,10 +288,14 @@
   -moz-osx-font-smoothing: grayscale
   margin-bottom: -2px
 
-.window[data-app=explorer] .window-body
-  height: calc(100% - 107px)
+.window .window-body
+  height: calc(100%)
 
-.explorer-footer
+.window[id="finder"] .window-body
+  height: calc(100% - 110px)
+
+
+.finder-footer
   background: #fff
   width: calc(100% - 180px)
   float: right
@@ -308,10 +312,10 @@
   -ms-user-select: none !important
   cursor: default
 
-.explorer-footer-selected-items-count
+.finder-footer-selected-items-count
   display: none
 
-.explorer-footer-seperator
+.finder-footer-seperator
   display: none
   margin: 15px
   color: #ccc
@@ -384,9 +388,9 @@
 
 .window >
   .ui-resizable-ne, .ui-resizable-nw, .ui-resizable-se, .ui-resizable-sw
-    width: 15px
-    height: 15px
-    z-index: 95 !important
+    width: 10px
+    height: 10px
+    z-index: 10 !important
 
 .window-alert-message
   font-size: 15px

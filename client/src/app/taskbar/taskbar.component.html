@@ -1,15 +1,14 @@
 <div class="taskbar" style="height: 50px">
-  <!--test-->
   <div
-    (click)="openMod($event, 'explorer', 'Explorer')"
+    (click)="openMod($event, 'finder', 'Finder')"
     class="taskbar-item disable-user-select"
     id="taskbar-item-2"
     data-taskbar-item-id="2"
-    data-name="Explorer"
-    data-app="explorer"
+    data-name="Finder"
+    data-app="finder"
     data-keep-in-taskbar="true"
     data-open-windows="0"
-    title="Explorer"
+    title="Finder"
   >
     <div class="taskbar-icon">
       <img src="./../../assets/img/folders.svg" />
@@ -17,9 +16,25 @@
     <span class="active-taskbar-indicator"></span>
   </div>
 
-  
   <div
-	(click)="openMod($event, 'draw', 'Draw')"
+    (click)="openMod($event, 'editor', 'Editor')"
+    class="taskbar-item disable-user-select"
+    id="taskbar-item-2"
+    data-taskbar-item-id="2"
+    data-name="Editor"
+    data-app="editor"
+    data-keep-in-taskbar="true"
+    data-open-windows="0"
+    title="Editor"
+  >
+    <div class="taskbar-icon">
+      <img src="./../../assets/img/app-editor.svg" />
+    </div>
+    <span class="active-taskbar-indicator"></span>
+  </div>
+
+  <div
+    (click)="openMod($event, 'draw', 'Draw')"
     class="taskbar-item disable-user-select"
     id="taskbar-item-4"
     data-taskbar-item-id="4"
@@ -36,7 +51,7 @@
   </div>
 
   <div
-	(click)="openMod($event, 'terminal', 'Terminal')"
+    (click)="openMod($event, 'terminal', 'Terminal')"
     class="taskbar-item disable-user-select"
     id="taskbar-item-5"
     data-taskbar-item-id="5"
@@ -53,7 +68,7 @@
   </div>
 
   <div
-	(click)="openMod($event, 'camera', 'Camera')"
+    (click)="openMod($event, 'camera', 'Camera')"
     class="taskbar-item disable-user-select"
     id="taskbar-item-6"
     data-taskbar-item-id="6"
@@ -70,7 +85,7 @@
   </div>
 
   <div
-	(click)="openMod($event, 'settings', 'Settings')"
+    (click)="openMod($event, 'settings', 'Settings')"
     class="taskbar-item disable-user-select"
     id="taskbar-item-7"
     data-taskbar-item-id="7"

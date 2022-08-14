@@ -25,16 +25,19 @@
     <div class="window-head-draggable">
       <img
         draggable="false"
-        *ngIf="id == 'explorer'"
-        src="../../assets/img/folder-home.svg"
-        alt="folder-home-icon"
+        *ngIf="id == 'finder'"
+        src="../../assets/img/app-finder.svg"
+        alt="app-finder-icon"
         class="window-head-icon"
       />
       <span class="window-head-title" [innerHTML]="name"></span>
     </div>
   </div>
-  <ng-container *ngIf="id == 'explorer'">
-    <app-explorer></app-explorer>
+  <ng-container *ngIf="id == 'finder'">
+    <app-finder [attr.showFolder]="this.folder"></app-finder>
+  </ng-container>
+  <ng-container *ngIf="id == 'editor'">
+    <app-editor></app-editor>
   </ng-container>
   <ng-container *ngIf="id == 'draw'">
     <app-draw></app-draw>

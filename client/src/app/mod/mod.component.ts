@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ViewEncapsulation, ElementRef, HostListener } from "@angular/core";
 import { ModService } from "./mod.service";
+import { Globals } from "../global";
 
 
 const enum Status {
@@ -19,6 +20,7 @@ export class ModComponent implements OnInit, AfterViewInit {
 	@Input() name: string | undefined;
 	@Output() closeModal: EventEmitter<any> = new EventEmitter<any>();
 	@Input() id!: string;
+	@Input() folder: String;
 
 	private element: any;
 	public status: Status = Status.OFF;
@@ -31,9 +33,12 @@ export class ModComponent implements OnInit, AfterViewInit {
 
 	constructor(
 		private el: ElementRef,
-		private modService: ModService) {
+		private modService: ModService,
+		private globals : Globals
+		) {
 
 		this.element = el.nativeElement;
+		this.folder = this.globals.currentDesktopFolder;
 		this.styleArr = [];
 
 	}
@@ -77,7 +82,6 @@ export class ModComponent implements OnInit, AfterViewInit {
 			}
 		}
 
-
 	}
 
 	/**
@@ -97,7 +101,7 @@ export class ModComponent implements OnInit, AfterViewInit {
 	 * set modal active, when it was minimized before or by click on the window
 	 */
 	active(): void {
-		console.log(this.element.classList)
+		//console.log(this.element.classList)
 
 		//if window minimized and saved in the store
 		if (this.element.classList.contains('minimized')) {
@@ -136,8 +140,8 @@ export class ModComponent implements OnInit, AfterViewInit {
 			}
 			//remove focused from the last
 			let focused = document.getElementsByClassName('focused');
-			console.log('focused:')
-			console.log(focused[0])
+			//console.log('focused:')
+			//console.log(focused[0])
 
 			//for (let index = 0; index < focused.length; index++) {
 			//	if(focused[i] != null){
@@ -249,8 +253,8 @@ export class ModComponent implements OnInit, AfterViewInit {
 			let opened = document.getElementsByClassName('app-modal-opened');
 			let focused = document.getElementsByClassName('focused');
 
-			console.log(opened)
-			console.log(focused)
+			//console.log(opened)
+			//console.log(focused)
 
 			//view opened windows
 			let flag: boolean = false;
@@ -259,7 +263,7 @@ export class ModComponent implements OnInit, AfterViewInit {
 				if(opened[i].children[0].getAttribute('id') != null){
 					if ((opened[i].children[0].getAttribute('id')) == this.id) {
 						//	console.log('opened windows and flag is true')
-						console.log(opened[i]);
+						//console.log(opened[i]);
 						flag = true;
 						break;
 					}
@@ -287,13 +291,13 @@ export class ModComponent implements OnInit, AfterViewInit {
 			if (!flag && opened.length != 0 && !focused[0].classList.contains('maximized')) {
 			//if (opened.length != 0 && !focused[0].classList.contains('maximized')) {
 				//get position for a last opened window
-				console.log('top:')
+				//console.log('top:')
 				focused[0].childNodes[0];
 				
 
 				const rect = focused[0].children[0].getBoundingClientRect();
-				console.log('rect top = '+rect.top)
-				console.log('rect left = '+rect.left)
+				//console.log('rect top = '+rect.top)
+				//console.log('rect left = '+rect.left)
 
 				focused[0].classList.remove('focused')
 

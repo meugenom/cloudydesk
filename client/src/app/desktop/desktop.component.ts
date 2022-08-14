@@ -11,7 +11,7 @@ import { ModService } from '../mod/mod.service';
 export class DesktopComponent{
 
 	fullScreen: boolean;
-	
+	showFolder : any = { path: 'Desktop' }
 
 	constructor(
 		private modService: ModService,
@@ -19,7 +19,6 @@ export class DesktopComponent{
 		public globals: Globals) {
 
 		this.fullScreen = this.globals.fullScreen;
-
 	}
 
 	//for modal windows
