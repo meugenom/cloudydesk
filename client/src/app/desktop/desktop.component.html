@@ -1,6 +1,8 @@
 <!--container for files-->
 <div class="desktop">
-  <app-file-list #container></app-file-list>
+  <app-file-list #container
+  [showFolder] = "showFolder"
+   ></app-file-list>
 
   <!--top right region-->
   <div

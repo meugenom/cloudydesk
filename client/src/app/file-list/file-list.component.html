@@ -1,4 +1,4 @@
-<div class="item-container dragula" dragula="FILES">
+<div class="item-container dragula" dragula="FILES" [attr.showFolder]="showFolder?.path">
   <div *ngFor="let file of this.files; let i = index">
     <div
       class="item"

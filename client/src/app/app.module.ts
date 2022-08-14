@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { DesktopComponent } from './desktop/desktop.component';
 import { FullscreenDirective } from './fullscreen/fullscreen.directive';
 import { TaskbarComponent } from './taskbar/taskbar.component';
-import { ExplorerComponent } from './explorer/explorer.component';
+import { FinderComponent } from './finder/finder.component';
 import { DrawComponent } from './draw/draw.component';
 import { TerminalComponent } from './terminal/terminal.component';
 import { EditorComponent } from './editor/editor.component';
@@ -17,6 +17,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { ModComponent } from './mod/mod.component';
 import { ModService } from './mod/mod.service';
 import { FileListModule } from './file-list/file-list.module'
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { FileListModule } from './file-list/file-list.module'
 		DesktopComponent,
 		FullscreenDirective,
 		TaskbarComponent,
-		ExplorerComponent,
+		FinderComponent,
 		DrawComponent,
 		TerminalComponent,
 		EditorComponent,
@@ -38,7 +39,8 @@ import { FileListModule } from './file-list/file-list.module'
 		BrowserModule,
 		HttpClientModule,
 		FormsModule,
-		FileListModule
+		FileListModule,
+		AngularEditorModule
 	],
 	providers: [ModService],
 	bootstrap: [AppComponent]

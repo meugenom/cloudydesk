@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { DragulaModule } from 'ng2-dragula';
 import { FileListComponent } from "./file-list.component";
-import { OrderByPosition } from "./OrderByPosition.pipe";
 
 @NgModule({
 
@@ -16,7 +15,6 @@ import { OrderByPosition } from "./OrderByPosition.pipe";
     ],
     declarations: [
         FileListComponent,
-        OrderByPosition
     ],
     exports: [
         FileListComponent

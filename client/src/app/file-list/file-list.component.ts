@@ -3,7 +3,6 @@ import SelectionArea from "@viselect/vanilla";
 import { Globals } from '../global';
 import { DragulaService } from 'ng2-dragula';
 
-
 @Component({
 	selector: 'app-file-list',
 	templateUrl: './file-list.component.html',
@@ -13,9 +12,10 @@ export class FileListComponent implements OnInit, OnDestroy {
 
 	@ViewChild('container') input: ElementRef | undefined;
 
-	
+
 	files: any[]
-	
+	currentFolder: String;
+
 	@Input() path: String | undefined;
 	@Input() id: number | undefined;
 	@Input() name: String | undefined;
@@ -28,35 +28,39 @@ export class FileListComponent implements OnInit, OnDestroy {
 	@Input() style: string | undefined;
 	@Input() item: string | undefined;
 	@Input() dragstart: boolean | undefined;
-	
-	@Input('childToMaster') masterName: string | undefined;
 
-	
+	@Input() showFolder: { path: string; } | undefined;
+
 	constructor(
 		public globals: Globals,
 		private dragulaService: DragulaService,
 		private element: ElementRef
-	) { 
-		this.files = this.globals.files;
+	) {
+		//by default is 'Desktop'
+		this.currentFolder = this.globals.currentDesktopFolder;
+		this.files = this.globals.files[0].Desktop;
 	}
 
 	ngOnInit(): void {
 
-		
+		if (this.showFolder?.path) {
+			console.log('change paths from default ')
+			console.log('from Desktop to ' + this.showFolder.path)
+			const path = this.showFolder.path;
+			this.files = this.globals.files[0][path];
+		}
+
 	}
-
-
 
 	ngOnDestroy() {
 
-    }
-
+	}
 
 	//begin select cells
 	ngAfterViewInit() {
 
-		if(this.element.nativeElement.attributes.childToMaster == 'desktop'){
-			this.files = this.globals.files;
+		if (this.element.nativeElement.attributes.childToMaster == 'Desktop') {
+			console.log('childToMaster = ' + this.element.nativeElement.attributes.childToMaster)
 		}
 
 		//viselect
@@ -106,8 +110,6 @@ export class FileListComponent implements OnInit, OnDestroy {
 						el.classList.remove("selected");
 						//el.children[1].attributes[2].value = " drop-shadow(1px 1px 1px rgba(102, 102, 102, 0.5))"
 					}
-
-
 				}
 			)
 			.on("stop", ({ store: { stored } }) => console.log(stored.length));

@@ -59,23 +59,29 @@ src
 	 |--editor.component.spec.ts
 	 |--editor.component.html
 	 |--editor.component.sass
+  
+ |--file-list
+     |--file-list.component.ts
+	 |--file-list.component.spec.ts
+	 |--file-list.component.html
+	 |--file-list.component.sass
 
- |--explorer
-     |--explorer.component.ts
-	 |--explorer.component.spec.ts
-	 |--explorer.component.html
-	 |--explorer.component.sass
+ |--finder
+     |--finder.component.ts
+	 |--finder.component.spec.ts
+	 |--finder.component.html
+	 |--finder.component.sass
 
  |--fullscreen
 	 |--fullscreen.directive.ts
 	 |--fullscreen.directive.spec.ts
 
- |--modal
-	 |--modal.module.ts
-	 |--modal.service.ts
-	 |--modal.component.ts
-	 |--modal.component.sass
-	 |--modal.component.html
+ |--mod
+	 |--mod.module.ts
+	 |--mod.service.ts
+	 |--mod.component.ts
+	 |--mod.component.sass
+	 |--mod.component.html
 
  |--taskbar
 	 |--taskbar.component.ts
