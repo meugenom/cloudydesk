@@ -20,7 +20,7 @@ A little bit, but still:
 
 - added typical modal window for next implementation
 
-![web desktop screenshot](./assets/screenshot09082022.png)
+![web desktop screenshot](./assets/screenshot15082022.png)
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 
