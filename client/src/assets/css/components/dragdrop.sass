@@ -1,5 +1,6 @@
 /* in-flight clone */
-.item-mirror
+/* in-flight clone */
+.gu-mirror
 	position: fixed !important
 	margin: 0 !important
 	z-index: 9999 !important
@@ -9,18 +10,18 @@
 	pointer-events: none
 
 /* high-performance display:none; helper */
-.item-hide
+.gu-hide
 	left: -9999px !important
 
 /* added to mirrorContainer (default = body) while dragging */
-.item-unselectable
+.gu-unselectable
 	-webkit-user-select: none !important
 	-moz-user-select: none !important
 	-ms-user-select: none !important
 	user-select: none !important
 
 /* added to the source element while its mirror is dragged */
-.item-transit 
-	opacity: 0.4
+.gu-transit
+	opacity: 0.2
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)"
 	filter: alpha(opacity=20)
