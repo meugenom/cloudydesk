@@ -17,8 +17,11 @@ import { SettingsComponent } from './settings/settings.component';
 import { ModComponent } from './mod/mod.component';
 import { ModService } from './mod/mod.service';
 import { FileListModule } from './file-list/file-list.module'
-import { AngularEditorModule } from '@kolkov/angular-editor';
+
+//global values
 import { Globals } from './global';
+
+//editors
 
 
 @NgModule({
@@ -40,8 +43,7 @@ import { Globals } from './global';
 		BrowserModule,
 		HttpClientModule,
 		FormsModule,
-		FileListModule,
-		AngularEditorModule
+		FileListModule
 	],
 	providers: [ModService, Globals],
 	bootstrap: [AppComponent]
