@@ -20,6 +20,7 @@
     "@angular/router": "^14.0.0",
     "express": "^4.18.1",
     "rxjs": "~7.5.0",
+    "suneditor": "^2.43.14",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
@@ -27,7 +28,6 @@
     "@angular-devkit/build-angular": "^14.0.6",
     "@angular/cli": "~14.0.6",
     "@angular/compiler-cli": "^14.0.0",
-    "@kolkov/angular-editor": "^3.0.0-beta.0",
     "@types/jasmine": "~4.0.0",
     "@viselect/vanilla": "^3.0.0",
     "jasmine-core": "~4.1.0",

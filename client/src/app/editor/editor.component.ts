@@ -1,53 +1,35 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 
+
+//import jsonDoc from './doc';
 
 
 @Component({
 	selector: 'app-editor',
 	templateUrl: './editor.component.html',
-	styleUrls: ['./editor.component.sass']
+	styleUrls: ['./editor.component.sass'],
+	//encapsulation: ViewEncapsulation.None,
 })
 
-export class EditorComponent implements OnInit {
+export class EditorComponent implements OnInit, OnDestroy {
 
-	htmlContent = 'This is the text editor';
-
-	config: AngularEditorConfig = {
-		editable: true,
-		spellcheck: true,
-		height: '15rem',
-		minHeight: '5rem',
-		placeholder: 'Enter text here...',
-		translate: 'no',
-		defaultParagraphSeparator: 'p',
-		defaultFontName: 'Arial',
-		toolbarHiddenButtons: [
-			['bold']
-		],
-		customClasses: [
-			{
-				name: "quote",
-				class: "quote",
-			},
-			{
-				name: 'redText',
-				class: 'redText'
-			},
-			{
-				name: "titleText",
-				class: "titleText",
-				tag: "h1",
-			},
-		]
-	};
-	constructor() {
-
+	
+	constructor(
+	) {
+		
 	}
+
+	
 
 
 	ngOnInit(): void {
+	
 	}
+
+	ngOnDestroy(): void {
+
+	  }
 
 
 }
