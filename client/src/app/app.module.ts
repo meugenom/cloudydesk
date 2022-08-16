@@ -14,12 +14,19 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { EditorComponent } from './editor/editor.component';
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
-import { ModComponent } from './mod/mod.component';
-import { ModService } from './mod/mod.service';
+
 import { FileListModule } from './file-list/file-list.module'
 
 //global values
 import { Globals } from './global';
+
+//modals
+import { ModComponent } from './mod/mod.component';
+import { ModService } from './mod/mod.service';
+
+//popovers
+import { ContextMenuComponent } from './context-menu/context-menu.component';
+import { ContextMenuService } from './context-menu/context-menu.service';
 
 //editors
 
@@ -37,6 +44,7 @@ import { Globals } from './global';
 		CameraComponent,
 		SettingsComponent,
 		ModComponent,
+		ContextMenuComponent,
 	],
 	imports: [
 		AppRoutingModule,
@@ -45,7 +53,7 @@ import { Globals } from './global';
 		FormsModule,
 		FileListModule
 	],
-	providers: [ModService, Globals],
+	providers: [ModService, Globals, ContextMenuService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
