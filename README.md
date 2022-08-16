@@ -7,23 +7,23 @@ I will be glad and pleased to listen to some critiques about my code or ideas. H
 
 Best Regards!
 
-**What do we have just now?** 
+### **What do we have just now?** 
+
 A little bit, but still:
-- web view with background, taskbar, and app icons
+- animated web view with space background, taskbar, and app icons
 - capable desktop's full-window mode
 - modals start from taskbar icons:
 	- closing, maximize, minimize, moving window-app / back to small window-app
 	- make window-app active with click when we have other opened window-apps
 	- resizing window-app by left-bottom icon
 - in app terminal ability to input commands, "clear" for example, others in progress
-- selection files on the desktop and change places between (drag and drop)
+- selection files on the desktop and in Finder and change places between (drag and drop)
+- context-menu (only visually)
 
-- added typical modal window for next implementation
-
-![web desktop screenshot](./assets/screenshot15082022.png)
+![web desktop screenshot](./assets/screenshot16092022.png)
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
-Background  download from Unsplash.com (by Milad Fakurian from Unsplash.com)
+Space Background's Picture downloaded from Unsplash.com (by Gary Scott)
 
 dirs:
 ```
@@ -42,6 +42,13 @@ src
 	 |--camera.component.spec.ts
 	 |--camera.component.html
 	 |--camera.component.sass
+
+ |--context-menu
+     |--context-menu.component.ts
+	 |--context-menu.component.spec.ts
+	 |--context-menu.component.html
+	 |--context-menu.service.ts
+	 |--context-menu.component.sass
 
  |--desktop
 	 |--desktop.component.ts

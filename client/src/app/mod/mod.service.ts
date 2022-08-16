@@ -58,6 +58,7 @@ export class ModService {
 
 		// remove modal from array of active modals
 		this.modals = this.modals.filter(x => x.id != id);
+		console.log('modal '+id+' destroyed')
 	}
 
 

@@ -177,7 +177,7 @@ export class ModComponent implements OnInit, AfterViewInit {
 			
 			opened[index].classList.add('focused')
 			let style = opened[index].children[0].getAttribute('style');
-			console.log(style)
+			//console.log(style)
 			//min-width: 300px; min-height: 200px; width: 600px; height: 350px; top: calc(15% + 0px); left: 405px; z-index: 1;
 			//we need to change last digit from 1 to 0 and set to the attributes again
 			style = style?.substring(0, style.length - 2)+"1;"

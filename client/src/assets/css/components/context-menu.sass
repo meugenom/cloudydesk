@@ -1,0 +1,101 @@
+.context-menu
+  background-color: rgb(255 255 255 / 92%)
+  backdrop-filter: blur(3px)
+
+.context-menu
+  display: none
+  z-index: 9999999999
+  position: absolute
+  overflow: hidden
+  white-space: nowrap
+  font-family: sans-serif
+  background: #fff
+  color: #333
+  border-radius: 10px
+  padding: 3px 0
+  min-width: 200px
+  background-color: rgba(240, 244, 248, 0.98)
+  border: 1px solid #e4ebf3de
+  box-shadow: 0 0 15px #00000066
+  padding-left: 6px
+  padding-right: 6px
+  padding-top: 4px
+  padding-bottom: 4px
+
+  li
+    list-style-type: none
+    user-select: none
+    cursor: default !important
+
+  .context-menu-divider > hr
+    margin-top: 5px
+    margin-bottom: 5px
+    border-bottom: none
+    border-top: 1px solid #00000033
+
+  .context-menu-item
+    padding: 5px
+    list-style-type: none
+    user-select: none
+    font-size: 13px
+    height: 25px
+    box-sizing: border-box
+
+.submenu-arrow
+  width: 15px
+  height: 15px
+  float: right
+
+.submenu-arrow-active
+  display: none
+
+.context-menu-item-active
+  .submenu-arrow
+    display: none
+    pointer-events: none
+
+  .submenu-arrow-active
+    display: inline-block
+
+.context-menu
+  .context-menu-item-active, .context-menu-item:hover
+    background-color: rgb(59 134 226)
+    color: #fff
+    border-radius: 4px
+
+  .context-menu-item-disabled
+    opacity: .5
+    background-color: transparent
+    color: initial
+    cursor: initial
+
+    &:hover
+      opacity: .5
+      background-color: transparent
+      color: initial
+      cursor: initial
+
+.context-menu-item-icon
+  display: inline-block
+  width: 20px
+  text-align: center
+  margin-right: 5px
+  font-size: 14px
+  line-height: 5px
+
+.context-menu-item-icon-active
+  display: inline-block
+  width: 20px
+  text-align: center
+  margin-right: 5px
+  font-size: 14px
+  line-height: 5px
+  display: none
+
+.context-menu .context-menu-item-active
+  .context-menu-item-icon
+    display: none
+
+  .context-menu-item-icon-active
+    display: inline-block
+    color: #fff

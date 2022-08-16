@@ -1,8 +1,6 @@
 <!--container for files-->
-<div class="desktop">
-  <app-file-list #container
-  [showFolder] = "showFolder"
-   ></app-file-list>
+<div class="desktop" (contextmenu)="openContext($event, 'desktop-context-menu', 'Desktop Context Menu')">
+  <app-file-list #container [showFolder]="showFolder"></app-file-list>
 
   <!--top right region-->
   <div
@@ -26,18 +24,16 @@
       FullScreenOpening
       class="fullscreen-btn button button-small"
       title="Enter Full Screen"
-	  (click)="getFullScreen()">
-      <img
-        src="./../../assets/img/fullscreen.svg"
-        *ngIf="!fullScreen"
-      />
-      <img src="./../../assets/img/screen.svg" 
-	  *ngIf="fullScreen"/>
+      (click)="getFullScreen()"
+    >
+      <img src="./../../assets/img/fullscreen.svg" *ngIf="!fullScreen" />
+      <img src="./../../assets/img/screen.svg" *ngIf="fullScreen" />
     </button>
     <!--user information button-->
     <button
       class="user-options-menu-btn button button-small"
-      (click)="openMod($event, 'user', 'User')">
+      (click)="openMod($event, 'user', 'User')"
+    >
       <img src="./../../assets/img/profile.svg" />
       <span class="user-options-menu-username"> user </span>
     </button>
