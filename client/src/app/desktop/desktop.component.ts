@@ -1,7 +1,8 @@
-import { Component, HostListener, OnInit, ElementRef, Renderer2, ViewChild, ViewContainerRef, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnInit, ElementRef, Renderer2, ViewChild, ViewContainerRef, OnDestroy, EventEmitter, Output } from '@angular/core';
 import SelectionArea from "@viselect/vanilla";
 import { Globals } from '../global';
 import { ModService } from '../mod/mod.service';
+import { ContextMenuService } from '../context-menu/context-menu.service';
 
 @Component({
 	selector: 'app-desktop',
@@ -17,6 +18,7 @@ export class DesktopComponent {
 
 	constructor(
 		private modService: ModService,
+		private contextMenuService: ContextMenuService,
 		private viewContainerRef: ViewContainerRef,
 		private globals: Globals,
 		private element: ElementRef
@@ -36,6 +38,14 @@ export class DesktopComponent {
 		this.modService.addDynamicComponent(id.toString(), name.toString());
 	}
 
+	//for context menu windows
+	openContext(e: MouseEvent, id: string, name: String) {
+
+		e.preventDefault();
+		this.contextMenuService.setRootViewContainerRef(this.viewContainerRef);
+		this.contextMenuService.addDynamicComponent(id.toString(), name.toString());
+	}
+
 	//begin select cells
 	ngAfterViewInit() {
 
@@ -48,21 +58,21 @@ export class DesktopComponent {
 		}).on("beforestart", ({ store: { stored }, event, selection }) => {
 
 			//if we need stop to move select area
-			//console.log('before start')
-			
+			console.log('before start')
+
 			// in js we have event.target.tagName 
 			//but ts needs default handler, so !important
 			if (event != null) {
-				if (event.target instanceof Element) { 
-					
+				if (event.target instanceof Element) {
+
 					//console.log(event.target.classList)
-					
-					if(event.target.classList.contains('item-icon-icon') || 
-					event.target.classList.contains('item-badges') ||
-					event.target.classList.contains('item-name')
-					){
+
+					if (event.target.classList.contains('item-icon-icon') ||
+						event.target.classList.contains('item-badges') ||
+						event.target.classList.contains('item-name')
+					) {
 						this.dragDrop = true;
-					}else{
+					} else {
 						this.dragDrop = false;
 					}
 				}
@@ -96,7 +106,7 @@ export class DesktopComponent {
 					event,
 					selection
 				}) => {
-					
+
 					//hardcore
 					if (this.dragDrop == true) {
 						selection.cancel()
@@ -105,7 +115,7 @@ export class DesktopComponent {
 					for (const el of added) {
 
 						el.classList.add("selected");
-						console.log(el.children[0].children[1].children[0].attributes)
+						//console.log(el.children[0].children[1].children[0].attributes)
 						el.children[0].children[1].children[0].classList.add('item-icon-icon-selected')
 
 					}
