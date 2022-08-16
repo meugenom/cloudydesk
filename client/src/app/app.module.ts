@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,9 +24,15 @@ import { Globals } from './global';
 import { ModComponent } from './mod/mod.component';
 import { ModService } from './mod/mod.service';
 
-//popovers
+//context menu
 import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { ContextMenuService } from './context-menu/context-menu.service';
+
+//spinner
+import { ProgressbarComponent } from './progressbar/progressbar.component';
+
+//loading interceptor
+import { LoadingInterceptor } from './loader/loading.interceptor';
 
 //editors
 
@@ -45,6 +51,7 @@ import { ContextMenuService } from './context-menu/context-menu.service';
 		SettingsComponent,
 		ModComponent,
 		ContextMenuComponent,
+  		ProgressbarComponent,
 	],
 	imports: [
 		AppRoutingModule,
@@ -53,7 +60,11 @@ import { ContextMenuService } from './context-menu/context-menu.service';
 		FormsModule,
 		FileListModule
 	],
-	providers: [ModService, Globals, ContextMenuService],
+	providers: [ModService, Globals, ContextMenuService,
+		{
+			provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+		  }
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
