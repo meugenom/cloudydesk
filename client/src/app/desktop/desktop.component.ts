@@ -80,9 +80,7 @@ export class DesktopComponent {
 				if (!(event as MouseEvent).ctrlKey && !(event as MouseEvent).metaKey) {
 					for (const el of store.stored) {
 						el.classList.remove("selected");
-
-						//console.log(el.children[1].attributes[2])
-						//el.children[1].attributes[2].value = " drop-shadow(1px 1px 1px rgba(102, 102, 102, 0.5))"
+						el.children[0].children[1].children[0].classList.remove('item-icon-icon-selected')
 
 					}
 					selection.clearSelection();
@@ -107,15 +105,15 @@ export class DesktopComponent {
 					for (const el of added) {
 
 						el.classList.add("selected");
-						//console.log(el)
-						//el.children[1].children[0].attributes[2].value = "background-color: #cdcdcd30; border-radius: 3px ; filter: drop-shadow(0 0 1px rgba(102, 102, 102, 1))"
+						console.log(el.children[0].children[1].children[0].attributes)
+						el.children[0].children[1].children[0].classList.add('item-icon-icon-selected')
 
 					}
 
 					for (const el of removed) {
 
 						el.classList.remove("selected");
-						//el.children[1].attributes[2].value = " drop-shadow(1px 1px 1px rgba(102, 102, 102, 0.5))"
+						el.children[0].children[1].children[0].classList.remove('item-icon-icon-selected')
 					}
 				}
 			)
