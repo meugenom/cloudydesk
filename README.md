@@ -1,4 +1,6 @@
-### Web Desktop (Under construction)
+### Web Desktop (In Progress)
+
+see [**Demo**](https://neetcloud.dev)
 
 #### Hello! 
 
@@ -7,7 +9,18 @@ I will be glad and pleased to listen to some critiques about my code or ideas. H
 
 Best Regards!
 
-### **What do we have just now?** see [**Demo**](https://neetcloud.dev)
+#### Useful links:
+
+##### Code:
+- [client code](./client/)
+- [server code in progress](/server/)
+
+##### Reading:
+- [client readme](./client/README.md)
+- [server readme in progress](./server/README.md)
+
+
+### **What do we have just now?** 
 
 A little bit, but still:
 - animated web view with space background, taskbar, and app icons

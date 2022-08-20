@@ -1,6 +1,10 @@
 {
-  "name": "neetcloud.dev",
-  "version": "0.0.2",
+  "name": "neetcloud",
+  "version": "0.1.1",
+  "description": "A web-based cloud desktop for users",
+  "license": "MIT",
+  "private":"false",
+  "main":"src/main.ts",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
@@ -8,7 +12,23 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meugenom/neetcloud "
+  },
+  "keywords": [
+    "cloud-app",
+    "neetcloud",
+    "web-desktop",
+    "web-based",
+    "typescript",
+    "angular",
+    "github"
+  ],
+  "bugs": {
+    "url": "https://github.com/meugenom/neetcloud/issues"
+  },
+  "homepage": "https://neetcloud.dev",
   "dependencies": {
     "@angular/animations": "^14.0.0",
     "@angular/common": "^14.0.0",
