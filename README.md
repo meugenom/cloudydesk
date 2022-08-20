@@ -1,13 +1,13 @@
 ### Web Desktop (Under construction)
 
-#### Hey! 
+#### Hello! 
 
 I want to create an open source prototype of a small web desktop written on javascript (angular) front-end and java on the back-end. It's a gut idea to have functional applications like a terminal app, draw app, text editor, photo viewer, and media player onboard. It would be workable with primitive functionality. See later!
 I will be glad and pleased to listen to some critiques about my code or ideas. Helping is welcome.
 
 Best Regards!
 
-### **What do we have just now?** 
+### **What do we have just now?** see [**Demo**](https://neetcloud.dev)
 
 A little bit, but still:
 - animated web view with space background, taskbar, and app icons
