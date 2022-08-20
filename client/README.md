@@ -32,3 +32,98 @@ Run `node front-server.js` to start local . Navigate to `http://localhost:8081/`
 ### Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+Directories:
+```
+src
+ |--app
+	 |--global.ts 
+	 |--app.module.ts
+	 |--app.component.ts
+	 |--app.component.html
+	 |--app.component.sass
+	 |--app-routing.module.ts
+	 |--app-component.spec.ts
+
+ |--camera
+     |--camera.component.ts
+	 |--camera.component.spec.ts
+	 |--camera.component.html
+	 |--camera.component.sass
+
+ |--context-menu
+     |--context-menu.component.ts
+	 |--context-menu.component.spec.ts
+	 |--context-menu.component.html
+	 |--context-menu.service.ts
+	 |--context-menu.component.sass
+
+ |--desktop
+	 |--desktop.component.ts
+	 |--desktop.component.spec.ts
+	 |--desktop.component.html
+	 |--desktop.component.sass
+
+ |--draw
+     |--draw.component.ts
+	 |--draw.component.spec.ts
+	 |--draw.component.html
+	 |--draw.component.sass
+
+ |--editor
+     |--editor.component.ts
+	 |--editor.component.spec.ts
+	 |--editor.component.html
+	 |--editor.component.sass
+  
+ |--file-list
+     |--file-list.component.ts
+	 |--file-list.component.spec.ts
+	 |--file-list.component.html
+	 |--file-list.component.sass
+
+ |--finder
+     |--finder.component.ts
+	 |--finder.component.spec.ts
+	 |--finder.component.html
+	 |--finder.component.sass
+
+ |--fullscreen
+	 |--fullscreen.directive.ts
+	 |--fullscreen.directive.spec.ts
+
+ |--mod
+	 |--mod.module.ts
+	 |--mod.service.ts
+	 |--mod.component.ts
+	 |--mod.component.sass
+	 |--mod.component.html
+
+ |--taskbar
+	 |--taskbar.component.ts
+	 |--taskbar.component.spec.ts
+	 |--taskbar.component.sass
+	 |--taskbar.component.html
+
+ |--terminal
+     |--terminal.component.ts
+	 |--terminal-core.js
+	 |--terminal.component.spec.ts
+	 |--terminal.component.html
+	 |--terminal.component.sass
+
+ |--settings
+     |--settings.component.ts
+	 |--settings.component.spec.ts
+	 |--settings.component.html
+	 |--settings.component.sass
+
+ |--assets
+	 |--css
+	 	 |-- styles.sass
+		 |--components/...
+
+	 |--img/
+ |--index.html
+ |--main.ts
+```

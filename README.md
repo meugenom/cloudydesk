@@ -1,23 +1,25 @@
-### Web Desktop (In Progress)
+### **A Web-based Cloud Desktop for users** (In Progress)
+
+[![Version](https://img.shields.io/badge/version-0.0.2-yellow.svg)](https://semver.org/spec/v1.0.0.html)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 see [**Demo**](https://neetcloud.dev)
 
 #### Hello! 
 
-I want to create an open source prototype of a small web desktop written on javascript (angular) front-end and java on the back-end. It's a gut idea to have functional applications like a terminal app, draw app, text editor, photo viewer, and media player onboard. It would be workable with primitive functionality. See later!
-I will be glad and pleased to listen to some critiques about my code or ideas. Helping is welcome.
+I want to create an open source prototype of a small web desktop written on javascript (angular) on frontend and java on the backend. It's a wonderful to have functional applications like a terminal app, draw app, text editor, photo viewer, and media player onboard. It would be workable with simple functionality.
+I'll be glad and pleased to listen to some critiques about my code or ideas. **Helping is welcome**.
 
-Best Regards!
 
-#### Useful links:
+#### **Useful links**:
 
-##### Code:
-- [client code](./client/)
-- [server code in progress](/server/)
+- Code:
+	- [client code](./client/)
+	- [server code in progress](/server/)
 
-##### Reading:
-- [client readme](./client/README.md)
-- [server readme in progress](./server/README.md)
+- Info:
+	- [client readme](./client/README.md)
+	- [server readme in progress](./server/README.md)
 
 
 ### **What do we have just now?** 
@@ -36,99 +38,16 @@ A little bit, but still:
 ![web desktop screenshot](./assets/screenshot16092022.png)
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
-Space Background's Picture downloaded from Unsplash.com (by Gary Scott)
+Space Background's Picture downloaded from Unsplash.com (Gary Scott).
 
-dirs:
-```
-src
- |--app
-	 |--global.ts
-	 |--app.module.ts
-	 |--app.component.ts
-	 |--app.component.html
-	 |--app.component.sass
-	 |--app-routing.module.ts
-	 |--app-component.spec.ts
+### **Contributors**
 
- |--camera
-     |--camera.component.ts
-	 |--camera.component.spec.ts
-	 |--camera.component.html
-	 |--camera.component.sass
+_You could be here!_
 
- |--context-menu
-     |--context-menu.component.ts
-	 |--context-menu.component.spec.ts
-	 |--context-menu.component.html
-	 |--context-menu.service.ts
-	 |--context-menu.component.sass
+#### **Author**
 
- |--desktop
-	 |--desktop.component.ts
-	 |--desktop.component.spec.ts
-	 |--desktop.component.html
-	 |--desktop.component.sass
+- [meugenom](https://meugenom.com)
 
- |--draw
-     |--draw.component.ts
-	 |--draw.component.spec.ts
-	 |--draw.component.html
-	 |--draw.component.sass
+#### **License**
 
- |--editor
-     |--editor.component.ts
-	 |--editor.component.spec.ts
-	 |--editor.component.html
-	 |--editor.component.sass
-  
- |--file-list
-     |--file-list.component.ts
-	 |--file-list.component.spec.ts
-	 |--file-list.component.html
-	 |--file-list.component.sass
-
- |--finder
-     |--finder.component.ts
-	 |--finder.component.spec.ts
-	 |--finder.component.html
-	 |--finder.component.sass
-
- |--fullscreen
-	 |--fullscreen.directive.ts
-	 |--fullscreen.directive.spec.ts
-
- |--mod
-	 |--mod.module.ts
-	 |--mod.service.ts
-	 |--mod.component.ts
-	 |--mod.component.sass
-	 |--mod.component.html
-
- |--taskbar
-	 |--taskbar.component.ts
-	 |--taskbar.component.spec.ts
-	 |--taskbar.component.sass
-	 |--taskbar.component.html
-
- |--terminal
-     |--terminal.component.ts
-	 |--terminal-core.js
-	 |--terminal.component.spec.ts
-	 |--terminal.component.html
-	 |--terminal.component.sass
-
- |--settings
-     |--settings.component.ts
-	 |--settings.component.spec.ts
-	 |--settings.component.html
-	 |--settings.component.sass
-
- |--assets
-	 |--css
-	 	 |-- styles.sass
-		 |--components/...
-
-	 |--img/
- |--index.html
- |--main.ts
-```
+This project is open source and available under the [MIT License](./LICENSE).
