@@ -1,27 +1,129 @@
-# Desktop
+## Web-based desktop client (frontend code)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6.
+see **[Demo](https://neetcloud.dev)**
 
-## Development server
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6. 
+Used [SASS](https://sass-lang.com) and [Typescript](https://www.typescriptlang.org).
+Used node version 16.14.2, npm version 8.9.0
+
+External Libraries:
+1. [ng2-dragula](https://www.npmjs.com/package/ng2-dragula) version 2.1.1
+2. [@viselect/vanilla](https://www.npmjs.com/package/@viselect/vanilla) version 3.0.0
+3. [express](https://www.npmjs.com/package/express) version 4.18.1
+4. [screenfull](https://www.npmjs.com/package/screenfull) version 6.0.2
+
+
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+### Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+### Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `ng build` to build the project. The build artifacts will be stored in the `build/` directory.
 
-## Running unit tests
+### Run generated build
+
+Run `node front-server.js` to start local . Navigate to `http://localhost:8081/`.
+
+### Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+Directories:
+```
+src
+ |--app
+	 |--global.ts 
+	 |--app.module.ts
+	 |--app.component.ts
+	 |--app.component.html
+	 |--app.component.sass
+	 |--app-routing.module.ts
+	 |--app-component.spec.ts
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+ |--camera
+     |--camera.component.ts
+	 |--camera.component.spec.ts
+	 |--camera.component.html
+	 |--camera.component.sass
 
-## Further help
+ |--context-menu
+     |--context-menu.component.ts
+	 |--context-menu.component.spec.ts
+	 |--context-menu.component.html
+	 |--context-menu.service.ts
+	 |--context-menu.component.sass
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+ |--desktop
+	 |--desktop.component.ts
+	 |--desktop.component.spec.ts
+	 |--desktop.component.html
+	 |--desktop.component.sass
+
+ |--draw
+     |--draw.component.ts
+	 |--draw.component.spec.ts
+	 |--draw.component.html
+	 |--draw.component.sass
+
+ |--editor
+     |--editor.component.ts
+	 |--editor.component.spec.ts
+	 |--editor.component.html
+	 |--editor.component.sass
+  
+ |--file-list
+     |--file-list.component.ts
+	 |--file-list.component.spec.ts
+	 |--file-list.component.html
+	 |--file-list.component.sass
+
+ |--finder
+     |--finder.component.ts
+	 |--finder.component.spec.ts
+	 |--finder.component.html
+	 |--finder.component.sass
+
+ |--fullscreen
+	 |--fullscreen.directive.ts
+	 |--fullscreen.directive.spec.ts
+
+ |--mod
+	 |--mod.module.ts
+	 |--mod.service.ts
+	 |--mod.component.ts
+	 |--mod.component.sass
+	 |--mod.component.html
+
+ |--taskbar
+	 |--taskbar.component.ts
+	 |--taskbar.component.spec.ts
+	 |--taskbar.component.sass
+	 |--taskbar.component.html
+
+ |--terminal
+     |--terminal.component.ts
+	 |--terminal-core.js
+	 |--terminal.component.spec.ts
+	 |--terminal.component.html
+	 |--terminal.component.sass
+
+ |--settings
+     |--settings.component.ts
+	 |--settings.component.spec.ts
+	 |--settings.component.html
+	 |--settings.component.sass
+
+ |--assets
+	 |--css
+	 	 |-- styles.sass
+		 |--components/...
+
+	 |--img/
+ |--index.html
+ |--main.ts
+```
