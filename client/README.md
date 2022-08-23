@@ -11,6 +11,7 @@ External Libraries:
 2. [@viselect/vanilla](https://www.npmjs.com/package/@viselect/vanilla) version 3.0.0
 3. [express](https://www.npmjs.com/package/express) version 4.18.1
 4. [screenfull](https://www.npmjs.com/package/screenfull) version 6.0.2
+5. [ngrx](https://ngrx.io) version 14.2.0
 
 
 ### Development server
@@ -37,93 +38,105 @@ Directories:
 ```
 src
  |--app
-	 |--global.ts 
-	 |--app.module.ts
-	 |--app.component.ts
-	 |--app.component.html
-	 |--app.component.sass
-	 |--app-routing.module.ts
-	 |--app-component.spec.ts
-
+ |	 |--global.ts 
+ |	 |--app.module.ts
+ |	 |--app.component.ts
+ |	 |--app.component.html
+ |	 |--app.component.sass
+ |	 |--app-routing.module.ts
+ |	 |--app-component.spec.ts
+ |
  |--camera
-     |--camera.component.ts
-	 |--camera.component.spec.ts
-	 |--camera.component.html
-	 |--camera.component.sass
-
+ |   |--camera.component.ts
+ |	 |--camera.component.spec.ts
+ |	 |--camera.component.html
+ |	 |--camera.component.sass
+ |
  |--context-menu
-     |--context-menu.component.ts
-	 |--context-menu.component.spec.ts
-	 |--context-menu.component.html
-	 |--context-menu.service.ts
-	 |--context-menu.component.sass
-
+ |   |--context-menu.component.ts
+ |	 |--context-menu.component.spec.ts
+ |	 |--context-menu.component.html
+ |	 |--context-menu.service.ts
+ |	 |--context-menu.component.sass
+ |
  |--desktop
-	 |--desktop.component.ts
-	 |--desktop.component.spec.ts
-	 |--desktop.component.html
-	 |--desktop.component.sass
-
+ |	 |--desktop.component.ts
+ |	 |--desktop.component.spec.ts
+ |	 |--desktop.component.html
+ |	 |--desktop.component.sass
+ |
  |--draw
-     |--draw.component.ts
-	 |--draw.component.spec.ts
-	 |--draw.component.html
-	 |--draw.component.sass
-
+ |   |--draw.component.ts
+ |	 |--draw.component.spec.ts
+ |	 |--draw.component.html
+ |	 |--draw.component.sass
+ |
  |--editor
-     |--editor.component.ts
-	 |--editor.component.spec.ts
-	 |--editor.component.html
-	 |--editor.component.sass
-  
+ |   |--editor.component.ts
+ |	 |--editor.component.spec.ts
+ |	 |--editor.component.html
+ |	 |--editor.component.sass
+ |
  |--file-list
-     |--file-list.component.ts
-	 |--file-list.component.spec.ts
-	 |--file-list.component.html
-	 |--file-list.component.sass
-
+ |   |--file-list.component.ts
+ |	 |--file-list.component.spec.ts
+ |	 |--file-list.component.html
+ |	 |--file-list.component.sass
+ |
  |--finder
-     |--finder.component.ts
-	 |--finder.component.spec.ts
-	 |--finder.component.html
-	 |--finder.component.sass
-
+ |   |--finder.component.ts
+ |	 |--finder.component.spec.ts
+ |	 |--finder.component.html
+ |	 |--finder.component.sass
+ |
  |--fullscreen
-	 |--fullscreen.directive.ts
-	 |--fullscreen.directive.spec.ts
-
+ |	 |--fullscreen.directive.ts
+ |	 |--fullscreen.directive.spec.ts
+ |
  |--mod
-	 |--mod.module.ts
-	 |--mod.service.ts
-	 |--mod.component.ts
-	 |--mod.component.sass
-	 |--mod.component.html
-
+ |	 |--mod.module.ts
+ |	 |--mod.service.ts
+ |	 |--mod.component.ts
+ |	 |--mod.component.sass
+ |	 |--mod.component.html
+ |
+ |--store
+ |	 |--actions
+ |	 |    |--navigator.action.ts
+ |	 |
+ |	 |--models
+ |	 |	  |--navigator-state.model.ts
+ |	 |	  |--navigator.model.ts
+ |   |
+ |	 |--reducers
+ |		  |--navigator.reducer.ts
+ |
  |--taskbar
-	 |--taskbar.component.ts
-	 |--taskbar.component.spec.ts
-	 |--taskbar.component.sass
-	 |--taskbar.component.html
-
+ |	 |--taskbar.component.ts
+ |	 |--taskbar.component.spec.ts
+ |	 |--taskbar.component.sass
+ |	 |--taskbar.component.html
+ |
  |--terminal
-     |--terminal.component.ts
-	 |--terminal-core.js
-	 |--terminal.component.spec.ts
-	 |--terminal.component.html
-	 |--terminal.component.sass
-
+ |   |--terminal.component.ts
+ |	 |--terminal-core.js
+ |	 |--terminal.component.spec.ts
+ |	 |--terminal.component.html
+ |	 |--terminal.component.sass
+ |
  |--settings
-     |--settings.component.ts
-	 |--settings.component.spec.ts
-	 |--settings.component.html
-	 |--settings.component.sass
-
+ |   |--settings.component.ts
+ |	 |--settings.component.spec.ts
+ |	 |--settings.component.html
+ |	 |--settings.component.sass
+ |
  |--assets
-	 |--css
-	 	 |-- styles.sass
-		 |--components/...
-
-	 |--img/
+ |	 |--css
+ |	 | 	 |-- styles.sass
+ |	 |	 |--components/...
+ |   |
+ |	 |--img/
+ |
  |--index.html
  |--main.ts
 ```
