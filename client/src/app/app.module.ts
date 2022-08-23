@@ -20,6 +20,11 @@ import { FileListModule } from './file-list/file-list.module'
 //global values
 import { Globals } from './global';
 
+//store and reducers
+import { ActionReducerMap, StoreModule } from '@ngrx/store';
+import { NavigatorReducer } from './store/reducers/navigator.reducer';
+
+
 //modals
 import { ModComponent } from './mod/mod.component';
 import { ModService } from './mod/mod.service';
@@ -33,9 +38,10 @@ import { ProgressbarComponent } from './progressbar/progressbar.component';
 
 //loading interceptor
 import { LoadingInterceptor } from './loader/loading.interceptor';
+import { PRIMARY_OUTLET } from '@angular/router';
+
 
 //editors
-
 
 @NgModule({
 	declarations: [
@@ -58,7 +64,8 @@ import { LoadingInterceptor } from './loader/loading.interceptor';
 		BrowserModule,
 		HttpClientModule,
 		FormsModule,
-		FileListModule
+		FileListModule,
+		StoreModule.forRoot({navigator: NavigatorReducer} as ActionReducerMap<any,any>)
 	],
 	providers: [ModService, Globals, ContextMenuService,
 		{
