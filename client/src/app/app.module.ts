@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,16 +14,10 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { EditorComponent } from './editor/editor.component';
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
-
 import { FileListModule } from './file-list/file-list.module'
 
 //global values
 import { Globals } from './global';
-
-//store and reducers
-import { ActionReducerMap, StoreModule } from '@ngrx/store';
-import { NavigatorReducer } from './store/reducers/navigator.reducer';
-
 
 //modals
 import { ModComponent } from './mod/mod.component';
@@ -38,10 +32,42 @@ import { ProgressbarComponent } from './progressbar/progressbar.component';
 
 //loading interceptor
 import { LoadingInterceptor } from './loader/loading.interceptor';
-import { PRIMARY_OUTLET } from '@angular/router';
+
+//devtools
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment'; // Angular CLI environment
+
+//auth
+import { AuthModule } from './auth/auth.module';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpConfigInterceptor } from './auth/interceptors/httpconfig.interceptor';
+import { LoginComponent } from './auth/components/login/login.component';
+import { RegisterComponent } from './auth/components/register/register.component';
+import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './auth/services/auth.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DesktopModule } from './desktop/desktop.module';
+import { WidgetPanelComponent } from './widget-panel/widget-panel.component';
 
 
-//editors
+
+//routes
+const routes: Routes = [
+	{
+		path: '',
+		component: LoginComponent
+	},
+	{
+		path: 'login',
+		component: LoginComponent
+	},
+	{
+		path: 'register',
+		component: RegisterComponent,
+		canActivate: [AuthGuard]
+	}
+]
+
 
 @NgModule({
 	declarations: [
@@ -57,20 +83,32 @@ import { PRIMARY_OUTLET } from '@angular/router';
 		SettingsComponent,
 		ModComponent,
 		ContextMenuComponent,
-  		ProgressbarComponent,
+		ProgressbarComponent,
+		LoginComponent,
+		RegisterComponent,
+  		WidgetPanelComponent
 	],
 	imports: [
 		AppRoutingModule,
 		BrowserModule,
 		HttpClientModule,
-		FormsModule,
 		FileListModule,
-		StoreModule.forRoot({navigator: NavigatorReducer} as ActionReducerMap<any,any>)
+		RouterModule.forChild(routes),
+		FormsModule,
+		ReactiveFormsModule,
+		AuthModule,
+		DesktopModule,
+		StoreDevtoolsModule.instrument({
+			maxAge: 25, // Retains last 25 states
+			logOnly: environment.production, // Restrict extension to log-only mode
+			autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+		}),
+		EffectsModule.forRoot([]),
 	],
 	providers: [ModService, Globals, ContextMenuService,
-		{
-			provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
-		  }
+		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
+		AuthGuard
 	],
 	bootstrap: [AppComponent]
 })
