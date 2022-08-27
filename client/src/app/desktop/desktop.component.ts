@@ -5,8 +5,8 @@ import { ModService } from '../mod/mod.service';
 import { ContextMenuService } from '../context-menu/context-menu.service';
 
 import { Store } from '@ngrx/store';
-import { WidgetPanel } from '../desktop/store/models/widgetPanel.model';
-import { OpenPanel } from '../desktop/store/actions/widgetPanel.action';
+import { WidgetPanel } from '../desktop/store/models/widgetpanel.model';
+import { OpenPanel } from '../desktop/store/actions/widgetpanel.action';
 import { AuthStateInterface } from '../auth/store/models/auth.state.model';
 import { AuthService } from '../auth/services/auth.service';
 import { getUserToken } from '../auth/store/actions/auth.action';
