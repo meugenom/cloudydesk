@@ -34,7 +34,8 @@ Run `node front-server.js` to start local . Navigate to `http://localhost:8081/`
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-Directories:
+
+Directories: changed, need new checking a little bit later
 ```
 src
  |--app

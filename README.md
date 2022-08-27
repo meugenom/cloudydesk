@@ -37,7 +37,7 @@ I'll be glad and pleased to listen to some critiques about the code or ideas. **
 - in app terminal ability to input commands, "clear" for example, others in progress
 - selection files on the desktop and in Finder and change places between (drag and drop)
 - context-menu (only visually)
-- login's and register's forms and functionality.
+- login's and register's forms and functionality, actions, calls to the server, widget panel
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 Space Background's Picture downloaded from Unsplash.com (Gary Scott).
