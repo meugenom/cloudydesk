@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModService } from './mod/mod.service';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Navigator } from './store/models/navigator.model';
-import { AddDimensions } from './store/actions/navigator.action';
+import { Navigator } from './desktop/store/models/navigator.model';
+import { AddDimensions } from './desktop/store/actions/navigator.action';
+import { getUserToken } from './auth/store/actions/auth.action';
 
 @Component({
 	selector: 'app-root',
@@ -25,10 +25,10 @@ export class AppComponent implements OnInit {
 
 	ngOnInit(): void {
 
-		//console.log(navigator.userAgent)
-		//console.log(window.innerHeight)
-		//console.log(window.innerWidth)
-		//console.log(this.navigator$)
+		console.log(navigator.userAgent)
+		console.log(window.innerHeight)
+		console.log(window.innerWidth)
+		console.log(navigator.userAgent)
 
 		this.addDevice(window.innerHeight, window.innerWidth, false, navigator.userAgent)
 
@@ -49,6 +49,8 @@ export class AppComponent implements OnInit {
 		this.store.dispatch(
 			AddDimensions(
 				navi))
-
 	}
+
+
+	
 }

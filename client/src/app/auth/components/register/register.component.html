@@ -1,0 +1,21 @@
+<div class="register">
+	<form #addForm="ngForm" (ngSubmit)="registerUser(addForm)">
+		<div class="form-group">
+		   <label class="form-label" for="name">User Name</label>
+		   <input 	type="text" ngModel name="userName" class="form-control" id="userName" 
+		   			placeholder="username">
+		</div>
+		<div class="form-group">
+			<label class="form-label" for="name">Email</label>
+			<input 	type="email" ngModel name="email" class="form-control" id="email" 
+						placeholder="email">
+		 </div>
+		<div class="form-group">
+			<label class="form-label" for="password">Password</label>
+			<input type="password" ngModel name="password" class="form-control" id="password" placeholder="password" required>
+		 </div>
+		   <button [disabled]="addForm.invalid" type="submit" class="btn-register-primary" >
+				Register
+		   </button>
+		</form>
+</div>

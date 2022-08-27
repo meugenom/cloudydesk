@@ -1,0 +1,16 @@
+<div class="login">
+	<form #addForm="ngForm" (ngSubmit)="loginUser(addForm)">
+		<div class="form-group">
+		   <label class="form-label" for="name">User Name</label>
+		   <input 	type="text" ngModel name="userName" class="form-control" id="userName" 
+		   			placeholder="username">
+		</div>
+		<div class="form-group">
+			<label class="form-label" for="password">Password</label>
+			<input type="password" ngModel name="password" class="form-control" id="password" placeholder="password" required>
+		 </div>
+		   <button [disabled]="addForm.invalid" type="submit" class="btn-login-primary" >
+				Login
+		   </button>
+		</form>
+</div>
