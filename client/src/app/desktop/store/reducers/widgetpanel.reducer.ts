@@ -1,7 +1,7 @@
 // import the interface
-import { OpenPanel } from '../actions/widgetPanel.action';
+import { OpenPanel } from '../actions/widgetpanel.action';
 import { createReducer, on } from '@ngrx/store';
-import { WidgetPanel } from '../models/widgetPanel.model';
+import { WidgetPanel } from '../models/widgetpanel.model';
 
 //create a dummy initial state
 const initialState: WidgetPanel =

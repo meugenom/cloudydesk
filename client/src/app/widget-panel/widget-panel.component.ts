@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { WidgetPanel } from '../desktop/store/models/widgetPanel.model';
+import { WidgetPanel } from '../desktop/store/models/widgetpanel.model';
 import { AuthStateInterface } from '../auth/store/models/auth.state.model'
-import { OpenPanel } from '../desktop/store/actions/widgetPanel.action';
+import { OpenPanel } from '../desktop/store/actions/widgetpanel.action';
 
 @Component({
 	selector: 'app-widget-panel',
-	styleUrls: ['./widget-panel.component.sass'],
-	templateUrl: './widget-panel.component.html'
+	templateUrl: './widget-panel.component.html',
+	styleUrls: ['./widget-panel.component.sass']
+	
 
 })
 export class WidgetPanelComponent implements OnInit {
