@@ -4,6 +4,13 @@ import { Globals } from '../global';
 import { ModService } from '../mod/mod.service';
 import { ContextMenuService } from '../context-menu/context-menu.service';
 
+import { Store } from '@ngrx/store';
+import { WidgetPanel } from '../desktop/store/models/widgetPanel.model';
+import { OpenPanel } from '../desktop/store/actions/widgetPanel.action';
+import { AuthStateInterface } from '../auth/store/models/auth.state.model';
+import { AuthService } from '../auth/services/auth.service';
+import { getUserToken } from '../auth/store/actions/auth.action';
+
 @Component({
 	selector: 'app-desktop',
 	templateUrl: './desktop.component.html',
@@ -16,26 +23,80 @@ export class DesktopComponent {
 	@ViewChild('container') input: ElementRef | undefined;
 	dragDrop: boolean = false;
 
+	isActive: boolean | undefined;
+	isLoginForm: boolean;
+	isRegisterForm: boolean;
+
 	constructor(
 		private modService: ModService,
+		private authService: AuthService,
 		private contextMenuService: ContextMenuService,
 		private viewContainerRef: ViewContainerRef,
 		private globals: Globals,
-		private element: ElementRef
+		private element: ElementRef,
+		private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface}>
 	) {
 
 		this.fullScreen = this.globals.fullScreen;
+		this.isLoginForm = false;
+		this.isRegisterForm = false;
+
+		//need check our localstorage and find authtoken
+		const token = this.authService.isAuthenticated();	
+		if(token){
+
+			//need to check this token with backend server ...i'll make it later
+			//and return userName
+			//...
+			this.store.dispatch((getUserToken(token)))
+
+		}
+
+		
+		store.select('auth').subscribe(data => {
+
+			this.isRegisterForm = false;
+			this.isActive = false;
+
+			if(data.isSubmitting){
+				this.isLoginForm = false;
+			}else{
+				this.isLoginForm = true;
+			}
+				
+				const widgetpanel: WidgetPanel = {
+					isActive: this.isActive,
+					isLoginForm: this.isLoginForm,
+					isRegisterForm: this.isRegisterForm
+				}
+		
+				this.store.dispatch(
+					OpenPanel(
+						widgetpanel))
+			
+		})
+
+		store.select('widgetPanel').subscribe(data => {
+			//console.log(data);
+			this.isActive = data.isActive;
+		})
 	}
 
 	getFullScreen() {
 		this.fullScreen = this.globals.fullScreen
 	}
 
-	//for modal windows
-	openMod(e: MouseEvent, id: String, name: String) {
-		e.preventDefault();
-		this.modService.setRootViewContainerRef(this.viewContainerRef);
-		this.modService.addDynamicComponent(id.toString(), name.toString());
+	//open widgets panel 
+	openWidgetsPanel(){
+		const widgetpanel: WidgetPanel = {
+			isActive: !this.isActive,
+			isLoginForm: this.isLoginForm,
+			isRegisterForm: this.isRegisterForm
+		}
+
+		this.store.dispatch(
+			OpenPanel(
+				widgetpanel))
 	}
 
 	//for context menu windows

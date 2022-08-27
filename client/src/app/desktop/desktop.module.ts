@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //store and reducers
 import { ActionReducerMap, StoreModule } from '@ngrx/store';
-import { NavigatorReducer } from './store/reducers/navigator.reducer';
+import { reducers } from './store/reducers/index';
+
 
 
 @NgModule({
   imports: [
     CommonModule,
-	StoreModule.forRoot({ navigator: NavigatorReducer } as ActionReducerMap<any, any>),
-    //StoreModule.forFeature('navigator', NavigatorReducer, {}),
+	StoreModule.forRoot(reducers),
 	FormsModule,
     ReactiveFormsModule
   ],

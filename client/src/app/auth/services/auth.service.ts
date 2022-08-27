@@ -19,12 +19,16 @@ export class AuthService {
         private persistanceService:PersistanceService
     ) { }
 
-    isAuthenticated(): boolean{
+	//need check the server 
+    isAuthenticated(): any{
         const localStorageToken = this.persistanceService.getToken('auth');
         if(!localStorageToken){
-            return false
+            //return false
         }
-        return true
+		//need check it with server...later
+        //return true
+		
+		return localStorageToken;
     }
 
     login(loginData: any) {
@@ -32,8 +36,8 @@ export class AuthService {
 
     }
 
-	signIn(signInData: any) {
-        return this.http.post(`${environment.apiUrl}/auth/register`, signInData)
+	register(registerData: any) {
+        return this.http.post(`${environment.apiUrl}/auth/register`, registerData)
     }
     
 

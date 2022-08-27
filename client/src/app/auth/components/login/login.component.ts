@@ -15,26 +15,21 @@ export class LoginComponent implements OnInit {
 	userForm!: FormGroup;
 	userName: String;
 	password: String;
-	isSubmitting$: Observable<boolean> | undefined
 
 
 	constructor(
 		private fb: FormBuilder,
 		private store: Store,
 	) {
-		this.password = "tester";
-		this.userName = "tester";
+		this.password = "";
+		this.userName = "";
 	}
 
 	ngOnInit(): void {
 
 	}
 
-	public onAddUser(addForm: NgForm): void {
-
-		const userName = document.getElementById("username")?.nodeValue
-
-		console.log(userName);
+	public loginUser(addForm: NgForm): void {
 
 		const request: any = {
 			userName: addForm.value.userName,
