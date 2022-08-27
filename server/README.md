@@ -21,11 +21,14 @@ This project was generated with:
 
 ### Development server
 
-Run `mvn spring-boot:run` for a dev server. Navigate to `http://localhost:3000/`. The application will automatically reload if you change any of the source files.
+Run `mvn spring-boot:run` for a dev server from console.
+Or please start batch files: `./start-dev-server.sh`
+Server starts on port 3000. The application will automatically reload if you change any of the source files.
 
 ### Build
 
-Run `mvn clean` to build the project. The build artifacts will be stored in the `target/` directory.
+Run `mvn clean package` to build the project. The build artifacts will be stored in the `target/` directory.
+
 
 ### Tests
 
