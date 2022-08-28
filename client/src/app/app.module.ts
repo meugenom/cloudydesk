@@ -43,6 +43,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpConfigInterceptor } from './auth/interceptors/httpconfig.interceptor';
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
+import { SignedinComponent } from './auth/components/signedin/signedin.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth/services/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -86,6 +87,7 @@ const routes: Routes = [
 		ProgressbarComponent,
 		LoginComponent,
 		RegisterComponent,
+		SignedinComponent,
   		WidgetPanelComponent
 	],
 	imports: [

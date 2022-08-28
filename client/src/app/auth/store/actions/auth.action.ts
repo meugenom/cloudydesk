@@ -11,6 +11,8 @@ export const registerAction = createAction('[Auth] Register', props<{ request: a
 export const registerSuccessAction = createAction('[Auth] Register success', props<{currentUser: any}>());
 export const registerFailureAction = createAction('[Auth] Register error', props<{error: any}>());
 
+export const signOutAction = createAction('[Auth] SignOut');
+
 export const getUserToken = createAction('[Auth] Get User Token', props<{ token: any }>());
 
 //not usable

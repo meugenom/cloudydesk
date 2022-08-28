@@ -20,4 +20,12 @@ export class PersistanceService {
 		}
 	}
 
+	removeToken(key: string){
+		try {
+			localStorage.removeItem(key)
+		} catch (e) {
+			console.error('error removing key from localStorage', e)
+		}
+	}
+
 }

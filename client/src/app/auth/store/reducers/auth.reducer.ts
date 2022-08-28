@@ -1,5 +1,5 @@
 import { getUserToken, loginAction, loginFailureAction, loginSuccessAction,
-	registerAction, registerFailureAction, registerSuccessAction } from '../actions/auth.action';
+	registerAction, registerFailureAction, registerSuccessAction, signOutAction } from '../actions/auth.action';
 import { AuthStateInterface } from "../models/auth.state.model";
 import { Action, createReducer, on } from '@ngrx/store';
 
@@ -41,6 +41,11 @@ const authReducer = createReducer(
         //token,
 		authToken: token,
         isSubmitting: true
+    })),
+	on(signOutAction, (state) => ({
+        ...state,
+		authToken: "",
+        isSubmitting: false
     })),
 
 );

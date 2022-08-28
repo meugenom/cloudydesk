@@ -45,9 +45,10 @@ export class AuthService {
         return this.http.get(`${environment.apiUrl}/api/getsomething`)
     }
     
-    signOut() {
-        localStorage.clear();
+    //signOut() {
+    //    localStorage.clear();
 		//need think about the logic
+	//	console.log('Sign Out from service')
     	//this.router.navigate(['/login']);
-    }
+    //}
 }

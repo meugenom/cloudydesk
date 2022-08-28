@@ -1,34 +1,41 @@
 <div class="widget-panel widget-panel-fade-in" *ngIf="isActive">
   <div class="widget-container">
-    
-	<div class="widget" *ngIf="isRegisterForm==true || isLoginForm==true">
-		<app-login *ngIf="isLoginForm"></app-login>
-		<a class="register-link"(click)="openRegisterForm()" *ngIf="isLoginForm && isRegisterForm==false">Register New User</a>
-		
-		<app-register *ngIf="isRegisterForm"></app-register>
-		<a class="register-link"(click)="openLoginForm()" *ngIf="isRegisterForm && isLoginForm==false">Login Existed User</a>
+    <div
+      class="widget-big"
+      *ngIf="isRegisterForm == true || isLoginForm == true"
+    >
+      <app-login *ngIf="isLoginForm"></app-login>
+      <a
+        class="register-link"
+        (click)="openRegisterForm()"
+        *ngIf="isLoginForm && isRegisterForm == false"
+        >Register New User</a
+      >
+
+      <app-register *ngIf="isRegisterForm"></app-register>
+      <a
+        class="register-link"
+        (click)="openLoginForm()"
+        *ngIf="isRegisterForm && isLoginForm == false"
+        >Login Existed User</a
+      >
+    </div>
+	
+    <div class="widget" *ngIf="isRegisterForm == false && isLoginForm == false">
+		<app-signedin></app-signedin>
 	</div>
 	
-    <div class="widget" *ngIf="isRegisterForm==false && isLoginForm==false">
-		Login works, 
-		Register works, 
-		Checking from LocalStore works
-		Name is not checked by server
-		(in progress)
-		
-		<!--
-		<div class="widget-clock">
-			<img src="../../assets/img/solar-clock.svg	" alt="clock_image" class="clock-image"/>
-		</div>
-		-->
-	</div>
-
-	<!--
 	<div class="widget">
-		<div class="widget-weather">
-			<img src="../../assets/img/weather.svg	" alt="weather_image" class="weather-image"/>
-		</div>
-	</div>
-	-->
+      <img
+        src="../../assets/img/timer.svg"
+        alt="clock-image"
+        class="clock-image"
+      />
+	  <img
+        src="../../assets/img/thermometer.svg"
+        alt="weather-image"
+        class="clock-image"
+      />
+    </div>
   </div>
 </div>
