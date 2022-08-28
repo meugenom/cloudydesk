@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, map, of, tap } from 'rxjs';
 import { loginAction, loginFailureAction, loginSuccessAction, registerAction, 
-		registerSuccessAction, registerFailureAction, signOutAction } from '../actions/auth.action';
+		registerSuccessAction, registerFailureAction, signOutAction, getUserSuccessAction, getUserAction } from '../actions/auth.action';
 //import { Router } from '@angular/router';
 
 @Injectable()
@@ -44,6 +44,20 @@ export class AuthEffect {
 		)
 	);
 
+	getUser$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(getUserAction),
+			map(({ request }) => request),
+			exhaustMap((request) => this.authService.getUser(request).pipe(
+				concatMap(currentUser => [
+					getUserSuccessAction({ currentUser }),
+					//loginRedirect()
+				]),
+				catchError(error => of(registerFailureAction({ error })))
+			)),
+		)
+	);
+
 	/*
 	loginRedirect$ = createEffect(() =>
 		this.actions$.pipe(
@@ -73,6 +87,18 @@ export class AuthEffect {
 		this.actions$.pipe(
 			ofType(registerSuccessAction),
 			tap((data) => {
+				//console.log(data);
+				this.persistanceService.setToken('auth', data.currentUser.token)
+			})
+		),
+		{ dispatch: false }
+	);
+
+	getUserSuccessAction$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(getUserSuccessAction),
+			tap((data) => {
+
 				//console.log(data);
 				this.persistanceService.setToken('auth', data.currentUser.token)
 			})
