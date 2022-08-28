@@ -12,8 +12,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -105,4 +107,13 @@ public class AuthenticationController {
 		responseMap.put("token", token);
 		return ResponseEntity.ok(responseMap);
 	}
+
+	@GetMapping("/user")
+    public Map<String, Object> getUserName() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("userName", authentication.getName());
+        userMap.put("error", false);
+        return userMap;
+    }
 }
