@@ -19,9 +19,6 @@ export class RegisterComponent implements OnInit {
 	password: String;
 
 
-
-	public displayedColumns: string[] = ['id', 'name', 'description'];
-
 	constructor(
 		private authService: AuthService,
 		private fb: FormBuilder,

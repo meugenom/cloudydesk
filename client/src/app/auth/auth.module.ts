@@ -7,6 +7,8 @@ import { reducer } from './store/reducers/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffect } from './store/effects/auth.effect';
 import { loginModule } from './components/login/login.module';
+import { registerModule } from './components/register/register.module';
+import { signedinModule } from './components/signedin/signedin.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -16,7 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EffectsModule.forFeature([AuthEffect]),
 	FormsModule,
     ReactiveFormsModule,
-	loginModule
+	loginModule,
+	registerModule,
+	signedinModule
   ],
   declarations: [
   ],

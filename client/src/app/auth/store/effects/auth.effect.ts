@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, map, of, tap } from 'rxjs';
 import { loginAction, loginFailureAction, loginSuccessAction, registerAction, 
-		registerSuccessAction, registerFailureAction } from '../actions/auth.action';
+		registerSuccessAction, registerFailureAction, signOutAction } from '../actions/auth.action';
 //import { Router } from '@angular/router';
 
 @Injectable()
@@ -75,6 +75,16 @@ export class AuthEffect {
 			tap((data) => {
 				//console.log(data);
 				this.persistanceService.setToken('auth', data.currentUser.token)
+			})
+		),
+		{ dispatch: false }
+	);
+
+	signOutAction$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(signOutAction),
+			tap(() => {
+				this.persistanceService.removeToken('auth')
 			})
 		),
 		{ dispatch: false }
