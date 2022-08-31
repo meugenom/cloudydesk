@@ -9,7 +9,7 @@ import { WidgetPanel } from '../desktop/store/models/widgetpanel.model';
 import { OpenPanel } from '../desktop/store/actions/widgetpanel.action';
 import { AuthStateInterface } from '../auth/store/models/auth.state.model';
 import { AuthService } from '../auth/services/auth.service';
-import { getUserAction, getUserToken } from '../auth/store/actions/auth.action';
+import { checkUserAction, getUserToken } from '../auth/store/actions/auth.action';
 
 @Component({
 	selector: 'app-desktop',
@@ -23,6 +23,7 @@ export class DesktopComponent {
 	@ViewChild('container') input: ElementRef | undefined;
 	dragDrop: boolean = false;
 
+	userName: String;
 	isActive: boolean;
 	isLoginForm: boolean;
 	isRegisterForm: boolean;
@@ -40,17 +41,25 @@ export class DesktopComponent {
 		this.isLoginForm = false;
 		this.isRegisterForm = false;
 		this.isActive = false;
+		this.userName = "unknown"
 
 		//need check our localstorage and find authtoken
-		const token = this.authService.isAuthenticated();	
-		if(token){
+		const  isAuthenticated = this.authService.isAuthenticated();
+		
+		console.log(isAuthenticated);
+		
+		if(isAuthenticated){
 
-			//need to check this token with backend server ...i'll make it later
-			//and return userName
-			//...entrypoint
-			this.store.dispatch((getUserToken(token)))
+			const res = this.authService.getLocalAuthInfo();
+
+			const request: any = {
+				userName: res.userName
+			}
+
+			this.store.dispatch((getUserToken(request)));
+
 			//feature
-			//this.store.dispatch((getUserAction(token)))
+			this.store.dispatch((checkUserAction(request)));
 			
 		}
 
@@ -64,7 +73,9 @@ export class DesktopComponent {
 
 			if(data.isSubmitting){
 				this.isLoginForm = false;
+				this.userName = data.name;
 			}else{
+				this.userName = "unknown"
 				this.isLoginForm = true;
 			}
 				

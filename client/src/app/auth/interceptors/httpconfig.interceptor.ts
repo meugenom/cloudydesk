@@ -13,7 +13,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 		const localStorageToken = this.persistanceService.getToken('auth');
 		const authReq = !!localStorageToken ? req.clone({
 			setHeaders: { 
-				Authorization: 'Bearer ' + localStorageToken.accessToken
+				Authorization: 'Bearer ' + localStorageToken //.accessToken
 		},
 		}) : req;
 		return next.handle(authReq).pipe(

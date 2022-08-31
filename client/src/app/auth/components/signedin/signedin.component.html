@@ -1,12 +1,11 @@
 <div class="signedin-container">
-	
-	<form class="signedin-form" #addForm="ngForm" (ngSubmit)="signOut()">
-		<div class="form-head">
-			<img class="signedin-form-head-icon" src="../../../../assets/img/btn-space-ship.svg" alt="space-ship-icon"/>
-		</div>
-		<div class="signed-right-container">
-			<label class="form-label" for="name">Sign Out of the Rocket</label>
-			<img (click)="signOut()" class="signout-icon" src="../../../../assets/img/parachute.svg" alt="parachute-icon"/>
-		</div>
-		</form>
+  <form class="signedin-form" #addForm="ngForm" (ngSubmit)="signOut()">
+    <div class="form-head">
+      <img
+        class="signedin-form-head-icon"
+        src="../../../../assets/img/btn-space-ship.svg"
+        alt="space-ship-icon"/>
+    </div>
+    <button class="btn-signin-primary">Sign Out</button>
+  </form>
 </div>

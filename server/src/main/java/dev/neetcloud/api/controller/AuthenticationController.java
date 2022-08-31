@@ -18,7 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,18 +50,16 @@ public class AuthenticationController {
 		Map<String, Object> responseMap = new HashMap<>();
 		try {
 
-			logger.info("password: " + user.getPassword());
-			logger.info("userName: " + user.getUserName());
+			// logger.info("password: " + user.getPassword());
+			// logger.info("userName: " + user.getUserName());
 
 			Authentication auth = authenticationManager
 					.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
 			if (auth.isAuthenticated()) {
-
-				logger.info("Logged In");
-
 				UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUserName());
 				String token = jwtTokenUtil.generateToken(userDetails);
 				responseMap.put("error", false);
+				responseMap.put("userName", userDetails.getUsername());
 				responseMap.put("message", "Logged In");
 				responseMap.put("token", token);
 				return ResponseEntity.ok(responseMap);
@@ -91,29 +91,45 @@ public class AuthenticationController {
 
 		Map<String, Object> responseMap = new HashMap<>();
 
-		user.setFirstName(user.getFirstName());
-		user.setLastName(user.getLastName());
+		user.setUserName(user.getUserName());
 		user.setEmail(user.getEmail());
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 		user.setRole("USER");
 
-		user.setUserName(user.getUserName());
-		UserDetails userDetails = userDetailsService.createUserDetails(user.getUserName(), user.getPassword());
+		UserDetails userDetails = userDetailsService.createUserDetails(user.getUserName(), user.getPassword(),
+				user.getEmail());
 		String token = jwtTokenUtil.generateToken(userDetails);
 		userRepository.save(user);
 		responseMap.put("error", false);
-		responseMap.put("username", user.getUserName());
+		responseMap.put("userName", user.getUserName());
 		responseMap.put("message", "Account created successfully");
 		responseMap.put("token", token);
 		return ResponseEntity.ok(responseMap);
 	}
 
-	@GetMapping("/user")
-    public Map<String, Object> getUserName() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Map<String, Object> userMap = new HashMap<>();
-        userMap.put("userName", authentication.getName());
-        userMap.put("error", false);
-        return userMap;
-    }
+	@PostMapping("/user")
+	public ResponseEntity<Map<String, Object>> checkUser(
+		//@RequestParam User user
+		) {
+
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String checkedUserName = userDetails.getUsername().toString();
+
+		Map<String, Object> responseMap = new HashMap<>();
+
+		if(!checkedUserName.equals(null)) {
+
+			responseMap.put("error", false);
+			responseMap.put("userName", checkedUserName);
+			responseMap.put("message", "User name was checked");
+			return ResponseEntity.ok(responseMap);
+		} else {
+			responseMap.put("error", true);
+			responseMap.put("message", "Invalid name");
+			return ResponseEntity.status(500).body(responseMap);
+		}
+
+		
+	}
+
 }

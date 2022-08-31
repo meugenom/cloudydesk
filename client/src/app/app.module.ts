@@ -50,6 +50,7 @@ import { AuthGuard } from './auth/services/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DesktopModule } from './desktop/desktop.module';
 import { WidgetPanelComponent } from './widget-panel/widget-panel.component';
+import { ClockComponent } from './clock/clock.component';
 
 
 
@@ -89,7 +90,8 @@ const routes: Routes = [
 		LoginComponent,
 		RegisterComponent,
 		SignedinComponent,
-  		WidgetPanelComponent
+  		WidgetPanelComponent,
+    ClockComponent
 	],
 	imports: [
 		AppRoutingModule,
@@ -109,7 +111,7 @@ const routes: Routes = [
 		EffectsModule.forRoot([]),
 	],
 	providers: [ModService, Globals, ContextMenuService,
-		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+		//{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
 		AuthGuard
 	],
