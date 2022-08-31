@@ -19,17 +19,26 @@ export class AuthService {
         private persistanceService:PersistanceService
     ) { }
 
-	//need check the server 
+	//need check the server if token is saved on LocalStorage 
     isAuthenticated(): any{
-        const localStorageToken = this.persistanceService.getToken('auth');
-        if(!localStorageToken){
-            //return false
-        }
-		//need check it with server...later
-        //return true
+
+        const localStorageToken = this.persistanceService.getToken("auth");
 		
-		return localStorageToken;
+		
+		if(!localStorageToken){
+            return false;
+        }
+		
+		return  true;
     }
+
+	getLocalAuthInfo(){
+		const res: any = {
+			token: this.persistanceService.getToken("auth"),
+			userName: this.persistanceService.getToken("name")
+		}
+		return res;
+	}
 
     login(loginData: any) {
 	return this.http.post(`${environment.apiUrl}/auth/login`, loginData);
@@ -40,8 +49,9 @@ export class AuthService {
         return this.http.post(`${environment.apiUrl}/auth/register`, registerData)
     }
 
-	getUser(getUserData: any){
-        return this.http.get(`${environment.apiUrl}/auth/user`, getUserData)
+	checkUser(checkUserData: any){	
+        //return this.http.post(`${environment.apiUrl}/auth/user`, checkUserData)
+		return this.http.post(`${environment.apiUrl}/auth/user`, checkUserData);
     }
     
 

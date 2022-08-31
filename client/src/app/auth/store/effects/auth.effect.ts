@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, map, of, tap } from 'rxjs';
 import { loginAction, loginFailureAction, loginSuccessAction, registerAction, 
-		registerSuccessAction, registerFailureAction, signOutAction, getUserSuccessAction, getUserAction } from '../actions/auth.action';
+		registerSuccessAction, registerFailureAction, signOutAction, checkUserSuccessAction, checkUserAction, checkUserFailureAction } from '../actions/auth.action';
 //import { Router } from '@angular/router';
 
 @Injectable()
@@ -44,16 +44,16 @@ export class AuthEffect {
 		)
 	);
 
-	getUser$ = createEffect(() =>
+	checkUser$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(getUserAction),
+			ofType(checkUserAction),
 			map(({ request }) => request),
-			exhaustMap((request) => this.authService.getUser(request).pipe(
+			exhaustMap((request) => this.authService.checkUser(request).pipe(
 				concatMap(currentUser => [
-					getUserSuccessAction({ currentUser }),
+					checkUserSuccessAction({ currentUser }),
 					//loginRedirect()
 				]),
-				catchError(error => of(registerFailureAction({ error })))
+				catchError(error => of(checkUserFailureAction({ error })))
 			)),
 		)
 	);
@@ -78,6 +78,7 @@ export class AuthEffect {
 
 				//console.log(data);
 				this.persistanceService.setToken('auth', data.currentUser.token)
+				this.persistanceService.setToken('name', data.currentUser.userName)
 			})
 		),
 		{ dispatch: false }
@@ -89,28 +90,44 @@ export class AuthEffect {
 			tap((data) => {
 				//console.log(data);
 				this.persistanceService.setToken('auth', data.currentUser.token)
+				this.persistanceService.setToken('name', data.currentUser.userName)
 			})
 		),
 		{ dispatch: false }
 	);
 
-	getUserSuccessAction$ = createEffect(() =>
+	checkUserSuccessAction$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(getUserSuccessAction),
+			ofType(checkUserSuccessAction),
 			tap((data) => {
 
 				//console.log(data);
-				this.persistanceService.setToken('auth', data.currentUser.token)
+				//this.persistanceService.setToken('auth', data.currentUser.token)
+				this.persistanceService.setToken('name', data.currentUser.userName)
 			})
 		),
 		{ dispatch: false }
 	);
+	
+	checkUserFailureAction$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(checkUserFailureAction),
+			tap((data) => {
 
+				//console.log(data);
+				this.persistanceService.removeToken('auth')
+				this.persistanceService.removeToken('name')
+			})
+		),
+		{ dispatch: false }
+	);
+	
 	signOutAction$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(signOutAction),
 			tap(() => {
 				this.persistanceService.removeToken('auth')
+				this.persistanceService.removeToken('name')
 			})
 		),
 		{ dispatch: false }

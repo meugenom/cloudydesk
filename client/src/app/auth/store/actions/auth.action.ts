@@ -11,9 +11,9 @@ export const registerAction = createAction('[Auth] Register', props<{ request: a
 export const registerSuccessAction = createAction('[Auth] Register success', props<{currentUser: any}>());
 export const registerFailureAction = createAction('[Auth] Register error', props<{error: any}>());
 
-export const getUserAction = createAction('[Auth] Get User', props<{ request: any }>());
-export const getUserSuccessAction = createAction('[Auth] Get User success', props<{currentUser: any}>());
-export const getUserFailureAction = createAction('[Auth] Get User error', props<{error: any}>());
+export const checkUserAction = createAction('[Auth] Check User', props<{ request: any }>());
+export const checkUserSuccessAction = createAction('[Auth] Check User success', props<{currentUser: any}>());
+export const checkUserFailureAction = createAction('[Auth] Check User error', props<{error: any}>());
 
 
 export const signOutAction = createAction('[Auth] SignOut');

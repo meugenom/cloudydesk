@@ -1,4 +1,5 @@
 export interface AuthStateInterface {
     authToken: any,
-	isSubmitting: boolean
+	isSubmitting: boolean,
+	name: any
 }
