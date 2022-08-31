@@ -22,6 +22,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     @Override
+
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         dev.neetcloud.api.model.User user = userRepository.findUserByUsername(username);
         List<GrantedAuthority> authorityList = new ArrayList<>();
@@ -29,13 +30,10 @@ public class JwtUserDetailsService implements UserDetailsService {
         return new User(user.getUserName(), user.getPassword(), authorityList);
     }
 
-    public UserDetails createUserDetails(String username, String password) {
+    public UserDetails createUserDetails(String username, String password, String email) {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority("USER"));
         return new User(username, password, authorityList);
     }
 
-	public UserDetails addUser(User user) {
-        return user;
-    }
 }
