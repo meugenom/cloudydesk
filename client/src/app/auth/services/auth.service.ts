@@ -41,24 +41,24 @@ export class AuthService {
 	}
 
     login(loginData: any) {
-	return this.http.post(`${environment.apiUrl}/auth/login`, loginData);
+	return this.http.post(`${environment.apiUrl}/api/login`, loginData);
 
     }
 
 	register(registerData: any) {
-        return this.http.post(`${environment.apiUrl}/auth/register`, registerData)
+        return this.http.post(`${environment.apiUrl}/api/register`, registerData)
     }
 
 	checkUser(checkUserData: any){	
         //return this.http.post(`${environment.apiUrl}/auth/user`, checkUserData)
-		return this.http.post(`${environment.apiUrl}/auth/user`, checkUserData);
+		return this.http.get(`${environment.apiUrl}/api/whoami`, checkUserData);
     }
     
 
     getSomething(): Observable<any>{
         return this.http.get(`${environment.apiUrl}/api/getsomething`)
     }
-    
+
     //signOut() {
     //    localStorage.clear();
 		//need think about the logic

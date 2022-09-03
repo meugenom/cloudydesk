@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api")
 public class AuthenticationController {
 
 	protected final Log logger = LogFactory.getLog(getClass());
@@ -107,6 +107,7 @@ public class AuthenticationController {
 		return ResponseEntity.ok(responseMap);
 	}
 
+	/*
 	@PostMapping("/user")
 	public ResponseEntity<Map<String, Object>> checkUser(
 		//@RequestParam User user
@@ -128,8 +129,9 @@ public class AuthenticationController {
 			responseMap.put("message", "Invalid name");
 			return ResponseEntity.status(500).body(responseMap);
 		}
-
+	
 		
 	}
+	*/
 
 }

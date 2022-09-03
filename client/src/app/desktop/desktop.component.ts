@@ -41,7 +41,7 @@ export class DesktopComponent {
 		this.isLoginForm = false;
 		this.isRegisterForm = false;
 		this.isActive = false;
-		this.userName = "unknown"
+		this.userName = "anonymousUser"
 
 		//need check our localstorage and find authtoken
 		const  isAuthenticated = this.authService.isAuthenticated();
@@ -75,7 +75,7 @@ export class DesktopComponent {
 				this.isLoginForm = false;
 				this.userName = data.name;
 			}else{
-				this.userName = "unknown"
+				this.userName = "anonymousUser"
 				this.isLoginForm = true;
 			}
 				

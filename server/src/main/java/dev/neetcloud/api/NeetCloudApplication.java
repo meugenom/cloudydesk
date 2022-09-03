@@ -8,19 +8,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import dev.neetcloud.api.model.User;
+import dev.neetcloud.api.model.File;
+import dev.neetcloud.api.repository.FileRepository;
 import dev.neetcloud.api.repository.UserRepository;
+import dev.neetcloud.api.model.FileStorage;
 
+@EnableConfigurationProperties({
+	FileStorage.class
+})
 @SpringBootApplication
 public class NeetCloudApplication implements CommandLineRunner{
 
 
 	@Autowired
-	private UserRepository repository;
+	private UserRepository userRepository;
+	private FileRepository fileRepository;
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
