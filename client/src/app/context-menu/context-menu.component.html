@@ -17,8 +17,6 @@
 <li class="context-menu-divider">
   <hr />
 </li>
--->
-
 <li data-action="1" class="context-menu-item">
   <span class="context-menu-item-icon"></span>
   <span class="context-menu-item-icon-active"></span>
@@ -29,19 +27,33 @@
   <span class="context-menu-item-icon-active"></span>
   New File
 </li>
+-->
 <li class="context-menu-divider">
   <hr />
 </li>
+
 <li data-action="3" class="context-menu-item">
   <span class="context-menu-item-icon"></span>
   <span class="context-menu-item-icon-active"></span>
-  Upload
+  <input
+    id="singleFileUploadInput"
+    type="file"
+    name="file"
+    class="file-input"
+    (change)="onFileSelected($event)"
+    #fileUpload
+    [accept]="requiredFileType"
+    required
+  />
+  <span (click)="fileUpload.click()">Upload ... {{ uploadProgress }} </span>
 </li>
+<!--
 <li data-action="4" class="context-menu-item">
   <span class="context-menu-item-icon"></span>
   <span class="context-menu-item-icon-active"></span>
   Copy
 </li>
+-->
 <li
   data-action="5"
   class="context-menu-item context-menu-item-disabled context-menu-item-active"

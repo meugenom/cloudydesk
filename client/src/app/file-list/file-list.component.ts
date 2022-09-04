@@ -11,7 +11,6 @@ export class FileListComponent implements OnInit, OnDestroy {
 
 	@ViewChild('container') input: ElementRef | undefined;
 
-
 	files: any[]
 	currentFolder: String;
 
