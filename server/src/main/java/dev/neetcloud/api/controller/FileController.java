@@ -20,8 +20,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 @RestController
 @RequestMapping("api/")
@@ -36,7 +42,7 @@ public class FileController {
 
 	@PostMapping("/uploadFile")
 	public File uploadFile(@RequestParam("file") MultipartFile file) {
-		
+
 		String fileName = fileStorageService.storeFile(file);
 
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -45,7 +51,6 @@ public class FileController {
 				.toUriString();
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
 
 		File fi = new File();
 		fi.setName(fileName);
@@ -64,38 +69,71 @@ public class FileController {
 
 		return res;
 	}
-	
+
+	@GetMapping("/ls")
+	public ResponseEntity<Map<String, Object>> getDir() {
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Map<String, Object> responseMap = new HashMap<>();
+
+		logger.info("name: " + authentication.getName());
+
+		if (authentication.getName() != null) {
+
+			List<File> files = fileRepository.findByCreatedUser(authentication.getName());
+
+			//logger.info(files.toString());
+
+			responseMap.put("error", false);
+			responseMap.put("userName", authentication.getName().toString());
+			responseMap.put("message", "User name was checked");
+			responseMap.put("files", files);
+
+			return ResponseEntity.ok(responseMap);
+
+		} else {
+			responseMap.put("error", true);
+			responseMap.put("message", "Invalid name");
+			return ResponseEntity.status(500).body(responseMap);
+		}
+	}
+
 	/*
-	@PostMapping("/api/uploadMultipleFiles")
-	public List<File> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
-		return Arrays.asList(files)
-				.stream()
-				.map(file -> uploadFile(file))
-				.collect(Collectors.toList());
-	}
-
-	@GetMapping("/api/downloadFile/{fileName:.+}")
-	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
-		// Load file as Resource
-		Resource resource = fileStorageService.loadFileAsResource(fileName);
-
-		// Try to determine file's content type
-		String contentType = null;
-		try {
-			contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-		} catch (IOException ex) {
-			logger.info("Could not determine file type.");
-		}
-
-		// Fallback to the default content type if type could not be determined
-		if (contentType == null) {
-			contentType = "application/octet-stream";
-		}
-
-		return ResponseEntity.ok()
-				.contentType(MediaType.parseMediaType(contentType))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-				.body(resource);
-	}
-	*/
+	 * @PostMapping("/api/uploadMultipleFiles")
+	 * public List<File> uploadMultipleFiles(@RequestParam("files") MultipartFile[]
+	 * files) {
+	 * return Arrays.asList(files)
+	 * .stream()
+	 * .map(file -> uploadFile(file))
+	 * .collect(Collectors.toList());
+	 * }
+	 * 
+	 * @GetMapping("/api/downloadFile/{fileName:.+}")
+	 * public ResponseEntity<Resource> downloadFile(@PathVariable String fileName,
+	 * HttpServletRequest request) {
+	 * // Load file as Resource
+	 * Resource resource = fileStorageService.loadFileAsResource(fileName);
+	 * 
+	 * // Try to determine file's content type
+	 * String contentType = null;
+	 * try {
+	 * contentType =
+	 * request.getServletContext().getMimeType(resource.getFile().getAbsolutePath())
+	 * ;
+	 * } catch (IOException ex) {
+	 * logger.info("Could not determine file type.");
+	 * }
+	 * 
+	 * // Fallback to the default content type if type could not be determined
+	 * if (contentType == null) {
+	 * contentType = "application/octet-stream";
+	 * }
+	 * 
+	 * return ResponseEntity.ok()
+	 * .contentType(MediaType.parseMediaType(contentType))
+	 * .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
+	 * resource.getFilename() + "\"")
+	 * .body(resource);
+	 * }
+	 */
 }
