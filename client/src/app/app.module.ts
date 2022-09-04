@@ -15,7 +15,7 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { EditorComponent } from './editor/editor.component';
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
-import { FileListModule } from './file-list/file-list.module'
+import { FileListModule } from './file-list/file-list.module';
 
 //global values
 import { Globals } from './global';

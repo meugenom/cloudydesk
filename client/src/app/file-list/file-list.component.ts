@@ -1,6 +1,8 @@
 import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 import { Globals } from '../global';
 import { DragulaService } from 'ng2-dragula';
+import {AuthService} from '../auth/services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'app-file-list',
@@ -32,12 +34,14 @@ export class FileListComponent implements OnInit, OnDestroy {
 	constructor(
 		public globals: Globals,
 		private dragulaService: DragulaService,
-		private element: ElementRef
+		private element: ElementRef,
+		private authService: AuthService,
 	) {
 		//by default is 'Desktop'
 		this.currentFolder = this.globals.currentDesktopFolder;
-		this.files = this.globals.files[0].Desktop;
+		this.files = [];
 	}
+
 
 	ngOnInit(): void {
 
@@ -45,7 +49,6 @@ export class FileListComponent implements OnInit, OnDestroy {
 			console.log('change paths from default ')
 			console.log('from Desktop to ' + this.showFolder.path)
 			const path = this.showFolder.path;
-			this.files = this.globals.files[0][path];
 		}
 
 	}
@@ -59,6 +62,17 @@ export class FileListComponent implements OnInit, OnDestroy {
 		if (this.element.nativeElement.attributes.childToMaster == 'Desktop') {
 			console.log('childToMaster = ' + this.element.nativeElement.attributes.childToMaster)
 		}
+
+
+		this.authService.ls().subscribe(data=>{
+			const arr = data.files;
+			arr.forEach((elem: any) => {
+				//console.log(JSON.stringify(elem))
+			});
+
+			this.files = data.files;
+		});
+
 	}
 
 

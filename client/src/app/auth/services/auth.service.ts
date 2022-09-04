@@ -53,6 +53,10 @@ export class AuthService {
         //return this.http.post(`${environment.apiUrl}/auth/user`, checkUserData)
 		return this.http.get(`${environment.apiUrl}/api/whoami`, checkUserData);
     }
+
+	ls(): Observable<any>{
+		return this.http.get(`${environment.apiUrl}/api/ls`);
+	}
     
 
     getSomething(): Observable<any>{

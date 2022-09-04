@@ -191,7 +191,6 @@ export class DesktopComponent {
 					for (const el of added) {
 
 						el.classList.add("selected");
-						//console.log(el.children[0].children[1].children[0].attributes)
 						el.children[0].children[1].children[0].classList.add('item-icon-icon-selected')
 
 					}

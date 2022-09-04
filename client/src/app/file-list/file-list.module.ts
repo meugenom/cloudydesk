@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { DragulaModule } from 'ng2-dragula';
 import { FileListComponent } from "./file-list.component";
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
 
@@ -11,6 +13,7 @@ import { FileListComponent } from "./file-list.component";
         BrowserModule,
         FormsModule,
         CommonModule,
+		HttpClientModule,
         DragulaModule.forRoot(),
     ],
     declarations: [
