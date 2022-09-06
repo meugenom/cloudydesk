@@ -10,6 +10,8 @@ import { OpenPanel } from '../desktop/store/actions/widgetpanel.action';
 import { AuthStateInterface } from '../auth/store/models/auth.state.model';
 import { AuthService } from '../auth/services/auth.service';
 import { checkUserAction, getUserToken } from '../auth/store/actions/auth.action';
+import { FileState } from './store/models/file.state.model';
+import { loadFiles } from './store/actions/file.actions';
 
 @Component({
 	selector: 'app-desktop',
@@ -35,7 +37,7 @@ export class DesktopComponent {
 		private viewContainerRef: ViewContainerRef,
 		private globals: Globals,
 		private element: ElementRef,
-		private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface}>
+		private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface, file: FileState}>
 	) {
 		this.fullScreen = this.globals.fullScreen;
 		this.isLoginForm = false;
@@ -85,9 +87,10 @@ export class DesktopComponent {
 					isRegisterForm: this.isRegisterForm
 				}
 		
-				this.store.dispatch(
-					OpenPanel(
-						widgetpanel))
+				this.store.dispatch(OpenPanel(widgetpanel))
+				
+				//get new file list for current user
+				this.store.dispatch((loadFiles()))
 			
 		})
 

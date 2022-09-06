@@ -6,6 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActionReducerMap, StoreModule } from '@ngrx/store';
 import { reducers } from './store/reducers/index';
 
+import { EffectsModule } from '@ngrx/effects';
+import { FileEffects } from './store/effects/file.effects';
+
 
 
 @NgModule({
@@ -13,7 +16,8 @@ import { reducers } from './store/reducers/index';
     CommonModule,
 	StoreModule.forRoot(reducers),
 	FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+	EffectsModule.forFeature([FileEffects])
   ],
   declarations: [
   ],

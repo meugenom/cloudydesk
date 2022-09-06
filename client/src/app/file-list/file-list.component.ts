@@ -1,8 +1,11 @@
 import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 import { Globals } from '../global';
 import { DragulaService } from 'ng2-dragula';
-import {AuthService} from '../auth/services/auth.service';
-import { HttpClient } from '@angular/common/http';
+import { FileService } from './services/file.service';
+import { loadFiles } from '../desktop/store/actions/file.actions';
+import { FileState } from '../desktop/store/models/file.state.model';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-file-list',
@@ -12,8 +15,9 @@ import { HttpClient } from '@angular/common/http';
 export class FileListComponent implements OnInit, OnDestroy {
 
 	@ViewChild('container') input: ElementRef | undefined;
+	files: any;
+	//files$: Observable<File[]> = this.store.select(state => state);
 
-	files: any[]
 	currentFolder: String;
 
 	@Input() path: String | undefined;
@@ -35,7 +39,8 @@ export class FileListComponent implements OnInit, OnDestroy {
 		public globals: Globals,
 		private dragulaService: DragulaService,
 		private element: ElementRef,
-		private authService: AuthService,
+		private fileService: FileService,
+		private store: Store<FileState>,
 	) {
 		//by default is 'Desktop'
 		this.currentFolder = this.globals.currentDesktopFolder;
@@ -51,6 +56,16 @@ export class FileListComponent implements OnInit, OnDestroy {
 			const path = this.showFolder.path;
 		}
 
+		//subscribe on events for store 'files'
+		this.store.select('files').subscribe((data: any) => {
+			//console.log(data.files)
+			//add list of files to the template
+			this.files = data.files
+		})
+
+		//start reducer for loading files
+		this.store.dispatch(loadFiles())
+
 	}
 
 	ngOnDestroy() {
@@ -62,17 +77,6 @@ export class FileListComponent implements OnInit, OnDestroy {
 		if (this.element.nativeElement.attributes.childToMaster == 'Desktop') {
 			console.log('childToMaster = ' + this.element.nativeElement.attributes.childToMaster)
 		}
-
-
-		this.authService.ls().subscribe(data=>{
-			const arr = data.files;
-			arr.forEach((elem: any) => {
-				//console.log(JSON.stringify(elem))
-			});
-
-			this.files = data.files;
-		});
-
 	}
 
 

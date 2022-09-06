@@ -54,9 +54,9 @@ export class AuthService {
 		return this.http.get(`${environment.apiUrl}/api/whoami`, checkUserData);
     }
 
-	ls(): Observable<any>{
-		return this.http.get(`${environment.apiUrl}/api/ls`);
-	}
+	//ls(userData: any){
+	//	return this.http.get(`${environment.apiUrl}/api/ls`, userData);
+	//}
     
 
     getSomething(): Observable<any>{

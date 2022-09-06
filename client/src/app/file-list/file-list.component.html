@@ -1,9 +1,13 @@
-<div class="item-container dragula" dragula="FILES" [attr.showFolder]="showFolder?.path">
+<div
+  class="item-container dragula"
+  dragula="FILES"
+  [attr.showFolder]="showFolder?.path"
+>
   <div *ngFor="let file of this.files; let i = index">
     <div
       class="item"
       id="item-{{ file.id }}"
-	  [attr.data-uid]="file.id"
+      [attr.data-uid]="file.id"
       [attr.data-id]="file.id"
       [attr.data-name]="file.name"
       [attr.data-size]="file.size"
@@ -26,9 +30,11 @@
           *ngIf="file.type == 'application/png'"
           class="item-icon-icon"
         />
-		<img
+        <img
           src="../../assets/img/file-txt.svg"
-          *ngIf="file.type != 'application/png' && file.type != 'application/pdf'"
+          *ngIf="
+            file.type != 'application/png' && file.type != 'application/pdf'
+          "
           class="item-icon-icon"
           [attr.data-dataitem]="'item-' + file.id"
         />
@@ -70,9 +76,8 @@
         autocorrect="off"
         autocapitalize="off"
         data-gramm_editor="false"
-        style="display: none; width: 66.578125px; height: 18px"
-      >
-			{{ file.name.substring(0,10)}}
+        style="display: none; width: 60px; height: 18px">
+			{{ file.name }}
 		</textarea
       >
     </div>

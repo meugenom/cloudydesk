@@ -54,24 +54,6 @@ import { ClockComponent } from './clock/clock.component';
 
 
 
-//routes
-const routes: Routes = [
-	{
-		path: '',
-		component: LoginComponent
-	},
-	{
-		path: 'login',
-		component: LoginComponent
-	},
-	{
-		path: 'register',
-		component: RegisterComponent,
-		canActivate: [AuthGuard]
-	}
-]
-
-
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -98,7 +80,7 @@ const routes: Routes = [
 		BrowserModule,
 		HttpClientModule,
 		FileListModule,
-		RouterModule.forChild(routes),
+		//RouterModule.forChild(routes),
 		FormsModule,
 		ReactiveFormsModule,
 		AuthModule,
