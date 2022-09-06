@@ -27,13 +27,32 @@
         <img
           src="../../assets/img/file-png.svg"
           [attr.data-dataitem]="'item-' + file.id"
-          *ngIf="file.type == 'application/png'"
+          *ngIf="file.type == 'image/png'"
+          class="item-icon-icon"
+        />
+		<img
+          src="../../assets/img/file-jpeg.svg"
+          [attr.data-dataitem]="'item-' + file.id"
+          *ngIf="file.type == 'image/jpeg'"
+          class="item-icon-icon"
+        />
+		<img
+          src="../../assets/img/file-rtf.svg"
+          [attr.data-dataitem]="'item-' + file.id"
+          *ngIf="file.type == 'text/rtf'"
+          class="item-icon-icon"
+        />
+		<img
+          src="../../assets/img/file-zip.svg"
+          [attr.data-dataitem]="'item-' + file.id"
+          *ngIf="file.type == 'application/zip'"
           class="item-icon-icon"
         />
         <img
           src="../../assets/img/file-txt.svg"
           *ngIf="
-            file.type != 'application/png' && file.type != 'application/pdf'
+            file.type != 'image/png' && file.type != 'application/pdf' && file.type != 'image/jpeg'
+			&& file.type != 'text/rtf' && file.type != 'application/zip'
           "
           class="item-icon-icon"
           [attr.data-dataitem]="'item-' + file.id"
