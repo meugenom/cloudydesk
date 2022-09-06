@@ -1,6 +1,9 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { finalize, Subscription } from 'rxjs';
+import { loadFiles } from '../desktop/store/actions/file.actions';
+import { FileState } from '../desktop/store/models/file.state.model';
 import { Globals } from '../global';
 import { ContextMenuService } from './context-menu.service';
 
@@ -28,7 +31,8 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 	constructor(
 		private el: ElementRef,
 		private contextMenuService: ContextMenuService,
-		private http: HttpClient
+		private http: HttpClient,
+		private store: Store<{file: FileState}>
 	) {
 		this.element = el.nativeElement;
 
@@ -114,6 +118,10 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 					finalize(() => {
 						this.reset()
 						console.log('Finale Pipes')
+
+						//get new file list for current user
+						this.store.dispatch((loadFiles()))
+			
 
 						//close context menu
 						this.closeContext.emit(event)
