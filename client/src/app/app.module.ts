@@ -15,7 +15,7 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { EditorComponent } from './editor/editor.component';
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
-import { FileListModule } from './file-list/file-list.module'
+import { FileListModule } from './file-list/file-list.module';
 
 //global values
 import { Globals } from './global';
@@ -54,24 +54,6 @@ import { ClockComponent } from './clock/clock.component';
 
 
 
-//routes
-const routes: Routes = [
-	{
-		path: '',
-		component: LoginComponent
-	},
-	{
-		path: 'login',
-		component: LoginComponent
-	},
-	{
-		path: 'register',
-		component: RegisterComponent,
-		canActivate: [AuthGuard]
-	}
-]
-
-
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -98,7 +80,7 @@ const routes: Routes = [
 		BrowserModule,
 		HttpClientModule,
 		FileListModule,
-		RouterModule.forChild(routes),
+		//RouterModule.forChild(routes),
 		FormsModule,
 		ReactiveFormsModule,
 		AuthModule,

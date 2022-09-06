@@ -15,9 +15,11 @@ This project was generated with:
 
 ### **Features**
 - **API**:
-	- **Login** with response a new JWT-token
-	- **Registration** with creating a new user and return a new JWT-token
-	- ... in progress
+	- **Login** get a new JWT-token
+	- **Registration** create a new user and return a new JWT-token
+	- **Get File List** get file list for current user
+	- **Uploading File** uploading file to the storage and get new file list
+	... other in progress
 
 ### Development server
 

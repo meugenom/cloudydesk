@@ -10,6 +10,8 @@ import { OpenPanel } from '../desktop/store/actions/widgetpanel.action';
 import { AuthStateInterface } from '../auth/store/models/auth.state.model';
 import { AuthService } from '../auth/services/auth.service';
 import { checkUserAction, getUserToken } from '../auth/store/actions/auth.action';
+import { FileState } from './store/models/file.state.model';
+import { loadFiles } from './store/actions/file.actions';
 
 @Component({
 	selector: 'app-desktop',
@@ -35,13 +37,13 @@ export class DesktopComponent {
 		private viewContainerRef: ViewContainerRef,
 		private globals: Globals,
 		private element: ElementRef,
-		private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface}>
+		private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface, file: FileState}>
 	) {
 		this.fullScreen = this.globals.fullScreen;
 		this.isLoginForm = false;
 		this.isRegisterForm = false;
 		this.isActive = false;
-		this.userName = "unknown"
+		this.userName = "anonymousUser"
 
 		//need check our localstorage and find authtoken
 		const  isAuthenticated = this.authService.isAuthenticated();
@@ -75,7 +77,7 @@ export class DesktopComponent {
 				this.isLoginForm = false;
 				this.userName = data.name;
 			}else{
-				this.userName = "unknown"
+				this.userName = "anonymousUser"
 				this.isLoginForm = true;
 			}
 				
@@ -85,9 +87,10 @@ export class DesktopComponent {
 					isRegisterForm: this.isRegisterForm
 				}
 		
-				this.store.dispatch(
-					OpenPanel(
-						widgetpanel))
+				this.store.dispatch(OpenPanel(widgetpanel))
+				
+				//get new file list for current user
+				this.store.dispatch((loadFiles()))
 			
 		})
 
@@ -191,7 +194,6 @@ export class DesktopComponent {
 					for (const el of added) {
 
 						el.classList.add("selected");
-						//console.log(el.children[0].children[1].children[0].attributes)
 						el.children[0].children[1].children[0].classList.add('item-icon-icon-selected')
 
 					}
