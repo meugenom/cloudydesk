@@ -6,6 +6,7 @@ import { loadFiles } from '../desktop/store/actions/file.actions';
 import { FileState } from '../desktop/store/models/file.state.model';
 import { Globals } from '../global';
 import { ContextMenuService } from './context-menu.service';
+import { environment } from "src/environments/environment";
 
 @Component({
 	selector: 'div[app-context-menu]',
@@ -110,7 +111,7 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 
 			console.log(formData);
 
-			const upload$ = this.http.post("http://localhost:3000/api/uploadFile", formData, {
+			const upload$ = this.http.post(`${environment.apiUrl}/api/uploadFile`, formData, {
 				reportProgress: true,
 				observe: 'events'
 			})
