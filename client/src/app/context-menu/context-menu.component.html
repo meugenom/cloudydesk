@@ -1,4 +1,4 @@
-<!--
+
 <li
   data-action="0"
   data-menu-id="0"
@@ -8,10 +8,7 @@
   <span class="context-menu-item-icon"></span>
   <span class="context-menu-item-icon-active"></span>
   Sort by
-  <img class="submenu-arrow" src="/img/chevron-right.svg" />
-  <img
-    class="submenu-arrow submenu-arrow-active"
-    src="/img/chevron-right-active.svg"/>
+  <img class="submenu-arrow" src="../../assets/img/chevron-right.svg" />
 </li>
 
 <li class="context-menu-divider">
@@ -27,33 +24,22 @@
   <span class="context-menu-item-icon-active"></span>
   New File
 </li>
--->
 <li class="context-menu-divider">
   <hr />
 </li>
 
-<li data-action="3" class="context-menu-item">
+<li data-action="3" 
+	UploadingFile
+	class="context-menu-item">
   <span class="context-menu-item-icon"></span>
   <span class="context-menu-item-icon-active"></span>
-  <input
-    id="singleFileUploadInput"
-    type="file"
-    name="file"
-    class="file-input"
-    (change)="onFileSelected($event)"
-    #fileUpload
-    [accept]="requiredFileType"
-    required
-  />
-  <span (click)="fileUpload.click()">Upload File ... {{ uploadProgress }} </span>
+  Uploading File
 </li>
-<!--
 <li data-action="4" class="context-menu-item">
   <span class="context-menu-item-icon"></span>
   <span class="context-menu-item-icon-active"></span>
   Copy
 </li>
--->
 <li
   data-action="5"
   class="context-menu-item context-menu-item-disabled context-menu-item-active"

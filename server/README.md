@@ -12,6 +12,8 @@ This project was generated with:
 ! Important: 
 - Added CORS-configuration to working with frontend on http port 8081 for API calls. 
 - Need preinstalled MongoDb [mongodb-community version](https://www.mongodb.com/try/download/community), all settings are default.
+- Please see [application.properties](./src/main/resources/application.properties) options:
+	- `file.upload-dir=/Users/meinemandala/uploads` need actual directory with your username
 
 ### **Features**
 - **API**:

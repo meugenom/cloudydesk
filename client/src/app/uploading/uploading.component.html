@@ -1,0 +1,21 @@
+<div class="uploading-container uploading-container-invisible">
+  <input
+    id="singleFileUploadInput"
+    type="file"
+    name="file"
+    class="file-input"
+    (change)="onFileSelected($event)"
+    #fileUpload
+    [accept]="requiredFileType"
+    required
+  />
+  <span class="upload-buttons">
+    <button id="file-upload-browser-open" (click)="fileUpload.click()">
+      Upload
+    </button>
+    <button id="file-upload-cancel" (click)="cancelUpload()">Cancel</button>
+  </span>
+  <progress id="progress-bar-uploading" max="100" value="{{ uploadProgress }}">
+    {{ uploadProgress }}%
+  </progress>
+</div>
