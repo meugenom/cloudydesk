@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DesktopComponent } from './desktop/desktop.component';
 import { FullscreenDirective } from './fullscreen/fullscreen.directive';
+import { UploadingDirective } from './uploading/uploading.directive';
 import { TaskbarComponent } from './taskbar/taskbar.component';
 import { FinderComponent } from './finder/finder.component';
 import { DrawComponent } from './draw/draw.component';
@@ -51,6 +52,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DesktopModule } from './desktop/desktop.module';
 import { WidgetPanelComponent } from './widget-panel/widget-panel.component';
 import { ClockComponent } from './clock/clock.component';
+import { UploadingComponent } from './uploading/uploading.component';
 
 
 
@@ -72,8 +74,10 @@ import { ClockComponent } from './clock/clock.component';
 		LoginComponent,
 		RegisterComponent,
 		SignedinComponent,
+		UploadingDirective,
   		WidgetPanelComponent,
-    ClockComponent
+    ClockComponent,
+    UploadingComponent
 	],
 	imports: [
 		AppRoutingModule,
