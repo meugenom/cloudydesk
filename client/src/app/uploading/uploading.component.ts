@@ -5,6 +5,7 @@ import { environment } from "src/environments/environment";
 import { Store } from '@ngrx/store';
 import { finalize, Subscription } from 'rxjs';
 import { loadFiles } from '../desktop/store/actions/file.actions';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-uploading',
@@ -24,7 +25,8 @@ export class UploadingComponent implements OnInit {
 
   constructor(
 	private http: HttpClient,
-	private store: Store<{file: FileState}>
+	private store: Store<{file: FileState}>,
+	private fb: FormBuilder,
   ) { 
 	this.uploadProgress = 0;
   }
@@ -41,6 +43,14 @@ export class UploadingComponent implements OnInit {
   }
   //file uploading
 	onFileSelected(event: any) {
+	//public onFileSelected(addForm: NgForm): void {
+
+	//	const file: any = {
+	//		userName: addForm.value.userName,
+	//		password: addForm.value.password
+	//	}
+
+	//	console.log(addForm);
 
 		const file: File = event.target.files[0];
 
