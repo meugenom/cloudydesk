@@ -53,6 +53,7 @@ import { DesktopModule } from './desktop/desktop.module';
 import { WidgetPanelComponent } from './widget-panel/widget-panel.component';
 import { ClockComponent } from './clock/clock.component';
 import { UploadingComponent } from './uploading/uploading.component';
+import { uploadingModule } from './uploading/uploading.module';
 
 
 
@@ -84,6 +85,7 @@ import { UploadingComponent } from './uploading/uploading.component';
 		BrowserModule,
 		HttpClientModule,
 		FileListModule,
+		uploadingModule,
 		//RouterModule.forChild(routes),
 		FormsModule,
 		ReactiveFormsModule,

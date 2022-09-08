@@ -1,21 +1,54 @@
 <div class="uploading-container uploading-container-invisible">
-  <input
-    id="singleFileUploadInput"
-    type="file"
-    name="file"
-    class="file-input"
-    (change)="onFileSelected($event)"
-    #fileUpload
-    [accept]="requiredFileType"
-    required
-  />
-  <span class="upload-buttons">
-    <button id="file-upload-browser-open" (click)="fileUpload.click()">
+  <!--
+	<form 
+	id="uploadform"
+	#addForm="ngForm">
+    <div id="fileInfo" style="display: none">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Last Modified</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="emptyMessage">Drop Files Here</div>
+    <input id="fileInput" type="file" name="dragupload[]" 
+	(change)="onFileSelected($event)"
+	/>
+    <div style="clear: both"></div>
+
+    <button id="uploadButton" type="submit" [disabled]="addForm.invalid">
       Upload
     </button>
-    <button id="file-upload-cancel" (click)="cancelUpload()">Cancel</button>
-  </span>
-  <progress id="progress-bar-uploading" max="100" value="{{ uploadProgress }}">
-    {{ uploadProgress }}%
-  </progress>
+  </form>
+	-->
+
+  <form id="uploadform" #addForm="ngForm">
+    <input
+      id="singleFileUploadInput"
+      type="file"
+      name="dragupload[]"
+      class="file-input"
+      (change)="onFileSelected($event)"
+      #fileUpload
+    />
+    <span class="upload-buttons">
+      <button id="file-upload-browser-open" (click)="fileUpload.click()">
+        Upload
+      </button>
+      <button id="file-upload-cancel" (click)="cancelUpload()">Cancel</button>
+    </span>
+    <progress
+      id="progress-bar-uploading"
+      max="100"
+      value="{{ uploadProgress }}"
+    >
+      {{ uploadProgress }}%
+    </progress>
+  </form>
 </div>
