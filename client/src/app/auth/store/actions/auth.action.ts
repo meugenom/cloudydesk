@@ -18,8 +18,3 @@ export const checkUserFailureAction = createAction('[Auth] Check User error', pr
 
 export const signOutAction = createAction('[Auth] SignOut');
 
-
-export const getUserToken = createAction('[Auth] Get User Token', props<{ token: any }>());
-
-//not usable
-//export const loginRedirect = createAction('[Auth] Login Redirect');

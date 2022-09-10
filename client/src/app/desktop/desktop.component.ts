@@ -9,7 +9,7 @@ import { WidgetPanel } from '../desktop/store/models/widgetpanel.model';
 import { OpenPanel } from '../desktop/store/actions/widgetpanel.action';
 import { AuthStateInterface } from '../auth/store/models/auth.state.model';
 import { AuthService } from '../auth/services/auth.service';
-import { checkUserAction, getUserToken } from '../auth/store/actions/auth.action';
+import { checkUserAction} from '../auth/store/actions/auth.action';
 import { FileState } from './store/models/file.state.model';
 import { loadFiles } from './store/actions/file.actions';
 
@@ -43,7 +43,7 @@ export class DesktopComponent {
 		this.isLoginForm = false;
 		this.isRegisterForm = false;
 		this.isActive = false;
-		this.userName = "anonymousUser"
+		this.userName = "unknown"
 
 		//need check our localstorage and find authtoken
 		const  isAuthenticated = this.authService.isAuthenticated();
@@ -58,7 +58,6 @@ export class DesktopComponent {
 				userName: res.userName
 			}
 
-			this.store.dispatch((getUserToken(request)));
 
 			//feature
 			this.store.dispatch((checkUserAction(request)));
@@ -77,7 +76,7 @@ export class DesktopComponent {
 				this.isLoginForm = false;
 				this.userName = data.name;
 			}else{
-				this.userName = "anonymousUser"
+				this.userName = "unknown"
 				this.isLoginForm = true;
 			}
 				

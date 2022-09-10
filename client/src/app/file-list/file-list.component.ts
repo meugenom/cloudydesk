@@ -80,9 +80,6 @@ export class FileListComponent implements OnInit, OnDestroy {
 			this.files = data.files
 		})
 
-		//start reducer for loading files
-		this.store.dispatch(loadFiles())
-
 	}
 
 	ngOnDestroy() {
@@ -98,7 +95,7 @@ export class FileListComponent implements OnInit, OnDestroy {
 
 	getItem(event: any, file: any){
 		console.log(file);
-		this.http.get(`${environment.apiUrl}/api/downloadFile/${file.name}`, { responseType: 'blob' })
+		this.http.get(`${environment.apiUrl}/api/downloadFile/${file.id}`, { responseType: 'blob' })
 			.subscribe(
 				(response) => {
 					const blob = new Blob([response], { type: 'application/octet-stream' });

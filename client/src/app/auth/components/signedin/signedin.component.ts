@@ -24,6 +24,7 @@ export class SignedinComponent implements OnInit {
 	signOut() {
 		console.log('Sign Out')
 		this.store.dispatch(signOutAction());
+		
 	}
 
 }

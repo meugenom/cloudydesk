@@ -1,7 +1,9 @@
 package dev.neetcloud.api.controller;
 
 import dev.neetcloud.api.model.File;
+import dev.neetcloud.api.model.User;
 import dev.neetcloud.api.repository.FileRepository;
+import dev.neetcloud.api.repository.UserRepository;
 import dev.neetcloud.api.service.FileStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,35 +41,51 @@ public class FileController {
 	private FileStorageService fileStorageService;
 	@Autowired
 	private FileRepository fileRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	@PostMapping("/uploadFile")
-	public File uploadFile(@RequestParam("file") MultipartFile file) {
+	public  ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file) {
+		Map<String, Object> responseMap = new HashMap<>();
 
-		String fileName = fileStorageService.storeFile(file);
-
-		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-				.path("/downloadFile")
-				.path(fileName)
-				.toUriString();
-
+		// get user name
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User currentUser = userRepository.getIdByUsername(authentication.getName());
+		// logger.info(" current user id: " + currentUser.getId());
 
-		File fi = new File();
-		fi.setName(fileName);
-		fi.setType(file.getContentType());
-		fi.setPath("/desktop");
-		fi.setSize(file.getSize());
-		fi.setCreatedUser(authentication.getName());
-		fi.setCreatedDate(new Date().toString());
-		fileRepository.save(fi);
+		// check file name
+		String fileName = fileStorageService.checkFileName(file);
 
-		File res = new File();
-		res.setName(fileName);
-		res.setPath(fileDownloadUri);
-		res.setType(file.getContentType());
-		res.setSize(file.getSize());
+		if (fileName != null && currentUser != null) {
+			// save file data in the mongo repo
+			File currentFile = new File();
+			currentFile.setName(fileName);
+			currentFile.setType(file.getContentType());
+			currentFile.setPath("/desktop");
+			currentFile.setSize(file.getSize());
+			currentFile.setCreatedUser(authentication.getName());
+			currentFile.setCreatedDate(new Date().toString());
+			
+			//save in mongo db
+			fileRepository.save(currentFile);
 
-		return res;
+			// get index for file
+			String currentFileId = currentFile.getId();
+
+			// save file to disk
+			fileName = fileStorageService.storeFile(file, currentUser.getId(), currentFileId);
+
+			responseMap.put("fileName", fileName);
+			responseMap.put("type", file.getContentType());
+			responseMap.put("size", file.getSize());
+			
+			return ResponseEntity.ok(responseMap);
+
+		}
+
+		responseMap.put("error", true);
+		responseMap.put("message", "Invalid operation");
+		return ResponseEntity.status(500).body(responseMap);
 	}
 
 	@GetMapping("/ls")
@@ -76,9 +94,10 @@ public class FileController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Map<String, Object> responseMap = new HashMap<>();
 
-		logger.info("name: " + authentication.getName());
+		User currentUser = userRepository.getIdByUsername(authentication.getName());
 
-		if (authentication.getName() != null) {
+
+		if (currentUser != null) {
 
 			List<File> files = fileRepository.findByCreatedUser(authentication.getName());
 
@@ -109,32 +128,47 @@ public class FileController {
 	 * }
 	 */
 
-	@GetMapping("/downloadFile/{fileName:.+}")
-	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName,
+	@GetMapping("/downloadFile/{fileId:.+}")
+	public ResponseEntity<Resource> downloadFile(@PathVariable String fileId,
 			HttpServletRequest request) {
-		
-		logger.info("fileName: "+ fileName);
 
-		// Load file as Resource
-		Resource resource = fileStorageService.loadFileAsResource(fileName);
+		logger.info("Need to load file with id: " + fileId);
 
-		// Try to determine file's content type
-		String contentType = null;
-		try {
-			contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-		} catch (IOException ex) {
-			logger.info("Could not determine file type.");
+		// check auth name
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User currentUser = userRepository.getIdByUsername(authentication.getName());
+		logger.info(" current user id: " + currentUser.getId());
+		logger.info(" current user name: " + currentUser.getUserName());
+		logger.info(" auth name : " + authentication.getName());
+
+		// if userName exists
+		if (currentUser != null) {
+
+			// Load file as Resource
+			Resource resource = fileStorageService.loadFileAsResource(fileId, currentUser.getId());
+
+			// Try to determine file's content type
+			String contentType = null;
+			try {
+				contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+			} catch (IOException ex) {
+				logger.info("Could not determine file type.");
+			}
+
+			// Fallback to the default content type if type could not be determined
+			if (contentType == null) {
+				contentType = "application/octet-stream";
+			}
+
+			return ResponseEntity.ok()
+					.contentType(MediaType.parseMediaType(contentType))
+					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
+							resource.getFilename() + "\"")
+					.body(resource);
 		}
-
-		// Fallback to the default content type if type could not be determined
-		if (contentType == null) {
-			contentType = "application/octet-stream";
-		}
-
-		return ResponseEntity.ok()
-				.contentType(MediaType.parseMediaType(contentType))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
-						resource.getFilename() + "\"")
-				.body(resource);
+			// if error
+			Resource resource = null;
+			return ResponseEntity.status(500)
+					.body(resource);
 	}
 }

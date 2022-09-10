@@ -1,6 +1,6 @@
 import {
 	checkUserAction, checkUserFailureAction, checkUserSuccessAction,
-	getUserToken, loginAction, loginFailureAction, loginSuccessAction,
+	loginAction, loginFailureAction, loginSuccessAction,
 	registerAction, registerFailureAction, registerSuccessAction,
 	signOutAction
 } from '../actions/auth.action';
@@ -57,11 +57,6 @@ const authReducer = createReducer(
 		isSubmitting: false,
 		authToken: null,
 		name: null
-	})),
-	on(getUserToken, (state, { token }) => ({
-		...state,
-		authToken: token,
-		isSubmitting: true
 	})),
 	on(signOutAction, (state) => ({
 		...state,
