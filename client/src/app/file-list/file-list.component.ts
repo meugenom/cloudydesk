@@ -6,6 +6,9 @@ import { loadFiles } from '../desktop/store/actions/file.actions';
 import { FileState } from '../desktop/store/models/file.state.model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { saveAs } from 'file-saver';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-file-list',
@@ -35,16 +38,30 @@ export class FileListComponent implements OnInit, OnDestroy {
 
 	@Input() showFolder: { path: string; } | undefined;
 
+	
+
 	constructor(
 		public globals: Globals,
 		private dragulaService: DragulaService,
 		private element: ElementRef,
 		private fileService: FileService,
 		private store: Store<FileState>,
+		private http: HttpClient
 	) {
 		//by default is 'Desktop'
 		this.currentFolder = this.globals.currentDesktopFolder;
 		this.files = [];
+
+		//add dblclk event listeenr for every item
+		const items = document.getElementsByClassName("item");
+		for (let index = 0; index < items.length; index++) {
+			
+			items[index].addEventListener('dblclick', (event) => {
+				console.log('double clicked')
+			});
+		}
+		
+
 	}
 
 
@@ -79,6 +96,15 @@ export class FileListComponent implements OnInit, OnDestroy {
 		}
 	}
 
-
+	getItem(event: any, file: any){
+		console.log(file);
+		this.http.get(`${environment.apiUrl}/api/downloadFile/${file.name}`, { responseType: 'blob' })
+			.subscribe(
+				(response) => {
+					const blob = new Blob([response], { type: 'application/octet-stream' });
+					saveAs(blob, file.name);
+				}
+			)
+	}
 
 }

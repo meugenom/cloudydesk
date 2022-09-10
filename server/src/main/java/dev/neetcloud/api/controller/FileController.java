@@ -82,7 +82,7 @@ public class FileController {
 
 			List<File> files = fileRepository.findByCreatedUser(authentication.getName());
 
-			//logger.info(files.toString());
+			// logger.info(files.toString());
 
 			responseMap.put("error", false);
 			responseMap.put("userName", authentication.getName().toString());
@@ -107,33 +107,34 @@ public class FileController {
 	 * .map(file -> uploadFile(file))
 	 * .collect(Collectors.toList());
 	 * }
-	 * 
-	 * @GetMapping("/api/downloadFile/{fileName:.+}")
-	 * public ResponseEntity<Resource> downloadFile(@PathVariable String fileName,
-	 * HttpServletRequest request) {
-	 * // Load file as Resource
-	 * Resource resource = fileStorageService.loadFileAsResource(fileName);
-	 * 
-	 * // Try to determine file's content type
-	 * String contentType = null;
-	 * try {
-	 * contentType =
-	 * request.getServletContext().getMimeType(resource.getFile().getAbsolutePath())
-	 * ;
-	 * } catch (IOException ex) {
-	 * logger.info("Could not determine file type.");
-	 * }
-	 * 
-	 * // Fallback to the default content type if type could not be determined
-	 * if (contentType == null) {
-	 * contentType = "application/octet-stream";
-	 * }
-	 * 
-	 * return ResponseEntity.ok()
-	 * .contentType(MediaType.parseMediaType(contentType))
-	 * .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
-	 * resource.getFilename() + "\"")
-	 * .body(resource);
-	 * }
 	 */
+
+	@GetMapping("/downloadFile/{fileName:.+}")
+	public ResponseEntity<Resource> downloadFile(@PathVariable String fileName,
+			HttpServletRequest request) {
+		
+		logger.info("fileName: "+ fileName);
+
+		// Load file as Resource
+		Resource resource = fileStorageService.loadFileAsResource(fileName);
+
+		// Try to determine file's content type
+		String contentType = null;
+		try {
+			contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+		} catch (IOException ex) {
+			logger.info("Could not determine file type.");
+		}
+
+		// Fallback to the default content type if type could not be determined
+		if (contentType == null) {
+			contentType = "application/octet-stream";
+		}
+
+		return ResponseEntity.ok()
+				.contentType(MediaType.parseMediaType(contentType))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
+						resource.getFilename() + "\"")
+				.body(resource);
+	}
 }

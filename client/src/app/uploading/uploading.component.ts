@@ -7,10 +7,11 @@ import { finalize, Subscription } from 'rxjs';
 import { loadFiles } from '../desktop/store/actions/file.actions';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 
+
 @Component({
-  selector: 'app-uploading',
-  templateUrl: './uploading.component.html',
-  styleUrls: ['./uploading.component.sass']
+	selector: 'app-uploading',
+	templateUrl: './uploading.component.html',
+	styleUrls: ['./uploading.component.sass']
 })
 export class UploadingComponent implements OnInit {
 
@@ -20,37 +21,38 @@ export class UploadingComponent implements OnInit {
 	uploadProgress: number | undefined;
 	uploadSub: Subscription | undefined;
 
+
 	@Input() requiredFileType: string | undefined;
 
 
-  constructor(
-	private http: HttpClient,
-	private store: Store<{file: FileState}>,
-	private fb: FormBuilder,
-  ) { 
-	this.uploadProgress = 0;
-  }
+	constructor(
+		private http: HttpClient,
+		private store: Store<{ file: FileState }>,
+		private fb: FormBuilder
+	) {
+		this.uploadProgress = 0;
+	}
 
-  //if click on the desktop then automatic close opened uploading component
+	//if click on the desktop then automatic close opened uploading component
 	@HostListener("document:click", ["$event"])
 	hide(event: Event) {
-		
+
 		//this.cancelUpload();
 		//this.hideComponent();
 	}
 
-  ngOnInit(): void {
-  }
-  //file uploading
+	ngOnInit(): void {
+	}
+	//file uploading
 	onFileSelected(event: any) {
-	//public onFileSelected(addForm: NgForm): void {
+		//public onFileSelected(addForm: NgForm): void {
 
-	//	const file: any = {
-	//		userName: addForm.value.userName,
-	//		password: addForm.value.password
-	//	}
+		//	const file: any = {
+		//		userName: addForm.value.userName,
+		//		password: addForm.value.password
+		//	}
 
-	//	console.log(addForm);
+		//	console.log(addForm);
 
 		const file: File = event.target.files[0];
 
@@ -69,8 +71,6 @@ export class UploadingComponent implements OnInit {
 				.pipe(
 					finalize(() => {
 						this.reset()
-						console.log('Finale Pipes')
-
 						//get new file list for current user
 						this.store.dispatch((loadFiles()))
 
@@ -80,22 +80,18 @@ export class UploadingComponent implements OnInit {
 					})
 				);
 
-			//upload$.subscribe();
-			this.uploadSub = upload$.subscribe((event : any)=> {
-					if (event.type == HttpEventType.UploadProgress) {
-						//this.uploadProgress = Math.round(100 * (event.loaded / event.total));
-						this.uploadProgress = 100 * (event.loaded / event.total);
-						console.log("upload progress: " + this.uploadProgress)
-					}
+			this.uploadSub = upload$.subscribe((event: any) => {
+				if (event.type == HttpEventType.UploadProgress) {
+					this.uploadProgress = 100 * (event.loaded / event.total);
+					console.log("upload progress: " + this.uploadProgress)
+				}
 			})
-
 		}
 	}
-
+	
 	cancelUpload() {
 		this.uploadSub?.unsubscribe();
-		this.reset();
-		
+		this.reset();		
 		this.hideComponent();
 		
 
@@ -106,7 +102,7 @@ export class UploadingComponent implements OnInit {
 		this.uploadSub = undefined;
 	}
 
-	hideComponent(){
+	hideComponent() {
 		const uploadingContainer = document.getElementsByClassName("uploading-container")[0];
 		uploadingContainer.classList.remove('uploading-container-visible')
 		uploadingContainer.classList.add('uploading-container-invisible')

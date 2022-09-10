@@ -14,6 +14,7 @@
       [attr.data-created]="file.createdUser"
       [attr.data-modified]="file.modifiedUser"
       [attr.dragstart]="this.dragstart"
+      (dblclick)="getItem($event, file)"
     >
       <div class="item-spinner"></div>
 
@@ -30,19 +31,19 @@
           *ngIf="file.type == 'image/png'"
           class="item-icon-icon"
         />
-		<img
+        <img
           src="../../assets/img/file-jpeg.svg"
           [attr.data-dataitem]="'item-' + file.id"
           *ngIf="file.type == 'image/jpeg'"
           class="item-icon-icon"
         />
-		<img
+        <img
           src="../../assets/img/file-rtf.svg"
           [attr.data-dataitem]="'item-' + file.id"
           *ngIf="file.type == 'text/rtf'"
           class="item-icon-icon"
         />
-		<img
+        <img
           src="../../assets/img/file-zip.svg"
           [attr.data-dataitem]="'item-' + file.id"
           *ngIf="file.type == 'application/zip'"
@@ -51,8 +52,11 @@
         <img
           src="../../assets/img/file-txt.svg"
           *ngIf="
-            file.type != 'image/png' && file.type != 'application/pdf' && file.type != 'image/jpeg'
-			&& file.type != 'text/rtf' && file.type != 'application/zip'
+            file.type != 'image/png' &&
+            file.type != 'application/pdf' &&
+            file.type != 'image/jpeg' &&
+            file.type != 'text/rtf' &&
+            file.type != 'application/zip'
           "
           class="item-icon-icon"
           [attr.data-dataitem]="'item-' + file.id"
@@ -95,7 +99,8 @@
         autocorrect="off"
         autocapitalize="off"
         data-gramm_editor="false"
-        style="display: none; width: 60px; height: 18px">
+        style="display: none; width: 60px; height: 18px"
+      >
 			{{ file.name }}
 		</textarea
       >

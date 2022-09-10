@@ -46,7 +46,6 @@ import { HttpConfigInterceptor } from './auth/interceptors/httpconfig.intercepto
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { SignedinComponent } from './auth/components/signedin/signedin.component';
-import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth/services/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DesktopModule } from './desktop/desktop.module';
@@ -54,7 +53,6 @@ import { WidgetPanelComponent } from './widget-panel/widget-panel.component';
 import { ClockComponent } from './clock/clock.component';
 import { UploadingComponent } from './uploading/uploading.component';
 import { uploadingModule } from './uploading/uploading.module';
-
 
 
 @NgModule({
@@ -76,9 +74,9 @@ import { uploadingModule } from './uploading/uploading.module';
 		RegisterComponent,
 		SignedinComponent,
 		UploadingDirective,
-  		WidgetPanelComponent,
-    ClockComponent,
-    UploadingComponent
+		WidgetPanelComponent,
+		ClockComponent,
+		UploadingComponent
 	],
 	imports: [
 		AppRoutingModule,
@@ -86,7 +84,6 @@ import { uploadingModule } from './uploading/uploading.module';
 		HttpClientModule,
 		FileListModule,
 		uploadingModule,
-		//RouterModule.forChild(routes),
 		FormsModule,
 		ReactiveFormsModule,
 		AuthModule,

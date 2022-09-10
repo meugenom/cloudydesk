@@ -134,11 +134,11 @@ export class DesktopComponent {
 			selectables: [".item-container > div"],
 			boundaries: [".item-container"]
 
-		}).on("beforestart", ({ store: { stored }, event, selection }) => {
+		})
+		.on("beforestart", ({ store: { stored }, event, selection }) => {
 
 			//if we need stop to move select area
 			console.log('before start')
-
 			// in js we have event.target.tagName 
 			//but ts needs default handler, so !important
 			if (event != null) {
