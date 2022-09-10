@@ -4,6 +4,9 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 see [**Demo**](https://neetcloud.dev)
+!Important: Anonymous User was deleted. Please use tester or create own:
+- ```login: tester```
+- ```password: tester```
 
 ![web desktop screenshot](./assets/screenshot06092022.png)
 
@@ -39,7 +42,7 @@ I'll be glad and pleased to listen to some critiques about the code or ideas. **
 - context-menu (works uploading file to the server)
 - login's and register's forms and functionality, actions, calls to the server, widget panel
 - getting file list visual and uploading file to the storage by current user
-- anonymous user 
+- download file by double clicking on file icon
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 Space Background's Picture downloaded from Unsplash.com (Gary Scott).
