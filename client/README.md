@@ -13,10 +13,12 @@ External Libraries:
 4. [screenfull](https://www.npmjs.com/package/screenfull) version 6.0.2
 5. [ngrx](https://ngrx.io) version 14.2.0
 
-
 ### Development server
 
-Run `npm run start` for a dev server. Navigate to `http://localhost:8081/`. The application will automatically reload if you change any of the source files.
+!Important:
+- Our development uses reverse proxy server. In this file [nginx.conf](../nginx/nginx.conf) you can find example proxy settings. Front-end server starts on port 8081 and backend starts in port 3000. 
+-  Other way to proxy, please uncomment string [Backend: NeetCloudApplication.java:70](../server/src/main/java/dev/neetcloud/api/NeetCloudApplication.java#L70) and change port apiUrl: 'http://localhost:8080' to apiUrl: 'http://localhost:3000'[Frontend: environment.ts](./src/environments/environment.ts)
+- File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: dir and change [application.properties:26](../server/src/main/resources/application.properties#L26).
 
 ### Code scaffolding
 

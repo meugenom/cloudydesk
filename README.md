@@ -4,6 +4,9 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 see [**Demo**](https://neetcloud.dev)
+!Important: Anonymous User was deleted. Please use tester or please create own account:
+- ```login: tester```
+- ```password: tester```
 
 ![web desktop screenshot](./assets/screenshot06092022.png)
 
@@ -11,18 +14,6 @@ see [**Demo**](https://neetcloud.dev)
 Neetcloud App is in a progressive state.
 NeetCloud is an app for the web. You can use the demo app at neetcloud.dev. It’s a dynamic site with a database MongoDB on board. The main goal of this website is to make a useful and friendly cloud like a desktop manager, which is a little bit similar to shell OS. So we plan to have our small functional embedded applications like a terminal app, draw app, text editor, photo viewer, media player, etc. It would be workable with simple functionality.
 NeetCloud App is Open Source App. You can download the code and make your changes.
-
-NeetCloud App was created with TypeScript, Angular, Ng Redux, Java, Spring Framework, and MongoDB-community. Please see:
-
-- Code:
-  - [client code in progress](./client/)
-  - [server code in progress](/server/)
-
-- Info:
-  - [client readme](./client/README.md)
-  - [server readme](./server/README.md)
-
-I'll be glad and pleased to listen to some critiques about the code or ideas. **Helping is welcome**.
 
 ### **What do we have just now?**
 
@@ -39,10 +30,29 @@ I'll be glad and pleased to listen to some critiques about the code or ideas. **
 - context-menu (works uploading file to the server)
 - login's and register's forms and functionality, actions, calls to the server, widget panel
 - getting file list visual and uploading file to the storage by current user
-- anonymous user 
+- download file by double clicking on file icon
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 Space Background's Picture downloaded from Unsplash.com (Gary Scott).
+
+#### **Development**
+
+!Important: 
+- Our development uses reverse proxy server. In this file [nginx.conf](./nginx/nginx.conf) you can find example proxy settings. Front-end server starts on port 8081 and backend starts in port 3000. 
+-  Other way to proxy, please uncomment string [Backend: NeetCloudApplication.java:70](./server/src/main/java/dev/neetcloud/api/NeetCloudApplication.java#L70) and change port apiUrl: 'http://localhost:8080' to apiUrl: 'http://localhost:3000'[Frontend: environment.ts](./client/src/environments/environment.ts)
+- File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: dir and change [application.properties:26](./server/src/main/resources/application.properties#L26).
+
+NeetCloud App was created with TypeScript, Angular, Ng Redux, Java, Spring Framework, and MongoDB-community. Please see:
+
+- Code:
+  - [client code in progress](./client/)
+  - [server code in progress](/server/)
+
+- Info:
+  - [client readme](./client/README.md)
+  - [server readme](./server/README.md)
+
+I'll be glad and pleased to listen to some critiques about the code or ideas. **Helping is welcome**.
 
 ### **Contributors**
 

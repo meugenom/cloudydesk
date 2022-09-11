@@ -3,7 +3,6 @@ import { ModService } from './mod/mod.service';
 import { Store } from '@ngrx/store';
 import { Navigator } from './desktop/store/models/navigator.model';
 import { AddDimensions } from './desktop/store/actions/navigator.action';
-import { getUserToken } from './auth/store/actions/auth.action';
 
 @Component({
 	selector: 'app-root',

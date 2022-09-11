@@ -107,31 +107,4 @@ public class AuthenticationController {
 		return ResponseEntity.ok(responseMap);
 	}
 
-	/*
-	@PostMapping("/user")
-	public ResponseEntity<Map<String, Object>> checkUser(
-		//@RequestParam User user
-		) {
-
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String checkedUserName = userDetails.getUsername().toString();
-
-		Map<String, Object> responseMap = new HashMap<>();
-
-		if(!checkedUserName.equals(null)) {
-
-			responseMap.put("error", false);
-			responseMap.put("userName", checkedUserName);
-			responseMap.put("message", "User name was checked");
-			return ResponseEntity.ok(responseMap);
-		} else {
-			responseMap.put("error", true);
-			responseMap.put("message", "Invalid name");
-			return ResponseEntity.status(500).body(responseMap);
-		}
-	
-		
-	}
-	*/
-
 }

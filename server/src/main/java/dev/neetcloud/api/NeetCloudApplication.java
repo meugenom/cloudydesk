@@ -67,6 +67,7 @@ public class NeetCloudApplication implements CommandLineRunner{
 	 * CORS configuration for development
 	 * @return
 	 */
+	/*
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -82,5 +83,5 @@ public class NeetCloudApplication implements CommandLineRunner{
 		urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
 		return new CorsFilter(urlBasedCorsConfigurationSource);
 	}
-
+	*/
 }
