@@ -17,7 +17,7 @@ External Libraries:
 
 !Important:
 - Our development uses reverse proxy server. In this file [nginx.conf](../nginx/nginx.conf) you can find example proxy settings. Front-end server starts on port 8081 and backend starts in port 3000. 
--  Other way to proxy, please uncomment string [Backend: NeetCloudApplication.java:70](../server/src/main/java/dev/neetcloud/api/NeetCloudApplication.java#L70) and change port apiUrl: 'http://localhost:8080' to apiUrl: 'http://localhost:3000'[Frontend: environment.ts](./src/environments/environment.ts)
+-  Other way to proxy, please uncomment string [Backend: NeetCloudApplication.java:70](../server/src/main/java/dev/neetcloud/api/NeetCloudApplication.java#L70) and change port from 8080 to 3000 in [Frontend: environment.ts](./src/environments/environment.ts)
 - File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: dir and change [application.properties:26](../server/src/main/resources/application.properties#L26).
 
 ### Code scaffolding
