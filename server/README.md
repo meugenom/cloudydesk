@@ -9,11 +9,11 @@ This project was generated with:
 - JWT API (jjwt-api) version 0.11.2
 - [Lombok](https://projectlombok.org)
 
-! Important: 
-- Added CORS-configuration to working with frontend on http port 8081 for API calls. 
+!Important: 
+- Our development uses reverse proxy server. In this file [nginx.conf](./nginx/nginx.conf) you can find example proxy settings. Front-end server starts on port 8081 and backend starts in port 3000. 
+-  Other way to proxy, please uncomment string [Backend: NeetCloudApplication.java:70](./src/main/java/dev/neetcloud/api/NeetCloudApplication.java#L70) and change port apiUrl: 'http://localhost:8080' to apiUrl: 'http://localhost:3000'[Frontend: environment.ts](../client/src/environments/environment.ts)
+- File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: dir and change [application.properties:26](../server/src/main/resources/application.properties#L26).
 - Need preinstalled MongoDb [mongodb-community version](https://www.mongodb.com/try/download/community), all settings are default.
-- Please see [application.properties](./src/main/resources/application.properties) options:
-	- `file.upload-dir=/Users/meinemandala/uploads` need actual directory with your username
 
 ### **Features**
 - **API**:

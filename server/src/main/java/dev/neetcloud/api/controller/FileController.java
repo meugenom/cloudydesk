@@ -45,7 +45,7 @@ public class FileController {
 	private UserRepository userRepository;
 
 	@PostMapping("/uploadFile")
-	public  ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file) {
 		Map<String, Object> responseMap = new HashMap<>();
 
 		// get user name
@@ -65,8 +65,8 @@ public class FileController {
 			currentFile.setSize(file.getSize());
 			currentFile.setCreatedUser(authentication.getName());
 			currentFile.setCreatedDate(new Date().toString());
-			
-			//save in mongo db
+
+			// save in mongo db
 			fileRepository.save(currentFile);
 
 			// get index for file
@@ -78,7 +78,7 @@ public class FileController {
 			responseMap.put("fileName", fileName);
 			responseMap.put("type", file.getContentType());
 			responseMap.put("size", file.getSize());
-			
+
 			return ResponseEntity.ok(responseMap);
 
 		}
@@ -95,7 +95,6 @@ public class FileController {
 		Map<String, Object> responseMap = new HashMap<>();
 
 		User currentUser = userRepository.getIdByUsername(authentication.getName());
-
 
 		if (currentUser != null) {
 
@@ -166,9 +165,9 @@ public class FileController {
 							resource.getFilename() + "\"")
 					.body(resource);
 		}
-			// if error
-			Resource resource = null;
-			return ResponseEntity.status(500)
-					.body(resource);
+		// if error
+		Resource resource = null;
+		return ResponseEntity.status(500)
+				.body(resource);
 	}
 }
