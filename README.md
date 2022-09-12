@@ -31,6 +31,7 @@ NeetCloud App is Open Source App. You can download the code and make your change
 - login's and register's forms and functionality, actions, calls to the server, widget panel
 - getting file list visual and uploading file to the storage by current user
 - download file by double clicking on file icon
+- added Notifications into the project
 
 All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 Space Background's Picture downloaded from Unsplash.com (Gary Scott).
