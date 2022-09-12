@@ -53,6 +53,8 @@ import { WidgetPanelComponent } from './widget-panel/widget-panel.component';
 import { ClockComponent } from './clock/clock.component';
 import { UploadingComponent } from './uploading/uploading.component';
 import { uploadingModule } from './uploading/uploading.module';
+import { NotificationComponent } from './notification/notification.component';
+import { NotificationService } from './notification/notification.service';
 
 
 @NgModule({
@@ -76,7 +78,8 @@ import { uploadingModule } from './uploading/uploading.module';
 		UploadingDirective,
 		WidgetPanelComponent,
 		ClockComponent,
-		UploadingComponent
+		UploadingComponent,
+  		NotificationComponent
 	],
 	imports: [
 		AppRoutingModule,
@@ -98,7 +101,8 @@ import { uploadingModule } from './uploading/uploading.module';
 	providers: [ModService, Globals, ContextMenuService,
 		//{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
-		AuthGuard
+		AuthGuard,
+		NotificationService
 	],
 	bootstrap: [AppComponent]
 })

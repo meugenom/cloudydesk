@@ -34,8 +34,11 @@ export class WidgetPanelComponent implements OnInit {
 		})
 
 		store.select('auth').subscribe(data => {
+			
 			console.log(data);
+
 			this.isSubmitting = data.isSubmitting;
+
 			if (this.isSubmitting) {
 				this.isLoginForm = false;
 			}
