@@ -55,6 +55,7 @@ import { UploadingComponent } from './uploading/uploading.component';
 import { uploadingModule } from './uploading/uploading.module';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
+import { MobileComponent } from './mobile/mobile.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { NotificationService } from './notification/notification.service';
 		WidgetPanelComponent,
 		ClockComponent,
 		UploadingComponent,
-  		NotificationComponent
+  		NotificationComponent,
+    MobileComponent
 	],
 	imports: [
 		AppRoutingModule,

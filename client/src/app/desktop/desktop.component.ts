@@ -12,6 +12,7 @@ import { AuthService } from '../auth/services/auth.service';
 import { checkUserAction} from '../auth/store/actions/auth.action';
 import { FileState } from './store/models/file.state.model';
 import { loadFiles } from './store/actions/file.actions';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-desktop',
@@ -37,7 +38,8 @@ export class DesktopComponent {
 		private viewContainerRef: ViewContainerRef,
 		private globals: Globals,
 		private element: ElementRef,
-		private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface, file: FileState}>
+		private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface, file: FileState}>,
+		private _router: Router
 	) {
 		this.fullScreen = this.globals.fullScreen;
 		this.isLoginForm = false;
@@ -101,6 +103,10 @@ export class DesktopComponent {
 
 	getFullScreen() {
 		this.fullScreen = this.globals.fullScreen
+	}
+
+	getMobileView(){
+		this._router.navigate(['mobile-component'])
 	}
 
 	//open widgets panel 
