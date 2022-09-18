@@ -1,0 +1,126 @@
+<div class="mobile"
+	(touchstart)="touchStart($event)"
+	(touchend)="touchEnd($event)"
+  >
+  <!--top right region-->
+  <div class="mobile-user-options-wrapper">
+    <!--clock-->
+    <div app-clock></div>
+	<!--mobile button-->
+    <button
+      class="fullscreen-btn button button-small"
+      title="Enter Mobile View"
+      (click)="getDesktopView()"
+    >
+      <img class="fullScreenOut" src="./../../assets/img/btn-desktop.svg"/>
+    </button>
+
+    <a target="_blank" href="https://github.com/meugenom/neetcloud.dev">
+      <img
+        src="./../../assets/img/github.svg"
+        style="
+          width: 30px;
+          margin-bottom: -10px;
+          display: inline-block;
+          margin-left: 10px;
+          filter: drop-shadow(0px 0px 1px rgb(51, 51, 51));
+        "
+      />
+    </a>
+  </div>
+  <div class="mobile-item-container"
+  (touchmove)="touchMove($event)"
+ 	 >
+    <div class="mobile-item active">
+		<p>DEMO</p>
+	</div>
+    <div class="mobile-item"></div>
+    <div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+	<div class="mobile-item"></div>
+  </div>
+
+  <div class="taskbar-mobile taskbar-mobile-visible">
+    <!--button run left-->
+    <div
+      class="taskbar-mobile-item disable-user-select"
+      data-taskbar-item-id="1"
+      data-name="Left"
+      data-app="left"
+      data-open-windows="0"
+      title="Left"
+    >
+      <div class="taskbar-mobile-icon">
+        <img src="./../../assets/img/btn-left.svg" />
+      </div>
+    </div>
+
+    <!--button run right-->
+    <div
+      class="taskbar-mobile-item disable-user-select"
+      data-taskbar-item-id="2"
+      data-name="Right"
+      data-app="right"
+      data-open-windows="0"
+      title="Right"
+    >
+      <div class="taskbar-mobile-icon">
+        <img src="./../../assets/img/btn-right.svg" />
+      </div>
+    </div>
+
+    <!--button download-->
+    <div
+      class="taskbar-mobile-item disable-user-select"
+      data-taskbar-item-id="3"
+      data-name="Upload"
+      data-app="upload"
+      data-open-windows="0"
+      title="Upload"
+    >
+      <div class="taskbar-mobile-icon">
+        <img src="./../../assets/img/btn-upload.svg" />
+      </div>
+    </div>
+
+    <!--button book search-->
+	<!--
+    <div
+      class="taskbar-mobile-item disable-user-select"
+      style="margin-top: 3px"
+      data-taskbar-item-id="4"
+      data-name="Book"
+      data-app="book"
+      data-open-windows="0"
+      title="Book"
+    >
+      <div class="taskbar-mobile-icon">
+        <img src="./../../assets/img/btn-book.svg" />
+      </div>
+    </div>
+	-->
+    <!--button windows search-->
+    <div
+      class="taskbar-mobile-item disable-user-select"
+      data-taskbar-item-id="5"
+      data-name="Windows"
+      data-app="windows"
+      data-open-windows="0"
+      title="Windows"
+    >
+      <div class="taskbar-mobile-icon">
+        <img src="./../../assets/img/btn-windows.svg" />
+      </div>
+    </div>
+  </div>
+</div>

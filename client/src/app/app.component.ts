@@ -3,6 +3,7 @@ import { ModService } from './mod/mod.service';
 import { Store } from '@ngrx/store';
 import { Navigator } from './desktop/store/models/navigator.model';
 import { AddDimensions } from './desktop/store/actions/navigator.action';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-root',
@@ -13,10 +14,11 @@ import { AddDimensions } from './desktop/store/actions/navigator.action';
 export class AppComponent implements OnInit {
 
 	constructor(
-		private store: Store<{ navigator: Navigator }>
+		private _store: Store<{ navigator: Navigator }>,
+		private _router: Router
 	) {
 
-		store.select('navigator').subscribe(data => {
+		_store.select('navigator').subscribe(data => {
 			console.log(data);
 		})
 
@@ -28,6 +30,10 @@ export class AppComponent implements OnInit {
 		console.log(window.innerHeight)
 		console.log(window.innerWidth)
 		console.log(navigator.userAgent)
+
+		//need choose mobile or desktop component
+		//this._router.navigate(['mobile-component'])
+		this._router.navigate(['desktop-component'])
 
 		this.addDevice(window.innerHeight, window.innerWidth, false, navigator.userAgent)
 
@@ -45,11 +51,9 @@ export class AppComponent implements OnInit {
 			browser: browser
 		}
 
-		this.store.dispatch(
+		this._store.dispatch(
 			AddDimensions(
 				navi))
 	}
-
-
 	
 }
