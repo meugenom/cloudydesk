@@ -53,15 +53,23 @@ export class MobileComponent implements OnInit {
 		if (this.scrollY > maxHeight) this.scrollY = maxHeight;
 		if (this.scrollY < 0) this.scrollY = 0;
 
+
+		const taskbar = document.getElementsByClassName('taskbar-mobile')[0]
+
 		if (updated < this.clientY) {
 
 			console.log("move down")
+			taskbar.classList.remove("taskbar-mobile-visible")
+			taskbar.classList.add("taskbar-mobile-hidden")
+						
 			//this.scrollY += 10;
 			//window.scrollTo(0, this.scrollY)
 
 		} else {
-
 			console.log("move up")
+			taskbar.classList.remove("taskbar-mobile-hidden")
+			taskbar.classList.add("taskbar-mobile-visible")
+
 			//this.scrollY -= 10;
 			//window.scrollTo(0, this.scrollY)
 
