@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-	<img src="./logo-neetcloud-gear.svg" data-canonical-src="./logo-neetcloud-gear.svg" width="200" height="200" />
+	<img src="./neetcloud-logo.svg" data-canonical-src="./neetcloud-logo.svg" width="200" height="200" />
 </p>
 
 <p align="center">
