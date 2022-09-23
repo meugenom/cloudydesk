@@ -1,51 +1,18 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<path style="fill:#E2E5E7;" d="M128,0c-17.6,0-32,14.4-32,32v448c0,17.6,14.4,32,32,32h320c17.6,0,32-14.4,32-32V128L352,0H128z"/>
-<path style="fill:#B0B7BD;" d="M384,128h96L352,0v96C352,113.6,366.4,128,384,128z"/>
-<polygon style="fill:#CAD1D8;" points="480,224 384,128 480,128 "/>
-<path style="fill:#84BD5A;" d="M416,416c0,8.8-7.2,16-16,16H48c-8.8,0-16-7.2-16-16V256c0-8.8,7.2-16,16-16h352c8.8,0,16,7.2,16,16
-	V416z"/>
-<g>
-	<path style="fill:#FFFFFF;" d="M132.64,384c-8.064,0-11.264-7.792-6.656-13.296l45.552-60.512h-37.76
-		c-11.12,0-10.224-15.712,0-15.712h51.568c9.712,0,12.528,9.184,5.632,16.624l-43.632,56.656h41.584
-		c10.24,0,11.52,16.256-1.008,16.256h-55.28V384z"/>
-	<path style="fill:#FFFFFF;" d="M212.048,303.152c0-10.496,16.896-10.88,16.896,0v73.04c0,10.608-16.896,10.88-16.896,0V303.152z"/>
-	<path style="fill:#FFFFFF;" d="M251.616,303.152c0-4.224,3.328-8.832,8.704-8.832h29.552c16.64,0,31.616,11.136,31.616,32.48
-		c0,20.224-14.976,31.488-31.616,31.488h-21.36v16.896c0,5.632-3.584,8.816-8.192,8.816c-4.224,0-8.704-3.184-8.704-8.816
-		L251.616,303.152L251.616,303.152z M268.496,310.432v31.872h21.36c8.576,0,15.36-7.568,15.36-15.504
-		c0-8.944-6.784-16.368-15.36-16.368H268.496z"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 512 512" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs/>
+<g id="Untitled">
+<path d="M128 0C110.4 0 96 14.4 96 32L96 480C96 497.6 110.4 512 128 512L448 512C465.6 512 480 497.6 480 480L480 128L352 0L128 0Z" fill="#e2e5e7" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M384 128L480 128L352 0L352 96C352 113.6 366.4 128 384 128Z" fill="#b0b7bd" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M480 224L384 128L480 128L480 224Z" fill="#cad1d8" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M416 416C416 424.8 408.8 432 400 432L48 432C39.2 432 32 424.8 32 416L32 256C32 247.2 39.2 240 48 240L400 240C408.8 240 416 247.2 416 256L416 416Z" fill="#5ba4f5" fill-rule="nonzero" opacity="1" stroke="none"/>
+<g opacity="1">
+<path d="M132.64 384C124.576 384 121.376 376.208 125.984 370.704L171.536 310.192L133.776 310.192C122.656 310.192 123.552 294.48 133.776 294.48L185.344 294.48C195.056 294.48 197.872 303.664 190.976 311.104L147.344 367.76L188.928 367.76C199.168 367.76 200.448 384.016 187.92 384.016L132.64 384.016C132.64 384.016 132.64 384 132.64 384Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M212.048 303.152C212.048 292.656 228.944 292.272 228.944 303.152L228.944 376.192C228.944 386.8 212.048 387.072 212.048 376.192L212.048 303.152Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M251.616 303.152C251.616 298.928 254.944 294.32 260.32 294.32L289.872 294.32C306.512 294.32 321.488 305.456 321.488 326.8C321.488 347.024 306.512 358.288 289.872 358.288L268.512 358.288L268.512 375.184C268.512 380.816 264.928 384 260.32 384C256.096 384 251.616 380.816 251.616 375.184L251.616 303.152L251.616 303.152ZM268.496 310.432L268.496 342.304L289.856 342.304C298.432 342.304 305.216 334.736 305.216 326.8C305.216 317.856 298.432 310.432 289.856 310.432L268.496 310.432Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none"/>
 </g>
-<path style="fill:#CAD1D8;" d="M400,432H96v16h304c8.8,0,16-7.2,16-16v-16C416,424.8,408.8,432,400,432z"/>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
+<path d="M400 432L96 432L96 448L400 448C408.8 448 416 440.8 416 432L416 416C416 424.8 408.8 432 400 432Z" fill="#cad1d8" fill-rule="nonzero" opacity="1" stroke="none"/>
 </g>
 </svg>
