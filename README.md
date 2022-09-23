@@ -1,14 +1,24 @@
-### **NeetCloud App** - A web-based cloud desktop for users (In Progress)
-
 [![Version](https://img.shields.io/badge/version-0.0.2-yellow.svg)](https://semver.org/spec/v1.0.0.html)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
-see [**Demo**](https://neetcloud.dev)
-!Important: Anonymous User was deleted. Please use tester or please create own account:
-- ```login: tester```
-- ```password: tester```
+<p align="center">
+	NeetCloud App - A web-based cloud desktop for users (In Progress)
+</p>
 
-![web desktop screenshot](./assets/screenshot06092022.png)
+<p align="center">
+	<img src="./logo-neetcloud-gear.svg" data-canonical-src="./logo-neetcloud-gear.svg" width="200" height="200" />
+</p>
+
+<p align="center">
+	<a href="https://neetcloud.dev" >See Demo</a>
+	<p align="center">!Important: Anonymous User was deleted. Please use tester or create own account:</p>
+	<p align="center">login: tester</p>
+	<p align="center">password: tester</p>
+</p>
+
+<p align="center">
+	<img src="./assets/screenshot06092022.png" data-canonical-src="./assets/screenshot06092022.png"/>
+</p>
 
 #### **About**
 Neetcloud App is in a progressive state.

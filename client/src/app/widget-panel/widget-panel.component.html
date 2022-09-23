@@ -25,19 +25,8 @@
       <app-signedin></app-signedin>
     </div>
 
-    <!--
-	<div class="widget">
-      <img
-        src="../../assets/img/timer.svg"
-        alt="clock-image"
-        class="clock-image"
-      />
-	  <img
-        src="../../assets/img/thermometer.svg"
-        alt="weather-image"
-        class="clock-image"
-      />
-    </div>
-	-->
+	<div class="widget" *ngIf="isRegisterForm == false && isLoginForm == false">
+		<a>User Info</a>
+	</div>
   </div>
 </div>
