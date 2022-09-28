@@ -9,11 +9,11 @@
 	</parent>
 	<groupId>dev.neetcloud</groupId>
 	<artifactId>api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>API AUTH CLOUD</name>
 	<description>NeetCloud API</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>18</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
