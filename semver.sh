@@ -21,8 +21,10 @@ if [[ "$version" =~ $SEMVER_REGEX ]]; then
 	patch=${BASH_REMATCH[3]}
 	prere=${BASH_REMATCH[4]}
 	build=${BASH_REMATCH[5]}
-	echo "major: " $major ", minor: " $minor ", patch: "  $patch
+	echo "Old version: " $major.$minor.$patch
 fi
+
+old_version="$major.$minor.$patch"
 
 #get the first param from colnsole (patch, minor, major)
 str="$1"
@@ -71,7 +73,7 @@ if [ ! -f "${file}" ]; then
 fi
 
 #BSD/OSX
-sed -i '' 's/"version": "'$version'"/"version": "'$new_version'"/' $file
+sed -i '' 's/"version": "'$old_version'"/"version": "'$new_version'"/' $file
 
 cd ..
 cd server
@@ -82,7 +84,7 @@ if [ ! -f "${file}" ]; then
 	exit 1
 fi
 #BSD/OSX
-sed -i '' 's/'$version'-SNAPSHOT/'$major.$minor.$patch'-SNAPSHOT/' $file
+sed -i '' 's/'$old_version'-SNAPSHOT/'$new_version'-SNAPSHOT/' $file
 
 cd ..
 file="README.md"
@@ -91,10 +93,11 @@ if [ ! -f "${file}" ]; then
 	exit 1
 fi
 #BSD/OSX
-sed -i '' 's/version-'$version'/version-'$major.$minor.$patch'/' $file
+sed -i '' 's/version-'$old_version'/version-'$major.$minor.$patch'/' $file
 
 #write new version as a tag
 # git tag -a "0.1.1" -m "version 0.1.1"
+
 git tag -a "$major.$minor.$patch" -m "version $major.$minor.$patch"
 git describe
  
