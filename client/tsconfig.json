@@ -3,6 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
 	"allowJs": true,
+	"allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -22,7 +23,11 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+	"types": [
+		"jest",
+		"node"
+	]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -30,5 +35,13 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
 	"resolveJsonModule": true
-  }
+  },
+  "files": [
+	"src/main.ts",
+	"src/polyfills.ts"
+  ],
+  "include": [
+	"src/**/*.spec.ts",
+    "src/**/*.d.ts"
+  ]
 }
