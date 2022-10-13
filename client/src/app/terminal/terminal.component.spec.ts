@@ -1,23 +1,26 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TerminalComponent } from './terminal.component';
+import { TestBed } from '@angular/core/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from "@angular/platform-browser-dynamic/testing";
+import { By} from "@angular/platform-browser";
 
-describe('TerminalComponent', () => {
-  let component: TerminalComponent;
-  let fixture: ComponentFixture<TerminalComponent>;
+TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ TerminalComponent ]
-    })
-    .compileComponents();
+describe('Terminal Component', () => {
 
-    fixture = TestBed.createComponent(TerminalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	test("It should create the terminal component", () => {
+		const fixture = TestBed.createComponent(TerminalComponent);
+		const app = fixture.componentInstance;
+		expect(app).toBeTruthy();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	test("It should create div.#term element", () => {
+		const fixture = TestBed.createComponent(TerminalComponent);
+		fixture.componentInstance.ngAfterViewInit;
+		expect(fixture.debugElement.query(By.css('#term'))).toBeTruthy();
+	});
+
+
+
+
+
 });
