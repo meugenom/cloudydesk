@@ -17,12 +17,12 @@ export class TerminalComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		const t1 = new Terminal('term');
-		t1.promptText = "/user> ";
-		t1.setTextColor("white");
-		t1._cursor.style.background = "white"
-		t1.input(``);
-		t1._inputLine.textContent = t1.promptText;
+		const term = new Terminal('term');
+		term.promptText = "/user> ";
+		term.setTextColor("white");
+		term._cursor.style.background = "white"
+		term.input(``);
+		term._inputLine.textContent = term.promptText;
 
 	}
 
