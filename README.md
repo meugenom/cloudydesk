@@ -1,6 +1,6 @@
 # NeetCloud App
 
-[![Version](https://img.shields.io/badge/version-0.1.5-yellow.svg)](https://semver.org/spec/v1.0.0.html)
+[![Version](https://img.shields.io/badge/version-0.1.6-yellow.svg)](https://semver.org/spec/v1.0.0.html)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 <p align="center">
