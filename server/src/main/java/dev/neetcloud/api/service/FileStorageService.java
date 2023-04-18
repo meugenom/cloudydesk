@@ -35,7 +35,7 @@ public class FileStorageService {
 	}
 
 	public String checkFileName(MultipartFile file) {
-		
+
 		// Normalize file name
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
@@ -52,19 +52,19 @@ public class FileStorageService {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
 		try {
-			//check current user dir
-			Path testPath = Paths.get(System.getProperty("user.home"),"uploads", userId);
+			// check current user dir
+			Path testPath = Paths.get(System.getProperty("user.home"), "uploads", userId);
 			Boolean isUserDirExists = Files.exists(testPath);
-			//System.out.println("testPath = " + testPath);
-			//System.out.println("isUserDirExists = " + isUserDirExists);
-			//create dir for current user
-			if(isUserDirExists == false){
+			// System.out.println("testPath = " + testPath);
+			// System.out.println("isUserDirExists = " + isUserDirExists);
+			// create dir for current user
+			if (isUserDirExists == false) {
 				Files.createDirectories(testPath);
 			}
 
 			// Copy file to the target location (Replacing existing file with the same name)
-			Path targetLocation = Paths.get(System.getProperty("user.home"),"uploads", userId, fileId);
-			//System.out.println("targetLocation = " + targetLocation);
+			Path targetLocation = Paths.get(System.getProperty("user.home"), "uploads", userId, fileId);
+			// System.out.println("targetLocation = " + targetLocation);
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
 			return fileName;
@@ -75,10 +75,10 @@ public class FileStorageService {
 	}
 
 	public Resource loadFileAsResource(String fileId, String userId) {
-		
+
 		try {
-			//Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
-			Path filePath = Paths.get(System.getProperty("user.home"),"uploads", userId, fileId);
+			// Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+			Path filePath = Paths.get(System.getProperty("user.home"), "uploads", userId, fileId);
 			Resource resource = new UrlResource(filePath.toUri());
 			if (resource.exists()) {
 				return resource;
