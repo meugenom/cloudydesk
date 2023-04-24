@@ -52,13 +52,13 @@ Space Background's Picture downloaded from Unsplash.com (Gary Scott).
 
 ## Development
 
-### Important for local usage: 
+### Important for local usage
 
 - Our development uses reverse proxy server. In this file [nginx.conf](./nginx/nginx.conf) you can find example proxy settings. Front-end server starts on port 8081 and backend starts in port 3000. 
 -  Other way to proxy, please uncomment string [Backend: NeetCloudApplication.java:70](./server/src/main/java/dev/neetcloud/api/NeetCloudApplication.java#L70) and change port from 8080 to 3000 in [Frontend: environment.ts](./client/src/environments/environment.ts)
 - File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: dir and change [application.properties:26](./server/src/main/resources/application.properties#L26).
 
-### Docker Image
+### Docker meugenom/neetcloud image from Docker Hub
 
 Here is a way to run the project locally:
 
