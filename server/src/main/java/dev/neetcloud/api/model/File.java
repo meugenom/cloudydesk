@@ -29,19 +29,4 @@ public class File {
 	private String modifiedDate;
 	private String createdUser;
 	private String modifiedUser;
-
-	@Override
-	public String toString() {
-		return "{" +
-				"id : " + id +
-				", name : " + name +
-				", type : " + type +
-				", path : " + path +
-				", size : " + size +
-				", createdDate : " + createdDate +
-				", modifiedDate : " + modifiedDate +
-				", createdUser : " + createdUser +
-				", modifiedUser : " + modifiedUser +
-				"}";
-	}
 }

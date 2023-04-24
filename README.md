@@ -52,11 +52,39 @@ Space Background's Picture downloaded from Unsplash.com (Gary Scott).
 
 ## Development
 
-Important: 
+### Important for local usage
 
 - Our development uses reverse proxy server. In this file [nginx.conf](./nginx/nginx.conf) you can find example proxy settings. Front-end server starts on port 8081 and backend starts in port 3000. 
 -  Other way to proxy, please uncomment string [Backend: NeetCloudApplication.java:70](./server/src/main/java/dev/neetcloud/api/NeetCloudApplication.java#L70) and change port from 8080 to 3000 in [Frontend: environment.ts](./client/src/environments/environment.ts)
 - File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: dir and change [application.properties:26](./server/src/main/resources/application.properties#L26).
+
+### Docker meugenom/neetcloud image from Docker Hub
+
+Here is a way to run the project locally:
+
+1. Install Docker and download the image using command below
+```bash
+	docker pull meugenom/neetcloud
+```
+2. Run the image with the following command:
+```bash
+	docker run -p 27017:27017 -p 8080:8080 -p 8081:8081 -v my-mongo-volume:/data/db neetcloud:latest
+```
+3. After the container is launched, run the command 
+```bash
+	docker ps
+````	
+and remember the ID of the running container.
+4. Run the command to open the console
+```bash
+	docker exec -it <container-id> bin/bash
+```
+5. In the opened console, start each service one by one with the following commands: 
+```bash
+	nginx && start-frontend && start-backend
+```
+6. Access the project in web browser at `http://localhost:8080`.
+
 
 NeetCloud App was created with TypeScript, Angular, Ng Redux, Java, Spring Framework, and MongoDB-community. Please see:
 
