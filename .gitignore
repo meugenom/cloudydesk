@@ -1,0 +1,7 @@
+.idea
+.vscode
+docker/docker-compose.yml
+docker/Dockerfile.backend
+docker/Dockerfile.frontend
+docker/Dockerfile.mongo
+docker/Dockerfile.nginx
