@@ -1,6 +1,6 @@
 # NeetCloud App
 
-[![Version](https://img.shields.io/badge/version-0.1.6-yellow.svg)](https://semver.org/spec/v1.0.0.html)
+[![Version](https://img.shields.io/badge/version-0.2.0-yellow.svg)](https://semver.org/spec/v1.0.0.html)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 <p align="center">
@@ -62,31 +62,33 @@ Space Background's Picture downloaded from Unsplash.com (Gary Scott).
 
 Here is a way to run the project locally:
 
-1. Install Docker and download the image using command below
 ```bash
+	# install docker and download image using command below
 	docker pull meugenom/neetcloud
-```
-2. Run the image with the following command:
-```bash
-	docker run -p 27017:27017 -p 8080:8080 -p 8081:8081 -v my-mongo-volume:/data/db neetcloud:latest
-```
-3. After the container is launched, run the command 
-```bash
+	# see images
+	docker images
+	# run image with the folowing command
+	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 -v data:/var/lib/postgresql/data neetcloud:0.2.0
+	# see started containers
 	docker ps
-````	
-and remember the ID of the running container.
-4. Run the command to open the console
-```bash
-	docker exec -it <container-id> bin/bash
-```
-5. In the opened console, start each service one by one with the following commands: 
-```bash
+	# after wann container is launched, run the command to connect to the container
+	docker exec -it neetcloud-container bin/bash
+	# in the opened console start each service one by one with the following commands:
 	nginx && start-frontend && start-backend
+	# you can see all started processes
+	htop
+	# and quit from the terminal of container
+	exit
 ```
-6. Access the project in web browser at `http://localhost:8080`.
+	- Access the project in web browser at `http://localhost:8080`.
+	By default database is empty.
+	- Register new user by button bottom-right
+	- Log in as new user 
+	- Upload file by right click on the screen->see menu->select Uploading File
+	- Download file from the screen -> double click on icon of downloaded file
 
 
-NeetCloud App was created with TypeScript, Angular, Ng Redux, Java, Spring Framework, and MongoDB-community. Please see:
+NeetCloud App was created with TypeScript, Angular, Ng Redux, Java, Spring Framework, and Postgres. Please see:
 
 - Code:
   - [client code in progress](./client/)
