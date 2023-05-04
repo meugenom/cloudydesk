@@ -2,7 +2,9 @@ import {
 	checkUserAction, checkUserFailureAction, checkUserSuccessAction,
 	loginAction, loginFailureAction, loginSuccessAction,
 	registerAction, registerFailureAction, registerSuccessAction,
-	signOutAction
+	signOutAction,
+	signOutFailureAction,
+	signOutSuccessAction
 } from '../actions/auth.action';
 import { AuthStateInterface } from "../models/auth.state.model";
 import { Action, createReducer, on } from '@ngrx/store';
@@ -10,7 +12,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 const initialState: AuthStateInterface = {
 	authToken: null,
 	isSubmitting: false,
-	name: null
+	email: null
 }
 
 const authReducer = createReducer(
@@ -23,7 +25,7 @@ const authReducer = createReducer(
 		...state,
 		isSubmitting: true,
 		authToken: currentUser.token,
-		name: currentUser.userName
+		email: currentUser.email
 	})),
 	on(loginFailureAction, (state) => ({
 		...state,
@@ -37,7 +39,7 @@ const authReducer = createReducer(
 		...state,
 		isSubmitting: true,
 		authToken: currentUser.token,
-		name: currentUser.userName
+		email: currentUser.email
 	})),
 	on(registerFailureAction, (state) => ({
 		...state,
@@ -50,17 +52,30 @@ const authReducer = createReducer(
 	on(checkUserSuccessAction, (state, { currentUser }) => ({
 		...state,
 		isSubmitting: true,
-		name: currentUser.userName
+		email: currentUser.email
 	})),
 	on(checkUserFailureAction, (state) => ({
 		...state,
 		isSubmitting: false,
 		authToken: null,
-		name: null
+		email: null
 	})),
 	on(signOutAction, (state) => ({
 		...state,
 		authToken: null,
+		email: null,
+		isSubmitting: false
+	})),
+	on(signOutSuccessAction, (state) => ({
+		...state,
+		authToken: null,
+		email: null,
+		isSubmitting: false
+	})),
+	on(signOutFailureAction, (state) => ({
+		...state,
+		authToken: null,
+		email: null,
 		isSubmitting: false
 	})),
 

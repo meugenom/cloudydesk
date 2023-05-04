@@ -1,4 +1,4 @@
-import { PersistanceService } from './services/persistance.service';
+//import { PersistanceService } from './services/persistance.service';
 import { AuthService } from './services/auth.service';
 import { StoreModule } from '@ngrx/store';
 import { NgModule } from '@angular/core';
@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffect } from './store/effects/auth.effect';
 import { loginModule } from './components/login/login.module';
 import { registerModule } from './components/register/register.module';
-import { signedinModule } from './components/signedin/signedin.module';
+import { signoutModule } from './components/signout/signout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -20,13 +20,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
 	loginModule,
 	registerModule,
-	signedinModule
+	signoutModule
   ],
   declarations: [
   ],
   providers: [
     AuthService,
-    PersistanceService
+//    PersistanceService
   ]
 })
 export class AuthModule { }

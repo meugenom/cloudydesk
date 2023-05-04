@@ -9,7 +9,7 @@ import { environment } from "src/environments/environment";
 	constructor (private http: HttpClient) {}
   
 	ls(userData: any){
-		return this.http.get(`${environment.apiUrl}/api/ls`, userData);
+		return this.http.get(`${environment.apiUrl}/api/v1/files/ls`, userData);
 	}
     
   }

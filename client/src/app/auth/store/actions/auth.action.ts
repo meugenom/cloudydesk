@@ -11,10 +11,10 @@ export const registerAction = createAction('[Auth] Register', props<{ request: a
 export const registerSuccessAction = createAction('[Auth] Register success', props<{currentUser: any}>());
 export const registerFailureAction = createAction('[Auth] Register error', props<{error: any}>());
 
-export const checkUserAction = createAction('[Auth] Check User', props<{ request: any }>());
+export const checkUserAction = createAction('[Auth] Check User');
 export const checkUserSuccessAction = createAction('[Auth] Check User success', props<{currentUser: any}>());
 export const checkUserFailureAction = createAction('[Auth] Check User error', props<{error: any}>());
 
-
-export const signOutAction = createAction('[Auth] SignOut');
-
+export const signOutAction = createAction('[Auth] SignOut', props<{ request: any }>());
+export const signOutSuccessAction = createAction('[Auth] SignOut success', props<{currentUser: any}>());
+export const signOutFailureAction = createAction('[Auth] SignOut error', props<{error: any}>());

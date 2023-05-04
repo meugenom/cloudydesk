@@ -1,10 +1,10 @@
-import { PersistanceService } from '../../services/persistance.service';
+//import { PersistanceService } from '../../services/persistance.service';
 import { AuthService } from '../../services/auth.service';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, map, of, tap } from 'rxjs';
 import { loginAction, loginFailureAction, loginSuccessAction, registerAction, 
-		registerSuccessAction, registerFailureAction, signOutAction, checkUserSuccessAction, checkUserAction, checkUserFailureAction } from '../actions/auth.action';
+		registerSuccessAction, registerFailureAction, signOutAction, checkUserSuccessAction, checkUserAction, checkUserFailureAction, signOutSuccessAction, signOutFailureAction } from '../actions/auth.action';
 import { NotificationService } from 'src/app/notification/notification.service';
 //import { Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ export class AuthEffect {
 		private authService: AuthService,
 		private actions$: Actions,
 		//private router: Router,
-		private persistanceService: PersistanceService,
+		//private persistanceService: PersistanceService,
 		private ntfService: NotificationService
 	) { }
 
@@ -49,8 +49,7 @@ export class AuthEffect {
 	checkUser$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(checkUserAction),
-			map(({ request }) => request),
-			exhaustMap((request) => this.authService.checkUser(request).pipe(
+			exhaustMap(() => this.authService.checkUser().pipe(
 				concatMap(currentUser => [
 					checkUserSuccessAction({ currentUser }),
 					//loginRedirect()
@@ -66,8 +65,8 @@ export class AuthEffect {
 			tap((data) => {
 
 				//console.log(data);
-				this.persistanceService.setToken('auth', data.currentUser.token)
-				this.persistanceService.setToken('name', data.currentUser.userName)
+				//this.persistanceService.setToken('auth', data.currentUser.token)
+				//this.persistanceService.setToken('email', data.currentUser.email)
 
 				//notify Logged-In
 				setTimeout(() => {
@@ -83,8 +82,8 @@ export class AuthEffect {
 			ofType(registerSuccessAction),
 			tap((data) => {
 				//console.log(data);
-				this.persistanceService.setToken('auth', data.currentUser.token)
-				this.persistanceService.setToken('name', data.currentUser.userName)
+				//this.persistanceService.setToken('auth', data.currentUser.token)
+				//this.persistanceService.setToken('email', data.currentUser.email)
 
 				//notify Signed-In 
 				setTimeout(() => {
@@ -102,7 +101,7 @@ export class AuthEffect {
 
 				//console.log(data);
 				//this.persistanceService.setToken('auth', data.currentUser.token)
-				this.persistanceService.setToken('name', data.currentUser.userName)
+				//this.persistanceService.setToken('email', data.currentUser.email)
 
 				//notify checked 
 				setTimeout(() => {
@@ -119,8 +118,8 @@ export class AuthEffect {
 			tap((data) => {
 
 				//console.log(data);
-				this.persistanceService.removeToken('auth')
-				this.persistanceService.removeToken('name')
+				//this.persistanceService.removeToken('auth')
+				//this.persistanceService.removeToken('email')
 
 				//notify id something is wrong
 				setTimeout(() => {
@@ -141,24 +140,19 @@ export class AuthEffect {
 					this.ntfService.error('Login Error');
 				}, 300);
 
-				//notify warning to use tester:tester
-				setTimeout(() => {
-					this.ntfService.warning('Use login:tester pass:tester');
-				}, 600);
-
 			})
 			
 		),
 		{ dispatch: false }
 	);
 	
-	
+	/*
 	signOutAction$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(signOutAction),
 			tap(() => {
 				this.persistanceService.removeToken('auth')
-				this.persistanceService.removeToken('name')
+				this.persistanceService.removeToken('email')
 
 				//notify sing-out
 				setTimeout(() => {
@@ -168,4 +162,60 @@ export class AuthEffect {
 		),
 		{ dispatch: false }
 	);
+	*/
+
+	signOutAction$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(signOutAction),
+			map(({ request }) => request),
+			exhaustMap((request) => this.authService.logout(request).pipe(
+				concatMap(currentUser => [
+					signOutSuccessAction({ currentUser }),
+				]),
+				catchError(error => of(loginFailureAction({ error })))
+			)),
+		)
+	);
+
+	signOutSuccessAction$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(signOutSuccessAction),
+			tap((data) => {
+
+				//console.log(data);
+				//this.persistanceService.removeToken('auth')
+				//this.persistanceService.removeToken('email')
+
+				//notify Logged-In
+				setTimeout(() => {
+					this.ntfService.success('User signed-out');
+				}, 300);
+			})
+		),
+		{ dispatch: false }
+	);
+
+	signOutFailureAction$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(signOutFailureAction),
+			tap((data) => {
+
+				//notify id something is wrong
+				setTimeout(() => {
+					this.ntfService.error('Sign-Out Error');
+				}, 300);
+
+				//notify warning to use tester:tester
+				setTimeout(() => {
+					this.ntfService.warning('User sign-out error');
+				}, 600);
+
+			})
+			
+		),
+		{ dispatch: false }
+	);
+	
+
+	
 }

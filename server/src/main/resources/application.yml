@@ -1,0 +1,40 @@
+server:
+  port: 3000
+
+spring:
+  main:
+    banner-mode: off
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+      file-size-threshold: 2KB
+  datasource:
+    url: jdbc:postgresql://localhost:5432/neetcloud
+    username: neetcloud
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        globally_quoted_identifiers: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+  pattern:
+    console: "%clr(%d{yy-MM-dd E HH:mm:ss.SSS}){yellow} %clr(%-5p) %clr(%logger{0}){blue} %clr(%m){faint}%n"
+
+file:
+  upload-dir: /Users/meinemandala/uploads/

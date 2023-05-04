@@ -1,15 +1,22 @@
-# use oficial image MongoDB as base
-FROM mongo:latest
+# use oficial image PostgreSQL as base image
+FROM postgres
+
+# make database name neetcloud and set user and password
+ENV POSTGRES_USER neetcloud
+ENV POSTGRES_PASSWORD password
+ENV POSTGRES_DB neetcloud
 
 # install nginx
-RUN apt-get update && apt-get upgrade -y && apt-get install -y nginx mc htop
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y nginx mc htop
 
 # install Node.js 16
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get install -y nodejs
 
 # install Java 18
-RUN apt-get install -y openjdk-18-jdk
+RUN apt-get install -y openjdk-17-jdk
 
 # copy the nginx config file to the image
 COPY /nginx/nginx.conf /etc/nginx/nginx.conf
@@ -30,11 +37,13 @@ RUN chmod +x /usr/local/bin/start-frontend
 COPY /docker/start-backend.sh /usr/local/bin/start-backend
 RUN chmod +x /usr/local/bin/start-backend
 
-# open port 27017, 8080, 8081
-EXPOSE 27017 8080 8081
+# open port 5432, 8080, 8081
+EXPOSE 5432 8080 8081
 
 # create a directory for the database
 VOLUME /data/db
 
-# start the MongoDB and the nginx server
-CMD ["mongod", "--bind_ip_all"]
+# start postgresql
+CMD ["postgres"]
+
+

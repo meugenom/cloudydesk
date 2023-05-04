@@ -6,6 +6,6 @@ export interface File {
 	size: number;
 	createdDate: string;
 	modifiedDate: string;
-	createdUser: string;
-	modifiedUser: string;
+	createdUserId: string;
+	modifiedUserId: string;
   }

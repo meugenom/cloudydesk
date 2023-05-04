@@ -5,8 +5,8 @@ see **[Demo - https://neetcloud.dev](https://neetcloud.dev)**
 This project was generated with:
 
 - [Spring Boot](https://spring.io) version 2.6.2
-- [Spring MongoDB Starter](https://spring.io/guides/gs/accessing-data-mongodb/) version 2.6.2
-- JWT API (jjwt-api) version 0.11.2
+- [PostgreSQL DB](https://www.postgresql.org)
+- JWT API (jjwt-api) version 0.9.1
 - [Lombok](https://projectlombok.org)
 
 !Important: 
@@ -17,10 +17,12 @@ This project was generated with:
 
 ### **Features**
 - **API**:
-	- **Login** get a new JWT-token
-	- **Registration** create a new user and return a new JWT-token
+	- **Authenticate** get a new JWT-token
+	- **Register** create a new user
+	-**Check User** check JWT-token and return user credential
 	- **Get File List** get file list for current user
 	- **Uploading File** uploading file to the storage and get new file list
+	- **Downloading File** downloading file from the storage by web desktop - double click on icon of file
 	... other in progress
 
 ### Development server
@@ -37,17 +39,3 @@ Run `mvn clean package` to build the project. The build artifacts will be stored
 ### Tests
 
 - JUnit Tests in progress;
-
-- API testing with `curl`:
-
-see example with testing `/auth/login`
-
-```
-curl -d '{"password":"tester","userName":"tester"}' -H 'Content-Type: application/json' http://localhost:3000/auth/login
-```
-
-in out:
-
-```
-{"error":false,"message":"Logged In","token":"eyJhbGciOiJIUzI1NiJ9 eyJzdWIiOiJ0ZXN0ZXIiLCJpYXQiOjE2NjE1ODkzNTIsImV4cCI6MTY2MTYwNzM1Mn0.lA9rIYmjfbw9G3cs2CWwew2JEJQrEtdlSPlc9BO0R_M"}%
-```

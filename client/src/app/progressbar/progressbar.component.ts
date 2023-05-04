@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
 import { LoaderService } from '../loader/loader.service';
-import { timer } from 'rxjs';
 
 
 @Component({
@@ -14,13 +13,13 @@ export class ProgressbarComponent implements OnInit, OnDestroy, AfterViewInit {
 	isProgressBar: boolean;
 	interval: any;
 	preloadingText = [
-		'Searching ...',
-		'Searching current user',
-		'Loading ...',
-		'Loading user settings',
-		'Building Environment',
-		'Check last update',
-		'Start Desktop',
+		'Scaning drives',
+		'User detected',
+		'Powering up',
+		'User settings',
+		'Building World',
+		'Update verified',
+		'Desktop online',
 	]
 
 	constructor(

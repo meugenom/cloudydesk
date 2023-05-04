@@ -26,7 +26,7 @@ export class DesktopComponent {
 	@ViewChild('container') input: ElementRef | undefined;
 	dragDrop: boolean = false;
 
-	userName: String;
+	email: String;
 	isActive: boolean;
 	isLoginForm: boolean;
 	isRegisterForm: boolean;
@@ -45,26 +45,19 @@ export class DesktopComponent {
 		this.isLoginForm = false;
 		this.isRegisterForm = false;
 		this.isActive = false;
-		this.userName = "unknown"
+		this.email = "unknown"
 
 		//need check our localstorage and find authtoken
 		const  isAuthenticated = this.authService.isAuthenticated();
 		
 		console.log(isAuthenticated);
 		
-		if(isAuthenticated){
+		//if(!isAuthenticated){
 
-			const res = this.authService.getLocalAuthInfo();
-
-			const request: any = {
-				userName: res.userName
-			}
-
-
-			//feature
-			this.store.dispatch((checkUserAction(request)));
+			//feature for the reloads or first time loading
+			this.store.dispatch((checkUserAction()));
 			
-		}
+		//}
 
 		
 		store.select('auth').subscribe(data => {
@@ -76,9 +69,9 @@ export class DesktopComponent {
 
 			if(data.isSubmitting){
 				this.isLoginForm = false;
-				this.userName = data.name;
+				this.email = data.email;
 			}else{
-				this.userName = "unknown"
+				this.email = "unknown"
 				this.isLoginForm = true;
 			}
 				
