@@ -1,4 +1,4 @@
-import { PersistanceService } from '../../services/persistance.service';
+//import { PersistanceService } from '../../services/persistance.service';
 import { AuthService } from '../../services/auth.service';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -14,7 +14,7 @@ export class AuthEffect {
 		private authService: AuthService,
 		private actions$: Actions,
 		//private router: Router,
-		private persistanceService: PersistanceService,
+		//private persistanceService: PersistanceService,
 		private ntfService: NotificationService
 	) { }
 
@@ -65,8 +65,8 @@ export class AuthEffect {
 			tap((data) => {
 
 				//console.log(data);
-				this.persistanceService.setToken('auth', data.currentUser.token)
-				this.persistanceService.setToken('email', data.currentUser.email)
+				//this.persistanceService.setToken('auth', data.currentUser.token)
+				//this.persistanceService.setToken('email', data.currentUser.email)
 
 				//notify Logged-In
 				setTimeout(() => {
@@ -82,8 +82,8 @@ export class AuthEffect {
 			ofType(registerSuccessAction),
 			tap((data) => {
 				//console.log(data);
-				this.persistanceService.setToken('auth', data.currentUser.token)
-				this.persistanceService.setToken('email', data.currentUser.email)
+				//this.persistanceService.setToken('auth', data.currentUser.token)
+				//this.persistanceService.setToken('email', data.currentUser.email)
 
 				//notify Signed-In 
 				setTimeout(() => {
@@ -101,7 +101,7 @@ export class AuthEffect {
 
 				//console.log(data);
 				//this.persistanceService.setToken('auth', data.currentUser.token)
-				this.persistanceService.setToken('email', data.currentUser.email)
+				//this.persistanceService.setToken('email', data.currentUser.email)
 
 				//notify checked 
 				setTimeout(() => {
@@ -118,8 +118,8 @@ export class AuthEffect {
 			tap((data) => {
 
 				//console.log(data);
-				this.persistanceService.removeToken('auth')
-				this.persistanceService.removeToken('email')
+				//this.persistanceService.removeToken('auth')
+				//this.persistanceService.removeToken('email')
 
 				//notify id something is wrong
 				setTimeout(() => {
@@ -183,8 +183,8 @@ export class AuthEffect {
 			tap((data) => {
 
 				//console.log(data);
-				this.persistanceService.removeToken('auth')
-				this.persistanceService.removeToken('email')
+				//this.persistanceService.removeToken('auth')
+				//this.persistanceService.removeToken('email')
 
 				//notify Logged-In
 				setTimeout(() => {

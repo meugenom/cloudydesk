@@ -2,7 +2,6 @@ import { AuthService } from '../../services/auth.service';
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { registerAction } from '../../store/actions/auth.action';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -26,8 +25,7 @@ export class RegisterComponent implements OnInit {
 	constructor(
 		private authService: AuthService,
 		private fb: FormBuilder,
-		private store: Store,
-		private cookieService: CookieService
+		private store: Store
 	) { 
 		this.firstName = "";
 		this.lastName = "";
@@ -51,17 +49,16 @@ export class RegisterComponent implements OnInit {
 			password: addForm.value.password,
 			roles: "ROLE_USER"
 		}
-
-		this.cookieService.set('jwt', '');
 		
 		this.store.dispatch(registerAction({ request }));
 
 	}
-
+	/*
 	getSomething() {
 		this.authService.getSomething().subscribe(data => {
 			console.log(data);
 		})
 	}
+	*/
 
 }

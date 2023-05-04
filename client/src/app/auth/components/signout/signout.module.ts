@@ -13,4 +13,4 @@ import { CommonModule } from '@angular/common';
   providers: []
 })
 
-export class signedinModule {}
+export class signoutModule {}

@@ -45,7 +45,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpConfigInterceptor } from './auth/interceptors/httpconfig.interceptor';
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
-import { SignedinComponent } from './auth/components/signedin/signedin.component';
+import { SignoutComponent } from './auth/components/signout/signout.component';
 import { AuthGuard } from './auth/services/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DesktopModule } from './desktop/desktop.module';
@@ -75,7 +75,7 @@ import { MobileComponent } from './mobile/mobile.component';
 		ProgressbarComponent,
 		LoginComponent,
 		RegisterComponent,
-		SignedinComponent,
+		SignoutComponent,
 		UploadingDirective,
 		WidgetPanelComponent,
 		ClockComponent,

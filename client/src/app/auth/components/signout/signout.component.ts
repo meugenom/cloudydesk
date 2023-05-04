@@ -7,20 +7,17 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { request } from 'express';
 
-import { PersistanceService } from '../../services/persistance.service';
-
 @Component({
-	selector: 'app-signedin',
-	templateUrl: './signedin.component.html',
-	styleUrls: ['./signedin.component.sass']
+	selector: 'app-signout',
+	templateUrl: './signout.component.html',
+	styleUrls: ['./signout.component.sass']
 })
-export class SignedinComponent implements OnInit {
+export class SignoutComponent implements OnInit {
 
 	userForm!: FormGroup;
 
 	constructor(
 		private store: Store,
-		private persistanceService: PersistanceService
 		) {}
 
 	ngOnInit() {
@@ -35,10 +32,6 @@ export class SignedinComponent implements OnInit {
 		}
 
 		this.store.dispatch(signOutAction(request));
-		
-		this.persistanceService.removeToken("auth");
-		this.persistanceService.removeToken("email");
-		
 	}
 
 }

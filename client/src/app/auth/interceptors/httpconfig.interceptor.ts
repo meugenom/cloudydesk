@@ -1,18 +1,19 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, throwError } from "rxjs";
-import { PersistanceService } from "../services/persistance.service";
+//import { PersistanceService } from "../services/persistance.service";
 //import { CookieService } from "ngx-cookie-service";
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
 	constructor(
-		private persistanceService: PersistanceService,
+		//private persistanceService: PersistanceService,
 		//private cookieService: CookieService
 	) { }
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		const localStorageToken = this.persistanceService.getToken('auth');
+		//const localStorageToken = this.persistanceService.getToken('auth');
+		const localStorageToken = localStorage.getItem('jwt');
 		//const jwtToken = this.cookieService.get('jwt');
 		const authReq = !!localStorageToken ? req.clone({
 			setHeaders: { 
