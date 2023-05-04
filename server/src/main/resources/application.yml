@@ -11,8 +11,8 @@ spring:
       max-request-size: 10MB
       file-size-threshold: 2KB
   datasource:
-    url: jdbc:postgresql://localhost:5332/neetcloud
-    username: meugenom
+    url: jdbc:postgresql://localhost:5432/neetcloud
+    username: neetcloud
     password: password
   jpa:
     hibernate:
