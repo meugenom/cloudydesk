@@ -77,6 +77,7 @@ export class FileListComponent implements OnInit, OnDestroy {
 		this.store.select('files').subscribe((data: any) => {
 			//console.log(data.files)
 			//add list of files to the template
+			//console.log(data.files);
 			this.files = data.files
 		})
 
@@ -95,7 +96,7 @@ export class FileListComponent implements OnInit, OnDestroy {
 
 	getItem(event: any, file: any){
 		console.log(file);
-		this.http.get(`${environment.apiUrl}/api/downloadFile/${file.id}`, { responseType: 'blob' })
+		this.http.get(`${environment.apiUrl}/api/v1/files/downloadFile/${file.id}`, { responseType: 'blob' })
 			.subscribe(
 				(response) => {
 					const blob = new Blob([response], { type: 'application/octet-stream' });

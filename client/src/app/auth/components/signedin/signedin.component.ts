@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { request } from 'express';
+
+import { PersistanceService } from '../../services/persistance.service';
 
 @Component({
 	selector: 'app-signedin',
@@ -16,14 +19,25 @@ export class SignedinComponent implements OnInit {
 	userForm!: FormGroup;
 
 	constructor(
-		private store: Store) {}
+		private store: Store,
+		private persistanceService: PersistanceService
+		) {}
 
 	ngOnInit() {
 	}
 
 	signOut() {
 		console.log('Sign Out')
-		this.store.dispatch(signOutAction());
+
+		const request: any = {
+			email: "",
+			password: ""
+		}
+
+		this.store.dispatch(signOutAction(request));
+		
+		this.persistanceService.removeToken("auth");
+		this.persistanceService.removeToken("email");
 		
 	}
 

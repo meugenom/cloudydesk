@@ -64,7 +64,7 @@ export class UploadingComponent implements OnInit {
 
 			console.log(formData);
 
-			const upload$ = this.http.post(`${environment.apiUrl}/api/uploadFile`, formData, {
+			const upload$ = this.http.post(`${environment.apiUrl}/api/v1/files/uploadFile`, formData, {
 				reportProgress: true,
 				observe: 'events'
 			})

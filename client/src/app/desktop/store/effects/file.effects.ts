@@ -14,7 +14,7 @@ export class FileEffects {
 		this.actions$.pipe(
 			ofType(loadFiles),
 			switchMap(() => this.fileService.ls({}).pipe(
-				map((response: any) => loadFilesSuccess({ files: response.files })),
+				map((response: any) => loadFilesSuccess({ files: response.files})),
 				catchError(() => of(loadFilesError()))
 			))
 		)

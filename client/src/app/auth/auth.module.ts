@@ -1,4 +1,4 @@
-import { PersistanceService } from './services/persistance.service';
+//import { PersistanceService } from './services/persistance.service';
 import { AuthService } from './services/auth.service';
 import { StoreModule } from '@ngrx/store';
 import { NgModule } from '@angular/core';
@@ -26,7 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     AuthService,
-    PersistanceService
+//    PersistanceService
   ]
 })
 export class AuthModule { }

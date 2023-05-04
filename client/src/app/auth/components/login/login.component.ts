@@ -1,9 +1,10 @@
 import { loginAction } from '../../store/actions/auth.action';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
 	selector: 'app-login',
@@ -13,16 +14,17 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements OnInit {
 
 	userForm!: FormGroup;
-	userName: String;
+	email: String;
 	password: String;
 
 
 	constructor(
 		private fb: FormBuilder,
 		private store: Store,
+		private cookieService: CookieService
 	) {
+		this.email = "";
 		this.password = "";
-		this.userName = "";
 	}
 
 	ngOnInit(): void {
@@ -32,7 +34,7 @@ export class LoginComponent implements OnInit {
 	public loginUser(addForm: NgForm): void {
 
 		const request: any = {
-			userName: addForm.value.userName,
+			email: addForm.value.email,
 			password: addForm.value.password
 		}
 

@@ -15,6 +15,8 @@ export const fileReducer = createReducer(
 	on(loadFilesSuccess, (state, action) => (
 		{
 			files: action.files
+
+
 		}
 	)),
 	on(loadFilesError, (state) => (
