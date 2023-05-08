@@ -31,6 +31,19 @@ Run `mvn spring-boot:run` for a dev server from console.
 Or please start batch files: `./start-dev-server.sh`
 Server starts on port 3000. The application will automatically reload if you change any of the source files.
 
+### Postgres
+Install and run `Docker`
+```bash
+	# open shell and pull docker image 
+	docker pull postgres
+	# see this images in the list
+	docker images
+	# start new docker container
+	docker run -d --name postgres-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -v data:/var/lib/postgresql/data postgres
+	# see started containers, in your case is postgres-container
+	docker ps
+```
+
 ### Build
 
 Run `mvn clean package` to build the project. The build artifacts will be stored in the `target/` directory.
