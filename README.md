@@ -59,7 +59,7 @@ Here is a way to run the project locally:
 
 ```bash
 	# install docker and download image using command below
-	docker pull meugenom/neetcloud:0.2.0
+	docker pull meugenom/neetcloud:0.2.1
 	# see images
 	docker images
 	# run image with the folowing command
