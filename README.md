@@ -27,7 +27,7 @@
 
 ## About
 Neetcloud App is in a progressive state.
-NeetCloud is an app for the web. It’s a dynamic site with a database MongoDB on board. The main goal of this website is to make a useful and friendly cloud like a desktop manager, which is a little bit similar to shell OS. So we plan to have our small functional embedded applications like a terminal app, draw app, text editor, photo viewer, media player, etc. It would be workable with simple functionality.
+NeetCloud is an app for the web. It’s a dynamic site with a database Postgres on board. The main goal of this website is to make a useful and friendly cloud like a desktop manager, which is a little bit similar to shell OS. So we plan to have our small functional embedded applications like a terminal app, draw app, text editor, photo viewer, media player, etc. It would be workable with simple functionality.
 NeetCloud App is Open Source App. You can download the code and make your changes.
 
 ## Features (Application in Progress)
@@ -63,7 +63,7 @@ Here is a way to run the project locally:
 	# see images
 	docker images
 	# run image with the folowing command
-	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 -v data:/var/lib/postgresql/data neetcloud:0.2.0
+	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 -v data:/var/lib/postgresql/data neetcloud:0.2.1
 	# see started containers
 	docker ps
 	# after wann container is launched, run the command to connect to the container
