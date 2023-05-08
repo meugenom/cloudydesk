@@ -14,11 +14,7 @@
 <p align="center">
   <a href="https://neetcloud.dev" >See Demo</a>
   <br>
-  <b>Important: Anonymous User was deleted. Please use tester or create own account:</b>
-  <br>
-  <b>login:</b> tester
-  <br>
-  <b>password:</b> tester
+  <b>Important: Anonymous User was deleted. Please create own account:</b>
 </p>
 
 <p align="center">
