@@ -1,6 +1,6 @@
 # NeetCloud App
 
-[![Version](https://img.shields.io/badge/version-0.2.0-yellow.svg)](https://semver.org/spec/v1.0.0.html)
+[![Version](https://img.shields.io/badge/version-0.2.1-yellow.svg)](https://semver.org/spec/v1.0.0.html)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 <p align="center">
@@ -27,7 +27,7 @@
 
 ## About
 Neetcloud App is in a progressive state.
-NeetCloud is an app for the web. It’s a dynamic site with a database MongoDB on board. The main goal of this website is to make a useful and friendly cloud like a desktop manager, which is a little bit similar to shell OS. So we plan to have our small functional embedded applications like a terminal app, draw app, text editor, photo viewer, media player, etc. It would be workable with simple functionality.
+NeetCloud is an app for the web. It’s a dynamic site with a database Postgres on board. The main goal of this website is to make a useful and friendly cloud like a desktop manager, which is a little bit similar to shell OS. So we plan to have our small functional embedded applications like a terminal app, draw app, text editor, photo viewer, media player, etc. It would be workable with simple functionality.
 NeetCloud App is Open Source App. You can download the code and make your changes.
 
 ## Features (Application in Progress)
@@ -46,17 +46,12 @@ NeetCloud App is Open Source App. You can download the code and make your change
 - Download file by double clicking on file icon
 - Added Notifications into the project
 
-
-All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
-Space Background's Picture downloaded from Unsplash.com (Gary Scott).
-
 ## Development
 
 ### Important for local usage
 
-- Our development uses reverse proxy server. In this file [nginx.conf](./nginx/nginx.conf) you can find example proxy settings. Front-end server starts on port 8081 and backend starts in port 3000. 
--  Other way to proxy, please uncomment string [Backend: NeetCloudApplication.java:70](./server/src/main/java/dev/neetcloud/api/NeetCloudApplication.java#L70) and change port from 8080 to 3000 in [Frontend: environment.ts](./client/src/environments/environment.ts)
-- File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: dir and change [application.properties:26](./server/src/main/resources/application.properties#L26).
+- Our development uses reverse proxy server. In this file [nginx.conf](./nginx/nginx.conf) you can find example proxy settings. Front-end server starts on port 8081 and backend starts in port 3000.
+- File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: dir and change [application.properties:40](./server/src/main/resources/application.yml#L26).
 
 ### Docker meugenom/neetcloud image from Docker Hub
 
@@ -68,7 +63,7 @@ Here is a way to run the project locally:
 	# see images
 	docker images
 	# run image with the folowing command
-	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 -v data:/var/lib/postgresql/data neetcloud:0.2.0
+	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 -v data:/var/lib/postgresql/data neetcloud:0.2.1
 	# see started containers
 	docker ps
 	# after wann container is launched, run the command to connect to the container
@@ -87,6 +82,10 @@ Here is a way to run the project locally:
 	- Upload file by right click on the screen->see menu->select Uploading File
 	- Download file from the screen -> double click on icon of downloaded file
 
+How to remove docker build cache
+```bash
+	docker builder prune
+```
 
 NeetCloud App was created with TypeScript, Angular, Ng Redux, Java, Spring Framework, and Postgres. Please see:
 
@@ -99,6 +98,12 @@ NeetCloud App was created with TypeScript, Angular, Ng Redux, Java, Spring Frame
   - [server readme](./server/README.md)
 
 I'll be glad and pleased to listen to some critiques about the code or ideas. **Helping is welcome**.
+
+### Used Resources
+
+- All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
+- Space Background's Picture downloaded from Unsplash.com (Gary Scott).
+
 
 ## Contributors
 

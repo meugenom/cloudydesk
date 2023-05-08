@@ -7,3 +7,4 @@ docker/Dockerfile.mongo
 docker/Dockerfile.nginx
 tmp
 
+docker/publish.txt

@@ -17,25 +17,19 @@ External Libraries:
 
 !Important:
 - Our development uses reverse proxy server. In this file [nginx.conf](../nginx/nginx.conf) you can find example proxy settings. Front-end server starts on port 8081 and backend starts in port 3000. 
--  Other way to proxy, please uncomment string [Backend: NeetCloudApplication.java:70](../server/src/main/java/dev/neetcloud/api/NeetCloudApplication.java#L70) and change port from 8080 to 3000 in [Frontend: environment.ts](./src/environments/environment.ts)
-- File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: dir and change [application.properties:26](../server/src/main/resources/application.properties#L26).
+- [Frontend: environment.ts](./src/environments/environment.ts)
 
-### Code scaffolding
+### How to start
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `npm install` and to start dev server `npm run dev`
 
 ### Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `build/` directory.
+Run `npm run build` to build the project. The build artifacts will be stored in the `build/` directory.
 
 ### Run generated build
 
 Run `node front-server.js` to start local . Navigate to `http://localhost:8081/`.
-
-### Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
 
 Directories: is not actual, need new checking a little bit later
 ```

@@ -11,18 +11,17 @@ This project was generated with:
 
 !Important: 
 - Our development uses reverse proxy server. In this file [nginx.conf](./nginx/nginx.conf) you can find example proxy settings. Front-end server starts on port 8081 and backend starts in port 3000. 
--  Other way to proxy, please uncomment string [Backend: NeetCloudApplication.java:70](./src/main/java/dev/neetcloud/api/NeetCloudApplication.java#L70) and change port from 8080 to 3000 in [Frontend: environment.ts](../client/src/environments/environment.ts)
-- File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: dir and change [application.properties:26](../server/src/main/resources/application.properties#L26).
-- Need preinstalled MongoDb [mongodb-community version](https://www.mongodb.com/try/download/community), all settings are default.
+- File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: directory.
 
 ### **Features**
 - **API**:
-	- **Authenticate** get a new JWT-token
-	- **Register** create a new user
-	-**Check User** check JWT-token and return user credential
-	- **Get File List** get file list for current user
-	- **Uploading File** uploading file to the storage and get new file list
-	- **Downloading File** downloading file from the storage by web desktop - double click on icon of file
+	- **/api/v1/auth/authenticate** return valid JWT Cookie
+	- **/api/v1/auth/register** create a new user and return Auth Response and valid JWT Cookie
+	-**api/v1/users/whoami** check JWT-token and return user credential
+	- **api/v1/users/list** get users list only when user has ROLE_ADMIN
+	- **api/v1/files/ls** get files list for current user
+	- **api/v1/files/uploadFile** uploading file to the storage and get file info
+	- **api/v1/files/downloadFile** downloading file from the storage (by web desktop - double click on icon of file)
 	... other in progress
 
 ### Development server
@@ -30,6 +29,19 @@ This project was generated with:
 Run `mvn spring-boot:run` for a dev server from console.
 Or please start batch files: `./start-dev-server.sh`
 Server starts on port 3000. The application will automatically reload if you change any of the source files.
+
+### Postgres
+Install and run `Docker`
+```bash
+	# open shell and pull docker image 
+	docker pull postgres
+	# see this images in the list
+	docker images
+	# start new docker container
+	docker run -d --name postgres-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -v data:/var/lib/postgresql/data postgres
+	# see started containers, in your case is postgres-container
+	docker ps
+```
 
 ### Build
 
