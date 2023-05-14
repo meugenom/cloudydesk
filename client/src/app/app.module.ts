@@ -13,10 +13,14 @@ import { TaskbarComponent } from './taskbar/taskbar.component';
 import { FinderComponent } from './finder/finder.component';
 import { DrawComponent } from './draw/draw.component';
 import { TerminalComponent } from './terminal/terminal.component';
-import { EditorComponent } from './editor/editor.component';
+
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
+
 import { FileListModule } from './file-list/file-list.module';
+
+import { EditorComponent } from './editor/editor.component';
+
 
 //global values
 import { Globals } from './global';
@@ -56,6 +60,8 @@ import { uploadingModule } from './uploading/uploading.module';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
 import { MobileComponent } from './mobile/mobile.component';
+
+import { NgxEditorModule } from 'ngx-editor';
 
 
 @NgModule({
@@ -99,6 +105,7 @@ import { MobileComponent } from './mobile/mobile.component';
 			autoPause: true, // Pauses recording actions and state changes when the extension window is not open
 		}),
 		EffectsModule.forRoot([]),
+		NgxEditorModule
 	],
 	providers: [ModService, Globals, ContextMenuService,
 		//{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },

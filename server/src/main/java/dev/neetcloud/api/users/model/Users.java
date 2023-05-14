@@ -52,7 +52,7 @@ public class Users {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		Roles = roles;
+		this.Roles = roles;
 		this.is_active = is_active;
 		this.password = password;
 	}

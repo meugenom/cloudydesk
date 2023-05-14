@@ -1,3 +1,43 @@
 <div class="window-body-editor">
-	
+	<div class="editor">
+		<div class="menu">
+			<button class="menu-button" (click)="toggleFileMenu()">File</button>
+			<div class="menu-dropdown" *ngIf="showFileMenu">
+				<div class="menu-item">New</div>
+				<div class="menu-item" (click)="openFile()">Open</div>
+				<div class="menu-item" (click)="saveFile()">Save</div>
+				<div class="menu-item">Export as ...</div>
+				<div class="menu-item">Close</div>
+		  	</div>
+			<button class="menu-button" (click)="toggleEditMenu()">Edit</button>
+			<div class="menu-dropdown" *ngIf="showEditMenu">
+				<div class="menu-item">Undo</div>
+				<div class="menu-item">Copy</div>
+				<div class="menu-item">Paste</div>
+				<div class="menu-item">Find</div>
+		  	</div>
+			<button class="menu-button" (click)="toggleViewMenu()">View</button>
+			<div class="menu-dropdown" *ngIf="showViewMenu">
+				<div class="menu-item">Zoom In</div>
+				<div class="menu-item">Zoom Out</div>
+		  	</div>
+			<button class="menu-button" (click)="toggleHelpMenu()">Help</button>
+			<div class="menu-dropdown" *ngIf="showHelpMenu">
+				<div class="menu-item">About</div>
+				<div class="menu-item">Version</div>
+		  	</div>
+		</div>
+		<form [formGroup]="form">
+			<div class="editor">
+				<ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+				<ngx-editor [editor]="editor" formControlName="editorContent">
+				</ngx-editor>
+			</div>
+		</form>
+	</div>
+	<div class="editor-footer">		
+		<span class="editor-footer-item-count">50 words</span>
+		<span class="editor-footer-seperator" style="display: inline;">|</span>
+		<span class="editor-footer-selected-items-count" style="display: inline;">saved</span>
+	</div>
 </div>
