@@ -79,15 +79,27 @@
 	width: 60px
 
 .menu-dropdown
-	position: inherit
+	position: absolute
+	display: none
 	background-color: #fff
 	border: 1px solid #ccc
 	padding: 8px
 	font-size: 14px
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
-	display: none
 	width: 100px
 	margin-top: -8px
+	
+.menu-dropdown-file
+	left: 10px
+
+.menu-dropdown-edit
+	left: 70px
+
+.menu-dropdown-view
+	left: 130px
+
+.menu-dropdown-help
+	left: 190px
 
 .menu-button:hover + .menu-dropdown,
 .menu-dropdown:hover

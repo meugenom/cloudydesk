@@ -34,20 +34,33 @@ export class EditorComponent implements OnInit, OnDestroy {
 	constructor() {
 	}
 
-	toggleFileMenu() {
-		this.showFileMenu = !this.showFileMenu;
-	}
+	togleMenu(param: string) {
+		if(param == "file"){
+			this.showFileMenu = !this.showFileMenu;
+			this.showEditMenu = false;
+			this.showViewMenu = false;
+			this.showHelpMenu = false;	
+		}
+		if(param == "edit"){
+			this.showEditMenu = !this.showEditMenu;
+			this.showFileMenu = false;
+			this.showViewMenu = false;
+			this.showHelpMenu = false;	
+		}
 
-	toggleEditMenu() {
-		this.showEditMenu = !this.showEditMenu;
-	}
+		if(param == "view"){
+			this.showViewMenu = !this.showViewMenu;
+			this.showFileMenu = false;
+			this.showEditMenu = false;
+			this.showHelpMenu = false;	
+		}
 
-	toggleViewMenu() {
-		this.showViewMenu = !this.showViewMenu;
-	}
-
-	toggleHelpMenu() {
-		this.showHelpMenu = !this.showHelpMenu;
+		if(param == "help"){
+			this.showHelpMenu = !this.showHelpMenu;
+			this.showFileMenu = false;
+			this.showEditMenu = false;
+			this.showViewMenu = false;	
+		}
 	}
 
 	form = new FormGroup({
