@@ -1,13 +1,20 @@
 import { Component, OnInit, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
 import { LoaderService } from '../loader/loader.service';
 
+import {select, Store} from '@ngrx/store';
+import {WidgetPanel} from "../desktop/store/models/widgetpanel.model";
+import {AuthStateInterface} from "../auth/store/models/auth.state.model";
+import {FileState} from "../desktop/store/models/file.state.model";
+import {selectAuth} from "../auth/store/selectors/auth.selector";
+
+
 
 @Component({
 	selector: 'app-progressbar',
-	templateUrl: './progressbar.component.html',
-	styleUrls: ['./progressbar.component.sass']
+	templateUrl: './system-loader.component.html',
+	styleUrls: ['./system-loader.component.sass']
 })
-export class ProgressbarComponent implements OnInit, OnDestroy, AfterViewInit {
+export class SystemLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	element: ElementRef;
 	isProgressBar: boolean;
@@ -20,11 +27,14 @@ export class ProgressbarComponent implements OnInit, OnDestroy, AfterViewInit {
 		'Building World',
 		'Update verified',
 		'Desktop online',
-	]
+	];
+	events: any[]| undefined;
 
 	constructor(
 		public loader: LoaderService,
-		private el: ElementRef
+		private el: ElementRef,
+		//private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface, file: FileState}>,
+		private store: Store<{auth: AuthStateInterface}>
 	) {
 		this.element = el.nativeElement;
 		this.isProgressBar = true;
@@ -69,14 +79,21 @@ export class ProgressbarComponent implements OnInit, OnDestroy, AfterViewInit {
 		clearInterval(this.interval);
 	}
 
+	// Create getter methods to access events from the store
 
 	ngAfterViewInit(): void {
+
+		
+
 	}
 
 	ngOnInit(): void {
+
+
 	}
 
 	ngOnDestroy(): void {
 
 	}
 }
+

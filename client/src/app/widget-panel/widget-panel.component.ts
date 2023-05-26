@@ -35,8 +35,7 @@ export class WidgetPanelComponent implements OnInit {
 
 		store.select('auth').subscribe(data => {
 			
-			console.log(data);
-
+			//console.log(data);
 			this.isSubmitting = data.isSubmitting;
 
 			if (this.isSubmitting) {
@@ -80,5 +79,4 @@ export class WidgetPanelComponent implements OnInit {
 	ngOnInit(): void {
 
 	}
-
 }

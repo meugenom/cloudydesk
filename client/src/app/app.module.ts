@@ -34,7 +34,7 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { ContextMenuService } from './context-menu/context-menu.service';
 
 //spinner
-import { ProgressbarComponent } from './progressbar/progressbar.component';
+import { SystemLoaderComponent } from './system-loader/system-loader.component';
 
 //loading interceptor
 import { LoadingInterceptor } from './loader/loading.interceptor';
@@ -47,9 +47,9 @@ import { environment } from '../environments/environment'; // Angular CLI enviro
 import { AuthModule } from './auth/auth.module';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpConfigInterceptor } from './auth/interceptors/httpconfig.interceptor';
-import { LoginComponent } from './auth/components/login/login.component';
+import { AuthenticateComponent } from './auth/components/authenticate/authenticate.component';
 import { RegisterComponent } from './auth/components/register/register.component';
-import { SignoutComponent } from './auth/components/signout/signout.component';
+import { LogoutComponent } from './auth/components/logout/logout.component';
 import { AuthGuard } from './auth/services/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DesktopModule } from './desktop/desktop.module';
@@ -78,10 +78,10 @@ import { NgxEditorModule } from 'ngx-editor';
 		SettingsComponent,
 		ModComponent,
 		ContextMenuComponent,
-		ProgressbarComponent,
-		LoginComponent,
+		SystemLoaderComponent,
+		AuthenticateComponent,
 		RegisterComponent,
-		SignoutComponent,
+		LogoutComponent,
 		UploadingDirective,
 		WidgetPanelComponent,
 		ClockComponent,
