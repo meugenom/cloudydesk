@@ -12,4 +12,4 @@ import { CommonModule } from '@angular/common';
   providers: []
 })
 
-export class loginModule {}
+export class authenticateModule {}
