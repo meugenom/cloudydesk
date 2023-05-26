@@ -1,7 +1,9 @@
 package dev.neetcloud.api.users.controller;
 
+import dev.neetcloud.api.auth.response.AuthenticationResponse;
 import dev.neetcloud.api.users.model.Users;
 import dev.neetcloud.api.users.repository.UsersRepository;
+import dev.neetcloud.api.users.responses.UsersResponse;
 import dev.neetcloud.api.users.service.UsersService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,6 +21,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * @author meugenom
+ * @since 2023-05-02
+ */
 
 @RestController
 @RequiredArgsConstructor
@@ -34,8 +40,8 @@ public class UsersController {
 
     @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     @GetMapping("list")
-    public List<Users> GetUsers() {
-        return usersService.GetAllUsers();
+    public List<Users> getUsersList() {
+		return usersService.GetAllUsers();
     }
 
     //@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
@@ -44,28 +50,37 @@ public class UsersController {
     //    return usersService.AddUser(user);
     //}
 	
-	@GetMapping("/whoami")
-	public ResponseEntity<Map<String, Object>> getDir() {
+	@GetMapping("/user")
+	public ResponseEntity<Map<String, Object>> whoami() {
 	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
 		Map<String, Object> responseMap = new HashMap<>();
-		Users currentUser = usersRepository.getIdByEmail(authentication.getName());
 
-		if (currentUser != null && authentication != null) {
+		//prepare authResponse
+		UsersResponse userResponse = new UsersResponse("", "", authentication.getName(), "", false);
 
-			Optional<Users> user = usersRepository.findByEmail(currentUser.getEmail());
+		//check info and add additional fileds
+		Optional<Users>  userOptional = usersRepository.findByEmail(authentication.getName());
 
-			logger.info(user.toString());
+		if (userOptional.isPresent() && authentication != null) {
+			Users result = userOptional.get();
+			userResponse.setId(result.getId());
+			userResponse.setFirstName(result.getFirstName());
+			userResponse.setLastName(result.getLastName());
+			userResponse.setRoles(result.getRoles());
+			userResponse.setIsActive(result.getIsActive());
+
+			logger.info(userResponse.toString());
 
 			responseMap.put("error", false);
-			responseMap.put("email", authentication.getName().toString());
-			responseMap.put("message", "User email was checked");
-			responseMap.put("user", user);
+			responseMap.put("message", "User name was checked. User info returned");
+			responseMap.put("user", userResponse);
 
 			return ResponseEntity.ok(responseMap);
 
 		} else {
 			responseMap.put("error", true);
-			responseMap.put("message", "Invalid name");
+			responseMap.put("message", "Invalid user name");
 			return ResponseEntity.status(500).body(responseMap);
 		}
 	}

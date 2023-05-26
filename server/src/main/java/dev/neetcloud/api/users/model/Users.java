@@ -5,6 +5,11 @@ import lombok.*;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
+/**
+ * @author meugenom
+ * @since 2023-05-01
+ */
+
 @Getter
 @Setter
 @ToString
@@ -36,10 +41,10 @@ public class Users {
     private String email;
 
     @Column(name = "roles", nullable = false)
-    private String Roles;
+    private String roles;
 
 	@Column(name = "is_active", nullable = false)
-	private Boolean is_active;
+	private Boolean isActive;
 
 	//constructor
 	public Users(
@@ -52,8 +57,8 @@ public class Users {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.Roles = roles;
-		this.is_active = is_active;
+		this.roles = roles;
+		this.isActive = is_active;
 		this.password = password;
 	}
 
