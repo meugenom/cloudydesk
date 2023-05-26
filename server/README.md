@@ -15,11 +15,16 @@ This project was generated with:
 
 ### **Features**
 - **API**:
-	- **/api/v1/auth/authenticate** return valid JWT Cookie
-	- **/api/v1/auth/register** create a new user and return Auth Response and valid JWT Cookie
-	-**api/v1/users/whoami** check JWT-token and return user credential
-	- **api/v1/users/list** get users list only when user has ROLE_ADMIN
-	- **api/v1/files/ls** get files list for current user
+	- **/api/v1/auth/authenticate** return valid JWT-token
+	- **/api/v1/auth/register** create a new user and return user and valid JWT-token
+	
+    - -**api/v1/users/user** check JWT-token and return user credential
+    - -**api/v1/users/user** put changed info about user
+    -**api/v1/users/user** delete all info about user from the system
+	
+    - **api/v1/users/list** get users list only when user has ROLE_ADMIN
+	- 
+    - **api/v1/files/ls** get files list for current user
 	- **api/v1/files/uploadFile** uploading file to the storage and get file info
 	- **api/v1/files/downloadFile** downloading file from the storage (by web desktop - double click on icon of file)
 	... other in progress
