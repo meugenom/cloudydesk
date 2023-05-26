@@ -1,18 +1,12 @@
 import { AuthStateInterface } from '../models/auth.state.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-//export const authKey = 'auth';
+const authFeatureSelector = createFeatureSelector<AuthStateInterface>('auth');
 
-//const authFeatureSelector = createFeatureSelector<AuthStateInterface>(authKey);
 
-/*
-export const selectUserToken = createSelector(
-    authFeatureSelector,
-    (state) => state.authToken
+// Select actions from the Auth state
+export const selectAuth = createSelector(
+	authFeatureSelector,
+	(state: AuthStateInterface) => state
 );
 
-export const selectUserGetToken = createSelector(
-    selectUserToken,
-    (authToken) => authToken.accessToken
-);
-*/

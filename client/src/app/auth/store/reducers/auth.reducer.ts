@@ -1,86 +1,88 @@
 import {
 	checkUserAction, checkUserFailureAction, checkUserSuccessAction,
-	loginAction, loginFailureAction, loginSuccessAction,
+	authenticateAction, authenticateFailureAction, authenticateSuccessAction,
 	registerAction, registerFailureAction, registerSuccessAction,
-	signOutAction,
-	signOutFailureAction,
-	signOutSuccessAction
+	logoutAction, logoutFailureAction, logoutSuccessAction
 } from '../actions/auth.action';
 import { AuthStateInterface } from "../models/auth.state.model";
 import { Action, createReducer, on } from '@ngrx/store';
+import {User} from '../../user/model/user';
+
 
 const initialState: AuthStateInterface = {
-	authToken: null,
 	isSubmitting: false,
-	email: null
+	user: new User("","","","","", false)
 }
 
 const authReducer = createReducer(
 	initialState,
-	on(loginAction, (state) => ({
+	on(authenticateAction, (state) => ({
 		...state,
 		isSubmitting: false,
+		user: new User("","","","","", false)
+
 	})),
-	on(loginSuccessAction, (state, { currentUser }) => ({
+	on(authenticateSuccessAction, (state, { currentUser }) => ({
 		...state,
 		isSubmitting: true,
-		authToken: currentUser.token,
-		email: currentUser.email
+		user: currentUser
+
 	})),
-	on(loginFailureAction, (state) => ({
+	on(authenticateFailureAction, (state) => ({
 		...state,
-		isSubmitting: false
+		isSubmitting: false,
+		user: new User("","","","","", false)
 	})),
 	on(registerAction, (state) => ({
 		...state,
 		isSubmitting: false,
+		user: new User("","","","","", false)
 	})),
 	on(registerSuccessAction, (state, { currentUser }) => ({
 		...state,
 		isSubmitting: true,
-		authToken: currentUser.token,
-		email: currentUser.email
+		user: currentUser
 	})),
 	on(registerFailureAction, (state) => ({
 		...state,
-		isSubmitting: false
+		isSubmitting: false,
+		user: new User("","","","","", false)
+
 	})),
 	on(checkUserAction, (state) => ({
 		...state,
 		isSubmitting: false,
+		user: new User("","","","","", false)
 	})),
 	on(checkUserSuccessAction, (state, { currentUser }) => ({
 		...state,
 		isSubmitting: true,
-		email: currentUser.email
+		user: currentUser.user
 	})),
 	on(checkUserFailureAction, (state) => ({
 		...state,
 		isSubmitting: false,
-		authToken: null,
-		email: null
+		user: new User("","","","","", false)
+
 	})),
-	on(signOutAction, (state) => ({
+	on(logoutAction, (state) => ({
 		...state,
-		authToken: null,
-		email: null,
-		isSubmitting: false
+		isSubmitting: false,
+		user: new User("","","","","", false)
+
 	})),
-	on(signOutSuccessAction, (state) => ({
+	on(logoutSuccessAction, (state) => ({
 		...state,
-		authToken: null,
-		email: null,
-		isSubmitting: false
+		isSubmitting: false,
+		user: new User("","","","","", false)
 	})),
-	on(signOutFailureAction, (state) => ({
+	on(logoutFailureAction, (state) => ({
 		...state,
-		authToken: null,
-		email: null,
-		isSubmitting: false
+		isSubmitting: false,
+		user: new User("","","","","", false)
 	})),
 
 );
-
 
 
 export function reducer(state: AuthStateInterface, action: Action) {

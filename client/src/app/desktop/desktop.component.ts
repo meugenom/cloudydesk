@@ -48,9 +48,9 @@ export class DesktopComponent {
 		this.email = "unknown"
 
 		//need check our localstorage and find authtoken
-		const  isAuthenticated = this.authService.isAuthenticated();
+		//const  isAuthenticated = this.authService.isAuthenticated();
 		
-		console.log(isAuthenticated);
+		//console.log(isAuthenticated);
 		
 		//if(!isAuthenticated){
 
@@ -69,7 +69,8 @@ export class DesktopComponent {
 
 			if(data.isSubmitting){
 				this.isLoginForm = false;
-				this.email = data.email;
+				this.email = data.user['email'];
+				console.log(data);
 			}else{
 				this.email = "unknown"
 				this.isLoginForm = true;

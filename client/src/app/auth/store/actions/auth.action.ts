@@ -3,11 +3,13 @@ import {
     props
 } from '@ngrx/store';
 
-export const loginAction = createAction('[Auth] Login', props<{ request: any }>());
-export const loginSuccessAction = createAction('[Auth] Login success', props<{currentUser: any}>());
-export const loginFailureAction = createAction('[Auth] Login error', props<{error: any}>());
+import {User} from '../../user/model/user'
 
-export const registerAction = createAction('[Auth] Register', props<{ request: any }>());
+export const authenticateAction = createAction('[Auth] Authenticate', props<{ user: User }>());
+export const authenticateSuccessAction = createAction('[Auth] Authenticate success', props<{currentUser: any}>());
+export const authenticateFailureAction = createAction('[Auth] Authenticate error', props<{error: any}>());
+
+export const registerAction = createAction('[Auth] Register', props<{ user: User }>());
 export const registerSuccessAction = createAction('[Auth] Register success', props<{currentUser: any}>());
 export const registerFailureAction = createAction('[Auth] Register error', props<{error: any}>());
 
@@ -15,6 +17,6 @@ export const checkUserAction = createAction('[Auth] Check User');
 export const checkUserSuccessAction = createAction('[Auth] Check User success', props<{currentUser: any}>());
 export const checkUserFailureAction = createAction('[Auth] Check User error', props<{error: any}>());
 
-export const signOutAction = createAction('[Auth] SignOut', props<{ request: any }>());
-export const signOutSuccessAction = createAction('[Auth] SignOut success', props<{currentUser: any}>());
-export const signOutFailureAction = createAction('[Auth] SignOut error', props<{error: any}>());
+export const logoutAction = createAction('[Auth] SignOut', props<{ request: any }>());
+export const logoutSuccessAction = createAction('[Auth] SignOut success', props<{currentUser: any}>());
+export const logoutFailureAction = createAction('[Auth] SignOut error', props<{error: any}>());

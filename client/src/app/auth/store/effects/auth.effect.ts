@@ -3,8 +3,18 @@ import { AuthService } from '../../services/auth.service';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, map, of, tap } from 'rxjs';
-import { loginAction, loginFailureAction, loginSuccessAction, registerAction, 
-		registerSuccessAction, registerFailureAction, signOutAction, checkUserSuccessAction, checkUserAction, checkUserFailureAction, signOutSuccessAction, signOutFailureAction } from '../actions/auth.action';
+import { 	authenticateAction,
+			authenticateFailureAction,
+			authenticateSuccessAction,
+			registerAction,
+			registerSuccessAction,
+			registerFailureAction,
+			checkUserSuccessAction,
+			checkUserAction,
+			checkUserFailureAction,
+			logoutAction,
+			logoutSuccessAction,
+			logoutFailureAction } from '../actions/auth.action';
 import { NotificationService } from 'src/app/notification/notification.service';
 //import { Router } from '@angular/router';
 
@@ -18,16 +28,16 @@ export class AuthEffect {
 		private ntfService: NotificationService
 	) { }
 
-	login$ = createEffect(() =>
+	authenticate$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(loginAction),
-			map(({ request }) => request),
-			exhaustMap((request) => this.authService.login(request).pipe(
+			ofType(authenticateAction),
+			map(({ user }) => user),
+			exhaustMap((user) => this.authService.authenticate(user).pipe(
 				concatMap(currentUser => [
-					loginSuccessAction({ currentUser }),
+					authenticateSuccessAction({ currentUser }),
 					//loginRedirect()
 				]),
-				catchError(error => of(loginFailureAction({ error })))
+				catchError(error => of(authenticateFailureAction({ error })))
 			)),
 		)
 	);
@@ -35,8 +45,8 @@ export class AuthEffect {
 	register$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(registerAction),
-			map(({ request }) => request),
-			exhaustMap((request) => this.authService.register(request).pipe(
+			map(({ user }) => user),
+			exhaustMap((user ) => this.authService.register(user).pipe(
 				concatMap(currentUser => [
 					registerSuccessAction({ currentUser }),
 					//loginRedirect()
@@ -59,9 +69,9 @@ export class AuthEffect {
 		)
 	);
 
-	loginSuccessAction$ = createEffect(() =>
+	authenticateSuccessAction$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(loginSuccessAction),
+			ofType(authenticateSuccessAction),
 			tap((data) => {
 
 				//console.log(data);
@@ -130,9 +140,9 @@ export class AuthEffect {
 		{ dispatch: false }
 	);
 
-	loginFailureAction$ = createEffect(() =>
+	authenticateFailureAction$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(loginFailureAction),
+			ofType(authenticateFailureAction),
 			tap((data) => {
 
 				//notify id something is wrong
@@ -164,22 +174,22 @@ export class AuthEffect {
 	);
 	*/
 
-	signOutAction$ = createEffect(() =>
+	logoutAction$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(signOutAction),
+			ofType(logoutAction),
 			map(({ request }) => request),
 			exhaustMap((request) => this.authService.logout(request).pipe(
 				concatMap(currentUser => [
-					signOutSuccessAction({ currentUser }),
+					logoutSuccessAction({ currentUser }),
 				]),
-				catchError(error => of(loginFailureAction({ error })))
+				catchError(error => of(authenticateFailureAction({ error })))
 			)),
 		)
 	);
 
-	signOutSuccessAction$ = createEffect(() =>
+	logoutSuccessAction$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(signOutSuccessAction),
+			ofType(logoutSuccessAction),
 			tap((data) => {
 
 				//console.log(data);
@@ -197,7 +207,7 @@ export class AuthEffect {
 
 	signOutFailureAction$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(signOutFailureAction),
+			ofType(logoutFailureAction),
 			tap((data) => {
 
 				//notify id something is wrong
@@ -215,7 +225,4 @@ export class AuthEffect {
 		),
 		{ dispatch: false }
 	);
-	
-
-	
 }
