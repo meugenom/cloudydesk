@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
-public class UserTest {
+public class UsersTest {
 
 	//test create new
 	@Test
@@ -17,5 +17,9 @@ public class UserTest {
 		assertTrue(user.getPassword().equals("password"));
 		assertTrue(user.getRoles().equals("ROLE_USER"));
 		assertTrue(user.getIs_active().equals(true));
+	}
+
+	public static class UsersRepositoryTest {
+
 	}
 }
