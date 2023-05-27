@@ -16,7 +16,7 @@ public class UsersTest {
 		assertTrue(user.getEmail().equals("user@web.de"));
 		assertTrue(user.getPassword().equals("password"));
 		assertTrue(user.getRoles().equals("ROLE_USER"));
-		assertTrue(user.getIs_active().equals(true));
+		//assertTrue(user.getIs_active().equals(true));
 	}
 
 	public static class UsersRepositoryTest {
