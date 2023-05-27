@@ -10,7 +10,7 @@ import {File} from '../models/file.model'
 import { FileState } from "../models/file.state.model";
 import {fileReducer} from './file.reducer'
 
-interface AppState {
+export interface AppState {
   widgetPanel: WidgetPanel;
   navigator: Navigator;
   files: FileState
