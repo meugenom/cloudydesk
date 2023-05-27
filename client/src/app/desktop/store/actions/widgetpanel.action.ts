@@ -4,5 +4,7 @@ export const OpenPanel = createAction('[WidgetPanel Component] OpenPanel',
 	props<{
 		isActive: boolean,
 		isLoginForm: boolean,
-		isRegisterForm: boolean
+		isRegisterForm: boolean,
+		lastAction: string,
+		lastActionDate: Date
 	}>());

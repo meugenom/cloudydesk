@@ -13,6 +13,17 @@ import { checkUserAction} from '../auth/store/actions/auth.action';
 import { FileState } from './store/models/file.state.model';
 import { loadFiles } from './store/actions/file.actions';
 import { Router } from '@angular/router';
+import { 
+	WIDGET_PANEL_INITIAL_STATE,
+	WIDGET_PANEL_OPEN_LOGIN_FORM,
+	WIDGET_PANEL_CLOSE_LOGIN_FORM,
+	WIDGET_PANEL_OPEN_REGISTER_FORM,
+	WIDGET_PANEL_CLOSE_REGISTER_FORM,
+	WIDGET_PANEL_OPEN_LOGOUT_FORM,
+	WIDGET_PANEL_CLOSE_LOGOUT_FORM,
+	WIDGET_PANEL_IS_ACTIVE,
+	WIDGET_PANEL_IS_NOT_ACTIVE
+} from './store/models/widgetpanel.constants'
 
 @Component({
 	selector: 'app-desktop',
@@ -79,7 +90,9 @@ export class DesktopComponent {
 				const widgetpanel: WidgetPanel = {
 					isActive: this.isActive,
 					isLoginForm: this.isLoginForm,
-					isRegisterForm: this.isRegisterForm
+					isRegisterForm: this.isRegisterForm,
+					lastAction: WIDGET_PANEL_OPEN_LOGIN_FORM,
+					lastActionDate: new Date()
 				}
 		
 				this.store.dispatch(OpenPanel(widgetpanel))
@@ -105,10 +118,13 @@ export class DesktopComponent {
 
 	//open widgets panel 
 	openWidgetsPanel(){
+			
 		const widgetpanel: WidgetPanel = {
 			isActive: !this.isActive,
 			isLoginForm: this.isLoginForm,
-			isRegisterForm: this.isRegisterForm
+			isRegisterForm: this.isRegisterForm,
+			lastAction: this.isActive ? WIDGET_PANEL_IS_NOT_ACTIVE : WIDGET_PANEL_IS_ACTIVE,
+			lastActionDate: new Date()
 		}
 
 		this.store.dispatch(
