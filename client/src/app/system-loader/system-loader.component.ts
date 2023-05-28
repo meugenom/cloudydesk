@@ -11,6 +11,10 @@ import { distinctUntilChanged, Subscription } from 'rxjs';
 import { EventQueue, EventData } from './event-queue'; // Import the EventQueue implementation
 import { animate, style, transition, trigger } from '@angular/animations';
 
+/**
+ * @description animation for fade in and fade out
+ * @param enterTransition, leaveTrans, fadeIn, fadeOut
+ */
 const enterTransition = transition(':enter', [
 	style({
 	  opacity: 0
@@ -41,11 +45,14 @@ const enterTransition = transition(':enter', [
 	selector: 'app-progressbar',
 	templateUrl: './system-loader.component.html',
 	styleUrls: ['./system-loader.component.sass'],
+	
+	//animation intercected with the component
 	animations: [
 		fadeIn,
 		fadeOut
 	  ]
 })
+
 export class SystemLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	element: ElementRef;
@@ -54,9 +61,11 @@ export class SystemLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	private subscription: Subscription;
 
-	//for queue
+	/**
+	 * @description EventQueue instance
+	 */
 	queue: EventQueue;
-	currentEvent:  any = { date: '', adapter: '', message: '', isError: false };
+	currentEvent: any = {date: '', adapter: '', message: '', isError: false};
 
 	constructor(
 		public loader: LoaderService,
@@ -64,28 +73,30 @@ export class SystemLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
 		private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface, files: FileState }>
 	) {
 
+		// Instantiate the queue, element and isProgressBar
 		this.queue = new EventQueue(); // Instantiate the queue
-
 		this.element = el.nativeElement;
 		this.isProgressBar = true;
 
 
+		// Subscribe to the store
 		this.subscription = this.store
 			.pipe(
 				select(state => state.auth)
 			)
 			.subscribe(authAction => {
-				console.log(authAction.lastActionDate.toLocaleString('en-GB', { timeZone: 'UTC' }) + ' : ' + authAction.lastAction);
+				console.log(authAction.lastActionDate.toLocaleString('en-GB', {timeZone: 'UTC'}) + ' : ' + authAction.lastAction);
 				this.queue.enqueue(
 					authAction.lastAction,
 					authAction.lastActionDate
 				);
-				if (!this.interval) {										
+				if (!this.interval) {
 					this.startTimer();
 					this.isProgressBar = true;
 				}
 			});
-
+		
+		// Subscribe to the store
 		this.subscription.add(
 			this.store
 				.pipe(
@@ -93,7 +104,7 @@ export class SystemLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
 					distinctUntilChanged()
 				)
 				.subscribe(widgetPanel => {
-					console.log(widgetPanel.lastActionDate.toLocaleString('en-GB', { timeZone: 'UTC' }) + ' : ' + widgetPanel.lastAction);
+					console.log(widgetPanel.lastActionDate.toLocaleString('en-GB', {timeZone: 'UTC'}) + ' : ' + widgetPanel.lastAction);
 					this.queue.enqueue(
 						widgetPanel.lastAction,
 						widgetPanel.lastActionDate
@@ -107,8 +118,14 @@ export class SystemLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	}
 
-	startTimer() {
+	//TODO: add possibility to turn off/on in the app settings
 
+	/**
+	 * @description function to start the timer
+	 * @return void
+	 * @param void
+	 */
+	startTimer() {
 
 		let index = 1;
 
@@ -129,17 +146,22 @@ export class SystemLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
 						console.log(index)
 
 						if (!this.queue.isEmpty() && this.interval) {
-							
+
 							let event: any = this.queue.dequeue();
 							let tokens = this.getTokens(event.event);
 							console.log(tokens);
-							this.currentEvent = 
-							{ date: 	event.date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
-							, adapter: 	tokens.adapter
-							, message: 	tokens.message
-							, isError: 	tokens.isError 
-							};
-							
+							this.currentEvent =
+								{
+									date: event.date.toLocaleTimeString('en-US', {
+										hour: '2-digit',
+										minute: '2-digit',
+										second: '2-digit'
+									})
+									, adapter: tokens.adapter
+									, message: tokens.message
+									, isError: tokens.isError
+								};
+
 						}
 					}
 				}
@@ -150,21 +172,28 @@ export class SystemLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
 				this.isProgressBar = false;
 				this.pauseTimer()
-				this.currentEvent = { date: '', adapter: '', message: '', isError: false };
-				
+				this.currentEvent = {date: '', adapter: '', message: '', isError: false};
+
 			}
 		}, 80) //multiply by 10 = 0,8s
 	}
 
+	/**
+	 * @description function to pause the timer
+	 * @return void
+	 */
 	pauseTimer() {
 		clearInterval(this.interval);
 		this.interval = null;
 	}
 
 	ngAfterViewInit(): void { }
-
 	ngOnInit(): void { }
 
+	/**
+	 * @description function to destroy the component
+	 * @return void
+	 */
 	ngOnDestroy(): void {
 
 		// Unsubscribe to prevent memory leaks
@@ -172,15 +201,18 @@ export class SystemLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
 		this.pauseTimer();
 	}
 
-	//static function to devide string txt to parts adapter, message, isError
+	/**
+	 * @description function to devide string txt to parts adapter, message, isError
+	 * @param txt to tokenize
+	 * @return Object {adapter: string , message: string, isError: boolean}
+	 */
 	getTokens(txt: string) {
 		//match in the string all the words between '[]'
 		let adapter = txt.split(/(?<=\[)(.*?)(?=\])/g)[1];
 		//match i the string all the words after '[]'
-		let message = txt.split(/(?<=\[)(.*?)(?=\])/g)[2].replace(']','');
+		let message = txt.split(/(?<=\[)(.*?)(?=\])/g)[2].replace(']', '');
 		//match in the message word Failed
 		let isError = message.match(/Failed/gi) ? true : false;
-		return { adapter: adapter , message: message, isError: isError};
+		return {adapter: adapter, message: message, isError: isError};
 	}
 }
-

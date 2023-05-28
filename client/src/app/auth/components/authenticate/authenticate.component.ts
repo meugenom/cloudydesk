@@ -28,17 +28,20 @@ export class AuthenticateComponent implements OnInit {
 
 	}
 
+	/**
+	 * @description Authenticate user
+	 * @param addForm 
+	 * @returns void
+	 */
 	public authenticateUser(addForm: NgForm): void {
 
 		const user = new User("", "", "", "", "", true);
 
 		user.setEmail(addForm.value.email);
 		user.setPassword(addForm.value.password);
-		//user.setIsActive(true);
-		//user.setRoles("ROLE_USER")
+		//console.log(user);
 
-		console.log(user);
-
+		// Dispatch action to the store
 		this.store.dispatch(authenticateAction({ user }));
 	}
 
