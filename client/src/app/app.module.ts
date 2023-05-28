@@ -64,6 +64,7 @@ import { NotificationService } from './notification/notification.service';
 import { MobileComponent } from './mobile/mobile.component';
 
 import { NgxEditorModule } from 'ngx-editor';
+import { FileMenuComponent } from './file-menu/file-menu.component';
 
 
 @NgModule({
@@ -89,7 +90,8 @@ import { NgxEditorModule } from 'ngx-editor';
 		ClockComponent,
 		UploadingComponent,
   		NotificationComponent,
-    MobileComponent
+    MobileComponent,
+    FileMenuComponent
 	],
 	imports: [
 		AppRoutingModule,

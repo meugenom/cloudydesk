@@ -25,42 +25,8 @@ export class EditorComponent implements OnInit, OnDestroy {
 		['text_color', 'background_color'],
 		['link', 'image'],       
 		['align_left', 'align_center', 'align_right', 'align_justify'],  ];
-	
-	showFileMenu = false;
-	showEditMenu = false;
-	showViewMenu = false;
-	showHelpMenu = false;
 
 	constructor() {
-	}
-
-	togleMenu(param: string) {
-		if(param == "file"){
-			this.showFileMenu = !this.showFileMenu;
-			this.showEditMenu = false;
-			this.showViewMenu = false;
-			this.showHelpMenu = false;	
-		}
-		if(param == "edit"){
-			this.showEditMenu = !this.showEditMenu;
-			this.showFileMenu = false;
-			this.showViewMenu = false;
-			this.showHelpMenu = false;	
-		}
-
-		if(param == "view"){
-			this.showViewMenu = !this.showViewMenu;
-			this.showFileMenu = false;
-			this.showEditMenu = false;
-			this.showHelpMenu = false;	
-		}
-
-		if(param == "help"){
-			this.showHelpMenu = !this.showHelpMenu;
-			this.showFileMenu = false;
-			this.showEditMenu = false;
-			this.showViewMenu = false;	
-		}
 	}
 
 	form = new FormGroup({
@@ -82,14 +48,5 @@ export class EditorComponent implements OnInit, OnDestroy {
 	ngOnDestroy(): void {
 		this.editor.destroy();
 	  }
-
-	openFile() {
-	}
-
-	editFile() {
-	}
-
-	saveFile() {
-	}
 
 }
