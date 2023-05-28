@@ -5,22 +5,36 @@ import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/co
 	templateUrl: './camera.component.html',
 	styleUrls: ['./camera.component.sass']
 })
-export class CameraComponent implements OnInit {
-
+export class CameraComponent implements OnInit, OnDestroy {
 	@ViewChild('videoElement') videoElement: ElementRef | any;
 	videoWidth = 0;
 	videoHeight = 0;
 
 	constructor() { }
-
+	
+	/**
+	 * @description Start the camera when loading the page
+	 * @memberof CameraComponent
+	 * @returns {void}
+	 */
 	ngOnInit(): void {
 		this.startCamera();
 	}
 
+	/**
+	 * @description Stop the camera when leaving the page
+	 * @memberof CameraComponent
+	 * @returns {void}
+	 */
 	ngOnDestroy(): void {
 		this.videoElement.nativeElement.srcObject.getTracks()[0].stop();
 	}
 
+	/**
+	 * @description Start the camera
+	 * @memberof CameraComponent
+	 * @returns {void}
+	 */
 	startCamera() {
 		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 			navigator.mediaDevices.getUserMedia({ video: true })
@@ -32,6 +46,12 @@ export class CameraComponent implements OnInit {
 		}
 	}
 
+	/**
+	 * @description When the video is loaded, get the video width and height
+	 * @param metadata: any
+	 * @memberof CameraComponent
+	 * @returns {void}
+	 */
 	onVideoLoaded(metadata: any) {
 		this.videoWidth = metadata.target.videoWidth;
 		this.videoHeight = metadata.target.videoHeight;
