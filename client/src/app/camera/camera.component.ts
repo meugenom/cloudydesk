@@ -11,6 +11,10 @@ export class CameraComponent implements OnInit, OnDestroy {
 	videoHeight = 0;
 
 	constructor() { }
+
+	//TODO: Add a button to take a picture and save it locally
+	//TODO: Add a button to start and stop the camera
+	//TODO: Add a possibility to share the video stream with another user 
 	
 	/**
 	 * @description Start the camera when loading the page
