@@ -137,7 +137,8 @@ module.exports = (function () {
   };
 
   var TerminalConstructor = function (containerId) {
-    let terminalObj = this;
+    
+	let terminalObj = this;
 
     this.html = document.createElement("div");
     this.html.className = "Terminal";
@@ -285,4 +286,5 @@ module.exports = (function () {
   };
 
   return TerminalConstructor;
+
 })();
