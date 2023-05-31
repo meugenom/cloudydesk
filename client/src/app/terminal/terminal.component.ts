@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, HostListener, ViewEncapsulation } from '@angular/core';
-import * as Terminal from './terminal-core';
+import { Terminal } from './terminal';
 
 @Component({
 	encapsulation: ViewEncapsulation.None,
@@ -17,10 +17,11 @@ export class TerminalComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
+		//const term = new Terminal('term');
 		const term = new Terminal('term');
 		term.promptText = "/user> ";
 		term.setTextColor("white");
-		term._cursor.style.background = "white"
+		term.cursor.style.background = "white"
 		term.input(``);
 		term._inputLine.textContent = term.promptText;
 
