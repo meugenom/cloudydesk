@@ -1,3 +1,10 @@
+/**
+ * Event Queue class for the system loader module to handle events in the system loader module
+ * uses FIFO (First In First Out) method to handle events
+ * @class EventQueue 
+ * 
+ */
+
 export interface EventData {
 	event: string;
 	date: Date;

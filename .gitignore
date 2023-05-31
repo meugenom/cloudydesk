@@ -8,3 +8,4 @@ docker/Dockerfile.nginx
 tmp
 
 docker/publish.txt
+client/target/npmlist.json

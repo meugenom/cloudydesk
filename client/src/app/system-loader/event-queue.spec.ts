@@ -1,3 +1,8 @@
+/**
+ * This class is used to test the event queue
+ */
+
+
 import { EventQueue, EventData } from './event-queue';
 
 /**
