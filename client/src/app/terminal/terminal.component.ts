@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, HostListener, ViewEncapsulation } from '@angular/core';
 import { Terminal } from './terminal';
+//import * as Terminal from './terminal-core'; //this is not working //old code for js terminal
 
 @Component({
 	encapsulation: ViewEncapsulation.None,
