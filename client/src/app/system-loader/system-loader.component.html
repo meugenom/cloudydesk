@@ -1,0 +1,36 @@
+<!-- this is for preloading with loading service and http interceptor 
+	<div *ngIf="!this.loader.getLoading()" class="loading-container">
+-->
+<!--it's only for first preloading -->
+<div class="rocket" *ngIf="isProgressBar" @fadeIn @fadeOut>
+  <!-- add svg file by link-->
+  <!-- TODO: add svg animations with rocket and astronaut by current events -->
+  <img src="../../assets/rocket.svg" alt="rocket" />
+
+</div>
+
+<div id="progressbar-container" *ngIf="isProgressBar" @fadeIn @fadeOut>
+  <input type="checkbox" id="progressbar-water" />
+  <label id="progressbar-label" for="progressbar-water">
+    <div id="fill-water"></div>
+  </label>
+  <span id="progress">0%</span>
+</div>
+<div class="event-container">
+  <div class="event-block" *ngIf="currentEvent">
+    <span class="event-text">
+      <span class="event-time flush-span">
+        {{ currentEvent.date }}
+      </span>
+      <span class="event-adapter flush-span">
+        {{ currentEvent.adapter }}
+      </span>
+      <span class="event-message flush-span" *ngIf="!currentEvent.isError">
+        {{ currentEvent.message }}
+      </span>
+      <span class="event-message-error flush-span" *ngIf="currentEvent.isError">
+        {{ currentEvent.message }}
+      </span>
+    </span>
+  </div>
+</div>

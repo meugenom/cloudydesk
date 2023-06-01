@@ -8,12 +8,22 @@ import { map, share } from "rxjs/operators";
   templateUrl: './clock.component.html',
   styleUrls: ['./clock.component.sass']
 })
+
 export class ClockComponent  implements OnInit, OnDestroy  {
 
   	rxTime = new Date();
-  	intervalId: any | undefined;
+  	intervalId: number | undefined;
   	subscription: Subscription | undefined;
 
+	//TODO: Add a possibility to change the time format (12h or 24h)
+	//TODO: Add a possibility to change the time zone
+	//TODO: Integrate the settings of the clock to the settings of the app
+
+	/**
+	 * @description Start the clock when loading the page
+	 * @memberof ClockComponent
+	 * @returns {void}
+	 */
 	ngOnInit() {
 
 		// Using RxJS Timer
@@ -26,7 +36,12 @@ export class ClockComponent  implements OnInit, OnDestroy  {
 			this.rxTime = time;
 		  });
 	  }
-	
+	  
+	  /**
+	   * @description Stop the clock when leaving the page
+	   * @memberof ClockComponent
+	   * @returns {void}
+	   */
 	  ngOnDestroy() {
 		clearInterval(this.intervalId);
 		if (this.subscription) {

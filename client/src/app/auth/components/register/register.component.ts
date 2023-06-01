@@ -2,6 +2,7 @@ import { AuthService } from '../../services/auth.service';
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { registerAction } from '../../store/actions/auth.action';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import {User} from '../../user/model/user'
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -40,19 +41,18 @@ export class RegisterComponent implements OnInit {
 
 	public registerUser(addForm: NgForm): void {
 
-		//		console.log(userName);
-
-		const request: any = {
-			firstName: addForm.value.firstName,
-			lastName: addForm.value.lastName,
-			email: addForm.value.email,
-			password: addForm.value.password,
-			roles: "ROLE_USER"
-		}
+		const user = new User(
+			addForm.value.firstName,
+			addForm.value.lastName,
+			addForm.value.email,
+			addForm.value.password,
+			"ROLE_USER",
+			true);
 		
-		this.store.dispatch(registerAction({ request }));
+		this.store.dispatch(registerAction({ user }));
 
 	}
+
 	/*
 	getSomething() {
 		this.authService.getSomething().subscribe(data => {

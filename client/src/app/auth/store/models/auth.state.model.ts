@@ -1,5 +1,7 @@
+import {User} from '../../user/model/user';
 export interface AuthStateInterface {
-    authToken: any,
 	isSubmitting: boolean,
-	email: any
+	user: User,
+	lastAction: string,
+	lastActionDate: Date
 }

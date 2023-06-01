@@ -3,7 +3,10 @@ import { Store } from '@ngrx/store';
 import { WidgetPanel } from '../desktop/store/models/widgetpanel.model';
 import { AuthStateInterface } from '../auth/store/models/auth.state.model'
 import { OpenPanel } from '../desktop/store/actions/widgetpanel.action';
-import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
+import {
+	WIDGET_PANEL_OPEN_LOGIN_FORM,
+	WIDGET_PANEL_OPEN_REGISTER_FORM,	
+} from '../desktop/store/models/widgetpanel.constants'
 
 
 @Component({
@@ -30,13 +33,12 @@ export class WidgetPanelComponent implements OnInit {
 			//console.log(data);
 			this.isActive = data.isActive;
 			this.isLoginForm = data.isLoginForm;
-			this.isRegisterForm = data.isRegisterForm
+			this.isRegisterForm = data.isRegisterForm;
 		})
 
 		store.select('auth').subscribe(data => {
 			
-			console.log(data);
-
+			//console.log(data);
 			this.isSubmitting = data.isSubmitting;
 
 			if (this.isSubmitting) {
@@ -53,7 +55,9 @@ export class WidgetPanelComponent implements OnInit {
 		const widgetpanel: WidgetPanel = {
 			isActive: this.isActive,
 			isLoginForm: this.isLoginForm,
-			isRegisterForm: this.isRegisterForm
+			isRegisterForm: this.isRegisterForm,
+			lastAction: WIDGET_PANEL_OPEN_REGISTER_FORM,
+			lastActionDate: new Date()
 		}
 
 		this.store.dispatch(
@@ -69,7 +73,9 @@ export class WidgetPanelComponent implements OnInit {
 		const widgetpanel: WidgetPanel = {
 			isActive: this.isActive,
 			isLoginForm: this.isLoginForm,
-			isRegisterForm: this.isRegisterForm
+			isRegisterForm: this.isRegisterForm,
+			lastAction: WIDGET_PANEL_OPEN_LOGIN_FORM,
+			lastActionDate: new Date()
 		}
 
 		this.store.dispatch(
@@ -80,5 +86,4 @@ export class WidgetPanelComponent implements OnInit {
 	ngOnInit(): void {
 
 	}
-
 }

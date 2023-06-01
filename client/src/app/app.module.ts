@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -13,10 +15,14 @@ import { TaskbarComponent } from './taskbar/taskbar.component';
 import { FinderComponent } from './finder/finder.component';
 import { DrawComponent } from './draw/draw.component';
 import { TerminalComponent } from './terminal/terminal.component';
-import { EditorComponent } from './editor/editor.component';
+
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
+
 import { FileListModule } from './file-list/file-list.module';
+
+import { EditorComponent } from './editor/editor.component';
+
 
 //global values
 import { Globals } from './global';
@@ -30,7 +36,7 @@ import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { ContextMenuService } from './context-menu/context-menu.service';
 
 //spinner
-import { ProgressbarComponent } from './progressbar/progressbar.component';
+import { SystemLoaderComponent } from './system-loader/system-loader.component';
 
 //loading interceptor
 import { LoadingInterceptor } from './loader/loading.interceptor';
@@ -43,9 +49,9 @@ import { environment } from '../environments/environment'; // Angular CLI enviro
 import { AuthModule } from './auth/auth.module';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpConfigInterceptor } from './auth/interceptors/httpconfig.interceptor';
-import { LoginComponent } from './auth/components/login/login.component';
+import { AuthenticateComponent } from './auth/components/authenticate/authenticate.component';
 import { RegisterComponent } from './auth/components/register/register.component';
-import { SignoutComponent } from './auth/components/signout/signout.component';
+import { LogoutComponent } from './auth/components/logout/logout.component';
 import { AuthGuard } from './auth/services/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DesktopModule } from './desktop/desktop.module';
@@ -56,6 +62,9 @@ import { uploadingModule } from './uploading/uploading.module';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
 import { MobileComponent } from './mobile/mobile.component';
+
+import { NgxEditorModule } from 'ngx-editor';
+import { FileMenuComponent } from './file-menu/file-menu.component';
 
 
 @NgModule({
@@ -72,20 +81,22 @@ import { MobileComponent } from './mobile/mobile.component';
 		SettingsComponent,
 		ModComponent,
 		ContextMenuComponent,
-		ProgressbarComponent,
-		LoginComponent,
+		SystemLoaderComponent,
+		AuthenticateComponent,
 		RegisterComponent,
-		SignoutComponent,
+		LogoutComponent,
 		UploadingDirective,
 		WidgetPanelComponent,
 		ClockComponent,
 		UploadingComponent,
   		NotificationComponent,
-    MobileComponent
+    MobileComponent,
+    FileMenuComponent
 	],
 	imports: [
 		AppRoutingModule,
 		BrowserModule,
+		BrowserAnimationsModule,
 		HttpClientModule,
 		FileListModule,
 		uploadingModule,
@@ -99,6 +110,7 @@ import { MobileComponent } from './mobile/mobile.component';
 			autoPause: true, // Pauses recording actions and state changes when the extension window is not open
 		}),
 		EffectsModule.forRoot([]),
+		NgxEditorModule
 	],
 	providers: [ModService, Globals, ContextMenuService,
 		//{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },

@@ -1,2 +1,6 @@
-<div class="window-navbar"></div>
-<div class="window-body item-container"></div>
+<!--
+	<div class="window-navbar"></div>
+-->
+<div class="window-body item-container video-container">
+	<video #videoElement (loadedmetadata)="onVideoLoaded($event)"></video>
+</div>

@@ -1,0 +1,16 @@
+<div class="authenticate-container">
+	<form class="login-form" #addForm="ngForm" (ngSubmit)="authenticateUser(addForm)">
+		<div class="form-head">
+			<img class="form-head-icon" src="../../../../assets/img/user.svg" alt="user-icon"/>
+		</div>
+		<label class="form-label" for="email">Email</label>
+		<div class="form-group">
+		   <input 	type="text" ngModel name="email" class="form-control" id="email" placeholder="email">
+		</div>
+		<label class="form-label" for="password">Password</label>
+		<div class="form-group">
+			<input type="password" ngModel name="password" class="form-control" id="password" placeholder="your password" required>
+		 </div>
+		   <button [disabled]="addForm.invalid" type="submit" class="btn-authenticate-primary" >Login</button>
+		</form>
+</div>

@@ -1,3 +1,17 @@
 <div class="window-body-editor">
-	
+	<div class="editor">
+		<app-file-menu></app-file-menu>
+		<form [formGroup]="form">
+			<div class="editor">
+				<ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+				<ngx-editor [editor]="editor" formControlName="editorContent">
+				</ngx-editor>
+			</div>
+		</form>
+	</div>
+	<div class="editor-footer">		
+		<span class="editor-footer-item-count">50 words</span>
+		<span class="editor-footer-seperator" style="display: inline;">|</span>
+		<span class="editor-footer-selected-items-count" style="display: inline;">saved</span>
+	</div>
 </div>

@@ -1,0 +1,27 @@
+<div class="menu">
+	<button class="menu-button" (click)="togleMenu('file')">File</button>
+	<div class="menu-dropdown menu-dropdown-file" *ngIf="showFileMenu">
+		<div class="menu-item">New</div>
+		<div class="menu-item" (click)="openFile()">Open</div>
+		<div class="menu-item" (click)="saveFile()">Save as</div>
+		<div class="menu-item">Export ...</div>
+		<div class="menu-item">Close</div>
+	  </div>
+	<button class="menu-button" (click)="togleMenu('edit')">Edit</button>
+	<div class="menu-dropdown menu-dropdown-edit" *ngIf="showEditMenu">
+		<div class="menu-item">Undo</div>
+		<div class="menu-item">Copy</div>
+		<div class="menu-item">Paste</div>
+		<div class="menu-item">Find</div>
+	  </div>
+	<button class="menu-button" (click)="togleMenu('view')">Edit</button>
+	<div class="menu-dropdown menu-dropdown-view" *ngIf="showViewMenu">
+		<div class="menu-item">Zoom In</div>
+		<div class="menu-item">Zoom Out</div>
+	  </div>
+	<button class="menu-button" (click)="togleMenu('help')">Help</button>
+	<div class="menu-dropdown menu-dropdown-help" *ngIf="showHelpMenu">
+		<div class="menu-item">About</div>
+		<div class="menu-item">Version</div>
+	  </div>
+</div>
