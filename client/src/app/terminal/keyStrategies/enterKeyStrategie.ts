@@ -5,7 +5,8 @@ import { Terminal } from '../terminal';
 import { ShouldClearTerminal } from './keyTokens/shouldClearTerminal';
 import { ShouldHelpInfo } from './keyTokens/shouldHelpInfo';
 
-export class EnterKeyStrategy extends KeyStrategy {
+export class EnterKeyStrategy implements KeyStrategy {
+
 
 	execute(terminal: Terminal, e: KeyboardEvent) {
 		// Implement the logic for handling "Enter" key
@@ -16,24 +17,51 @@ export class EnterKeyStrategy extends KeyStrategy {
 		//console.log(textContent.split(">")[1]);
 		const commandText = textContent.split(">")[1].trim(); //removes whitespaces from the start and end of the string
 
-		// clear terminal
-		if ( commandText == 'clear') {
-			
-			//clear terminal
-			console.log('clear');
-			new ShouldClearTerminal().exec(terminal);
-		
-		// help about commands
-		} else if (commandText == 'help') {
-			//print help info
-			new ShouldHelpInfo(terminal);
-		
-		//without commands (empty)
-		} else {
-			//enter on new line
-			terminal.print(terminal._inputLine.textContent);
-			terminal._inputLine.textContent = terminal.promptText;
-			terminal.scrollBottom();
+		switch (commandText) {
+			case 'clear' :
+				//clear terminal
+				console.log('clear');
+				new ShouldClearTerminal().exec(terminal);
+				break;
+			case 'help':
+				//print help info
+				new ShouldHelpInfo(terminal);
+				break;
+			case 'ls':
+				//list files
+				console.log('ls');
+				
+				if(terminal.files != null){
+					//print files
+					//console.log(terminal.files);
+
+					//generate string from names of files
+					let filesString = "";
+					terminal.files.forEach((file) => {
+						filesString += file.name + "   ";
+					});					
+					
+					terminal.print(terminal._inputLine.textContent, 'white');
+					terminal._inputLine.textContent = terminal.promptText;
+					terminal.print(filesString, 'deepskyblue');
+				}
+
+				terminal.scrollBottom();
+
+				break;
+			case '':
+				terminal.print(terminal._inputLine.textContent, 'white');
+				terminal._inputLine.textContent = terminal.promptText;
+				terminal.scrollBottom();	
+				break;
+			default:
+				terminal.print(terminal._inputLine.textContent, 'white');
+				terminal._inputLine.textContent = terminal.promptText;
+				terminal.print("Error: Command not found: ", 'red');
+				terminal.scrollBottom();
+				break;
 		}
+
+
 	}
 }

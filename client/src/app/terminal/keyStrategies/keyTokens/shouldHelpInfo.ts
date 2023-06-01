@@ -2,20 +2,22 @@ import { Terminal } from '../../terminal';
 
 export class ShouldHelpInfo{
 
-	constructor(terminal: Terminal) {		
-		
-		terminal.print('cat <read file>');
-		terminal.print('clear <clear terminal>');
-		terminal.print('cd <change directory>');
-		terminal.print('help <help info>');
-		terminal.print('ls <list files>');
-		terminal.print('mkdir <make directory>');
-		terminal.print('pwd <print working directory>');
-		terminal.print('rm <remove file>');		
-		terminal.print('rmdir <remove directory>');
-		terminal.print('touch <create file>');
-		
+	constructor(terminal: Terminal) {
+
+		terminal.print(terminal._inputLine.textContent, 'white');
 		terminal._inputLine.textContent = terminal.promptText;
+		
+		terminal.print('cat <filename> - read file', 'lightgreen');
+		terminal.print('clear - clear terminal', 'lightgreen');
+		terminal.print('cd <..> - change directory', 'lightgreen');
+		terminal.print('help - help info', 'lightgreen');
+		terminal.print('ls - list files', 'lightgreen');
+		terminal.print('mkdir <dir> - make new directory', 'lightgreen');
+		terminal.print('pwd - print working directory', 'lightgreen');
+		terminal.print('rm <filename> - remove file', 'lightgreen');		
+		terminal.print('rmdir - remove directory', 'lightgreen');
+		terminal.print('touch - create file', 'lightgreen');
+		
 		terminal.scrollBottom();
 	}
 }
