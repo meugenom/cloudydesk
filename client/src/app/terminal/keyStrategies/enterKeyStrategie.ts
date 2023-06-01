@@ -1,34 +1,39 @@
 import { KeyStrategy } from './keyStrategie';
 import { Terminal } from '../terminal';
 
+//tokens
+import { ShouldClearTerminal } from './keyTokens/shouldClearTerminal';
+import { ShouldHelpInfo } from './keyTokens/shouldHelpInfo';
+
 export class EnterKeyStrategy extends KeyStrategy {
+
 	execute(terminal: Terminal, e: KeyboardEvent) {
 		// Implement the logic for handling "Enter" key
 		console.log('enter key');
 		e.preventDefault();
 
-		//COMMAND 'clear'
-		if (terminal._inputLine.textContent == terminal.promptText + 'clear') {
+		const textContent = terminal._inputLine.textContent.trim(); //removes whitespaces from the end		
+		//console.log(textContent.split(">")[1]);
+		const commandText = textContent.split(">")[1].trim(); //removes whitespaces from the start and end of the string
 
-			//if we have not something to remove
-			if (document.getElementsByClassName('Terminal')[0].childNodes.length == 2) {
-				//console.log(document.getElementsByClassName('Terminal')[0].childNodes[0].childNodes[0].childNodes[0])
-				let length = document.getElementsByClassName('Terminal')[0].childNodes[0].childNodes[0].childNodes.length;
-				while (length > 0) {
-					document.getElementsByClassName('Terminal')[0].childNodes[0].childNodes[0].childNodes[0].remove();
-					length = document.getElementsByClassName('Terminal')[0].childNodes[0].childNodes[0].childNodes.length;
-				}
-			}
-
-			terminal._inputLine.textContent = terminal.promptText;
-			terminal.scrollBottom();
-
+		// clear terminal
+		if ( commandText == 'clear') {
+			
+			//clear terminal
+			console.log('clear');
+			new ShouldClearTerminal().exec(terminal);
+		
+		// help about commands
+		} else if (commandText == 'help') {
+			//print help info
+			new ShouldHelpInfo(terminal);
+		
+		//without commands (empty)
 		} else {
-
+			//enter on new line
 			terminal.print(terminal._inputLine.textContent);
 			terminal._inputLine.textContent = terminal.promptText;
 			terminal.scrollBottom();
 		}
-		//
 	}
 }

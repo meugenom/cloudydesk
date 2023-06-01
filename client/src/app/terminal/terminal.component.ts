@@ -2,6 +2,11 @@ import { AfterViewInit, Component, ElementRef, OnInit, HostListener, ViewEncapsu
 import { Terminal } from './terminal';
 //import * as Terminal from './terminal-core'; //this is not working //old code for js terminal
 
+import { Store } from '@ngrx/store';
+import { WidgetPanel } from '../desktop/store/models/widgetpanel.model';
+import { AuthStateInterface } from '../auth/store/models/auth.state.model';
+import { FileState } from '../desktop/store/models/file.state.model';
+
 @Component({
 	encapsulation: ViewEncapsulation.None,
 	selector: 'app-terminal',
@@ -10,21 +15,37 @@ import { Terminal } from './terminal';
 })
 export class TerminalComponent implements OnInit, AfterViewInit {
 
-	constructor(private element: ElementRef) {
+	private email: String;
+
+	constructor(
+		private element: ElementRef,
+		private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface, file: FileState }>,
+	) {
+		this.email = "";
 	}
 
 	ngOnInit(): void {
-
 	}
 
 	ngAfterViewInit() {
+
+
+		//get name from store
+		let user = this.store.select(store => store.auth.user);
+		if (user != null) {
+			user.subscribe(data => {
+				if (data.getEmail() != null) {
+					this.email = data.getEmail();
+				}
+			});
+		}
+
+		// create terminal
 		const term = new Terminal('term');
-		term.promptText = "/user> ";
+		term.promptText = "/" + (this.email.length == 0 ? "user" : this.email) + "> ";
 		term.setTextColor("white");
-		term.cursor.style.background = "white"
+		term.cursor.style.background = "white";
 		term.input(``);
 		term._inputLine.textContent = term.promptText;
-
 	}
-
 }

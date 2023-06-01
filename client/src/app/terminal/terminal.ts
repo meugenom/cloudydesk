@@ -43,7 +43,7 @@ export class Terminal extends TerminalPrompt{
 		
 		this.setBackgroundColor("black")
 		this.setTextColor("white")
-		this.setTextSize("1em")
+		this.setTextSize("1.1em")
 		this.setWidth("100%")
 		this.setHeight("100%");
 		
@@ -51,11 +51,11 @@ export class Terminal extends TerminalPrompt{
 		this.html.style.margin = "0";
 		this.html.style.overflow = "auto";
 		this.html.style.whiteSpace = "pre";
-		this.innerWindow.style.padding = "10px";
+		this.innerWindow.style.padding = "5px";
 		this._input.style.margin = "0";
 		this.output.style.margin = "0";
 		this.cursor.style.background = "white";
-		this.cursor.innerHTML = "C"; //put something in the cursor..
+		this.cursor.innerHTML = "_"; //put something in the cursor..
 		this.cursor.style.display = "none"; //then hide it
 		this._input.style.display = "none";
 
@@ -89,7 +89,7 @@ export class Terminal extends TerminalPrompt{
 			} else {
 				this.cursor.style.visibility = "visible";
 			}
-		}, 500);
+		}, 400);
 	};
 
 	public scrollBottom() {
@@ -97,7 +97,7 @@ export class Terminal extends TerminalPrompt{
 	};
 
 	public print(message: string) {
-		console.log('new stroke created '+ message);
+		//console.log('new stroke created '+ message);
 		var newLine = document.createElement("div");
 		newLine.textContent = message;
 		this.output.appendChild(newLine);
