@@ -97,6 +97,7 @@ export class Terminal extends TerminalPrompt{
 	};
 
 	public print(message: string) {
+		console.log('new stroke created '+ message);
 		var newLine = document.createElement("div");
 		newLine.textContent = message;
 		this.output.appendChild(newLine);
