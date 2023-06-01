@@ -53,7 +53,7 @@ export class Terminal extends TerminalPrompt{
 		
 		this.setBackgroundColor("black")
 		this.setTextColor("white")
-		this.setTextSize("1.1em")
+		this.setTextSize("0.9em")
 		this.setWidth("100%")
 		this.setHeight("100%");
 		

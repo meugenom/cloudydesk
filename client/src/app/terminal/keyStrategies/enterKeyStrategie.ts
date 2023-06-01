@@ -6,6 +6,7 @@ import { ShouldClearTerminal } from './keyTokens/shouldClearTerminal';
 import { ShouldHelpInfo } from './keyTokens/shouldHelpInfo';
 import { ShouldListFiles } from './keyTokens/shouldListFiles';
 import { ShouldUserInfo } from './keyTokens/shouldUserInfo';
+import { ShouldSystemInfo } from './keyTokens/shouldSystemInfo';
 
 export class EnterKeyStrategy implements KeyStrategy {
 
@@ -37,6 +38,12 @@ export class EnterKeyStrategy implements KeyStrategy {
 				//print user info
 				new ShouldUserInfo(terminal);
 				break
+			case 'uname':
+
+				//print system info
+				new ShouldSystemInfo(terminal);
+				
+				break;
 			case '':
 				terminal.print(terminal._inputLine.textContent, 'white');
 				terminal._inputLine.textContent = terminal.promptText;
