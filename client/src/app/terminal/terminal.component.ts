@@ -86,16 +86,30 @@ export class TerminalComponent implements OnInit, AfterViewInit {
 
 	putFiles(files : any){
 		if(this.term != undefined){
-			this.term.files = files;
+			if(files){
+				this.term.files = files;
+			}else{
+				this.term.files = undefined;
+			}
+			
 		}
+
+		return this.term;
 	};
 
 	putUser(user : any){
-		if(this.term != undefined){
-			this.term.auth = user;
-			this.term.promptText = "/" + user['email'] + "> ";
-
-
+		if(this.term != undefined){			
+			if(user.email.length > 0){
+				this.term.auth = user;
+				this.term.promptText = "/" + user['email'] + "> ";
+				this.term._inputLine.textContent = this.term.promptText;
+				this.term.scrollBottom();
+			} else {
+				this.term.auth = undefined;
+				this.term.promptText = "/" + 'user' + "> ";
+				this.term._inputLine.textContent = this.term.promptText;
+				this.term.scrollBottom();
+			}
 		}
 	}
 
