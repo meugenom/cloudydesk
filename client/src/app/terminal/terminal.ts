@@ -1,5 +1,9 @@
 import { TerminalPrompt } from './terminal-prompt'
 
+import { User } from '../auth/user/model/user';
+import { File } from '../desktop/store/models/file.model';
+
+
 export class Terminal extends TerminalPrompt{
 
 	//decalre a variable to hold the terminal
@@ -14,12 +18,18 @@ export class Terminal extends TerminalPrompt{
 	public shouldBlinkCursor: any;
 	public cursorTimer: any;
 
+	public auth: User| undefined;
+	public files: File[]| undefined;
+
+	
+
 	//constructor
-	constructor(containerId: string) {
+	constructor(
+		containerId: string
+		) {
 		
 		//inherit from TerminalPrompt class
 		super();
-
 
 		this.html = document.createElement("div");
     	this.html.className = "Terminal";
@@ -96,10 +106,11 @@ export class Terminal extends TerminalPrompt{
 		this.html.scrollTop = this.html.scrollHeight;
 	};
 
-	public print(message: string) {
+	public print(message: string, color: string) {
 		//console.log('new stroke created '+ message);
 		var newLine = document.createElement("div");
 		newLine.textContent = message;
+		newLine.style.color = color;
 		this.output.appendChild(newLine);
 		this.scrollBottom();
 	};
@@ -129,13 +140,13 @@ export class Terminal extends TerminalPrompt{
 		this._input.style.fontSize = size;
 	};
 
-	public setTextColor(col: string) {
-		this.html.style.color = col;
-		this.cursor.style.background = col;
+	public setTextColor(color: string) {
+		this.html.style.color = color;
+		this.cursor.style.background = color;
 	};
 
-	public setBackgroundColor(col: string) {
-		this.html.style.background = col;
+	public setBackgroundColor(color: string) {
+		this.html.style.background = color;
 	};
 
 	public setWidth(width: string) {
@@ -157,7 +168,7 @@ export class Terminal extends TerminalPrompt{
 	};
 
 	public getVersion() {
-		console.info(`TerminalTS ${this.VERSION}`);
+		console.info(`neetcloud.dev-terminal ${this.VERSION}`);
 		return this.VERSION;
 	};
 

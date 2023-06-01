@@ -3,9 +3,11 @@ import { Terminal } from './terminal';
 //import * as Terminal from './terminal-core'; //this is not working //old code for js terminal
 
 import { Store } from '@ngrx/store';
-import { WidgetPanel } from '../desktop/store/models/widgetpanel.model';
 import { AuthStateInterface } from '../auth/store/models/auth.state.model';
 import { FileState } from '../desktop/store/models/file.state.model';
+
+import { User } from '../auth/user/model/user';
+import { File } from '../desktop/store/models/file.model';
 
 @Component({
 	encapsulation: ViewEncapsulation.None,
@@ -16,10 +18,15 @@ import { FileState } from '../desktop/store/models/file.state.model';
 export class TerminalComponent implements OnInit, AfterViewInit {
 
 	private email: String;
+	private user: User| undefined;
+	private files: File[]| undefined;
+	private term: Terminal| undefined;
 
 	constructor(
 		private element: ElementRef,
-		private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface, file: FileState }>,
+		//private userStore: Store<AuthStateInterface>,
+		private userStore: Store<{ auth: AuthStateInterface}>,
+		private fileStore: Store<FileState>
 	) {
 		this.email = "";
 	}
@@ -29,23 +36,66 @@ export class TerminalComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit() {
 
+		// get email and user information
+		this.userStore.select('auth').subscribe((data) => {
+			//console.log(data)
+			//add email to the template
+			this.email = data['user']['email']
+			this.user = data['user']
 
-		//get name from store
-		let user = this.store.select(store => store.auth.user);
-		if (user != null) {
-			user.subscribe(data => {
-				if (data.getEmail() != null) {
-					this.email = data.getEmail();
-				}
-			});
-		}
+			//add new user to the terminal
+			this.putUser(this.user);
+
+		})
+
+		// get files
+		this.fileStore.select('files').subscribe((data: any) => {
+			
+			//console.log(data.files)
+			
+			//add list of files to the template
+			this.files = data.files
+
+			//add new files to the terminal
+			this.putFiles(this.files);
+
+		})
 
 		// create terminal
-		const term = new Terminal('term');
-		term.promptText = "/" + (this.email.length == 0 ? "user" : this.email) + "> ";
-		term.setTextColor("white");
-		term.cursor.style.background = "white";
-		term.input(``);
-		term._inputLine.textContent = term.promptText;
+		this.term = new Terminal('term');
+		this.term.promptText = "/" + (this.email.length == 0 ? "user" : this.email) + "> ";
+		this.term.setTextColor("white");
+		this.term.cursor.style.background = "white";
+		this.term.input(``);
+		this.term._inputLine.textContent = this.term.promptText;
+		this.term.print(
+			`(c) neetcloud.dev v.` + this.term.getVersion() + `, type 'help'`, 
+			'plum');
+		this.term.scrollBottom();
+		
+		//first time we need to add user and files
+		if(this.user != null){
+			//console.log('add auth and files')
+			this.term.auth = this.user;
+		}
+		
+		if(this.files != null){
+			this.term.files = this.files;
+		}
 	}
+
+	putFiles(files : any){
+		if(this.term != undefined){
+			this.term.files = files;
+		}
+	};
+
+	putUser(user : any){
+		if(this.term != undefined){
+			this.term.auth = user;
+		}
+	}
+
+
+
 }
