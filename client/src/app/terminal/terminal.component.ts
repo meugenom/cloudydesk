@@ -93,6 +93,9 @@ export class TerminalComponent implements OnInit, AfterViewInit {
 	putUser(user : any){
 		if(this.term != undefined){
 			this.term.auth = user;
+			this.term.promptText = "/" + user['email'] + "> ";
+
+
 		}
 	}
 

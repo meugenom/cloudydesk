@@ -17,6 +17,7 @@ export class ShouldHelpInfo{
 		terminal.print('rm <filename> - remove file', 'lightgreen');		
 		terminal.print('rmdir - remove directory', 'lightgreen');
 		terminal.print('touch - create file', 'lightgreen');
+		terminal.print('whoami - print user info', 'lightgreen');
 		
 		terminal.scrollBottom();
 	}

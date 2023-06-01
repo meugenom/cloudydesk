@@ -4,6 +4,8 @@ import { Terminal } from '../terminal';
 //tokens
 import { ShouldClearTerminal } from './keyTokens/shouldClearTerminal';
 import { ShouldHelpInfo } from './keyTokens/shouldHelpInfo';
+import { ShouldListFiles } from './keyTokens/shouldListFiles';
+import { ShouldUserInfo } from './keyTokens/shouldUserInfo';
 
 export class EnterKeyStrategy implements KeyStrategy {
 
@@ -29,26 +31,12 @@ export class EnterKeyStrategy implements KeyStrategy {
 				break;
 			case 'ls':
 				//list files
-				console.log('ls');
-				
-				if(terminal.files != null){
-					//print files
-					//console.log(terminal.files);
-
-					//generate string from names of files
-					let filesString = "";
-					terminal.files.forEach((file) => {
-						filesString += file.name + "   ";
-					});					
-					
-					terminal.print(terminal._inputLine.textContent, 'white');
-					terminal._inputLine.textContent = terminal.promptText;
-					terminal.print(filesString, 'deepskyblue');
-				}
-
-				terminal.scrollBottom();
-
+				new ShouldListFiles(terminal);
 				break;
+			case 'whoami':
+				//print user info
+				new ShouldUserInfo(terminal);
+				break
 			case '':
 				terminal.print(terminal._inputLine.textContent, 'white');
 				terminal._inputLine.textContent = terminal.promptText;
