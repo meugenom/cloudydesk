@@ -3,15 +3,15 @@ package dev.neetcloud.api.directories.model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import dev.neetcloud.api.directories.repository.FileNodeRepository;
+import dev.neetcloud.api.directories.repository.DirNodeRepository;
 
 @Component
-public class DirectoryStructure {
-    private FileNodeRepository fileNodeRepository;
+public class DirStructure {
+    private DirNodeRepository dirNodeRepository;
 
     @Autowired
-    public DirectoryStructure(FileNodeRepository fileNodeRepository) {
-        this.fileNodeRepository = fileNodeRepository;
+    public DirStructure(DirNodeRepository fileNodeRepository) {
+        this.dirNodeRepository = dirNodeRepository;
     }
 
     public void addDirectory(String path) {
@@ -22,7 +22,7 @@ public class DirectoryStructure {
         // Same implementation as before
     }
 
-    public FileNode getRoot() {
-        return fileNodeRepository.findById(1L).orElse(null);
+    public DirNode getRoot() {
+        return dirNodeRepository.findById(1L).orElse(null);
     }
 }

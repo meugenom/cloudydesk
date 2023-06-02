@@ -5,21 +5,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.neetcloud.api.directories.model.DirectoryStructure;
-import dev.neetcloud.api.directories.model.FileNode;
+import dev.neetcloud.api.directories.model.DirStructure;
+import dev.neetcloud.api.directories.model.DirNode;
 
 @RestController
-@RequestMapping("/directory")
+@RequestMapping("/directories")
 public class DirectoryController {
-    private DirectoryStructure directoryStructure;
+    private DirStructure directoryStructure;
 
     @Autowired
-    public DirectoryController(DirectoryStructure directoryStructure) {
+    public DirectoryController(DirStructure directoryStructure) {
         this.directoryStructure = directoryStructure;
     }
 
     @GetMapping("/")
-    public FileNode getDirectoryStructure() {
+    public DirNode getDirectoryStructure() {
         return directoryStructure.getRoot();
     }
 }
