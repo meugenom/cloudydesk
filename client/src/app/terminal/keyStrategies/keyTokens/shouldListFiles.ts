@@ -14,7 +14,7 @@ export class ShouldListFiles {
 				//generate string from names of files
 				let filesString = "";
 				terminal.files.forEach((file) => {
-					filesString += file.name + "/n";
+					filesString += file.name + "\n";
 				});
 
 				terminal.print(filesString, 'deepskyblue');
