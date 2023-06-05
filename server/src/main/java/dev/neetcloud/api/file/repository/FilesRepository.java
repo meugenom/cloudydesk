@@ -20,6 +20,6 @@ public interface FilesRepository extends JpaRepository<Files, String> {
 	Iterable<Files> findAllByCreatedUserId(Long createdUserId);
 
 	//find by path is used in the project
-	Optional<Files> findByPath(String path);
+	Optional<Files> findByDirId(Long dirId);
 	
 }
