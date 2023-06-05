@@ -61,13 +61,17 @@ export class UploadingComponent implements OnInit {
 			this.fileName = file.name;
 			const formData = new FormData();
 			formData.append("file", file);
-
 			console.log(formData);
 
-			const upload$ = this.http.post(`${environment.apiUrl}/api/v1/files/uploadFile`, formData, {
-				reportProgress: true,
-				observe: 'events'
-			})
+			//TODO: by default, need make Dir Structure (as JSON)
+
+			const dirId = '1';
+
+			const upload$ = this.http.post(`${environment.apiUrl}/api/v1/files/uploadFile?dirId=${dirId}`,
+				formData, {
+					reportProgress: true,
+					observe: 'events'
+				})
 				.pipe(
 					finalize(() => {
 						this.reset()
