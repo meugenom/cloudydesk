@@ -14,7 +14,8 @@ export const fileReducer = createReducer(
 	initialState,
 	on(loadFilesSuccess, (state, action) => (
 		{
-			files: action.files
+			files: action.files,
+			dirs: action.dirs
 
 
 		}
