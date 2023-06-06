@@ -81,7 +81,11 @@
 </div>
 <div class="window-navbar"></div>
 <div class="window-body item-container">
-  <app-file-list #container [showFolder]="showFolder">
+  <app-file-list 
+    #container 
+    [showFolder]="showFolder"
+    [isFinder]="isFinder"
+    >
   </app-file-list>
 </div>
 <div class="finder-footer">

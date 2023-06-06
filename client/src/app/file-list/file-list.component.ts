@@ -16,7 +16,8 @@ import { File } from '../desktop/store/models/file.model';
 	templateUrl: './file-list.component.html',
 	styleUrls: ['./file-list.component.sass']
 })
-export class FileListComponent implements DoCheck  {
+
+export class FileListComponent implements DoCheck, OnInit  {
 
 	@ViewChild('container') input: ElementRef | undefined;
 	
@@ -25,7 +26,11 @@ export class FileListComponent implements DoCheck  {
 	dirs: Dir | undefined;
 
 	currentFolder: String;
+	
+	//input props for file-list component
 	@Input() showFolder: { path: string; } | undefined;
+	@Input() isFinder: boolean | undefined;
+
 
 	@Input() path: String | undefined;
 	@Input() id: number | undefined;
@@ -92,13 +97,27 @@ export class FileListComponent implements DoCheck  {
 					dirId = dir.data.id;
 				}
 			});
-
 			//console.log('dirId = ' + dirId);
-			
+	
 			//need rerender files list where file.dirId == dirId
 			this.files = this.allFiles.filter((file: any) => file.dirId == dirId);
 		}
 	  }
+
+	ngOnInit(): void {
+		//need to know how can show item-containe
+		// in finder mode or in desktop mode
+		console.log("isFinder: " + this.isFinder);
+		if(this.isFinder){
+			//console.log('finder mode is: ' + this.isFinder);
+			//find in the DOM element with class 'item-container'
+			//const itemContainers = document.getElementsByClassName('item-container');
+			//console.log(itemContainers)
+			//get class and add new property for this class
+			//itemContainer[2].classList.add('item-container-finder');
+			//itemContainer[2].classList.remove('item-container');
+		}
+	}
 
 	ngAfterViewInit() {
 		//if (this.element.nativeElement.attributes.childToMaster == 'Desktop') {
