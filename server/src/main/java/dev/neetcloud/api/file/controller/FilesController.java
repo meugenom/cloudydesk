@@ -112,7 +112,7 @@ public class FilesController {
 			responseMap.put("email", authentication.getName().toString());
 			responseMap.put("message", "Files were found");
 			responseMap.put("files", files);
-			responseMap.put("root", dirTree);
+			responseMap.put("dirs", dirTree);
 
 			return ResponseEntity.ok(responseMap);
 
