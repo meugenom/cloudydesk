@@ -1,27 +1,31 @@
-import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
-import { Globals } from '../global';
+import { Component, ElementRef, Input, OnDestroy, OnInit, 
+	DoCheck, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { FileService } from './services/file.service';
-import { loadFiles } from '../desktop/store/actions/file.actions';
 import { FileState } from '../desktop/store/models/file.state.model';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import { environment } from 'src/environments/environment';
+import { DirState } from '../desktop/store/models/dir.state.model';
+import { Dir } from '../desktop/store/models/dir.model';
+import { File } from '../desktop/store/models/file.model';
 
 @Component({
 	selector: 'app-file-list',
 	templateUrl: './file-list.component.html',
 	styleUrls: ['./file-list.component.sass']
 })
-export class FileListComponent implements OnInit, OnDestroy {
+export class FileListComponent implements DoCheck  {
 
 	@ViewChild('container') input: ElementRef | undefined;
-	files: any;
-	//files$: Observable<File[]> = this.store.select(state => state);
+	
+	allFiles: any;
+	files: any
+	dirs: Dir | undefined;
 
 	currentFolder: String;
+	@Input() showFolder: { path: string; } | undefined;
 
 	@Input() path: String | undefined;
 	@Input() id: number | undefined;
@@ -36,20 +40,16 @@ export class FileListComponent implements OnInit, OnDestroy {
 	@Input() item: string | undefined;
 	@Input() dragstart: boolean | undefined;
 
-	@Input() showFolder: { path: string; } | undefined;
-
-	
-
 	constructor(
-		public globals: Globals,
 		private dragulaService: DragulaService,
 		private element: ElementRef,
 		private fileService: FileService,
-		private store: Store<FileState>,
+		private store: Store<{files: FileState, dirs: DirState}>,
 		private http: HttpClient
 	) {
 		//by default is 'Desktop'
-		this.currentFolder = this.globals.currentDesktopFolder;
+		this.currentFolder = 'Desktop';
+		this.allFiles = [];
 		this.files = [];
 
 		//add dblclk event listeenr for every item
@@ -60,42 +60,54 @@ export class FileListComponent implements OnInit, OnDestroy {
 				console.log('double clicked')
 			});
 		}
-		
-
-	}
-
-
-	ngOnInit(): void {
-
-		if (this.showFolder?.path) {
-			console.log('change paths from default ')
-			console.log('from Desktop to ' + this.showFolder.path)
-			const path = this.showFolder.path;
-		}
 
 		//subscribe on events for store 'files'
-		this.store.select('files').subscribe((data: any) => {
-			//console.log(data.files)
-			//add list of files to the template
+		this.store.select('files').subscribe((data: any) => {			
 			//console.log(data.files);
-			this.files = data.files
+			this.dirs = data.dirs;
+
+			let dirId: null = null;
+			this.dirs?.children?.forEach((dir: any) => {
+				//console.log(dir.data.dirName);
+				if(dir.data.dirName == this.currentFolder){
+					dirId = dir.data.id;
+				}
+			});
+
+			this.allFiles = data.files;
+			this.files = data.files.filter((file: any) => file.dirId == dirId);
+			
 		})
-
 	}
 
-	ngOnDestroy() {
 
-	}
+	ngDoCheck() {
+		if(this.showFolder?.path != this.currentFolder){ 
+			this.currentFolder = this.showFolder?.path!;
+			
+			let dirId: null = null;
+			this.dirs?.children?.forEach((dir: any) => {
+				//console.log(dir.data.dirName);
+				if(dir.data.dirName == this.currentFolder){
+					dirId = dir.data.id;
+				}
+			});
+
+			//console.log('dirId = ' + dirId);
+			
+			//need rerender files list where file.dirId == dirId
+			this.files = this.allFiles.filter((file: any) => file.dirId == dirId);
+		}
+	  }
 
 	ngAfterViewInit() {
-
-		if (this.element.nativeElement.attributes.childToMaster == 'Desktop') {
+		//if (this.element.nativeElement.attributes.childToMaster == 'Desktop') {
 			console.log('childToMaster = ' + this.element.nativeElement.attributes.childToMaster)
-		}
+		//}
 	}
 
 	getItem(event: any, file: any){
-		console.log(file);
+		//console.log(file);
 		this.http.get(`${environment.apiUrl}/api/v1/files/downloadFile/${file.id}`, { responseType: 'blob' })
 			.subscribe(
 				(response) => {

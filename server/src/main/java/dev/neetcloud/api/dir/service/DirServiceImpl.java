@@ -51,7 +51,7 @@ public class DirServiceImpl implements DirService {
 
         // add root/apps
         Dir apps = new Dir();
-        apps.setDirName("apps");
+        apps.setDirName("Apps");
         apps.setCreatedUserId(createdUserId);
         apps.setDirectory(true);
         apps.setParentId(root.getId());
@@ -59,7 +59,7 @@ public class DirServiceImpl implements DirService {
 
         // add root/desktop
         Dir desktop = new Dir();
-        desktop.setDirName("desktop");
+        desktop.setDirName("Desktop");
         desktop.setCreatedUserId(createdUserId);
         desktop.setDirectory(true);
         desktop.setParentId(root.getId());
@@ -67,7 +67,7 @@ public class DirServiceImpl implements DirService {
 
         // add root/docs
         Dir docs = new Dir();
-        docs.setDirName("docs");
+        docs.setDirName("Docs");
         docs.setCreatedUserId(createdUserId);
         docs.setDirectory(true);
         docs.setParentId(root.getId());
@@ -75,7 +75,7 @@ public class DirServiceImpl implements DirService {
 
         // add root/shared
         Dir shared = new Dir();
-        shared.setDirName("shared");
+        shared.setDirName("Shared");
         shared.setCreatedUserId(createdUserId);
         shared.setDirectory(true);
         shared.setParentId(root.getId());
@@ -83,7 +83,7 @@ public class DirServiceImpl implements DirService {
 
         // add root/trash
         Dir trash = new Dir();
-        trash.setDirName("trash");
+        trash.setDirName("Trash");
         trash.setCreatedUserId(createdUserId);
         trash.setDirectory(true);
         trash.setParentId(root.getId());

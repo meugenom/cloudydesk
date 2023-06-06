@@ -221,7 +221,7 @@ export class DesktopComponent {
 				}
 			)
 			.on("stop", ({ store: { stored } }) => {
-				console.log('stored length = ' + stored.length);
+				//console.log('stored length = ' + stored.length);
 			});
 
 		//this.globals.selection = selection;

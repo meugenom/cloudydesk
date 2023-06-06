@@ -1,75 +1,88 @@
 <div class="window-sidebar">
-  <h2 class="window-sidebar-title" disable-user-select>Directories</h2>
+  <h2 class="window-sidebar-title" disable-user-select>Favourites</h2>
   <ng-container *ngFor="let folder of this.folders; let i = index">
     <div
       class="window-sidebar-item window-sidebar-item-active"
-      id="{{ folder.toLowerCase() + '-sidebar' }}"
-      *ngIf="folder == activeFolderName"
-      (click)="changeFileList(folder)"
-    >
+      id="{{ folder.data.dirName + '-sidebar' }}"
+      *ngIf="folder.data.dirName == activeFolderName"
+      (click)="changeFileList(folder.data.dirName)"
+      >
       <img
         src="../../assets/img/folder-desktop.svg"
-        *ngIf="folder == 'Desktop'"
+        *ngIf="folder.data.dirName == 'Desktop'"
         alt=""
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-apps.svg"
-        *ngIf="folder == 'Applications'"
+        *ngIf="folder.data.dirName == 'Apps'"
         alt=""
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-shared.svg"
-        *ngIf="folder == 'Shared'"
+        *ngIf="folder.data.dirName == 'Shared'"
         alt=""
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-docs.svg"
-        *ngIf="folder == 'Documents'"
+        *ngIf="folder.data.dirName == 'Docs'"
         alt=""
         class="window-sidebar-item-icon"
       />
-      {{ folder }}
+      <img
+        src="../../assets/img/folder-trash.svg"
+        *ngIf="folder.data.dirName == 'Trash'"
+        alt=""
+        class="window-sidebar-item-icon"
+      />
+      {{ folder.data.dirName }}
     </div>
     <div
       class="window-sidebar-item"
-      id="{{ folder.toLowerCase() + '-sidebar' }}"
-      *ngIf="folder != activeFolderName"
-      (click)="changeFileList(folder)"
+      id="{{ folder.data.dirName + '-sidebar' }}"
+      *ngIf="folder.data.dirName != activeFolderName"
+      (click)="changeFileList(folder.data.dirName)"
     >
       <img
         src="../../assets/img/folder-desktop.svg"
-        *ngIf="folder == 'Desktop'"
+        *ngIf="folder.data.dirName == 'Desktop'"
         alt=""
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-apps.svg"
-        *ngIf="folder == 'Applications'"
+        *ngIf="folder.data.dirName == 'Apps'"
         alt=""
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-shared.svg"
-        *ngIf="folder == 'Shared'"
+        *ngIf="folder.data.dirName == 'Shared'"
         alt=""
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-docs.svg"
-        *ngIf="folder == 'Documents'"
+        *ngIf="folder.data.dirName == 'Docs'"
         alt=""
         class="window-sidebar-item-icon"
       />
-      {{ folder }}
+      <img
+        src="../../assets/img/folder-trash.svg"
+        *ngIf="folder.data.dirName == 'Trash'"
+        alt=""
+        class="window-sidebar-item-icon"
+      />
+      {{ folder.data.dirName }}
     </div>
   </ng-container>
 </div>
 <div class="window-navbar"></div>
 <div class="window-body item-container">
-  <app-file-list #container [showFolder]="showFolder"> </app-file-list>
+  <app-file-list #container [showFolder]="showFolder">
+  </app-file-list>
 </div>
 <div class="finder-footer">
 	<span class="finder-footer-item-count">4 items</span>
