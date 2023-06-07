@@ -29,6 +29,15 @@
   <div class="firefly"></div>
   <div class="firefly"></div>
 
+  <!--loader-->
+  <div #loaderTemplate>
+    <div *ngIf="getLoading()"
+      class="loader">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+
   <!--spinner-->
   <app-progressbar></app-progressbar>
   <!-- mobile or desktop -->

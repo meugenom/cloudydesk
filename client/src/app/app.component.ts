@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { Navigator } from './desktop/store/models/navigator.model';
 import { AddDimensions } from './desktop/store/actions/navigator.action';
 import { Router } from '@angular/router';
+import { LoaderService } from './loader/loader.service';
+
 
 @Component({
 	selector: 'app-root',
@@ -15,7 +17,8 @@ export class AppComponent implements OnInit {
 
 	constructor(
 		private _store: Store<{ navigator: Navigator }>,
-		private _router: Router
+		private _router: Router,
+		private _loaderService: LoaderService
 	) {
 
 		_store.select('navigator').subscribe(data => {
@@ -54,6 +57,10 @@ export class AppComponent implements OnInit {
 		this._store.dispatch(
 			AddDimensions(
 				navi))
+	}
+
+	getLoading() {
+		return this._loaderService.getLoading();
 	}
 	
 }

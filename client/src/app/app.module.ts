@@ -9,7 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DesktopComponent } from './desktop/desktop.component';
-import { FullscreenDirective } from './fullscreen/fullscreen.directive';
+import { DesktopFullscreenDirective } from './desktop-fullscreen/desktop-fullscreen.directive';
 import { UploadingDirective } from './uploading/uploading.directive';
 import { TaskbarComponent } from './taskbar/taskbar.component';
 import { FinderComponent } from './finder/finder.component';
@@ -72,7 +72,7 @@ import { FileMenuComponent } from './file-menu/file-menu.component';
 	declarations: [
 		AppComponent,
 		DesktopComponent,
-		FullscreenDirective,
+		DesktopFullscreenDirective,
 		TaskbarComponent,
 		FinderComponent,
 		DrawComponent,
@@ -115,7 +115,7 @@ import { FileMenuComponent } from './file-menu/file-menu.component';
 		NgxEditorModule
 	],
 	providers: [ModService, Globals, ContextMenuService,
-		//{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
 		AuthGuard,
 		NotificationService
