@@ -91,7 +91,7 @@ const authReducer = createReducer(
 	on(checkUserSuccessAction, (state, { currentUser }) => ({
 		...state,
 		isSubmitting: true,
-		user: currentUser,
+		user: currentUser.user,
 		lastAction: AUTH_CHECK_USER_FETCH_SUCCESSFUL,
 		lastActionDate: new Date()
 	})),

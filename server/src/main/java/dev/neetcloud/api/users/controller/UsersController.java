@@ -1,12 +1,10 @@
 package dev.neetcloud.api.users.controller;
 
 import dev.neetcloud.api.auth.response.AuthenticationResponse;
-import dev.neetcloud.api.auth.utils.UtilsCookie;
 import dev.neetcloud.api.users.model.Users;
 import dev.neetcloud.api.users.repository.UsersRepository;
 import dev.neetcloud.api.users.responses.UsersResponse;
 import dev.neetcloud.api.users.service.UsersService;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -57,17 +51,10 @@ public class UsersController {
     //}
 	
 	@GetMapping("/user")
-	//public ResponseEntity<Map<String, Object>> whoami() {
-		public ResponseEntity<String> whoami(HttpServletResponse response ) throws JsonProcessingException {
-	
-		//need to know when JWT token is expired
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
+	public ResponseEntity<Map<String, Object>> whoami() {
+	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		if (authentication == null) {
-			//delete old JWT token from response
-			response.addCookie(UtilsCookie.getCookie(null));
-			return ResponseEntity.status(500).body("JWT token is expired");
-		}
+		Map<String, Object> responseMap = new HashMap<>();
 
 		//prepare authResponse
 		UsersResponse userResponse = new UsersResponse("", "", authentication.getName(), "", false);
@@ -85,12 +72,16 @@ public class UsersController {
 
 			logger.info(userResponse.toString());
 
-			ObjectMapper objectMapper = new ObjectMapper();
-			String json = objectMapper.writeValueAsString(userResponse);
-			return ResponseEntity.ok().body(json);
+			responseMap.put("error", false);
+			responseMap.put("message", "User name was checked. User info returned");
+			responseMap.put("user", userResponse);
+
+			return ResponseEntity.ok(responseMap);
 
 		} else {
-			return ResponseEntity.status(500).body("Invalid user name");
+			responseMap.put("error", true);
+			responseMap.put("message", "Invalid user name");
+			return ResponseEntity.status(500).body(responseMap);
 		}
 	}
 }
