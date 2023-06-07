@@ -61,6 +61,7 @@ export class AppComponent implements OnInit {
 
 	getLoading() {
 		return this._loaderService.getLoading();
+		//return true;
 	}
 	
 }

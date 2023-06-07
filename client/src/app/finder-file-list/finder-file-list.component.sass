@@ -1,3 +1,7 @@
+// variable
+$container_background: #d0b7eb
+$div_element_background: #c4a1ed
+	
 .wrapper
 	display: table
 	width: 100%
@@ -10,7 +14,7 @@
 .finder-item-container
 	display: contents
 	flex-wrap: wrap 
-	//background: $container_background
+	background-color: $container_background
 	border-radius: 0.3rem 
 	z-index: 0
 	//.disable-user-select
@@ -21,7 +25,7 @@
 	-moz-user-select: none !important
 	-ms-user-select: none !important
 	user-select: none !important
-
+	
 	& > div
 		//background: $div_element_background
 		&.selected 

@@ -10,31 +10,37 @@
       <img
         src="../../assets/img/folder-desktop.svg"
         *ngIf="folder.data.dirName == 'Desktop'"
-        alt=""
+        alt="desktop"
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-apps.svg"
         *ngIf="folder.data.dirName == 'Apps'"
-        alt=""
+        alt="apps"
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-shared.svg"
         *ngIf="folder.data.dirName == 'Shared'"
-        alt=""
+        alt="shared"
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-docs.svg"
         *ngIf="folder.data.dirName == 'Docs'"
-        alt=""
+        alt="docs"
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-trash.svg"
         *ngIf="folder.data.dirName == 'Trash'"
-        alt=""
+        alt="trash"
+        class="window-sidebar-item-icon"
+      />
+      <img
+        src="../../assets/img/folder-trash.svg"
+        *ngIf="folder.data.dirName == 'Desktop' && folder.data.dirName == 'Apps' && folder.data.dirName == 'Shared' && folder.data.dirName == 'Docs' && folder.data.dirName == 'Trash'"
+        alt="folder"
         class="window-sidebar-item-icon"
       />
       {{ folder.data.dirName }}
@@ -48,31 +54,37 @@
       <img
         src="../../assets/img/folder-desktop.svg"
         *ngIf="folder.data.dirName == 'Desktop'"
-        alt=""
+        alt="desktop"
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-apps.svg"
         *ngIf="folder.data.dirName == 'Apps'"
-        alt=""
+        alt="apps"
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-shared.svg"
         *ngIf="folder.data.dirName == 'Shared'"
-        alt=""
+        alt="shared"
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-docs.svg"
         *ngIf="folder.data.dirName == 'Docs'"
-        alt=""
+        alt="docs"
         class="window-sidebar-item-icon"
       />
       <img
         src="../../assets/img/folder-trash.svg"
         *ngIf="folder.data.dirName == 'Trash'"
-        alt=""
+        alt="trash"
+        class="window-sidebar-item-icon"
+      />
+      <img
+        src="../../assets/img/folder.svg"
+        *ngIf="folder.data.dirName != 'Apps' && folder.data.dirName != 'Desktop' && folder.data.dirName != 'Shared' && folder.data.dirName != 'Docs' && folder.data.dirName != 'Trash'"
+        alt="folder"
         class="window-sidebar-item-icon"
       />
       {{ folder.data.dirName }}
