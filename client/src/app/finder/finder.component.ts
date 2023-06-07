@@ -11,7 +11,6 @@ import { Store, select } from '@ngrx/store';
 export class FinderComponent implements OnInit {
 
 	showFolder: any = { path: 'desktop' }
-	isFinder: boolean = true;	
 	folders: any[]
 	activeFolderName: String ;
 
@@ -66,7 +65,7 @@ export class FinderComponent implements OnInit {
 	}
 
 	getFolders() {
-		return this.dirs.children;		
+		return this.dirs.children;
 	}
 
 }

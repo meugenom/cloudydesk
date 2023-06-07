@@ -19,7 +19,8 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
 
-import { FileListModule } from './file-list/file-list.module';
+import { DesktopFileListModule } from './desktop-file-list/desktop-file-list.module';
+import { FinderFileListModule } from './finder-file-list/finder-file-list.module';
 
 import { EditorComponent } from './editor/editor.component';
 
@@ -98,7 +99,8 @@ import { FileMenuComponent } from './file-menu/file-menu.component';
 		BrowserModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
-		FileListModule,
+		DesktopFileListModule,
+		FinderFileListModule,
 		uploadingModule,
 		FormsModule,
 		ReactiveFormsModule,

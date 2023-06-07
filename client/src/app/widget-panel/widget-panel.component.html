@@ -17,8 +17,17 @@
             <app-logout></app-logout>
         </div>
 
-        <div class="widget" *ngIf="isRegisterForm == false && isLoginForm == false">
-            <a>User Info</a>
+        <div class="widget-card-user" *ngIf="isRegisterForm == false && isLoginForm == false">
+            <div class="card-user-img">
+                <img src="../../assets/img/astronaut.svg" alt="astronaut">
+            </div>
+            <div class="card-user-about">
+                <h5 class="primary-text">{{user.firstName}} {{user.lastName}}</h5>
+                <h5 class="secondary-text">astro pin: {{user.email}}</h5>
+                <h5 class="secondary-text">portal: {{user.isActive==true?'active':'not active'}}</h5>
+                <h5 class="secondary-text">speciality: {{user.roles=="ROLE_USER"?'space sailor':'capitan'}}</h5>
+            </div>
+            
         </div>
     </div>
 </div>

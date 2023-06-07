@@ -1,23 +1,22 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, 
 	DoCheck, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
-import { FileService } from './services/file.service';
 import { FileState } from '../desktop/store/models/file.state.model';
 import { Store } from '@ngrx/store';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { saveAs } from 'file-saver';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { DirState } from '../desktop/store/models/dir.state.model';
 import { Dir } from '../desktop/store/models/dir.model';
 import { File } from '../desktop/store/models/file.model';
 
 @Component({
-	selector: 'app-file-list',
-	templateUrl: './file-list.component.html',
-	styleUrls: ['./file-list.component.sass']
+	selector: 'app-finder-file-list',
+	templateUrl: './finder-file-list.component.html',
+	styleUrls: ['./finder-file-list.component.sass']
 })
 
-export class FileListComponent implements DoCheck, OnInit  {
+export class FinderFileListComponent implements DoCheck, OnInit  {
 
 	@ViewChild('container') input: ElementRef | undefined;
 	
@@ -29,7 +28,6 @@ export class FileListComponent implements DoCheck, OnInit  {
 	
 	//input props for file-list component
 	@Input() showFolder: { path: string; } | undefined;
-	@Input() isFinder: boolean | undefined;
 
 
 	@Input() path: String | undefined;
@@ -48,7 +46,6 @@ export class FileListComponent implements DoCheck, OnInit  {
 	constructor(
 		private dragulaService: DragulaService,
 		private element: ElementRef,
-		private fileService: FileService,
 		private store: Store<{files: FileState, dirs: DirState}>,
 		private http: HttpClient
 	) {
@@ -105,18 +102,7 @@ export class FileListComponent implements DoCheck, OnInit  {
 	  }
 
 	ngOnInit(): void {
-		//need to know how can show item-containe
-		// in finder mode or in desktop mode
-		console.log("isFinder: " + this.isFinder);
-		if(this.isFinder){
-			//console.log('finder mode is: ' + this.isFinder);
-			//find in the DOM element with class 'item-container'
-			//const itemContainers = document.getElementsByClassName('item-container');
-			//console.log(itemContainers)
-			//get class and add new property for this class
-			//itemContainer[2].classList.add('item-container-finder');
-			//itemContainer[2].classList.remove('item-container');
-		}
+		
 	}
 
 	ngAfterViewInit() {
