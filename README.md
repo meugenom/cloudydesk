@@ -43,6 +43,14 @@ NeetCloud App is Open Source App. You can download the code and make your change
 - Notifications have been implemented in the project.
 - A loading spinner is activated to indicate ongoing processes.
 
+### !Important
+- There is currently no demo available on the website [https://neetcloud.dev](https://neetcloud.dev). Please use the following login credentials:
+	login: muster@muster.muster
+	password: muster
+- After loading the Docker image to start, please follow the instructions below.
+- If you have started the Docker image and the database is empty, create your own account and upload your files. The default file upload size limit is 10 MB.
+- In the Docker image, the path 'upload-dir' is set by default. Please refer to the file 'server/src/main/resources/application.yml' to select your own directory to work locally, to which you have access.
+
 ## Development
 
 ### Important for local usage
@@ -60,7 +68,7 @@ Here is a way to run the project locally:
 	# see images
 	docker images
 	# run image with the folowing command
-	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 -v data:/var/lib/postgresql/data neetcloud:0.2.3
+	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 neetcloud:0.2.3
 	# see started containers
 	docker ps
 	# after wann container is launched, run the command to connect to the container
@@ -74,8 +82,7 @@ Here is a way to run the project locally:
 ```
 	- Access the project in web browser at `http://localhost:8080`.
 	By default database is empty.
-	- Register new user by button bottom-right
-	- Log in as new user 
+	- Register new user by button bottom-right 
 	- Upload file by right click on the screen->see menu->select Uploading File
 	- Download file from the screen -> double click on icon of downloaded file
 

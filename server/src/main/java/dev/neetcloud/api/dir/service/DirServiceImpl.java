@@ -47,7 +47,7 @@ public class DirServiceImpl implements DirService {
         dirRepository.save(root);
 
         // get root id from saved root
-        root = (Dir) dirRepository.findByCreatedUserIdAndDirName(createdUserId, "root").get(0);
+        root = (Dir) dirRepository.findByCreatedUserIdAndDirName(createdUserId, "/").get(0);
 
         // add root/apps
         Dir apps = new Dir();
