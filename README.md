@@ -28,19 +28,20 @@ NeetCloud App is Open Source App. You can download the code and make your change
 
 ## Features (Application in Progress)
 
-- Animated web view with space background, taskbar, and app icons
-- Capable desktop's full-window mode
-- Modals start from taskbar icons:
-  - Closing, maximize, minimize, moving window-app / back to small window-app
-  - Make window-app active with click when we have other opened window-apps
-  - Resizing window-app by left-bottom icon
-- In app terminal ability to input commands, "clear" for example, others in progress
-- Selection files on the desktop and in Finder and change places between (drag and drop)
-- Context-menu (works uploading file to the server)
-- Login's and register's forms and functionality, actions, calls to the server, widget panel
-- Getting file list visual and uploading file to the storage by current user
-- Download file by double clicking on file icon
-- Added Notifications into the project
+- Animated web view with a space-themed background, taskbar, and app icons.
+- An animated progress bar that displays the progress of space settings and messages.
+- Capable desktop's full-window mode, allowing you to maximize the desktop view to occupy the entire screen.
+- Modals that are triggered from taskbar icons, providing options to close, maximize, minimize, move, and resize windowed applications. You can also switch between active window-apps with a click, even when other window-apps are open. Resizing can be done using the left-bottom icon.
+- The app terminal allows you to input commands such as "help," "ls," "whoami," and "uname." Other commands are also in progress.
+- The app finder displays a list of files organized by directories.
+- The app editor provides a simple text editor interface without saving options.
+- The app camera allows you to connect your webcam and view yourself.
+- Context-menu functionality, including uploading files to the server.
+- Login and register forms and functionality, including server calls and a widget panel with User Info.
+- Visual display of file lists and the ability to upload files to storage by the current user.
+- Download files by double-clicking on file icons.
+- Notifications have been added to the project.
+- A loading spinner is activated to indicate when processes are in progress.
 
 ## Development
 
