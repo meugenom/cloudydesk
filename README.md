@@ -12,11 +12,16 @@
 </p>
 
 <p align="center">
-  <a href="https://neetcloud.dev" >See Demo</a>
-  <br>
-  <b>Important: Anonymous User was deleted. Please create own account:</b>
+  	<a href="https://neetcloud.dev" >See Demo</a>
+  	<br>
+  	<b>Anonymous User was deleted. Please create own account or use current:</b>
 </p>
-
+<p align="center">
+	<b>login: muster@muster.muster</b>
+</p>
+<p align="center">
+	<b>password: muster</b>
+</p>
 <p align="center">
   <img src="./assets/screenshot08062023.png" data-canonical-src="./assets/screenshot08062023.png"/>
 </p>
