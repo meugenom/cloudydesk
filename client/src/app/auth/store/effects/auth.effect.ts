@@ -127,13 +127,9 @@ export class AuthEffect {
 			ofType(checkUserFailureAction),
 			tap((data) => {
 
-				//console.log(data);
-				//this.persistanceService.removeToken('auth')
-				//this.persistanceService.removeToken('email')
-
-				//notify id something is wrong
+				//notify id something is wrong with jwt token or has expired
 				setTimeout(() => {
-					this.ntfService.error('User Unknown!');
+					this.ntfService.error('Credentials expired! Please login again.');
 				}, 300);
 			})
 		),
