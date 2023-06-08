@@ -1,0 +1,111 @@
+<div
+  class="item-container dragula"
+  dragula="FILES"
+  [attr.showFolderPath]="showFolderPath"
+  [attr.showFolderId]="showFolderId"
+>
+  <div *ngFor="let file of this.files; let i = index">
+    <div
+      class="item"
+      id="item-{{ file.id }}"
+      [attr.data-uid]="file.id"
+      [attr.data-id]="file.id"
+      [attr.data-name]="file.name"
+      [attr.data-size]="file.size"
+      [attr.data-created]="file.createdUser"
+      [attr.data-modified]="file.modifiedUser"
+      [attr.dragstart]="this.dragstart"
+      (dblclick)="getItem($event, file)"
+    >
+      <div class="item-spinner"></div>
+
+      <div class="item-icon" [attr.style]="this.style">
+        <img
+          src="../../assets/img/file-pdf.svg"
+          *ngIf="file.type == 'application/pdf'"
+          [attr.data-dataitem]="'item-' + file.id"
+          class="item-icon-icon"
+        />
+        <img
+          src="../../assets/img/file-png.svg"
+          [attr.data-dataitem]="'item-' + file.id"
+          *ngIf="file.type == 'image/png'"
+          class="item-icon-icon"
+        />
+        <img
+          src="../../assets/img/file-jpeg.svg"
+          [attr.data-dataitem]="'item-' + file.id"
+          *ngIf="file.type == 'image/jpeg'"
+          class="item-icon-icon"
+        />
+        <img
+          src="../../assets/img/file-rtf.svg"
+          [attr.data-dataitem]="'item-' + file.id"
+          *ngIf="file.type == 'text/rtf'"
+          class="item-icon-icon"
+        />
+        <img
+          src="../../assets/img/file-zip.svg"
+          [attr.data-dataitem]="'item-' + file.id"
+          *ngIf="file.type == 'application/zip'"
+          class="item-icon-icon"
+        />
+        <img
+          src="../../assets/img/file-txt.svg"
+          *ngIf="
+            file.type != 'image/png' &&
+            file.type != 'application/pdf' &&
+            file.type != 'image/jpeg' &&
+            file.type != 'text/rtf' &&
+            file.type != 'application/zip'
+          "
+          class="item-icon-icon"
+          [attr.data-dataitem]="'item-' + file.id"
+        />
+      </div>
+
+      <div class="item-badges" [attr.data-dataitem]="'item-' + file.id">
+        <img
+          class="item-badge item-has-website-badge"
+          src="../../assets/img/world.svg"
+          data-item-id="0"
+        />
+        <img
+          class="item-badge item-badge-has-permission"
+          style="display: none; background-color: #ffffff; padding: 2px"
+          src="../../assets/img/shared-file.svg"
+          data-item-id="0"
+        />
+
+        <img
+          class="item-badge item-is-shared"
+          style="background-color: #ffffff; padding: 2px; display: none"
+          src="../../assets/img/shared-owner.svg"
+          data-item-id="0"
+        />
+		<!--
+        <img
+          class="item-badge item-shortcut"
+          style="background-color: #ffffff; padding: 2px"
+          src="../../assets/img/shortcut.svg"
+          data-item-id="0"
+          title="Shortcut"
+        />
+		-->
+      </div>
+      <span class="item-name" data-item-id="0" title="">{{ file.name }}</span>
+      <textarea
+        class="item-name-editor"
+        spellcheck="false"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        data-gramm_editor="false"
+        style="display: none; width: 60px; height: 18px"
+      >
+			{{file.name}}
+		</textarea
+      >
+    </div>
+  </div>
+</div>

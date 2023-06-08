@@ -9,7 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DesktopComponent } from './desktop/desktop.component';
-import { FullscreenDirective } from './fullscreen/fullscreen.directive';
+import { DesktopFullscreenDirective } from './desktop-fullscreen/desktop-fullscreen.directive';
 import { UploadingDirective } from './uploading/uploading.directive';
 import { TaskbarComponent } from './taskbar/taskbar.component';
 import { FinderComponent } from './finder/finder.component';
@@ -19,7 +19,8 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { CameraComponent } from './camera/camera.component';
 import { SettingsComponent } from './settings/settings.component';
 
-import { FileListModule } from './file-list/file-list.module';
+import { DesktopFileListModule } from './desktop-file-list/desktop-file-list.module';
+import { FinderFileListModule } from './finder-file-list/finder-file-list.module';
 
 import { EditorComponent } from './editor/editor.component';
 
@@ -71,7 +72,7 @@ import { FileMenuComponent } from './file-menu/file-menu.component';
 	declarations: [
 		AppComponent,
 		DesktopComponent,
-		FullscreenDirective,
+		DesktopFullscreenDirective,
 		TaskbarComponent,
 		FinderComponent,
 		DrawComponent,
@@ -98,7 +99,8 @@ import { FileMenuComponent } from './file-menu/file-menu.component';
 		BrowserModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
-		FileListModule,
+		DesktopFileListModule,
+		FinderFileListModule,
 		uploadingModule,
 		FormsModule,
 		ReactiveFormsModule,
@@ -113,7 +115,7 @@ import { FileMenuComponent } from './file-menu/file-menu.component';
 		NgxEditorModule
 	],
 	providers: [ModService, Globals, ContextMenuService,
-		//{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
 		AuthGuard,
 		NotificationService

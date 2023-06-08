@@ -1,10 +1,5 @@
-//code downloaded from https://codepen.io/mikegolus/pen/Jegvym
-//created by Mike Golus
 .screen
-//  background-image: url("./../assets/img/background-gary-scott-space-unsplash.jpg")
-//  background-size: contain
 
-	
 // Quantity should be the same in PUG
 $quantity: 20
 
@@ -69,7 +64,51 @@ $quantity: 20
 @keyframes flash
   0%, 30%, 100%
     opacity: 0
-    box-shadow: 0 0 0vw 0vw #f5f4e5
+    box-shadow: 0 0 2vw 0.4vw #7535ea
   5%
     opacity: 1
-    box-shadow: 0 0 2vw 0.4vw #f5f4e5
+    box-shadow: 0 0 2vw 0.4vw #f90ede
+
+
+// Loader
+.loader
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: rgba(20, 19, 19, 0.408)
+  z-index: 9999
+
+.spinner
+  position: absolute
+  top: 46%
+  left: 46%
+  transform: translate(-50%, -50%)
+  //border: 4px solid rgba(120, 129, 137, 0.854)
+  border-top: 4px solid #1bc1e2ac
+  border-radius: 50%
+  width: 70px
+  height: 70px
+  animation: spin 1s linear infinite
+
+.loader-image
+  position: absolute
+  top: 51%
+  left: 50%
+  transform: translate(-50%, -50%)
+  width: 50px
+  height: 50px
+  //animation: away 1s linear infinite
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+@keyframes away
+  0%
+    opacity: 1.0
+  100%
+    opacity: 0.6

@@ -7,6 +7,7 @@ import dev.neetcloud.api.auth.response.AuthenticationResponse;
 import dev.neetcloud.api.auth.service.AuthService;
 import dev.neetcloud.api.auth.utils.UtilsCookie;
 import dev.neetcloud.api.config.JwtUtils;
+import dev.neetcloud.api.dir.service.DirService;
 import dev.neetcloud.api.users.model.Users;
 import dev.neetcloud.api.users.repository.UsersRepository;
 import dev.neetcloud.api.users.requests.UsersRequest;
@@ -50,6 +51,8 @@ public class AuthController {
 
 	private final JwtUtils jwtUtils;
 
+	private final DirService dirService;
+
 	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
 	@Autowired
@@ -68,14 +71,14 @@ public class AuthController {
 			final UserDetails user = jpaUserDetailsService.loadUserByUsername(request.getEmail());
 			if (user != null) {
 				String jwt = jwtUtils.generateToken(user);
-				//add cookie to response
+				// add cookie to response
 				response.addCookie(UtilsCookie.getCookie(jwt));
 
-				//prepare authResponse
+				// prepare authResponse
 				AuthenticationResponse authResponse = new AuthenticationResponse("", "", email, "", false);
 
-				//check info and add additional fileds
-				Optional<Users>  userOptional = usersRepository.findByEmail(user.getUsername());
+				// check info and add additional fileds
+				Optional<Users> userOptional = usersRepository.findByEmail(user.getUsername());
 				if (userOptional.isPresent()) {
 					Users result = userOptional.get();
 					authResponse.setId(result.getId());
@@ -114,15 +117,18 @@ public class AuthController {
 			response.addCookie(UtilsCookie.getCookie(null));
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
+		// generate default dirs for new user: apps, docs, desktop, shared, trash
+		dirService.addDefaultDirs(newUser.getId());
 
+		// Generate token
 		String token = jwtUtils.generateToken(jpaUserDetailsService.loadUserByUsername(newUser.getEmail()));
 		response.addCookie(UtilsCookie.getCookie(token));
 
 		// Create AuthResponse object with token and user information
-		//AuthenticationResponse authResponse = new AuthenticationResponse(newUser.getEmail());
+		// AuthenticationResponse authResponse = new
+		// AuthenticationResponse(newUser.getEmail());
 		AuthenticationResponse authResponse = new AuthenticationResponse(
-				"","",newUser.getEmail(),"",true
-		);
+				"", "", newUser.getEmail(), "", true);
 		return ResponseEntity.ok(authResponse);
 	}
 

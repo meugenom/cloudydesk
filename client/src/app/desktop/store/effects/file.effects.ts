@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
 import { map, mergeMap, catchError, exhaustMap, concatMap, tap, switchMap } from 'rxjs/operators';
 import { NotificationService } from 'src/app/notification/notification.service';
-import { FileService } from '../../../file-list/services/file.service';
+import { FileService } from '../../../desktop-file-list/services/file.service';
 import { loadFiles, loadFilesSuccess, loadFilesError } from '../actions/file.actions';
 
 
@@ -14,7 +14,7 @@ export class FileEffects {
 		this.actions$.pipe(
 			ofType(loadFiles),
 			switchMap(() => this.fileService.ls({}).pipe(
-				map((response: any) => loadFilesSuccess({ files: response.files})),
+				map((response: any) => loadFilesSuccess({ files: response.files, dirs: response.dirs})),
 				catchError(() => of(loadFilesError()))
 			))
 		)

@@ -1,0 +1,32 @@
+// variable
+$container_background: #d0b7eb
+$div_element_background: #c4a1ed
+	
+.wrapper
+	display: table
+	width: 100%
+
+.gu-mirror
+	cursor: grabbing
+	cursor: -moz-grabbing
+	cursor: -webkit-grabbing
+
+.finder-item-container
+	display: contents
+	flex-wrap: wrap 
+	background-color: $container_background
+	border-radius: 0.3rem 
+	z-index: 0
+	//.disable-user-select
+	cursor: default
+	-webkit-touch-callout: none !important
+	-webkit-user-select: none !important
+	-khtml-user-select: none !important
+	-moz-user-select: none !important
+	-ms-user-select: none !important
+	user-select: none !important
+	
+	& > div
+		//background: $div_element_background
+		&.selected 
+			//background: gray

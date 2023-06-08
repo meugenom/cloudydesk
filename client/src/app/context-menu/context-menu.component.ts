@@ -1,5 +1,9 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { ContextMenuService } from './context-menu.service';
+import { Store } from '@ngrx/store';
+import { ContextState } from '../desktop/store/models/context.state.model';
+import { Context } from '../desktop/store/models/context.model';
+import { AddContext } from '../desktop/store/actions/context.action';
 
 @Component({
 	selector: 'div[app-context-menu]',
@@ -18,6 +22,7 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 	constructor(
 		private el: ElementRef,
 		private contextMenuService: ContextMenuService,
+		private store: Store<{ context: ContextState}>,
 	) {
 		this.element = el.nativeElement;
 
@@ -55,6 +60,7 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 		//need to get from desktop component parent component ...need think
 		//this.element.style.top = 'calc(15% + 0px)';
 		//this.element.style.left = '405px';
+
 	}
 
 	ngAfterViewInit(): void {
@@ -78,8 +84,46 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 			console.log(event)
 			this.element.style.top = event.clientY + 'px';
 			this.element.style.left = event.clientX + 'px';
+			
+			//find parent element and some attribute 
+			//console.log(event.target)
+			let foundElem : any = event.target;
+			let path = '';
+			let id = '';
+			//if desktop or finder then set store for lastDir
+			if(foundElem.getAttribute('showFolderPath') == null
+				&& foundElem.getAttribute('showFolderId') == null
+			){
+				// finder
+				path = foundElem.children[0].children[0].getAttribute('showFolderPath');
+				id = foundElem.children[0].children[0].getAttribute('showFolderId');
+				//console.log(path);
+				//console.log(id);
+
+			}else{
+				// desktop 
+				//console.log(foundElem);
+				console.log(foundElem.getAttribute('showFolderPath'));
+				console.log(foundElem.getAttribute('showFolderId'));
+				
+				id = foundElem.getAttribute('showFolderId');
+				path = foundElem.getAttribute('showFolderPath');
+				
+			}
+
+			//set store for context
+			const context: Context = {
+				usedFolder: id,
+				usedFile: ''
+			}
+	
+			this.store.dispatch(
+				AddContext(
+					context))		
+			
 		}
 	}
+	
 
 	
 

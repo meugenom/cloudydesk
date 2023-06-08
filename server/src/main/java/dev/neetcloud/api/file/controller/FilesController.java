@@ -1,5 +1,8 @@
 package dev.neetcloud.api.file.controller;
 
+import dev.neetcloud.api.dir.model.Dir;
+import dev.neetcloud.api.dir.model.GraphNode;
+import dev.neetcloud.api.dir.service.DirService;
 import dev.neetcloud.api.file.model.Files;
 import dev.neetcloud.api.fileStorage.service.FileStorageService;
 import dev.neetcloud.api.file.repository.FilesRepository;
@@ -24,15 +27,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
 @RestController
 @RequestMapping("api/v1/files")
 public class FilesController {
-	
 
 	private static final Logger logger = LoggerFactory.getLogger(FilesController.class);
-	
+
 	@Autowired
 	private FileStorageService fileStorageService;
 	@Autowired
@@ -40,11 +40,16 @@ public class FilesController {
 	@Autowired
 	private UsersRepository usersRepository;
 
+	@Autowired
+	private DirService dirService;
+
 	@PostMapping("/uploadFile")
-	public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<Map<String, Object>> uploadFile(
+			@RequestParam("") MultipartFile file,
+			@RequestParam("dirId") String dirId) {
 		Map<String, Object> responseMap = new HashMap<>();
 
-		// get user name
+		// get user
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Users currentUser = usersRepository.getIdByEmail(authentication.getName());
 		// logger.info(" current user id: " + currentUser.getId());
@@ -52,17 +57,18 @@ public class FilesController {
 		// check file name
 		String fileName = fileStorageService.checkFileName(file);
 
+		long currentDirId = Long.parseLong(dirId);
+
 		if (fileName != null && currentUser != null) {
-			
+
 			// save file data in the repo
 			Files currentFile = new Files(
-										fileName, 
-										file.getContentType(), 
-										"/desktop", 
-										file.getSize(),
-										currentUser.getId(), 
-										currentUser.getId()
-									);
+					fileName,
+					file.getContentType(),
+					currentDirId,
+					file.getSize(),
+					currentUser.getId(),
+					currentUser.getId());
 
 			// save in database
 			filesRepository.save(currentFile);
@@ -97,13 +103,16 @@ public class FilesController {
 
 			// get files from repo
 			Iterable<Files> files = filesRepository.findAllByCreatedUserId(currentUser.getId());
+			// logger.info(files.toString());
+			GraphNode<Dir> dirTree = (GraphNode<Dir>) dirService.getDirTree(currentUser.getId());
+			logger.info(dirTree.toString());
 
-			//logger.info(files.toString());
 
 			responseMap.put("error", false);
 			responseMap.put("email", authentication.getName().toString());
 			responseMap.put("message", "Files were found");
 			responseMap.put("files", files);
+			responseMap.put("dirs", dirTree);
 
 			return ResponseEntity.ok(responseMap);
 
@@ -125,7 +134,6 @@ public class FilesController {
 	 * }
 	 */
 
-	 
 	@GetMapping("/downloadFile/{fileId:.+}")
 	public ResponseEntity<Resource> downloadFile(@PathVariable String fileId,
 			HttpServletRequest request) {

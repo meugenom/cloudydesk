@@ -12,7 +12,6 @@ import { ControlKeyStrategy } from './keyStrategies/controlKeyStrategie';
 import { BackspaceKeyStrategy } from './keyStrategies/backspaceKeyStrategie';
 import { EnterKeyStrategy } from './keyStrategies/enterKeyStrategie';
 
-
 export class TerminalPrompt {
 
 	VERSION: string;
@@ -26,13 +25,14 @@ export class TerminalPrompt {
 	//when key is pressed, we add it to this set
 	keyStates: Set<string>;
 
-
-	constructor() {
-		this.VERSION = "0.0.1";
+	constructor(
+	) {
+		this.VERSION = "0.2.1";
 		this.PROMPT_INPUT = 1;
 		this.PROMPT_PASSWORD = 2;
 		this.PROMPT_CONFIRM = 3;
 		this.firstPrompt = true;
+		
 
 		//key strategies
 		this.keyStrategies = new Map<string, KeyStrategy>();
@@ -47,6 +47,8 @@ export class TerminalPrompt {
 		this.keyStrategies.set("Control", new ControlKeyStrategy());
 		this.keyStrategies.set("Backspace", new BackspaceKeyStrategy());
 		this.keyStrategies.set("Enter", new EnterKeyStrategy());
+		
+		
 		//add other key strategies here
 
 		//when key is pressed, we add it to this set
@@ -108,7 +110,8 @@ export class TerminalPrompt {
 
 				if (terminal._inputLine.textContent.length > 60) {
 					terminal.print(
-						terminal._inputLine.textContent.substring(0, 60)
+						terminal._inputLine.textContent.substring(0, 60),
+						'white'
 					);
 
 					let str = terminal._inputLine.textContent.substring(80, terminal._inputLine.textContent.length - 1);

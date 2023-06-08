@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { finalize, Subscription } from 'rxjs';
 import { loadFiles } from '../desktop/store/actions/file.actions';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { ContextState } from '../desktop/store/models/context.state.model';
+import { dir } from 'console';
 
 
 @Component({
@@ -27,7 +29,8 @@ export class UploadingComponent implements OnInit {
 
 	constructor(
 		private http: HttpClient,
-		private store: Store<{ file: FileState }>,
+		private store: Store<{ file: FileState, context: ContextState }>,
+
 		private fb: FormBuilder
 	) {
 		this.uploadProgress = 0;
@@ -61,39 +64,49 @@ export class UploadingComponent implements OnInit {
 			this.fileName = file.name;
 			const formData = new FormData();
 			formData.append("file", file);
-
 			console.log(formData);
 
-			const upload$ = this.http.post(`${environment.apiUrl}/api/v1/files/uploadFile`, formData, {
-				reportProgress: true,
-				observe: 'events'
+
+			let dirId = '';
+
+			//get from store context param usedFolder 
+			this.store.select('context').subscribe((data: any) => {
+				dirId = data.usedFolder;
 			})
-				.pipe(
-					finalize(() => {
-						this.reset()
-						//get new file list for current user
-						this.store.dispatch((loadFiles()))
+			
+			if (dirId != '') {
+				const upload$ = this.http.post(`${environment.apiUrl}/api/v1/files/uploadFile?dirId=${dirId}`,
+					formData, {
+					reportProgress: true,
+					observe: 'events'
+				})
+					.pipe(
+						finalize(() => {
+							this.reset()
+							//get new file list for current user
+							this.store.dispatch((loadFiles()))
 
-						//get invisible for uploading component
-						this.hideComponent();
+							//get invisible for uploading component
+							this.hideComponent();
 
-					})
-				);
+						})
+					);
 
-			this.uploadSub = upload$.subscribe((event: any) => {
-				if (event.type == HttpEventType.UploadProgress) {
-					this.uploadProgress = 100 * (event.loaded / event.total);
-					console.log("upload progress: " + this.uploadProgress)
-				}
-			})
+				this.uploadSub = upload$.subscribe((event: any) => {
+					if (event.type == HttpEventType.UploadProgress) {
+						this.uploadProgress = 100 * (event.loaded / event.total);
+						console.log("upload progress: " + this.uploadProgress)
+					}
+				})
+			}
 		}
 	}
-	
+
 	cancelUpload() {
 		this.uploadSub?.unsubscribe();
-		this.reset();		
+		this.reset();
 		this.hideComponent();
-		
+
 
 	}
 

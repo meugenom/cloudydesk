@@ -29,6 +29,16 @@
   <div class="firefly"></div>
   <div class="firefly"></div>
 
+  <!--loader-->
+  <div #loaderTemplate>
+    <div *ngIf="getLoading()"
+      class="loader">
+      <div class="spinner"></div>
+      <img class="loader-image" src="../assets//img/rocket-ship.svg" alt="rocket" />
+    </div>
+  </div>
+
+
   <!--spinner-->
   <app-progressbar></app-progressbar>
   <!-- mobile or desktop -->

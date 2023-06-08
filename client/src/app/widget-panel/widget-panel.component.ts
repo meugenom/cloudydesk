@@ -7,6 +7,7 @@ import {
 	WIDGET_PANEL_OPEN_LOGIN_FORM,
 	WIDGET_PANEL_OPEN_REGISTER_FORM,	
 } from '../desktop/store/models/widgetpanel.constants'
+import { User } from '../auth/user/model/user';
 
 
 @Component({
@@ -21,6 +22,8 @@ export class WidgetPanelComponent implements OnInit {
 	isRegisterForm: boolean;
 	isSubmitting: boolean;
 
+	user: any;
+
 	constructor(
 		private store: Store<{ widgetPanel: WidgetPanel, auth: AuthStateInterface }>
 	) {
@@ -28,6 +31,7 @@ export class WidgetPanelComponent implements OnInit {
 		this.isSubmitting = false;
 		this.isLoginForm = true;
 		this.isRegisterForm = false
+
 
 		store.select('widgetPanel').subscribe(data => {
 			//console.log(data);
@@ -37,12 +41,14 @@ export class WidgetPanelComponent implements OnInit {
 		})
 
 		store.select('auth').subscribe(data => {
-			
 			//console.log(data);
 			this.isSubmitting = data.isSubmitting;
 
 			if (this.isSubmitting) {
 				this.isLoginForm = false;
+
+				//add user info to widget panel
+				this.user = data.user;
 			}
 		})
 	}

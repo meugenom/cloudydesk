@@ -1,6 +1,6 @@
 # NeetCloud App
 
-[![Version](https://img.shields.io/badge/version-0.2.2-yellow.svg)](https://semver.org/spec/v1.0.0.html)
+[![Version](https://img.shields.io/badge/version-0.2.3-yellow.svg)](https://semver.org/spec/v1.0.0.html)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 <p align="center">
@@ -28,19 +28,28 @@ NeetCloud App is Open Source App. You can download the code and make your change
 
 ## Features (Application in Progress)
 
-- Animated web view with space background, taskbar, and app icons
-- Capable desktop's full-window mode
-- Modals start from taskbar icons:
-  - Closing, maximize, minimize, moving window-app / back to small window-app
-  - Make window-app active with click when we have other opened window-apps
-  - Resizing window-app by left-bottom icon
-- In app terminal ability to input commands, "clear" for example, others in progress
-- Selection files on the desktop and in Finder and change places between (drag and drop)
-- Context-menu (works uploading file to the server)
-- Login's and register's forms and functionality, actions, calls to the server, widget panel
-- Getting file list visual and uploading file to the storage by current user
-- Download file by double clicking on file icon
-- Added Notifications into the project
+- An animated web view featuring a background with a space theme, a taskbar, and app icons.
+- An animated progress bar that indicates the progress of space settings and messages.
+- Full-window mode capability for the desktop, allowing you to maximize the desktop view and occupy the entire screen.
+- Modal windows that can be triggered from taskbar icons, providing options to close, maximize, minimize, move, and resize windowed applications. You can also switch between active windowed apps with a single click, even when other windowed apps are open. Resizing can be done using the bottom-left icon.
+- The app terminal allows you to input commands such as "help," "ls," "whoami," and "uname." Other commands are currently being developed.
+- The app finder displays a list of files organized by directories, which are automatically added when creating a new account.
+- The app editor provides a simple text editor interface without the option to save files.
+- The app camera allows you to connect your webcam and view yourself.
+- Context-menu functionality, left-clicking, including the ability to upload files to the server. The file can be saved based on the context of where you selected the menu - either in the finder or on the desktop. Other options in progress.
+- Login and registration forms and functionality, including server calls and a widget panel displaying user information.
+- Visual representation of file lists and the ability to upload files to storage for the current user by context-menu and selected folders in the sidebar of the finder.
+- Double-clicking on file icons enables file downloading.
+- Notifications have been implemented in the project.
+- A loading spinner is activated to indicate ongoing processes.
+
+### !Important
+- There is currently no demo available on the website [https://neetcloud.dev](https://neetcloud.dev). Please use the following login credentials:
+	login: muster@muster.muster
+	password: muster
+- After loading the Docker image to start, please follow the instructions below.
+- If you have started the Docker image and the database is empty, create your own account and upload your files. The default file upload size limit is 10 MB.
+- In the Docker image, the path 'upload-dir' is set by default. Please refer to the file 'server/src/main/resources/application.yml' to select your own directory to work locally, to which you have access.
 
 ## Development
 
@@ -55,11 +64,11 @@ Here is a way to run the project locally:
 
 ```bash
 	# install docker and download image using command below
-	docker pull meugenom/neetcloud:0.2.1
+	docker pull meugenom/neetcloud:0.2.3
 	# see images
 	docker images
 	# run image with the folowing command
-	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 -v data:/var/lib/postgresql/data neetcloud:0.2.1
+	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 neetcloud:0.2.3
 	# see started containers
 	docker ps
 	# after wann container is launched, run the command to connect to the container
@@ -73,8 +82,7 @@ Here is a way to run the project locally:
 ```
 	- Access the project in web browser at `http://localhost:8080`.
 	By default database is empty.
-	- Register new user by button bottom-right
-	- Log in as new user 
+	- Register new user by button bottom-right 
 	- Upload file by right click on the screen->see menu->select Uploading File
 	- Download file from the screen -> double click on icon of downloaded file
 

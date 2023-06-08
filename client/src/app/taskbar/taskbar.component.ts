@@ -2,6 +2,9 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 
 import { ModService } from '../mod/mod.service';
 import { Globals } from '../global';
+import { Store } from '@ngrx/store';
+import { AuthStateInterface } from '../auth/store/models/auth.state.model';
+import { NotificationService } from 'src/app/notification/notification.service';
 
 @Component({
 	selector: 'app-taskbar',
@@ -10,20 +13,38 @@ import { Globals } from '../global';
 })
 export class TaskbarComponent implements OnInit {
 
+	isAuth: boolean = false;
+
 	constructor(
 		private modService: ModService,
 		private viewContainerRef: ViewContainerRef,
-		public globals: Globals
-	
-		) { }
+		public globals: Globals,
+		private store: Store<{ auth: AuthStateInterface}>,
+		private ntfService: NotificationService
+		) { 
+			this.store.subscribe((data: any) => {
+				if(data.auth.isSubmitting){
+					this.isAuth = true;
+				}else{
+					this.isAuth = false;
+				}
+			});
 
-	ngOnInit(): void { 
+		}
+
+	ngOnInit(): void { 		
 	}
 	
 	openMod(e: MouseEvent, id: String, name: String) {
 		e.preventDefault();
 		this.modService.setRootViewContainerRef(this.viewContainerRef);
 		this.modService.addDynamicComponent(id.toString(), name.toString());
+	}
+
+	notify() {
+		setTimeout(() => {
+			this.ntfService.error('Please Login or Register to continue');
+		}, 300);
 	}
 
 }

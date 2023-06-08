@@ -33,7 +33,11 @@ import {
 export class DesktopComponent {
 
 	fullScreen: boolean;
-	showFolder: any = { path: 'Desktop' }
+	
+	//props for file-list component
+	showFolderPath: string = '';
+	showFolderId: string = '';
+
 	@ViewChild('container') input: ElementRef | undefined;
 	dragDrop: boolean = false;
 
@@ -221,7 +225,7 @@ export class DesktopComponent {
 				}
 			)
 			.on("stop", ({ store: { stored } }) => {
-				console.log('stored length = ' + stored.length);
+				//console.log('stored length = ' + stored.length);
 			});
 
 		//this.globals.selection = selection;

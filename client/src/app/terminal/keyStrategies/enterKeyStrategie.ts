@@ -1,34 +1,62 @@
 import { KeyStrategy } from './keyStrategie';
 import { Terminal } from '../terminal';
 
-export class EnterKeyStrategy extends KeyStrategy {
+//tokens
+import { ShouldClearTerminal } from './keyTokens/shouldClearTerminal';
+import { ShouldHelpInfo } from './keyTokens/shouldHelpInfo';
+import { ShouldListFiles } from './keyTokens/shouldListFiles';
+import { ShouldUserInfo } from './keyTokens/shouldUserInfo';
+import { ShouldSystemInfo } from './keyTokens/shouldSystemInfo';
+
+export class EnterKeyStrategy implements KeyStrategy {
+
+
 	execute(terminal: Terminal, e: KeyboardEvent) {
 		// Implement the logic for handling "Enter" key
 		console.log('enter key');
 		e.preventDefault();
 
-		//COMMAND 'clear'
-		if (terminal._inputLine.textContent == terminal.promptText + 'clear') {
+		const textContent = terminal._inputLine.textContent.trim(); //removes whitespaces from the end		
+		//console.log(textContent.split(">")[1]);
+		const commandText = textContent.split(">")[1].trim(); //removes whitespaces from the start and end of the string
 
-			//if we have not something to remove
-			if (document.getElementsByClassName('Terminal')[0].childNodes.length == 2) {
-				//console.log(document.getElementsByClassName('Terminal')[0].childNodes[0].childNodes[0].childNodes[0])
-				let length = document.getElementsByClassName('Terminal')[0].childNodes[0].childNodes[0].childNodes.length;
-				while (length > 0) {
-					document.getElementsByClassName('Terminal')[0].childNodes[0].childNodes[0].childNodes[0].remove();
-					length = document.getElementsByClassName('Terminal')[0].childNodes[0].childNodes[0].childNodes.length;
-				}
-			}
+		switch (commandText) {
+			case 'clear' :
+				//clear terminal
+				console.log('clear');
+				new ShouldClearTerminal().exec(terminal);
+				break;
+			case 'help':
+				//print help info
+				new ShouldHelpInfo(terminal);
+				break;
+			case 'ls':
+				//list files
+				new ShouldListFiles(terminal);
+				break;
+			case 'whoami':
+				//print user info
+				new ShouldUserInfo(terminal);
+				break
+			case 'uname':
 
-			terminal._inputLine.textContent = terminal.promptText;
-			terminal.scrollBottom();
-
-		} else {
-
-			terminal.print(terminal._inputLine.textContent);
-			terminal._inputLine.textContent = terminal.promptText;
-			terminal.scrollBottom();
+				//print system info
+				new ShouldSystemInfo(terminal);
+				
+				break;
+			case '':
+				terminal.print(terminal._inputLine.textContent, 'white');
+				terminal._inputLine.textContent = terminal.promptText;
+				terminal.scrollBottom();	
+				break;
+			default:
+				terminal.print(terminal._inputLine.textContent, 'white');
+				terminal._inputLine.textContent = terminal.promptText;
+				terminal.print("Error: Command not found: ", 'red');
+				terminal.scrollBottom();
+				break;
 		}
-		//
+
+
 	}
 }

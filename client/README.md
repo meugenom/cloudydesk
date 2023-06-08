@@ -12,6 +12,7 @@ External Libraries:
 3. [express](https://www.npmjs.com/package/express) version 4.18.1
 4. [screenfull](https://www.npmjs.com/package/screenfull) version 6.0.2
 5. [ngrx](https://ngrx.io) version 14.2.0
+6. [ngx-editor](https://github.com/sibiraj-s/ngx-editor) version 15.3.0
 
 ### Development server
 

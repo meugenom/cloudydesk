@@ -1,7 +1,7 @@
 import { KeyStrategy } from './keyStrategie';
 import { Terminal } from '../terminal';
 
-export class BackspaceKeyStrategy extends KeyStrategy {
+export class BackspaceKeyStrategy implements KeyStrategy {
 	execute(terminal: Terminal, e: KeyboardEvent) {
 		// Implement the logic for handling "Backspace" key
 		console.log('backspace key');

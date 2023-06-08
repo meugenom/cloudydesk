@@ -4,7 +4,7 @@ import { Globals } from '../global';
 @Directive({
 	selector: 'button[FullScreenOpening]'
 })
-export class FullscreenDirective {
+export class DesktopFullscreenDirective {
 	
 	constructor(private renderer: Renderer2, private globals: Globals) {		
 	}
@@ -57,7 +57,6 @@ export class FullscreenDirective {
 		} else if (docWithBrowsersExitFunctions.msExitFullscreen) { /* IE/Edge */
 			docWithBrowsersExitFunctions.msExitFullscreen();
 		}
-
 		
 		this.globals.fullScreen = false;
 	}

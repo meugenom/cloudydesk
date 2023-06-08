@@ -26,8 +26,8 @@ public class Files {
 	@Column(name = "type", nullable = false)
 	private String type;
 
-	@Column(name = "path", nullable = false)
-	private String path;
+	@Column(name = "dir_id", nullable = false)
+	private Long dirId;
 
 	@Column(name = "size", nullable = false)
 	private Long size;
@@ -47,7 +47,7 @@ public class Files {
 	// default constructor
 	public Files(   String name, 
 					String type, 
-					String path, 
+					Long dirId,
 					Long size, 
 					Long createdUserId, 
 					Long modifiedUserId
@@ -55,7 +55,7 @@ public class Files {
 		this.id = UUID.randomUUID().toString(); // generate a random UUID as the file ID
 		this.name = name;
 		this.type = type;
-		this.path = path;
+		this.dirId = dirId;
 		this.size = size;
 		this.createdDate = LocalDate.now();
 		this.modifiedDate = LocalDate.now();

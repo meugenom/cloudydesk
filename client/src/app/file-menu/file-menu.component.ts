@@ -50,6 +50,7 @@ export class FileMenuComponent implements OnInit {
 		}
 	}
 
+	//TODO: need to implement these functions and add them to the html
 	openFile() {
 	}
 

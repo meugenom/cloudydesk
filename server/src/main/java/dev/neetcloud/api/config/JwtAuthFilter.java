@@ -1,6 +1,8 @@
 package dev.neetcloud.api.config;
 
 import dev.neetcloud.api.UserSecurity.dao.JpaUserDetailsService;
+import dev.neetcloud.api.auth.utils.UtilsCookie;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -27,34 +29,48 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        //final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        
         final String userEmail;
         String jwtToken = null;
 		
-		/*
-        if (authHeader == null || !authHeader.startsWith("Bearer")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-		*/
 
 		if(request.getCookies() != null) {
 			for (Cookie cookie : request.getCookies()) {
 				if (cookie.getName().equals("jwt")) {
 					jwtToken = cookie.getValue();
-//                System.out.println(cookie.getValue());
 				}
 			}
 		}
 		
         if (jwtToken == null || jwtToken == "") {
+            //add to the resonse information about error and status 401 Error
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             filterChain.doFilter(request, response);
             return;
+        }else{
+            
+            System.out.println("jwtToken: " + jwtToken);            
+            Boolean isExpired = false;
+            
+            try{
+                isExpired= jwtUtils.isTokenExpired(jwtToken);
+                //check jwtToken is expired and return response if expired throw exception
+            
+            }catch(ExpiredJwtException e){
+                //System.out.println("jwtToken is expired");
+                isExpired = true;
+
+                //if jwtToken is expired, delete cookie with expired jwtToken
+                response.addCookie(UtilsCookie.getCookie(null));
+                
+                //add to the resonse information about error and status 403 Error
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                filterChain.doFilter(request, response);
+                return;
+            }
         }
 
-		//System.out.println("jwtToken: " + jwtToken);
-
-//        jwtToken = authHeader.substring(7);
+        // by default, the user is not authenticated ...has to be set manually
         userEmail = jwtUtils.extractUsername(jwtToken);
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = jpaUserDetailsService.loadUserByUsername(userEmail);
