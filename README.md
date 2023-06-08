@@ -12,11 +12,16 @@
 </p>
 
 <p align="center">
-  <a href="https://neetcloud.dev" >See Demo</a>
-  <br>
-  <b>Important: Anonymous User was deleted. Please create own account:</b>
+  	<a href="https://neetcloud.dev" >See Demo</a>
+  	<br>
+  	<b>Anonymous User was deleted. Please create own account or use current:</b>
 </p>
-
+<p align="center">
+	<b>login: muster@muster.muster</b>
+</p>
+<p align="center">
+	<b>password: muster</b>
+</p>
 <p align="center">
   <img src="./assets/screenshot08062023.png" data-canonical-src="./assets/screenshot08062023.png"/>
 </p>
@@ -43,7 +48,7 @@ NeetCloud App is Open Source App. You can download the code and make your change
 - Notifications have been implemented in the project.
 - A loading spinner is activated to indicate ongoing processes.
 
-### !Important
+### Please read this
 - There is currently no demo available on the website [https://neetcloud.dev](https://neetcloud.dev). Please use the following login credentials:
 	login: muster@muster.muster
 	password: muster
