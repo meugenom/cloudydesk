@@ -48,7 +48,7 @@ NeetCloud App is Open Source App. You can download the code and make your change
 - Notifications have been implemented in the project.
 - A loading spinner is activated to indicate ongoing processes.
 
-### !Important
+### Please read this
 - There is currently no demo available on the website [https://neetcloud.dev](https://neetcloud.dev). Please use the following login credentials:
 	login: muster@muster.muster
 	password: muster
