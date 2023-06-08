@@ -28,20 +28,20 @@ NeetCloud App is Open Source App. You can download the code and make your change
 
 ## Features (Application in Progress)
 
-- Animated web view with a space-themed background, taskbar, and app icons.
-- An animated progress bar that displays the progress of space settings and messages.
-- Capable desktop's full-window mode, allowing you to maximize the desktop view to occupy the entire screen.
-- Modals that are triggered from taskbar icons, providing options to close, maximize, minimize, move, and resize windowed applications. You can also switch between active window-apps with a click, even when other window-apps are open. Resizing can be done using the left-bottom icon.
-- The app terminal allows you to input commands such as "help," "ls," "whoami," and "uname." Other commands are also in progress.
-- The app finder displays a list of files organized by directories.
-- The app editor provides a simple text editor interface without saving options.
+- An animated web view featuring a background with a space theme, a taskbar, and app icons.
+- An animated progress bar that indicates the progress of space settings and messages.
+- Full-window mode capability for the desktop, allowing you to maximize the desktop view and occupy the entire screen.
+- Modal windows that can be triggered from taskbar icons, providing options to close, maximize, minimize, move, and resize windowed applications. You can also switch between active windowed apps with a single click, even when other windowed apps are open. Resizing can be done using the bottom-left icon.
+- The app terminal allows you to input commands such as "help," "ls," "whoami," and "uname." Other commands are currently being developed.
+- The app finder displays a list of files organized by directories, which are automatically added when creating a new account.
+- The app editor provides a simple text editor interface without the option to save files.
 - The app camera allows you to connect your webcam and view yourself.
-- Context-menu functionality, including uploading files to the server.
-- Login and register forms and functionality, including server calls and a widget panel with User Info.
-- Visual display of file lists and the ability to upload files to storage by the current user.
-- Download files by double-clicking on file icons.
-- Notifications have been added to the project.
-- A loading spinner is activated to indicate when processes are in progress.
+- Context-menu functionality, left-clicking, including the ability to upload files to the server. The file can be saved based on the context of where you selected the menu - either in the finder or on the desktop. Other options in progress.
+- Login and registration forms and functionality, including server calls and a widget panel displaying user information.
+- Visual representation of file lists and the ability to upload files to storage for the current user by context-menu and selected folders in the sidebar of the finder.
+- Double-clicking on file icons enables file downloading.
+- Notifications have been implemented in the project.
+- A loading spinner is activated to indicate ongoing processes.
 
 ## Development
 
