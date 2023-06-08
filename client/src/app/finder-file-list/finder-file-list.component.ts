@@ -24,10 +24,12 @@ export class FinderFileListComponent implements DoCheck, OnInit  {
 	files: any
 	dirs: Dir | undefined;
 
-	currentFolder: String;
+	currentFolderPath: String | undefined;
+	currentFolderId: String | undefined;
 	
 	//input props for file-list component
-	@Input() showFolder: { path: string; } | undefined;
+	@Input() showFolderPath: string | undefined;
+	@Input() showFolderId: string | undefined;
 
 
 	@Input() path: String | undefined;
@@ -50,7 +52,9 @@ export class FinderFileListComponent implements DoCheck, OnInit  {
 		private http: HttpClient
 	) {
 		//by default is 'Desktop'
-		this.currentFolder = 'Desktop';
+		this.currentFolderPath = 'Desktop';
+		this.currentFolderId = '';
+		this.showFolderPath = 'Desktop';
 		this.allFiles = [];
 		this.files = [];
 
@@ -71,8 +75,9 @@ export class FinderFileListComponent implements DoCheck, OnInit  {
 			let dirId: null = null;
 			this.dirs?.children?.forEach((dir: any) => {
 				//console.log(dir.data.dirName);
-				if(dir.data.dirName == this.currentFolder){
+				if(dir.data.dirName == this.currentFolderPath){
 					dirId = dir.data.id;
+					this.showFolderId = dir.data.id;				
 				}
 			});
 
@@ -84,14 +89,16 @@ export class FinderFileListComponent implements DoCheck, OnInit  {
 
 
 	ngDoCheck() {
-		if(this.showFolder?.path != this.currentFolder){ 
-			this.currentFolder = this.showFolder?.path!;
+		if(this.showFolderPath != this.currentFolderPath){ 
+			this.currentFolderId = this.showFolderId;
+			this.currentFolderPath = this.showFolderPath!;
 			
 			let dirId: null = null;
 			this.dirs?.children?.forEach((dir: any) => {
 				//console.log(dir.data.dirName);
-				if(dir.data.dirName == this.currentFolder){
+				if(dir.data.dirName == this.currentFolderPath){
 					dirId = dir.data.id;
+					this.showFolderId = dir.data.id;
 				}
 			});
 			//console.log('dirId = ' + dirId);

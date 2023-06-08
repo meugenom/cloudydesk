@@ -25,12 +25,12 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 	files: any
 	dirs: Dir | undefined;
 
-	currentFolder: String;
+	currentFolderPath: String | undefined;
+	currentFolderId: String | undefined;
 	
 	//input props for file-list component
-	@Input() showFolder: { path: string; } | undefined;
-	@Input() isFinder: boolean | undefined;
-
+	@Input() showFolderPath: string | undefined;
+	@Input() showFolderId: string | undefined;
 
 	@Input() path: String | undefined;
 	@Input() id: number | undefined;
@@ -53,7 +53,8 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 		private http: HttpClient
 	) {
 		//by default is 'Desktop'
-		this.currentFolder = 'Desktop';
+		this.currentFolderPath = 'Desktop';
+		this.currentFolderId = '';
 		this.allFiles = [];
 		this.files = [];
 
@@ -74,8 +75,11 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 			let dirId: null = null;
 			this.dirs?.children?.forEach((dir: any) => {
 				//console.log(dir.data.dirName);
-				if(dir.data.dirName == this.currentFolder){
+				if(dir.data.dirName == this.currentFolderPath){
 					dirId = dir.data.id;
+					this.showFolderPath = dir.data.dirName;
+					this.showFolderId = dir.data.id;
+					this.currentFolderId = dir.data.id;
 				}
 			});
 
@@ -87,13 +91,14 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 
 
 	ngDoCheck() {
-		if(this.showFolder?.path != this.currentFolder){ 
-			this.currentFolder = this.showFolder?.path!;
+		if(this.showFolderId != this.currentFolderId){ 
+			this.currentFolderId = this.showFolderId;
+			this.currentFolderPath = this.showFolderPath!;
 			
 			let dirId: null = null;
 			this.dirs?.children?.forEach((dir: any) => {
 				//console.log(dir.data.dirName);
-				if(dir.data.dirName == this.currentFolder){
+				if(dir.data.dirName == this.currentFolderPath){
 					dirId = dir.data.id;
 				}
 			});
@@ -105,18 +110,7 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 	  }
 
 	ngOnInit(): void {
-		//need to know how can show item-containe
-		// in finder mode or in desktop mode
-		console.log("isFinder: " + this.isFinder);
-		if(this.isFinder){
-			//console.log('finder mode is: ' + this.isFinder);
-			//find in the DOM element with class 'item-container'
-			//const itemContainers = document.getElementsByClassName('item-container');
-			//console.log(itemContainers)
-			//get class and add new property for this class
-			//itemContainer[2].classList.add('item-container-finder');
-			//itemContainer[2].classList.remove('item-container');
-		}
+
 	}
 
 	ngAfterViewInit() {

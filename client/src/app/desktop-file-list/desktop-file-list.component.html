@@ -1,7 +1,8 @@
 <div
   class="item-container dragula"
   dragula="FILES"
-  [attr.showFolder]="showFolder?.path"
+  [attr.showFolderPath]="showFolderPath"
+  [attr.showFolderId]="showFolderId"
 >
   <div *ngFor="let file of this.files; let i = index">
     <div

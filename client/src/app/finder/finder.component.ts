@@ -10,7 +10,9 @@ import { Store, select } from '@ngrx/store';
 })
 export class FinderComponent implements OnInit {
 
-	showFolder: any = { path: 'desktop' }
+	showFolderPath: string | undefined;
+	showFolderId: string | undefined;
+
 	folders: any[]
 	activeFolderName: String ;
 
@@ -59,13 +61,15 @@ export class FinderComponent implements OnInit {
 		document.getElementById(this.activeFolderName + '-sidebar')?.classList.remove('window-sidebar-item-active');
 		document.getElementById(name + '-sidebar')?.classList.add('window-sidebar-item-active');
 		this.activeFolderName = name;
-		this.showFolder.path = name;
+		this.showFolderPath = name.toString();
 		//console.log('activeFolderName = '+this.activeFolderName )
 		//console.log('showFolder.path = '+this.showFolder.path )
 	}
 
 	getFolders() {
-		return this.dirs.children;
+		if (this.dirs)
+			return this.dirs.children;
+		else
+			return [];
 	}
-
 }
