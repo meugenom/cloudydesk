@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <img src="./assets/screenshot06092022.png" data-canonical-src="./assets/screenshot06092022.png"/>
+  <img src="./assets/screenshot08062023.png" data-canonical-src="./assets/screenshot08062023.png"/>
 </p>
 
 ## About
