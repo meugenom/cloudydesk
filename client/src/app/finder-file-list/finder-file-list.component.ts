@@ -85,9 +85,9 @@ export class FinderFileListComponent implements DoCheck, OnInit {
 
 		})
 
-		//dragula subscription		
+
 		this.subs.add(dragulaService.out(this.BAG)
-			.subscribe(({ el, container }) => {
+			.subscribe(({ el, container, source }) => {
 				if (
 					this.currentFolderId != container.getAttribute('showFolderId') &&
 					container.getAttribute('showFolderId') != null &&
@@ -121,8 +121,8 @@ export class FinderFileListComponent implements DoCheck, OnInit {
 					el.children[0].getAttribute('data-dirId') == container.getAttribute('showFolderId'))
 				{
 					//need delete this moving visual effect
-					el.remove();
-
+					source.appendChild(el);
+					//el.remove();					
 				}
 			})
 		);

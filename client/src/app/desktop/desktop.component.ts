@@ -63,7 +63,6 @@ export class DesktopComponent {
 		this.email = "unknown"
 
 		//need check our localstorage and find authtoken
-		//const  isAuthenticated = this.authService.isAuthenticated();
 		
 		//console.log(isAuthenticated);
 		

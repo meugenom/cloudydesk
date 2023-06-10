@@ -117,6 +117,7 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 	}
 
 	//dragula methods
+	/*
 	addClass(el: any, name: any) {
 		el.classList.add(name);
 	};
@@ -124,7 +125,7 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 	removeClass(el: any, name: any) {
 		el.classList.remove(name);
 	};
-
+	*/
 
 	ngDoCheck() {
 		if(this.showFolderId != this.currentFolderId){ 
