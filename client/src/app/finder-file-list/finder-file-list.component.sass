@@ -1,5 +1,5 @@
 // variable
-$container_background: #d0b7eb
+$container_background: #fafbfd
 $div_element_background: #c4a1ed
 	
 .wrapper
@@ -12,8 +12,12 @@ $div_element_background: #c4a1ed
 	cursor: -webkit-grabbing
 
 .finder-item-container
-	display: contents
-	flex-wrap: wrap 
+	display: flex	
+	flex-flow: row wrap
+	width: 100%
+	height: 100vh
+	align-items: flex-start
+	align-content: flex-start
 	background-color: $container_background
 	border-radius: 0.3rem 
 	z-index: 0

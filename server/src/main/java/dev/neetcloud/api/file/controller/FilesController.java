@@ -123,6 +123,73 @@ public class FilesController {
 		}
 	}
 
+	@PostMapping("/mv")
+	public ResponseEntity<Map<String, Object>> moveFile(
+			@RequestBody Map<String, String> body) 
+		{
+		
+		logger.info("File Moving");
+		Map<String, Object> responseMap = new HashMap<>();
+
+		// get user
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Users currentUser = usersRepository.getIdByEmail(authentication.getName());
+
+		// check file name
+		String fileId = body.get("fileId");
+		String targetDirId = body.get("targetDirId");
+		String currentDirId = body.get("sourceDirId");
+
+		// convert to long
+		long targetDir = Long.parseLong(targetDirId);
+		long currentDir = Long.parseLong(currentDirId);
+
+
+		if (currentUser != null &&
+			currentDir != targetDir			
+		) {
+
+			// get file from repo
+			Files currentFile = filesRepository.findById(fileId).orElse(null);
+
+			// check if file exists
+			if (  currentFile != null && 
+				  currentFile.getCreatedUserId() == currentUser.getId() &&
+				  currentFile.getDirId() == currentDir
+				  ) {
+
+				// check if file belongs to user
+				if (currentFile.getCreatedUserId() == currentUser.getId()) {
+
+					// update file dir
+					currentFile.setDirId(targetDir);
+
+					// save in database
+					filesRepository.save(currentFile);
+
+					responseMap.put("error", false);
+					responseMap.put("message", "File was moved");
+					return ResponseEntity.ok(responseMap);
+
+				} else {
+					responseMap.put("error", true);
+					responseMap.put("message", "File does not belong to user");
+					return ResponseEntity.status(401).body(responseMap);
+				}
+
+			} else {
+				responseMap.put("error", true);
+				responseMap.put("message", "File does not exist");
+				return ResponseEntity.status(401).body(responseMap);
+			}
+
+		} else {
+			responseMap.put("error", true);
+			responseMap.put("message", "Invalid name");
+			return ResponseEntity.status(401).body(responseMap);
+		}
+	}
+
 	/*
 	 * @PostMapping("/api/uploadMultipleFiles")
 	 * public List<File> uploadMultipleFiles(@RequestParam("files") MultipartFile[]

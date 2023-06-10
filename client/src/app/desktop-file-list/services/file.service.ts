@@ -10,6 +10,10 @@ import { environment } from "../../../environments/environment";
   
 	ls(userData: any){
 		return this.http.get(`${environment.apiUrl}/api/v1/files/ls`, userData);
-	}
+	};
+
+	mv(fileData: any){
+		return this.http.post(`${environment.apiUrl}/api/v1/files/mv`, fileData);
+	};
     
   }
