@@ -127,11 +127,11 @@ public class FileStorageService {
 
 			// Copy file to the target location (Replacing existing file with the same name)
 			Path targetLocation = Paths.get(System.getProperty("user.home"), "uploads",
-					//userId,
-
+					userId,
 					fileId
 			);
-			// System.out.println("targetLocation = " + targetLocation);
+
+			System.out.println("targetLocation = " + targetLocation);
 
 			File currentFile = new File(targetLocation.toUri());
 			currentFile.delete();

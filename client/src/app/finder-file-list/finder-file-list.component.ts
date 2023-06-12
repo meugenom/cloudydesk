@@ -1,6 +1,6 @@
 import {
-	Component, ElementRef, Input, OnDestroy, OnInit,
-	DoCheck, SimpleChanges, ViewChild, ViewContainerRef
+	Component, ElementRef, Input, OnInit,
+	DoCheck, ViewChild
 } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { FileState } from '../desktop/store/models/file.state.model';
@@ -10,10 +10,9 @@ import { saveAs } from 'file-saver';
 import { environment } from '../../environments/environment';
 import { DirState } from '../desktop/store/models/dir.state.model';
 import { Dir } from '../desktop/store/models/dir.model';
-import { File } from '../desktop/store/models/file.model';
 import { Subscription } from 'rxjs';
 import { FileService } from '../services/file.service';
-import { loadFiles, loadFilesSuccess } from '../desktop/store/actions/file.actions';
+import { loadFiles } from '../desktop/store/actions/file.actions';
 
 @Component({
 	selector: 'app-finder-file-list',
@@ -21,7 +20,7 @@ import { loadFiles, loadFilesSuccess } from '../desktop/store/actions/file.actio
 	styleUrls: ['./finder-file-list.component.sass']
 })
 
-export class FinderFileListComponent implements DoCheck, OnInit {
+export class FinderFileListComponent implements DoCheck {
 
 	@ViewChild('container') input: ElementRef | undefined;
 
@@ -100,30 +99,47 @@ export class FinderFileListComponent implements DoCheck, OnInit {
 					//console.log(el.children[0].getAttribute('data-id'));
 					//console.log(el.children[0].getAttribute('data-name'));
 
-					//call api to move file to another folder
-					const payload = {
-						'fileId': el.children[0].getAttribute('data-id'),
-						'sourceDirId': el.children[0].getAttribute('data-dirId'),
-						'targetDirId': container.getAttribute('showFolderId')
+					//call api to edit file settings
+					let fileId = el.children[0].getAttribute('data-id');
+					let dirId = container.getAttribute('showFolderId');
+					//console.log(fileId);
+					console.log(this.allFiles)
+					for (let key in this.allFiles) {
+						const file: any = this.allFiles[key];
+						if (file.id == fileId) {
+							if(file.dirId != dirId && dirId != null) {
+								const payload = {
+									id: file.id.toString(),
+									name: file.name,
+									type: file.type,
+									size: file.size,
+									dirId: dirId.toString(),
+									createdUserId: file.createdUserId.toString(),
+									modifiedUserId: file.modifiedUserId.toString(),
+									createdDate: file.createdDate,
+									modifiedDate: file.modifiedDate
+								}
+								console.log('test');
+								this.fileService.putFile(payload).subscribe((data: any) => {
+
+								console.log(data);
+
+								//need update store files
+								this.fileService.ls("").subscribe((data: any) => {
+									//need call action to update store files
+									this.store.dispatch(loadFiles());
+								});
+							});
+
+							}
+						}
 					};
-
-					// call api to move file to another folder
-					this.fileService.mv(payload).subscribe((data: any) => {
-						//console.log(data);				
-						//need update store files
-						this.fileService.ls("").subscribe((data: any) => {
-							//need call action to update store files
-							this.store.dispatch(loadFiles());
-						});
-
-					});
 
 				} else (
 					el.children[0].getAttribute('data-dirId') == container.getAttribute('showFolderId'))
 				{
 					//need delete this moving visual effect
 					source.appendChild(el);
-					//el.remove();					
 				}
 			})
 		);
@@ -148,17 +164,6 @@ export class FinderFileListComponent implements DoCheck, OnInit {
 			//need rerender files list where file.dirId == dirId
 			this.files = this.allFiles.filter((file: any) => file.dirId == dirId);
 		}
-	}
-
-	ngOnInit(): void {
-
-	}
-
-	ngAfterViewInit() {
-		//TODO: ?
-		//if (this.element.nativeElement.attributes.childToMaster == 'Desktop') {
-		//console.log('childToMaster = ' + this.element.nativeElement.attributes.childToMaster)
-		//}
 	}
 
 	getItem(event: any, file: any) {

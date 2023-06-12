@@ -2,8 +2,8 @@ export interface File {
 	id: string;
 	name: string;
 	type: string;
-	path: string;
 	size: number;
+	dirId: string;
 	createdDate: string;
 	modifiedDate: string;
 	createdUserId: string;

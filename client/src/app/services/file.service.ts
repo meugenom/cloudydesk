@@ -12,8 +12,8 @@ import { environment } from "../../environments/environment";
 		return this.http.get(`${environment.apiUrl}/api/v1/files/ls`, userData);
 	};
 
-	mv(fileData: any){
-		return this.http.post(`${environment.apiUrl}/api/v1/files/mv`, fileData);
+	putFile(fileData: any){
+		return this.http.put(`${environment.apiUrl}/api/v1/files/file`, fileData);
 	};
     
   }

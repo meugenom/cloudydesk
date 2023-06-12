@@ -24,13 +24,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
+
+
+/**
+ * @description: FilesController is used to handle all the requests related to files
+ * @author meugenom
+ * @date 06-12-2023
+ */
 
 @RestController
 @RequestMapping("api/v1/files")
@@ -48,6 +52,12 @@ public class FilesController {
 	@Autowired
 	private DirService dirService;
 
+	/**
+	 * @description: uploading file to the server
+	 * @param file in multipart format
+	 * @param dirId directory id
+	 * @return ResponseEntity<Map < String, Object>>
+	 */
 	@PostMapping("/uploadFile")
 	public ResponseEntity<Map<String, Object>> uploadFile(
 			@RequestParam("") MultipartFile file,
@@ -97,6 +107,11 @@ public class FilesController {
 		return ResponseEntity.status(500).body(responseMap);
 	}
 
+	/**
+	 * @description: downloading file and directory list from the server by user id from the jwt token
+	 * @return files and dirs list
+	 */
+
 	@GetMapping("/ls")
 	public ResponseEntity<Map<String, Object>> getDir() {
 
@@ -127,11 +142,15 @@ public class FilesController {
 		}
 	}
 
-	// get info about existed file form repository
+	/**
+	 * @description: downloading file info from the server by file id
+	 * @param fileId
+	 * @return file info
+	 */
 	@GetMapping("/file")
 	public ResponseEntity<Files> getFile(
 			@RequestParam("id") String fileId) {
-		// get curent user
+		// get current user
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Users currentUser = usersRepository.getIdByEmail(authentication.getName());
 
@@ -151,12 +170,17 @@ public class FilesController {
 		}
 	}
 
-	// create new file without downloading bodies of the file
+
+	/**
+	 * @description: creating new file with name NewFile
+	 * @param body(file object) , jwt token
+	 * @return file info created by default
+	 */
 	@PostMapping("/file")
 	public ResponseEntity<Files> createFile(
 			@RequestBody Map<String, String> body) {
 
-		// get cuurent user
+		// get current user
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Users currentUser = usersRepository.getIdByEmail(authentication.getName());
 
@@ -184,7 +208,6 @@ public class FilesController {
 					fileStorageService.storeNewFile(Long.toString(currentUser.getId()), currentFileId);
 
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					return ResponseEntity.status(502).body(null);
 
@@ -203,7 +226,11 @@ public class FilesController {
 		}
 	}
 
-	//edit current file
+	/**
+	 * @description: editing file info by File() object from the body of request
+	 * @param body(file object), jwt token
+	 * @return file info
+	 */
 	@PutMapping("/file")
 	public ResponseEntity<Map<String, Object>> editFile(
 			@RequestBody Map<String, String> body) {
@@ -217,7 +244,7 @@ public class FilesController {
 
 		if (currentUser != null) {
 
-			//casting string datas to Long
+			//casting string data to Long
 			Long dirId = Long.parseLong(body.get("dirId"));
 			Long createUserId = Long.parseLong(body.get("createdUserId"));
 			Long modifiedUserId = Long.parseLong(body.get("modifiedUserId"));
@@ -237,8 +264,8 @@ public class FilesController {
 				filesRepository.save(file);
 
 				responseMap.put("error","false");
-				responseMap.put("file", file);
-				return ResponseEntity.ok(responseMap);
+				responseMap.put("message","File was edited");
+				return ResponseEntity.ok().body(responseMap);
 
 			}catch(EntityNotFoundException ex){
 
@@ -250,11 +277,15 @@ public class FilesController {
 
 		responseMap.put("error","true");
 		responseMap.put("errorName","User doesn't exist");
-		return ResponseEntity.status(502).body(responseMap);
+		return ResponseEntity.status(403).body(responseMap);
 	}
 
-	//delete file from database and from storage
-	@DeleteMapping
+	/**
+	 * @description: deleting file from the database and from the storage
+	 * @param body(file object), jwt token
+	 * @return response map with info about deleting (ok or error
+	 */
+	@DeleteMapping("/file")
 	public ResponseEntity<Map<String, Object>> deleteFile(
 			@RequestBody Map<String, String> body
 	){
@@ -300,70 +331,6 @@ public class FilesController {
 		return ResponseEntity.status(401).body(null);
 	}
 
-	//TODO: ? es gibt @PUTMAPPING string 207
-	@PostMapping("/mv")
-	public ResponseEntity<Map<String, Object>> moveFile(
-			@RequestBody Map<String, String> body) {
-
-		logger.info("File Moving");
-		Map<String, Object> responseMap = new HashMap<>();
-
-		// get user
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Users currentUser = usersRepository.getIdByEmail(authentication.getName());
-
-		// check file name
-		String fileId = body.get("fileId");
-		String targetDirId = body.get("targetDirId");
-		String currentDirId = body.get("sourceDirId");
-
-		// convert to long
-		long targetDir = Long.parseLong(targetDirId);
-		long currentDir = Long.parseLong(currentDirId);
-
-		if (currentUser != null &&
-				currentDir != targetDir) {
-
-			// get file from repo
-			Files currentFile = filesRepository.findById(fileId).orElse(null);
-
-			// check if file exists
-			if (currentFile != null &&
-					currentFile.getCreatedUserId() == currentUser.getId() &&
-					currentFile.getDirId() == currentDir) {
-
-				// check if file belongs to user
-				if (currentFile.getCreatedUserId() == currentUser.getId()) {
-
-					// update file dir
-					currentFile.setDirId(targetDir);
-
-					// save in database
-					filesRepository.save(currentFile);
-
-					responseMap.put("error", false);
-					responseMap.put("message", "File was moved");
-					return ResponseEntity.ok(responseMap);
-
-				} else {
-					responseMap.put("error", true);
-					responseMap.put("message", "File does not belong to user");
-					return ResponseEntity.status(401).body(responseMap);
-				}
-
-			} else {
-				responseMap.put("error", true);
-				responseMap.put("message", "File does not exist");
-				return ResponseEntity.status(401).body(responseMap);
-			}
-
-		} else {
-			responseMap.put("error", true);
-			responseMap.put("message", "Invalid name");
-			return ResponseEntity.status(401).body(responseMap);
-		}
-	}
-
 	/*
 	 * @PostMapping("/api/uploadMultipleFiles")
 	 * public List<File> uploadMultipleFiles(@RequestParam("files") MultipartFile[]
@@ -373,6 +340,11 @@ public class FilesController {
 	 * .map(file -> uploadFile(file))
 	 * .collect(Collectors.toList());
 	 * }
+	 */
+	/**
+	 * @description: downloading file from the storage
+	 * @param fileId as @PathVariable, jwt token
+	 * @return file as Resource
 	 */
 
 	@GetMapping("/downloadFile/{fileId:.+}")
