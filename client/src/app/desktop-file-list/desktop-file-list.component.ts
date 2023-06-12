@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, 
 	DoCheck, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
-import { FileService } from './services/file.service';
+import { FileService } from '../services/file.service';
 import { FileState } from '../desktop/store/models/file.state.model';
 import { Store } from '@ngrx/store';
 import { HttpClient, HttpEventType } from '@angular/common/http';

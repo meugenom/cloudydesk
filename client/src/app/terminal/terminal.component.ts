@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AuthStateInterface } from '../auth/store/models/auth.state.model';
 import { FileState } from '../desktop/store/models/file.state.model';
 
-import { User } from '../auth/user/model/user';
+import { User } from '../user/models/user';
 import { File } from '../desktop/store/models/file.model';
 
 @Component({

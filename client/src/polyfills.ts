@@ -58,5 +58,7 @@ import 'zone.js';  // Included with Angular CLI.
  */
 // import 'intl';  // Run `npm install --save intl`.
 
-//ng-dragula drag and drop lib
+/**
+ * Need to import at least one locale-data for ng-dragula to work
+ */
 (window as any).global = window;

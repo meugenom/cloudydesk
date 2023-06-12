@@ -6,7 +6,7 @@ import {
 } from '../actions/auth.action';
 import { AuthStateInterface } from "../models/auth.state.model";
 import { Action, createReducer, on } from '@ngrx/store';
-import {User} from '../../user/model/user';
+import {User} from '../../../user/models/user';
 
 import { 
 	AUTH_LOGIN_USER,

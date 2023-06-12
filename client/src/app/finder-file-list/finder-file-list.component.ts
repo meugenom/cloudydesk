@@ -12,7 +12,7 @@ import { DirState } from '../desktop/store/models/dir.state.model';
 import { Dir } from '../desktop/store/models/dir.model';
 import { File } from '../desktop/store/models/file.model';
 import { Subscription } from 'rxjs';
-import { FileService } from '../desktop-file-list/services/file.service';
+import { FileService } from '../services/file.service';
 import { loadFiles, loadFilesSuccess } from '../desktop/store/actions/file.actions';
 
 @Component({
@@ -54,6 +54,7 @@ export class FinderFileListComponent implements DoCheck, OnInit {
 		this.currentFolderDir = 'Desktop';
 		this.currentFolderId = '';
 		this.showFolderPath = 'Desktop';
+		
 		this.allFiles = [];
 		this.files = [];
 

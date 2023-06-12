@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+//TODO: save properties in the localstorage 
+
 /*
 @Injectable()
 export class PersistanceService {

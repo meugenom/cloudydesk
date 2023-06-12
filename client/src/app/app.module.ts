@@ -49,11 +49,11 @@ import { environment } from '../environments/environment'; // Angular CLI enviro
 //auth
 import { AuthModule } from './auth/auth.module';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpConfigInterceptor } from './auth/interceptors/httpconfig.interceptor';
+import { HttpConfigInterceptor } from './interceptors/httpconfig.interceptor';
 import { AuthenticateComponent } from './auth/components/authenticate/authenticate.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { LogoutComponent } from './auth/components/logout/logout.component';
-import { AuthGuard } from './auth/services/auth.guard';
+import { AuthGuard } from './services/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DesktopModule } from './desktop/desktop.module';
 import { WidgetPanelComponent } from './widget-panel/widget-panel.component';
@@ -67,6 +67,7 @@ import { MobileComponent } from './mobile/mobile.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FileMenuComponent } from './file-menu/file-menu.component';
 
+import { ThemesComponent } from './themes/themes.component';
 
 @NgModule({
 	declarations: [
@@ -92,7 +93,8 @@ import { FileMenuComponent } from './file-menu/file-menu.component';
 		UploadingComponent,
   		NotificationComponent,
     MobileComponent,
-    FileMenuComponent
+    FileMenuComponent,
+    ThemesComponent
 	],
 	imports: [
 		AppRoutingModule,

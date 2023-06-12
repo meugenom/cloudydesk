@@ -123,8 +123,4 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 			
 		}
 	}
-	
-
-	
-
 }
