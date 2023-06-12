@@ -14,7 +14,7 @@ public interface FilesRepository extends JpaRepository<Files, String> {
 	Optional<Files> findByName(String name);
 
 	//find file by id
-	Optional<Files> findById(String id);
+	Files getOne(String id);
 	
 	//find by createdUserId is used in the project
 	Iterable<Files> findAllByCreatedUserId(Long createdUserId);
