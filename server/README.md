@@ -14,12 +14,12 @@ This project was generated with:
 - File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: directory.
 
 ### **Features**
-- **API**:
+- **Endpoints**:
 	- **/api/v1/auth/authenticate**[POST] return valid JWT-token
 	- **/api/v1/auth/register**[POST] create a new user and return user and valid JWT-token
 	- **/api/v1/auth/logout**[POST] return JWT-token with null body
-	
-    - -**api/v1/users/user**[GET] check JWT-token and return user credential
+	-
+    - **api/v1/users/user**[GET] check JWT-token and return user credential
     - **api/v1/users/list**[GET] get users list only when user has ROLE_ADMIN
 	- 
     - **api/v1/files/ls**[GET] files and directories list for current user
