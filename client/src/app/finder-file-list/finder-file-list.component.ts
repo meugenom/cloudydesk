@@ -155,8 +155,9 @@ export class FinderFileListComponent implements DoCheck, OnInit {
 	}
 
 	ngAfterViewInit() {
+		//TODO: ?
 		//if (this.element.nativeElement.attributes.childToMaster == 'Desktop') {
-		console.log('childToMaster = ' + this.element.nativeElement.attributes.childToMaster)
+		//console.log('childToMaster = ' + this.element.nativeElement.attributes.childToMaster)
 		//}
 	}
 
