@@ -1,46 +1,17 @@
-<!--
-<nav>
-  <ul>
-	<li><a routerLink="/desktop-component" routerLinkActive="active" ariaCurrentWhenActive="page">Web Desktop</a></li>
-  </ul>
-</nav>
--->
-<!-- The routed views render in the <router-outlet>-->
-<div
-  class="screen">
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-  <div class="firefly"></div>
-
+<div>
   <!--loader-->
   <div #loaderTemplate>
     <div *ngIf="getLoading()"
       class="loader">
-      <div class="spinner"></div>
+      <div class="inner-spinner"></div>
+      <div class="outer-spinner"></div>
       <img class="loader-image" src="../assets//img/rocket-ship.svg" alt="rocket" />
     </div>
   </div>
 
 
-  <!--spinner-->
-  <app-progressbar></app-progressbar>
+  <!--progress system loader-->
+  <app-system-loader></app-system-loader> 
   <!-- mobile or desktop -->
   <router-outlet></router-outlet>
 </div>

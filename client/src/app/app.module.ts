@@ -67,13 +67,16 @@ import { MobileComponent } from './mobile/mobile.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FileMenuComponent } from './file-menu/file-menu.component';
 
-import { ThemesComponent } from './themes/themes.component';
+import {ThemesModule} from "./themes/themes.module";
+import {ThemesDirective} from "./themes/themes.directive";
+import {PersistanceService} from "./services/persistance.service";
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		DesktopComponent,
 		DesktopFullscreenDirective,
+		ThemesDirective,
 		TaskbarComponent,
 		FinderComponent,
 		DrawComponent,
@@ -93,8 +96,7 @@ import { ThemesComponent } from './themes/themes.component';
 		UploadingComponent,
   		NotificationComponent,
     MobileComponent,
-    FileMenuComponent,
-    ThemesComponent
+    FileMenuComponent
 	],
 	imports: [
 		AppRoutingModule,
@@ -114,13 +116,15 @@ import { ThemesComponent } from './themes/themes.component';
 			autoPause: true, // Pauses recording actions and state changes when the extension window is not open
 		}),
 		EffectsModule.forRoot([]),
-		NgxEditorModule
+		NgxEditorModule,
+		ThemesModule
 	],
 	providers: [ModService, Globals, ContextMenuService,
 		{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
 		AuthGuard,
-		NotificationService
+		NotificationService,
+		PersistanceService
 	],
 	bootstrap: [AppComponent]
 })
