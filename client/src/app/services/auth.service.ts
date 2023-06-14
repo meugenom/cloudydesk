@@ -2,8 +2,8 @@ import { catchError, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { environment } from "src/environments/environment";
-import { User } from  '../user/model/user';
+import { environment } from "../../environments/environment";
+import { User } from '../user/models/user';
 
 
 @Injectable({providedIn: 'root'})

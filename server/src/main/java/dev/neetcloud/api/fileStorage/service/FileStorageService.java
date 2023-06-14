@@ -4,12 +4,14 @@ import dev.neetcloud.api.file.exception.FileNotFoundException;
 import dev.neetcloud.api.fileStorage.exception.FileStorageException;
 import dev.neetcloud.api.fileStorage.model.FileStorage;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -19,8 +21,7 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class FileStorageService {
-	
-	
+
 	private final Path fileStorageLocation;
 
 	public FileStorageService(FileStorage fileStorageProperties) {
@@ -36,7 +37,7 @@ public class FileStorageService {
 	}
 
 	public String checkFileName(MultipartFile file) {
-		
+
 		// Normalize file name
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
@@ -47,25 +48,61 @@ public class FileStorageService {
 		return fileName;
 	}
 
+	// create null file
+	public boolean storeNewFile(String userId, String fileId) throws java.io.FileNotFoundException {
+
+		try {
+
+			Path testPath = Paths.get(System.getProperty("user.home"), "uploads", userId);
+			Boolean isUserDirExists = Files.exists(testPath);
+
+			System.out.println("testPath = " + testPath);
+			System.out.println("isUserDirExists = " + isUserDirExists);
+
+			// create dir for current user
+			if (isUserDirExists == false) {
+				Files.createDirectories(testPath);
+			}
+
+			// Copy file to the target location (Replacing existing file with the same name)
+			Path targetLocation = Paths.get(System.getProperty("user.home"), "uploads", userId, fileId);
+
+			System.out.println("targetLocation = " + targetLocation);
+
+			File file = new File(targetLocation.toUri());
+			boolean isCreated = file.createNewFile();
+			try {
+
+				return isCreated;
+
+			}catch(Exception e){
+				throw new FileStorageException("Could not store file " + fileId + ". Please try again!", e);
+			}
+
+		} catch (IOException ex) {
+			throw new FileStorageException("Could not store file " + fileId + ". Please try again!", ex);
+		}
+	}
+
 	public String storeFile(MultipartFile file, String userId, String fileId) {
 
 		// Normalize file name
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
 		try {
-			//check current user dir
-			Path testPath = Paths.get(System.getProperty("user.home"),"uploads", userId);
+			// check current user dir
+			Path testPath = Paths.get(System.getProperty("user.home"), "uploads", userId);
 			Boolean isUserDirExists = Files.exists(testPath);
-			//System.out.println("testPath = " + testPath);
-			//System.out.println("isUserDirExists = " + isUserDirExists);
-			//create dir for current user
-			if(isUserDirExists == false){
+			// System.out.println("testPath = " + testPath);
+			// System.out.println("isUserDirExists = " + isUserDirExists);
+			// create dir for current user
+			if (isUserDirExists == false) {
 				Files.createDirectories(testPath);
 			}
 
 			// Copy file to the target location (Replacing existing file with the same name)
-			Path targetLocation = Paths.get(System.getProperty("user.home"),"uploads", userId, fileId);
-			//System.out.println("targetLocation = " + targetLocation);
+			Path targetLocation = Paths.get(System.getProperty("user.home"), "uploads", userId, fileId);
+			// System.out.println("targetLocation = " + targetLocation);
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
 			return fileName;
@@ -75,11 +112,41 @@ public class FileStorageService {
 		}
 	}
 
+	public String deleteFile(String fileId, String userId){
+
+		try{
+			// check current user dir
+			Path testPath = Paths.get(System.getProperty("user.home"), "uploads", userId);
+			Boolean isUserDirExists = Files.exists(testPath);
+			// System.out.println("testPath = " + testPath);
+			// System.out.println("isUserDirExists = " + isUserDirExists);
+			// create dir for current user
+			if (isUserDirExists == false) {
+				Files.createDirectories(testPath);
+			}
+
+			// Copy file to the target location (Replacing existing file with the same name)
+			Path targetLocation = Paths.get(System.getProperty("user.home"), "uploads",
+					userId,
+					fileId
+			);
+
+			System.out.println("targetLocation = " + targetLocation);
+
+			File currentFile = new File(targetLocation.toUri());
+			currentFile.delete();
+
+			return "";
+		}catch (IOException ex){
+			throw new FileStorageException("Could not store file " + fileId + ". Please try again!", ex);
+		}
+	}
+
 	public Resource loadFileAsResource(String fileId, String userId) {
-		
+
 		try {
-			//Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
-			Path filePath = Paths.get(System.getProperty("user.home"),"uploads", userId, fileId);
+			// Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+			Path filePath = Paths.get(System.getProperty("user.home"), "uploads", userId, fileId);
 			Resource resource = new UrlResource(filePath.toUri());
 			if (resource.exists()) {
 				return resource;

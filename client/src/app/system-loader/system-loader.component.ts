@@ -42,7 +42,7 @@ const enterTransition = transition(':enter', [
   ]);
 
 @Component({
-	selector: 'app-progressbar',
+	selector: 'app-system-loader',
 	templateUrl: './system-loader.component.html',
 	styleUrls: ['./system-loader.component.sass'],
 	

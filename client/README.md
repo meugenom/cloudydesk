@@ -7,7 +7,7 @@ Used [SASS](https://sass-lang.com) and [Typescript](https://www.typescriptlang.o
 Used node version 16.14.2, npm version 8.9.0
 
 External Libraries:
-1. [ng2-dragula](https://www.npmjs.com/package/ng2-dragula) version 2.1.1
+1. [ng2-dragula](https://www.npmjs.com/package/ng2-dragula) version 3.2.0
 2. [@viselect/vanilla](https://www.npmjs.com/package/@viselect/vanilla) version 3.0.0
 3. [express](https://www.npmjs.com/package/express) version 4.18.1
 4. [screenfull](https://www.npmjs.com/package/screenfull) version 6.0.2

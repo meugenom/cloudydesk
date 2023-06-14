@@ -2,7 +2,7 @@ import { authenticateAction } from '../../store/actions/auth.action';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import {User} from '../../user/model/user'
+import {User} from '../../../user/models/user'
 
 @Component({
 	selector: 'app-authenticate',

@@ -1,6 +1,6 @@
 <div
   class="finder-item-container dragula"
-  dragula="FILES"
+  dragula="DRAGULA_FILE_LIST"
   [attr.showFolderPath]="showFolderPath"
   [attr.showFolderId]="showFolderId"
 >
@@ -8,13 +8,16 @@
     <div
       class="item"
       id="item-{{ file.id }}"
-      [attr.data-uid]="file.id"
-      [attr.data-id]="file.id"
+      [attr.data-id] = "file.id"      
       [attr.data-name]="file.name"
+      [attr.data-dirId]="file.dirId"
       [attr.data-size]="file.size"
-      [attr.data-created]="file.createdUser"
-      [attr.data-modified]="file.modifiedUser"
-      [attr.dragstart]="this.dragstart"
+      [attr.data-type]="file.type"
+      [attr.data-createdDate]="file.createdDate"
+      [attr.data-createdDate]="file.modifiedDate"
+      [attr.data-createdUser]="file.createdUser"
+      [attr.data-modifiedUser]="file.modifiedUser"
+      
       (dblclick)="getItem($event, file)"
     >
       <div class="item-spinner"></div>

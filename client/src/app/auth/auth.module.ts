@@ -1,5 +1,5 @@
 //import { PersistanceService } from './services/persistance.service';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { StoreModule } from '@ngrx/store';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

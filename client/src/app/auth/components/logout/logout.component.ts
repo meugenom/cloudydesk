@@ -1,4 +1,4 @@
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { registerAction, logoutAction } from '../../store/actions/auth.action';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';

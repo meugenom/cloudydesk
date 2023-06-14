@@ -1,6 +1,6 @@
 # NeetCloud App
 
-[![Version](https://img.shields.io/badge/version-0.2.3-yellow.svg)](https://semver.org/spec/v1.0.0.html)
+[![Version](https://img.shields.io/badge/version-0.2.4-yellow.svg)](https://semver.org/spec/v1.0.0.html)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 <p align="center">
@@ -33,12 +33,13 @@ NeetCloud App is Open Source App. You can download the code and make your change
 
 ## Features (Application in Progress)
 
-- An animated web view featuring a background with a space theme, a taskbar, and app icons.
-- An animated progress bar that indicates the progress of space settings and messages.
+- An animated web view featuring a background with a space, ocean, moon, among themes, a taskbar, and app icons.
+- An animated loader system bar that indicates the progress of space settings and messages.
 - Full-window mode capability for the desktop, allowing you to maximize the desktop view and occupy the entire screen.
 - Modal windows that can be triggered from taskbar icons, providing options to close, maximize, minimize, move, and resize windowed applications. You can also switch between active windowed apps with a single click, even when other windowed apps are open. Resizing can be done using the bottom-left icon.
 - The app terminal allows you to input commands such as "help," "ls," "whoami," and "uname." Other commands are currently being developed.
-- The app finder displays a list of files organized by directories, which are automatically added when creating a new account.
+- The app finder displays a list of files organized by directories, which are automatically added when creating a new account. It's possible to drag and drop files from desktop to directories to save on backend. 
+- The app settings provides to choose current thema from space, ocean, moon, among themes. By default is space thema.
 - The app editor provides a simple text editor interface without the option to save files.
 - The app camera allows you to connect your webcam and view yourself.
 - Context-menu functionality, left-clicking, including the ability to upload files to the server. The file can be saved based on the context of where you selected the menu - either in the finder or on the desktop. Other options in progress.
@@ -112,8 +113,8 @@ I'll be glad and pleased to listen to some critiques about the code or ideas. **
 
 - All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 - Space Background's Picture downloaded from Unsplash.com (Gary Scott).
-
-
+- Theme 'Among' was injected from resource: [@Mamboleoo - Louis Hoebregts](https://codepen.io/Mamboleoo/pen/WNxOvjo), 'Moon' from resource: [@aris_acoba - Aris Acoba](https://codepen.io/aris_acoba/pen/vzyJJQ),
+ 'Ocean' from resource: [@tedmcdo - Ted McDonald](https://codepen.io/tedmcdo/pen/PqxKXg).
 ## Contributors
 
 _You could be here!_

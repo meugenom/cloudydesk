@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, 
 	DoCheck, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
-import { FileService } from './services/file.service';
+import { FileService } from '../services/file.service';
 import { FileState } from '../desktop/store/models/file.state.model';
 import { Store } from '@ngrx/store';
 import { HttpClient, HttpEventType } from '@angular/common/http';
@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { DirState } from '../desktop/store/models/dir.state.model';
 import { Dir } from '../desktop/store/models/dir.model';
 import { File } from '../desktop/store/models/file.model';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-desktop-file-list',
@@ -31,26 +32,20 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 	//input props for file-list component
 	@Input() showFolderPath: string | undefined;
 	@Input() showFolderId: string | undefined;
-
-	@Input() path: String | undefined;
-	@Input() id: number | undefined;
-	@Input() name: String | undefined;
-	@Input() type: String | undefined;
-	@Input() uid: number | undefined;
-	@Input() size: number | undefined;
-	@Input() created: string | undefined;
-	@Input() modified: string | undefined;
-	@Input() charset: string | undefined;
+	
 	@Input() style: string | undefined;
-	@Input() item: string | undefined;
-	@Input() dragstart: boolean | undefined;
+
+
+	// declare for dragula service
+	BAG = "DRAGULA_FILE_LIST";
+  	subs = new Subscription();
 
 	constructor(
 		private dragulaService: DragulaService,
 		private element: ElementRef,
 		private fileService: FileService,
 		private store: Store<{files: FileState, dirs: DirState}>,
-		private http: HttpClient
+		private http: HttpClient,
 	) {
 		//by default is 'Desktop'
 		this.currentFolderPath = 'Desktop';
@@ -87,8 +82,50 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 			this.files = data.files.filter((file: any) => file.dirId == dirId);
 			
 		})
+
+		//dragula subscription
+		/*
+		this.subs.add(dragulaService.drag(this.BAG)
+		.subscribe(({ el }) => {
+		  this.removeClass(el, 'ex-moved');
+		})
+	  );
+	  this.subs.add(dragulaService.drop(this.BAG)
+		.subscribe(({ el }) => {
+		  this.addClass(el, 'ex-moved');
+		})
+	  );
+	  
+	  this.subs.add(dragulaService.over(this.BAG)
+		.subscribe(({ el, container }) => {
+		  console.log('over', container);
+		  this.addClass(container, 'ex-over');
+		})
+	  );
+	  this.subs.add(dragulaService.out(this.BAG)
+		.subscribe(({ el, container }) => {
+		  console.log('out', container);
+		  this.removeClass(container, 'ex-over');
+		})
+	  );
+	  */
 	}
 
+	ngOnDestroy() {
+		// destroy dragula subscription
+		this.subs.unsubscribe();
+	}
+
+	//dragula methods
+	/*
+	addClass(el: any, name: any) {
+		el.classList.add(name);
+	};
+
+	removeClass(el: any, name: any) {
+		el.classList.remove(name);
+	};
+	*/
 
 	ngDoCheck() {
 		if(this.showFolderId != this.currentFolderId){ 

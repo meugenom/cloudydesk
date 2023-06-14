@@ -7,7 +7,7 @@ import { DesktopFileListComponent } from "./desktop-file-list.component";
 import { HttpClientModule } from '@angular/common/http';
 import { fileReducer } from '../desktop/store/reducers/file.reducer';
 import { StoreModule } from '@ngrx/store';
-import { FileService } from './services/file.service'
+import { FileService } from '../services/file.service'
 
 @NgModule({
 

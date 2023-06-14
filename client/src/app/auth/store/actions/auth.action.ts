@@ -3,7 +3,7 @@ import {
     props
 } from '@ngrx/store';
 
-import {User} from '../../user/model/user'
+import {User} from '../../../user/models/user'
 import { AUTH_LOGIN_USER,
 		 AUTH_LOGIN_USER_FETCH_SUCCESSFUL,
 		 AUTH_LOGIN_USER_FETCH_ERROR,

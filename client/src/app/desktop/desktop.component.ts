@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { WidgetPanel } from '../desktop/store/models/widgetpanel.model';
 import { OpenPanel } from '../desktop/store/actions/widgetpanel.action';
 import { AuthStateInterface } from '../auth/store/models/auth.state.model';
-import { AuthService } from '../auth/services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { checkUserAction} from '../auth/store/actions/auth.action';
 import { FileState } from './store/models/file.state.model';
 import { loadFiles } from './store/actions/file.actions';
@@ -63,7 +63,6 @@ export class DesktopComponent {
 		this.email = "unknown"
 
 		//need check our localstorage and find authtoken
-		//const  isAuthenticated = this.authService.isAuthenticated();
 		
 		//console.log(isAuthenticated);
 		

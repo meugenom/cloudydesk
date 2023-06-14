@@ -1,5 +1,5 @@
 //import { PersistanceService } from '../../services/persistance.service';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, map, of, tap } from 'rxjs';

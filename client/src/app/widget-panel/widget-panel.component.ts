@@ -7,7 +7,7 @@ import {
 	WIDGET_PANEL_OPEN_LOGIN_FORM,
 	WIDGET_PANEL_OPEN_REGISTER_FORM,	
 } from '../desktop/store/models/widgetpanel.constants'
-import { User } from '../auth/user/model/user';
+import { User } from '../user/models/user';
 
 
 @Component({

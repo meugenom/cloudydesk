@@ -14,17 +14,22 @@ This project was generated with:
 - File Store uses by default ```home:/user:/uploads``` directories. Please make dir ```/uploads``` in your /Home:/User: directory.
 
 ### **Features**
-- **API**:
-	- **/api/v1/auth/authenticate** return valid JWT-token
-	- **/api/v1/auth/register** create a new user and return user and valid JWT-token
-	- **/api/v1/auth/logout** return JWT-token with null body
-	
-    - -**api/v1/users/user** check JWT-token and return user credential
-    - **api/v1/users/list** get users list only when user has ROLE_ADMIN
+- **Endpoints**:
+	- **/api/v1/auth/authenticate**[POST] return valid JWT-token
+	- **/api/v1/auth/register**[POST] create a new user and return user and valid JWT-token
+	- **/api/v1/auth/logout**[POST] return JWT-token with null body
+	-
+    - **api/v1/users/user**[GET] check JWT-token and return user credential
+    - **api/v1/users/list**[GET] get users list only when user has ROLE_ADMIN
 	- 
-    - **api/v1/files/ls** get files and directories list for current user
-	- **api/v1/files/uploadFile:** uploading file to the storage and get file info
-	- **api/v1/files/downloadFile/{fileId:.+}** downloading file from the storage (by web desktop - double click on icon of file)
+    - **api/v1/files/ls**[GET] files and directories list for current user
+    - **api/v1/files/file**[GET] get file info by id
+    - **api/v1/files/file**[POST] create new file info without file content
+    - **api/v1/files/file**[PUT] update file info without file content
+    - **api/v1/files/file**[DELETE] delete file info by id
+    - **api/v1/files/file/{fileId}** delete file by id
+	- **api/v1/files/uploadFile:**[POST] uploading file to the storage and get file info
+	- **api/v1/files/downloadFile/{fileId}**[GET] downloading file from the storage (by web desktop - double click on icon of file)
 	... other in progress
 
 ### Development server

@@ -1,8 +1,8 @@
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { registerAction } from '../../store/actions/auth.action';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import {User} from '../../user/model/user'
+import {User} from '../../../user/models/user'
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';

@@ -1,0 +1,14 @@
+<div>
+    <div class="primary-text">
+        <h4>Themes Setting</h4>
+    </div>
+    <div>
+        <select [(ngModel)]="selectedTheme" (ngModelChange)="onSelectedThemeChange($event)">
+            <option value="space">Space</option>
+            <option value="among">Among Us</option>
+            <option value="moon">Moon</option>
+            <option value="ocean">Ocean</option>
+        </select>
+    </div>
+</div>
+

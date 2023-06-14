@@ -1,6 +1,6 @@
 import { TerminalPrompt } from './terminal-prompt'
 
-import { User } from '../auth/user/model/user';
+import { User } from '../user/models/user';
 import { File } from '../desktop/store/models/file.model';
 
 
