@@ -1,0 +1,48 @@
+@keyframes cresent
+  0%
+    transform: translate(-30px, 30px) scale(0.9)
+    box-shadow: none
+  50%
+    transform: translate(0px, 0px) scale(1.02)
+    box-shadow: 0 0 10px #f9f3f2, 0 0 80px 8px #C7938B
+    background-color: #efdbd8
+  100%
+    transform: translate(30px, -30px) scale(0.9)
+    box-shadow: none
+
+.moon-container
+  position: absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  z-index: -1
+  display: flex
+  justify-content: center
+  align-items: center
+  background-image: linear-gradient(30deg, #182C51, #09101e)
+  overflow: hidden
+
+.moon
+  background-image: linear-gradient(30deg, #13223f, #0e1a30)
+  width: 256px
+  height: 256px
+  border-radius: 50%
+  position: relative
+
+.moon::before
+  content: ""
+  background-color: #C7938B
+  position: absolute
+  display: block
+  height: 100%
+  width: 100%
+  border-radius: 50%
+  z-index: -1
+  animation: 3.2s cresent linear infinite alternate
+
+
+@media (max-width: 768px)
+  .moon
+    width: 160px
+    height: 160px
