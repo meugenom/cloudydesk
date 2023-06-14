@@ -1,30 +1,33 @@
 import { ActionReducerMap } from "@ngrx/store";
 
+import {Navigator} from '../models/navigator.model'
 import { NavigatorReducer} from "./navigator.reducer";
-import { WidgetPanelReducer } from './widgetpanel.reducer';
 
 import {WidgetPanel} from '../models/widgetpanel.model'
-import {Navigator} from '../models/navigator.model'
+import { WidgetPanelReducer } from './widgetpanel.reducer';
 
-import {File} from '../models/file.model'
 import { FileState } from "../models/file.state.model";
 import {fileReducer} from './file.reducer'
 
 import {Context} from '../models/context.model'
-import { ContextState } from "../models/context.state.model";
 import {ContextReducer} from './context.reducer'
+
+import {Environment} from "../models/environment.model";
+import {EnvironmentReducer} from './environment.reducer'
 
 export interface AppState {
   widgetPanel: WidgetPanel;
   navigator: Navigator;
   files: FileState,
-  context: Context
+  context: Context,
+environment: Environment
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-	  widgetPanel: WidgetPanelReducer,
+    widgetPanel: WidgetPanelReducer,
   	navigator: NavigatorReducer,
-	  files: fileReducer,
-    context: ContextReducer
+    files: fileReducer,
+    context: ContextReducer,
+    environment: EnvironmentReducer
 };
 	
