@@ -70,11 +70,11 @@ Here is a way to run the project locally:
 
 ```bash
 	# install docker and download image using command below
-	docker pull meugenom/neetcloud:0.2.3
+	docker pull meugenom/neetcloud:0.2.4
 	# see images
 	docker images
 	# run image with the folowing command
-	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 neetcloud:0.2.3
+	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 neetcloud:0.2.4
 	# see started containers
 	docker ps
 	# after wann container is launched, run the command to connect to the container
