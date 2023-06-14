@@ -37,6 +37,6 @@ logging:
     console: "%clr(%d{yy-MM-dd E HH:mm:ss.SSS}){yellow} %clr(%-5p) %clr(%logger{0}){blue} %clr(%m){faint}%n"
 
 file:
-  #upload-dir: /Users/meinemandala/uploads/ # for me local
-  upload-dir: /uploads/ # for docker by root
+  upload-dir: /Users/meinemandala/uploads/ # for me local
+  #upload-dir: /uploads/ # for docker by root
   #upload-dir: /home/<username>/uploads/ # for you, please add own path
