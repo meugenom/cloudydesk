@@ -8,6 +8,7 @@ import {SpaceComponent} from "./components/space/space.component";
 import {AmongComponent} from "./components/among/among.component";
 import {MoonComponent} from "./components/moon/moon.component";
 import { OceanComponent } from "./components/ocean/ocean.component";
+import { SolarSystemComponent } from "./components/solarsystem/solarsystem.component";
 
 @NgModule({
 
@@ -16,6 +17,7 @@ import { OceanComponent } from "./components/ocean/ocean.component";
         FormsModule,
         CommonModule,
         HttpClientModule,
+        
 
     ],
     declarations: [
@@ -23,14 +25,16 @@ import { OceanComponent } from "./components/ocean/ocean.component";
         SpaceComponent,
         AmongComponent,
         MoonComponent,
-        OceanComponent
+        OceanComponent,
+        SolarSystemComponent,
     ],
     exports: [
         ThemesComponent,
         SpaceComponent,
         AmongComponent,
         MoonComponent,
-        OceanComponent        
+        OceanComponent,
+        SolarSystemComponent, 
     ],
     providers: []
 

@@ -39,7 +39,7 @@ NeetCloud App is Open Source App. You can download the code and make your change
 - Modal windows that can be triggered from taskbar icons, providing options to close, maximize, minimize, move, and resize windowed applications. You can also switch between active windowed apps with a single click, even when other windowed apps are open. Resizing can be done using the bottom-left icon.
 - The app terminal allows you to input commands such as "help," "ls," "whoami," and "uname." Other commands are currently being developed.
 - The app finder displays a list of files organized by directories, which are automatically added when creating a new account. It's possible to drag and drop files from desktop to directories to save on backend. 
-- The app settings provides to choose current thema from space, ocean, moon, among themes. By default is space thema.
+- The app settings provides to choose current thema from space, ocean, moon, among solar system themes. By default is space thema.
 - The app editor provides a simple text editor interface without the option to save files.
 - The app camera allows you to connect your webcam and view yourself.
 - Context-menu functionality, left-clicking, including the ability to upload files to the server. The file can be saved based on the context of where you selected the menu - either in the finder or on the desktop. Other options in progress.
@@ -114,7 +114,7 @@ I'll be glad and pleased to listen to some critiques about the code or ideas. **
 - All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 - Space Background's Picture downloaded from Unsplash.com (Gary Scott).
 - Theme 'Among' was injected from resource: [@Mamboleoo - Louis Hoebregts](https://codepen.io/Mamboleoo/pen/WNxOvjo), 'Moon' from resource: [@aris_acoba - Aris Acoba](https://codepen.io/aris_acoba/pen/vzyJJQ),
- 'Ocean' from resource: [@tedmcdo - Ted McDonald](https://codepen.io/tedmcdo/pen/PqxKXg).
+ 'Ocean' from resource: [@tedmcdo - Ted McDonald](https://codepen.io/tedmcdo/pen/PqxKXg), 'Solar System' from resource: [@kowlor Malik Dellidj](https://codepen.io/kowlor/pen/ZYYQoy).
 ## Contributors
 
 _You could be here!_

@@ -9,6 +9,7 @@ import { MoonComponent } from './components/moon/moon.component'
 import { OceanComponent } from './components/ocean/ocean.component';
 import {Store} from "@ngrx/store";
 import {EnvironmentState} from "../desktop/store/models/environment.state.model";
+import { SolarSystemComponent } from './components/solarsystem/solarsystem.component';
 
 
 @Directive({
@@ -121,6 +122,21 @@ export class ThemesDirective {
 
             // Create a component factory for the CirclesComponent
             const componentFactory = this.componentFactoryResolver.resolveComponentFactory(OceanComponent);
+
+            // Create an instance of the CirclesComponent
+            const componentRef = this.viewContainerRef.createComponent(componentFactory);
+
+            // Append the component's root element to the desktop element
+            desktop.appendChild(componentRef.location.nativeElement);
+
+        } else if(theme === "solarsystem"){
+
+            desktop.style.backgroundImage = '';
+            desktop.style.backgroundSize = '';
+            desktop.style.background ='';
+
+            // Create a component factory for the CirclesComponent
+            const componentFactory = this.componentFactoryResolver.resolveComponentFactory(SolarSystemComponent);
 
             // Create an instance of the CirclesComponent
             const componentRef = this.viewContainerRef.createComponent(componentFactory);
