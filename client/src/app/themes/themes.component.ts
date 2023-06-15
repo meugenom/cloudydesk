@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Globals } from '../global';
-import {PersistanceService} from "../services/persistance.service";
-import {Store} from "@ngrx/store";
-import {EnvironmentState} from "../desktop/store/models/environment.state.model";
-import {AddEnvironment} from "../desktop/store/actions/environment.action";
+import { PersistanceService } from "../services/persistance.service";
+import { Store } from "@ngrx/store";
+import { EnvironmentState } from "../desktop/store/models/environment.state.model";
+import { AddEnvironment } from "../desktop/store/actions/environment.action";
 
 
 @Component({
@@ -13,41 +13,54 @@ import {AddEnvironment} from "../desktop/store/actions/environment.action";
 })
 export class ThemesComponent implements OnInit {
 
-  selectedTheme: string | undefined;
-
-
+  selectedTheme: string | null = null;
 
   constructor(
     private globals: Globals,
     private persistanceService: PersistanceService,
-    private store: Store<{ environment: EnvironmentState}>
+    private store: Store<{ environment: EnvironmentState }>
   ) {
 
-    this.selectedTheme = this.globals.currentTheme;
-    persistanceService.setItem('theme', this.selectedTheme);
+    //if theme exist on local storage then set it
+    if (this.persistanceService.getItem('theme')) {
+      this.selectedTheme = this.persistanceService.getItem('theme');      
+    } else {
+      this.selectedTheme = this.globals.currentTheme;
+      persistanceService.setItem('theme', this.selectedTheme);
     }
 
-    ngOnInit(): void {
-
+    //set store for environment
+    const environment: { theme: string } = {
+      theme : this.selectedTheme!=null?this.selectedTheme:'space',
     }
+
+    // add to the store
+    this.store.dispatch( AddEnvironment(environment));
+
+  }
+
+  ngOnInit(): void {
+
+  }
 
   ngOnDestroy(): void {
   }
 
-    onSelectedThemeChange(theme : string) {
-      //console.log('Selected theme changed:', theme);
-        this.globals.currentTheme = theme;
-        this.persistanceService.setItem('theme', theme);
+  onSelectedThemeChange(theme: string) {
+    //console.log('Selected theme changed:', theme);
 
-        //set store for environment
-      const environment: { theme: string } = {
-        theme: theme,
-      }
+    this.globals.currentTheme = theme;
+    this.persistanceService.setItem('theme', theme);
 
-      this.store.dispatch(
-          AddEnvironment(
-              environment))
-
+    //set store for environment
+    const environment: { theme: string } = {
+      theme: theme,
     }
+
+    this.store.dispatch(
+      AddEnvironment(
+        environment))
+
   }
+}
 

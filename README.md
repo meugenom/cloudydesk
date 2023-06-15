@@ -113,8 +113,7 @@ I'll be glad and pleased to listen to some critiques about the code or ideas. **
 
 - All icons uploaded from [www.svgrepo.com](https://www.svgrepo.com) and will be changed later in our versions.
 - Space Background's Picture downloaded from Unsplash.com (Gary Scott).
-- Theme 'Among' was injected from resource: [@Mamboleoo - Louis Hoebregts](https://codepen.io/Mamboleoo/pen/WNxOvjo), 'Moon' from resource: [@aris_acoba - Aris Acoba](https://codepen.io/aris_acoba/pen/vzyJJQ),
- 'Ocean' from resource: [@tedmcdo - Ted McDonald](https://codepen.io/tedmcdo/pen/PqxKXg), 'Solar System' from resource: [@kowlor Malik Dellidj](https://codepen.io/kowlor/pen/ZYYQoy).
+- Theme 'Among' was injected from resource: [@Mamboleoo - Louis Hoebregts](https://codepen.io/Mamboleoo/pen/WNxOvjo), 'Moon' from resource: [@aris_acoba - Aris Acoba](https://codepen.io/aris_acoba/pen/vzyJJQ), 'Solar System' from resource: [@kowlor Malik Dellidj](https://codepen.io/kowlor/pen/ZYYQoy).
 ## Contributors
 
 _You could be here!_
