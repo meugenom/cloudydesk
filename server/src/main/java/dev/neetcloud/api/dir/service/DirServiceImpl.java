@@ -106,28 +106,44 @@ public class DirServiceImpl implements DirService {
     /**
      * DFS add child node to parent node
      * 
-     * @param node     current node, by default it's root node
-     * @param parentId parent id of child node
+     * @param root     root node
+     * @param rootId  root node id
      * @param child    child node
-     * @param root     root node, by default it's root node
+     * @param parentId parent node id
      * @return root node
      */
     public GraphNode<Dir> dfsAddChild(
-            GraphNode<Dir> node,
-            Long parentId,
+            GraphNode<Dir> root,
+            Long rootId,
             GraphNode<Dir> child,
-            GraphNode<Dir> root) {
-        if (node.getData().getId().equals(parentId)) {
-            node.addChild(child);
+            Long parentId) {
+            
+            System.out.println("root.id = " + rootId + ", parentId = " + parentId);
+
+        if (rootId.equals(parentId)) {
+            root.addChild(child);
             return root;
+        }else {
+            return helper(root,rootId, child, parentId);
         }
-        for (GraphNode<Dir> n : node.getChildren()) {
-            GraphNode<Dir> result = dfsAddChild(n, parentId, child, root);
-            if (result != null) {
-                return result;
+    }
+
+    // recursive helper function for dfsAddChild()
+    public GraphNode<Dir> helper  (
+            GraphNode<Dir> root,
+            Long rootId,
+            GraphNode<Dir> child,
+            Long parentId
+    ){
+        if(rootId.equals(parentId)) {
+            root.addChild(child);
+            return root;
+        }else{
+            for(GraphNode<Dir> node : root.getChildren()){
+                helper(node, node.getData().getId(), child, parentId);
             }
         }
-        return null;
+        return root;
     }
 
     @Override
@@ -150,9 +166,16 @@ public class DirServiceImpl implements DirService {
 
         while (it.hasNext()) {
             Dir currentDir = it.next();
-            if (currentDir.getId() != rootId && currentDir.getParentId().equals(rootId)) {
+            Long parentId = currentDir.getParentId();
+            if (    
+                currentDir.getId() != rootId 
+                ) {
                 GraphNode<Dir> parentGraphNode = new GraphNode<Dir>(currentDir);
-                rootGraphNode = this.dfsAddChild(rootGraphNode, rootId, parentGraphNode, rootGraphNode);
+                rootGraphNode = this.dfsAddChild(
+                    rootGraphNode, 
+                    rootId, 
+                    parentGraphNode, 
+                    parentId);
                 it.remove();
             }
         }
