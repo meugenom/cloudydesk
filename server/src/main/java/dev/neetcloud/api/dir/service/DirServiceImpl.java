@@ -118,14 +118,9 @@ public class DirServiceImpl implements DirService {
             GraphNode<Dir> child,
             Long parentId) {
             
-            System.out.println("root.id = " + rootId + ", parentId = " + parentId);
+            System.out.println("root.id = " + rootId + ", child id = "+ child.getData().getId() + ", parentId = " + parentId);
 
-        if (rootId.equals(parentId)) {
-            root.addChild(child);
-            return root;
-        }else {
-            return helper(root,rootId, child, parentId);
-        }
+        return helper(root,rootId, child, parentId);
     }
 
     // recursive helper function for dfsAddChild()
@@ -138,11 +133,12 @@ public class DirServiceImpl implements DirService {
         if(rootId.equals(parentId)) {
             root.addChild(child);
             return root;
-        }else{
-            for(GraphNode<Dir> node : root.getChildren()){
-                helper(node, node.getData().getId(), child, parentId);
-            }
         }
+
+        for(GraphNode<Dir> node : root.getChildren()){
+            helper(node, node.getData().getId(), child, parentId);
+        }
+
         return root;
     }
 
@@ -160,6 +156,9 @@ public class DirServiceImpl implements DirService {
 
         // create root GraphNode
         GraphNode<Dir> rootGraphNode = new GraphNode<Dir>(rootDir);
+
+        //sorting allDirs by id in ascending order, so that can exist parent for child in allDirs
+        allDirs.sort((Dir d1, Dir d2) -> d1.getId().compareTo(d2.getId()));
 
         // make iterator for allDirs
         Iterator<Dir> it = allDirs.iterator();
