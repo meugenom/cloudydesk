@@ -9,7 +9,6 @@ import { saveAs } from 'file-saver';
 import { environment } from 'src/environments/environment';
 import { DirState } from '../desktop/store/models/dir.state.model';
 import { Dir } from '../desktop/store/models/dir.model';
-import { File } from '../desktop/store/models/file.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,7 +17,7 @@ import { Subscription } from 'rxjs';
 	styleUrls: ['./desktop-file-list.component.sass']
 })
 
-export class DesktopFileListComponent implements DoCheck, OnInit  {
+export class DesktopFileListComponent implements OnInit  {
 
 	@ViewChild('container') input: ElementRef | undefined;
 	
@@ -28,10 +27,6 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 
 	currentFolderPath: String | undefined;
 	currentFolderId: String | undefined;
-	
-	//input props for file-list component
-	@Input() showFolderPath: string | undefined;
-	@Input() showFolderId: string | undefined;
 	
 	@Input() style: string | undefined;
 
@@ -71,9 +66,7 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 			this.dirs?.children?.forEach((dir: any) => {
 				//console.log(dir.data.dirName);
 				if(dir.data.dirName == this.currentFolderPath){
-					dirId = dir.data.id;
-					this.showFolderPath = dir.data.dirName;
-					this.showFolderId = dir.data.id;
+					dirId = dir.data.id;					
 					this.currentFolderId = dir.data.id;
 				}
 			});
@@ -115,37 +108,7 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 		// destroy dragula subscription
 		this.subs.unsubscribe();
 	}
-
-	//dragula methods
-	/*
-	addClass(el: any, name: any) {
-		el.classList.add(name);
-	};
-
-	removeClass(el: any, name: any) {
-		el.classList.remove(name);
-	};
-	*/
-
-	ngDoCheck() {
-		if(this.showFolderId != this.currentFolderId){ 
-			this.currentFolderId = this.showFolderId;
-			this.currentFolderPath = this.showFolderPath!;
-			
-			let dirId: null = null;
-			this.dirs?.children?.forEach((dir: any) => {
-				//console.log(dir.data.dirName);
-				if(dir.data.dirName == this.currentFolderPath){
-					dirId = dir.data.id;
-				}
-			});
-			//console.log('dirId = ' + dirId);
 	
-			//need rerender files list where file.dirId == dirId
-			this.files = this.allFiles.filter((file: any) => file.dirId == dirId);
-		}
-	  }
-
 	ngOnInit(): void {
 
 	}

@@ -33,10 +33,6 @@ import {
 export class DesktopComponent {
 
 	fullScreen: boolean;
-	
-	//props for file-list component
-	showFolderPath: string = '';
-	showFolderId: string = '';
 
 	@ViewChild('container') input: ElementRef | undefined;
 	dragDrop: boolean = false;
