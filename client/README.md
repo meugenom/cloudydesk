@@ -1,6 +1,6 @@
 ## Web-based desktop client (frontend code)
 
-see **[Demo](https://neetcloud.dev)**
+see **[Demo](https://cloudydesk.de)**
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6. 
 Used [SASS](https://sass-lang.com) and [Typescript](https://www.typescriptlang.org).

@@ -1,6 +1,6 @@
 {
-  "name": "neetcloud",
-  "version": "0.2.4",
+  "name": "cloudydesk",
+  "version": "0.2.5",
   "description": "A web-based cloud desktop for users",
   "license": "MIT",
   "private": "false",
@@ -20,7 +20,7 @@
   },
   "keywords": [
     "cloud-app",
-    "neetcloud",
+    "cloudydesk",
     "web-desktop",
     "web-based",
     "typescript",
@@ -28,9 +28,9 @@
     "github"
   ],
   "bugs": {
-    "url": "https://github.com/meugenom/neetcloud/issues"
+    "url": "https://github.com/meugenom/cloudydesk/issues"
   },
-  "homepage": "https://neetcloud.dev",
+  "homepage": "https://cloudydesk.de",
   "dependencies": {
     "@angular/animations": "^14.0.0",
     "@angular/common": "^14.0.0",

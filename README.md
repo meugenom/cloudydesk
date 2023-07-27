@@ -1,18 +1,18 @@
-# NeetCloud App
+# CloudyDesk App
 
-[![Version](https://img.shields.io/badge/version-0.2.4-yellow.svg)](https://semver.org/spec/v1.0.0.html)
+[![Version](https://img.shields.io/badge/version-0.2.5-yellow.svg)](https://semver.org/spec/v1.0.0.html)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 <p align="center">
-  <img src="./neetcloud-logo.svg" data-canonical-src="./neetcloud-logo.svg" width="200" height="200" />
+  <img src="./cloudydesk.svg" data-canonical-src="./cloudydesk.svg" width="200" height="200" />
 </p>
 
 <p align="center">
-  NeetCloud App - A web-based cloud desktop for users (In Progress)
+  CloudyDesk App - A web-based cloud desktop for users (In Progress)
 </p>
 
 <p align="center">
-  	<a href="https://neetcloud.dev" >See Demo</a>
+  	<a href="https://cloudydesk.de" >See Demo</a>
   	<br>
   	<b>Anonymous User was deleted. Please create own account or use current:</b>
 </p>
@@ -27,9 +27,9 @@
 </p>
 
 ## About
-Neetcloud App is in a progressive state.
-NeetCloud is an app for the web. It’s a dynamic site with a database Postgres on board. The main goal of this website is to make a useful and friendly cloud like a desktop manager, which is a little bit similar to shell OS. So we plan to have our small functional embedded applications like a terminal app, draw app, text editor, photo viewer, media player, etc. It would be workable with simple functionality.
-NeetCloud App is Open Source App. You can download the code and make your changes.
+CloudyDesk App is in a progressive state.
+CloudyDesk is an app for the web. It’s a dynamic site with a database Postgres on board. The main goal of this website is to make a useful and friendly cloud like a desktop manager, which is a little bit similar to shell OS. So we plan to have our small functional embedded applications like a terminal app, draw app, text editor, photo viewer, media player, etc. It would be workable with simple functionality.
+CloudyDesk App is Open Source App. You can download the code and make your changes.
 
 ## Features (Application in Progress)
 
@@ -50,7 +50,7 @@ NeetCloud App is Open Source App. You can download the code and make your change
 - A loading spinner is activated to indicate ongoing processes.
 
 ### Please read this
-- There is currently no demo available on the website [https://neetcloud.dev](https://neetcloud.dev). Please use the following login credentials:
+- There is currently no demo available on the website [https://cloudydesk.de](https://cloudydesk.de). Please use the following login credentials:
 	login: muster@muster.muster
 	password: muster
 - After loading the Docker image to start, please follow the instructions below.
@@ -70,15 +70,15 @@ Here is a way to run the project locally:
 
 ```bash
 	# install docker and download image using command below
-	docker pull meugenom/neetcloud:0.2.4
+	docker pull meugenom/cloudydesk:0.2.5
 	# see images
 	docker images
 	# run image with the folowing command
-	docker run -d --name neetcloud-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 neetcloud:0.2.4
+	docker run -d --name cloudydesk-container -e POSTGRES_USER=cloudydesk -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 cloudydesk:0.2.5
 	# see started containers
 	docker ps
 	# after wann container is launched, run the command to connect to the container
-	docker exec -it neetcloud-container bin/bash
+	docker exec -it cloudydesk-container bin/bash
 	# in the opened console start each service one by one with the following commands:
 	nginx && start-frontend && start-backend
 	# you can see all started processes

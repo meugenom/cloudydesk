@@ -1,6 +1,6 @@
 ## Web-based desktop client (backend code)
 
-see **[Demo - https://neetcloud.dev](https://neetcloud.dev)**
+see **[Demo - https://cloudydesk.de](https://cloudydesk.de)**
 
 This project was generated with:
 
@@ -46,10 +46,14 @@ Install and run `Docker`
 	# see this images in the list
 	docker images
 	# start new docker container
-	docker run -d --name postgres-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -v data:/var/lib/postgresql/data postgres
+	docker run -d --name postgres-container -e POSTGRES_USER=cloudydesk -e POSTGRES_PASSWORD=password -p 5432:5432 -v data:/var/lib/postgresql/data postgres
 	# see started containers, in your case is postgres-container
 	docker ps
 ```
+### DB Scheme
+<p align="center">
+  <img src="./assets/cloudydesk_db _diagram.svg" data-canonical-src="./assets/cloudydesk_db_diagram.svg" width="800" height="600" />
+</p>
 
 ### Build
 

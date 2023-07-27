@@ -10,7 +10,7 @@ export default {
 		content: [
 		  {
 			type: "text",
-			text: "neetcloud.dev"
+			text: "cloudydesk.de"
 		  }
 		]
 	  },
@@ -22,7 +22,7 @@ export default {
 		content: [
 		  {
 			type: "text",
-			text: "neetcloud.dev is a website developed by meugenom. It is a cloud storage platform that provides secure and reliable storage for your files. With neetcloud.dev, you can easily upload, manage, and share your files with others."
+			text: "cloudydesk.de is a website developed by meugenom. It is a cloud storage platform that provides secure and reliable storage for your files. With neetcloud.dev, you can easily upload, manage, and share your files with others."
 		  }
 		]
 	  },
