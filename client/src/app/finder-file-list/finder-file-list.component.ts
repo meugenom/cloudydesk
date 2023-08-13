@@ -9,10 +9,10 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import { environment } from '../../environments/environment';
 import { DirState } from '../desktop/store/models/dir.state.model';
-import { Dir } from '../desktop/store/models/dir.model';
 import { Subscription } from 'rxjs';
 import { FileService } from '../services/file.service';
 import { loadFiles } from '../desktop/store/actions/file.actions';
+import { DirUtils} from '../utils/dir-utils';
 
 @Component({
 	selector: 'app-finder-file-list',
@@ -30,7 +30,8 @@ export class FinderFileListComponent implements DoCheck {
 
 	allFiles: any;
 	files: any
-	dirs: Dir | undefined;
+	allDirs: any;
+	dirs: any| undefined;
 
 	currentFolderDir: String | undefined;
 	currentFolderId: String | undefined;
@@ -56,6 +57,8 @@ export class FinderFileListComponent implements DoCheck {
 		
 		this.allFiles = [];
 		this.files = [];
+		this.allDirs = [];
+		this.dirs = [];
 
 		//add dblclk event listeenr for every item
 		const items = document.getElementsByClassName("item");
@@ -81,8 +84,20 @@ export class FinderFileListComponent implements DoCheck {
 			});
 
 			this.allFiles = data.files;
+			this.allDirs  = data.dirs;
+			
 			this.files = data.files.filter((file: any) => file.dirId == dirId);
-
+			//console.log(data.dirs);
+			
+			//find dirs by id
+			if(dirId != undefined) {				
+				const currentDir = DirUtils.getDir(this.allDirs, dirId);
+				//console.log(currentDir)
+				if(currentDir.children.length != 0){
+					this.dirs = currentDir.children;
+				}
+			}			
+			
 		})
 
 
@@ -166,8 +181,33 @@ export class FinderFileListComponent implements DoCheck {
 		}
 	}
 
+	//when click on dir in the list, need change currentFolderDir and open new file list
+	//save old dir in the linked list for bread crumbs
+	openDir(event: any, dir: any) {
+		//this.showFolderPath = dir.data.dirName;
+		//this.showFolderId = dir.data.id;
+		this.currentFolderDir = dir.data.dirName;
+		this.currentFolderId = dir.data.id;
+
+		this.files = this.allFiles.filter((file: any) => file.dirId == dir.data.id);
+		//console.log(this.files);
+
+		//find dirs by id
+		if(dir.data.id != undefined) {
+			const currentDir = DirUtils.getDir(this.allDirs, dir.data.id);
+			//console.log(currentDir);
+			if(currentDir.children.length != 0){
+				this.dirs = currentDir.children;
+			}else{
+				this.dirs = [];
+			}
+		}
+		console.log(this.dirs)
+	}
+
 	getItem(event: any, file: any) {
-		//console.log(file);
+
+
 		this.http.get(`${environment.apiUrl}/api/v1/files/downloadFile/${file.id}`, { responseType: 'blob' })
 			.subscribe(
 				(response) => {

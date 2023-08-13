@@ -2,5 +2,6 @@ import { createAction, props } from '@ngrx/store';
 
 export const AddFinder = createAction('[Finder Component] AddFinder',
 	props<{
-		currentDir: string        
+		currentDir: string,
+		currentDirId: string       
 	}>());

@@ -1,3 +1,4 @@
 export interface Finder {
-    currentDir: string
+    currentDir: string,
+    currentDirId: string,
 }
