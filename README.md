@@ -1,6 +1,6 @@
 # CloudyDesk App
 
-[![Version](https://img.shields.io/badge/version-0.2.5-yellow.svg)](https://semver.org/spec/v1.0.0.html)
+[![Version](https://img.shields.io/badge/version-0.2.4-yellow.svg)](https://semver.org/spec/v1.0.0.html)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 <p align="center">
@@ -70,7 +70,7 @@ Here is a way to run the project locally:
 
 ```bash
 	# install docker and download image using command below
-	docker pull meugenom/cloudydesk:0.2.5
+	docker pull meugenom/cloudydesk:0.2.4
 	# see images
 	docker images
 	# run image with the folowing command

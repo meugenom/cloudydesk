@@ -1,7 +1,7 @@
 {
   "name": "cloudydesk",
-  "version": "0.2.5",
-  "description": "A web-based cloud desktop for users",
+  "version": "0.2.4",
+  "description": "A web-based cloud desktop for users cloudydesk",
   "license": "MIT",
   "private": "false",
   "main": "src/main.ts",
