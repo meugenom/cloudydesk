@@ -1,31 +1,32 @@
 export class DirUtils {
 
-  static getDirName(dirs: any): string {
+  static getDirName(dirs: any) {
     //return path.split('/').pop();
     return dirs.data.dirName;
   }
 
   static getDir(dirs: any, id: number): any {
-    
-    //private case
-    if (dirs != null && dirs.data.id == id)
-      return dirs;
-
-    if(dirs == null)
-      return;
-
-    //recursive case
-    for (let index = 0; index < dirs.children.length; index++) {
-      const dir = dirs.children[index];
-      if (dir.data.id == id)
-        return dir;
-      else {
-        let result = this.getDir(dir, id);
-        if (result != null)
-          return result;
-      }
+    if (!dirs) {
+        return null;
     }
+
+    if (dirs.data && dirs.data.id === id) {
+        return dirs;
+    }
+
+    if (dirs.children && dirs.children.length > 0) {
+      for (let index = 0; index < dirs.children.length; index++) {
+          const dir = dirs.children[index];
+          const result = this.getDir(dir, id);
+          if (result) {
+              return result;
+          }
+      }
   }
+  
+    return null;
+}
+
 
 }
 
