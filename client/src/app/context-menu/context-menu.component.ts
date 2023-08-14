@@ -80,28 +80,39 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 		// in js we have event.target.tagName 
 		//but ts needs default handler, so !important
 		if (event instanceof MouseEvent) {
-			console.log(event.clientX)
-			console.log(event.clientY)
+			//console.log(event.clientX)
+			//console.log(event.clientY)
+			
 			console.log(event)
+			
 			this.element.style.top = event.clientY + 'px';
 			this.element.style.left = event.clientX + 'px';
 			
-			//find parent element and some attribute 
-			//console.log(event.target)
-			let foundElem : any = event.target;
-			let path = '';
-			let id = '';
+			//find parent element and some attribute to know id and path			
+			console.log(event.target)
+			let container = event.target as HTMLElement;
+			let dirId = container.getAttribute('dirId');
+			console.log(dirId)
 			
-			this.store.select('finder').subscribe((data: any) => {
-				id = data.currentDirId;
-			})
+			let dirName = container.getAttribute('dirName');
+			console.log(dirName)
 
-			//set store for context
 			const context: Context = {
-				usedFolder: id,
+				usedFolder: '',
 				usedFile: ''
 			}
-	
+			
+			if(dirId == null || dirName == null){
+				// we clicked on the same file
+				console.log(container.getAttribute('data-dataitem'));
+				context.usedFile = (container.getAttribute('data-dataitem') as string).substring(5);
+			}else{
+				//we clicked on the folder
+				
+				//set store for context				
+				context.usedFolder = dirId;
+			}
+			//put to the store
 			this.store.dispatch(
 				AddContext(
 					context))		
