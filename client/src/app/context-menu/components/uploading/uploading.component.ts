@@ -1,12 +1,12 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { FileState } from '../desktop/store/models/file.state.model';
-import { environment } from "src/environments/environment";
+import { FileState } from '../../../desktop/store/models/file.state.model';
+import { environment } from "../../../../environments/environment";
 import { Store } from '@ngrx/store';
 import { finalize, Subscription } from 'rxjs';
-import { loadFiles } from '../desktop/store/actions/file.actions';
+import { loadFiles } from '../../../desktop/store/actions/file.actions';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import { ContextState } from '../desktop/store/models/context.state.model';
+import { ContextState } from '../../../desktop/store/models/context.state.model';
 import { dir } from 'console';
 
 
