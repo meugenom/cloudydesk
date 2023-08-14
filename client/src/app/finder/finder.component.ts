@@ -12,9 +12,6 @@ import { AddFinder } from '../desktop/store/actions/finder.action';
 })
 export class FinderComponent implements OnInit {
 
-	showFolderPath: string | undefined;
-	showFolderId: string | undefined;
-
 	folders: any[]
 
 	activeFolderName: string | undefined;
@@ -36,45 +33,57 @@ export class FinderComponent implements OnInit {
 			this.files = data.files;
 			//console.log(data.dirs);
 			this.dirs = data.dirs;
-
-			//add to the breadcrumbs
-			this.breadcrumbs.push({name: 'Desktop', id: 'desktop'});
 		})
 
 		//get folders
 		this.folders = this.getFolders();
 
-		//set active folder
-		
-		this.activeFolderName = 'Desktop' //by default the desktop folder is active on startup
-		
+		//set active folder from the store
+		this.store.select('finder').subscribe((data: any) => {
+			//console.log(data);
+			if(data.currentDir == undefined || data.currentDir == ''){
+				//by default set active folder to desktop
+				this.activeFolderName = 'Desktop';
+				
+				//get id from folders array where name is desktop				
+				this.folders.forEach((folder) => {
+					if (folder.data.dirName?.toLowerCase() == this.activeFolderName?.toLowerCase()) {
+						this.activeFolderId = folder.data.id;
+						//console.log(folder.data.id);
+					}				
+				})
+				//set active folder
+				//console.log(this.activeFolderName, this.activeFolderId)
+				//this.setActiveFolder(this.activeFolderName, this.activeFolderId);
 
-		//get id from folders array where name is desktop
-		this.folders.forEach((folder) => {
-			if (folder.name?.toLowerCase() == this.activeFolderName?.toLowerCase()) {
-				this.activeFolderId = folder.id;
+			}else{			
+				this.activeFolderId = data.currentDirId;
+				this.activeFolderName = data.currentDir;
+				//this.setActiveFolder(this.activeFolderName, this.activeFolderId);
 			}
 		})
+
+		//set breadcrumbs
+		this.breadcrumbs = [
+			{name : this.activeFolderName,
+			id: this.activeFolderId }];
+		this.setActiveFolder(this.activeFolderName, this.activeFolderId);
+
+		
 	}
 
 	ngOnInit(): void {
 
 	}
 
-	changeFileList(name : string, id: string){
-		//console.log(name.toLowerCase());
-		
-		//set active state for item
-		this.setActiveFolder(name, id);
-
-
-	}
 
 	/**
 	 * @description sets the active folder and changes the active state of the folder in the sidebar
 	 * @param name 
 	 */
 	setActiveFolder(name : any, id: any) {
+
+		//console.log(name, id);
 		
 		//remove old active folder by css
 		document.getElementById(this.activeFolderName + '-sidebar')?.classList.remove('window-sidebar-item-active');
@@ -85,16 +94,16 @@ export class FinderComponent implements OnInit {
 		//put active folder name in to this.activeFolderName
 		this.activeFolderName = name;
 		this.activeFolderId = id;
-
-		//set new breadcrumbs
-		this.breadcrumbs.pop();
-		this.breadcrumbs.push({name: name, id: id});
 		
-		//set store for finder
-		  const finder: { currentDir: any, currentDirId: any } = {
+		this.breadcrumbs = [];
+		this.breadcrumbs.push({name : name, id: id});
+		
+		  //set store for finder
+		  const finder: { currentDir: any, currentDirId: any, breadcrumbs: any } = {
             currentDir : name,
-			currentDirId : id
-        }
+			currentDirId : id,
+			breadcrumbs: this.breadcrumbs
+          }
   
       // add to the store
       this.store.dispatch( AddFinder(finder));

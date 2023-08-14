@@ -7,7 +7,8 @@ import { createReducer, on } from '@ngrx/store';
 const initialState: Finder =
 {
     currentDir: '',
-    currentDirId: ''
+    currentDirId: '',
+    breadcrumbs: []
 };
 
 export const FinderReducer = createReducer(
@@ -15,7 +16,8 @@ export const FinderReducer = createReducer(
     on(AddFinder, (state, action) => (
         {
             currentDir: action.currentDir,
-            currentDirId: action.currentDirId
+            currentDirId: action.currentDirId,
+            breadcrumbs: action.breadcrumbs
         }
     ))
 );

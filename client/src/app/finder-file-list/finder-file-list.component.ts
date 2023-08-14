@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { FileService } from '../services/file.service';
 import { loadFiles } from '../desktop/store/actions/file.actions';
 import { DirUtils} from '../utils/dir-utils';
+import { FinderState } from '../desktop/store/models/finder.state.model';
 
 @Component({
 	selector: 'app-finder-file-list',
@@ -33,12 +34,8 @@ export class FinderFileListComponent implements DoCheck {
 	allDirs: any;
 	dirs: any| undefined;
 
-	currentFolderDir: String | undefined;
-	currentFolderId: String | undefined;
-
-	//input props for file-list component
-	@Input() showFolderPath: string | undefined;
-	@Input() showFolderId: string | undefined;
+	currentDir: String | undefined;
+	currentDirId: String | undefined;
 
 	// set input props for file-list component
 	@Input() style: string | undefined;
@@ -46,19 +43,24 @@ export class FinderFileListComponent implements DoCheck {
 	constructor(
 		private dragulaService: DragulaService,
 		private element: ElementRef,
-		private store: Store<{ files: FileState, dirs: DirState }>,
+		private store: Store<{ files: FileState, dirs: DirState, finder: FinderState }>,
 		private http: HttpClient,
 		private fileService: FileService
 	) {
-		//by default is 'Desktop'
-		this.currentFolderDir = 'Desktop';
-		this.currentFolderId = '';
-		this.showFolderPath = 'Desktop';
 		
 		this.allFiles = [];
 		this.files = [];
 		this.allDirs = [];
 		this.dirs = [];
+
+		this.store.select('finder').subscribe((data: any) => {
+			//console.log(data);
+			this.currentDir = data.currentDir;
+			this.currentDirId = data.currentDirId;
+			
+			//need rerender files list where file.dirId == dirId
+			this.files = this.allFiles.filter((file: any) => file.dirId == this.currentDirId);
+		});
 
 		//add dblclk event listeenr for every item
 		const items = document.getElementsByClassName("item");
@@ -77,9 +79,9 @@ export class FinderFileListComponent implements DoCheck {
 			let dirId: null = null;
 			this.dirs?.children?.forEach((dir: any) => {
 				//console.log(dir.data.dirName);
-				if (dir.data.dirName == this.currentFolderDir) {
+				if (dir.data.dirName == this.currentDir) {
 					dirId = dir.data.id;
-					this.showFolderId = dir.data.id;
+					this.currentDirId = dir.data.id;
 				}
 			});
 
@@ -99,26 +101,38 @@ export class FinderFileListComponent implements DoCheck {
 			}			
 			
 		})
-
-
+		
+		
 		this.subs.add(dragulaService.out(this.BAG)
 			.subscribe(({ el, container, source }) => {
+				console.log('file moving');
 				if (
-					this.currentFolderId != container.getAttribute('showFolderId') &&
-					container.getAttribute('showFolderId') != null &&
-					el.children[0].getAttribute('data-dirId') != container.getAttribute('showFolderId')
+					//source.getAttribute('dirId') != container.getAttribute('dirId') &&
+					container.getAttribute('dirId') != null &&
+					el.children[0].getAttribute('data-dirId') != container.getAttribute('dirId')
 
 				) {
-					//console.log('out to ', container.getAttribute('showFolderPath'));
-					//console.log('out to ', container.getAttribute('showFolderId'));
-					//console.log(el.children[0].getAttribute('data-id'));
-					//console.log(el.children[0].getAttribute('data-name'));
+					
+					//info about file transfer from to
+					console.log('from ',source.id)
+					console.log('from dirName ', source.getAttribute('dirName'))
+					console.log('form dirId ', source.getAttribute('dirId'))
+					
+					console.log('to ', container.id)
+					console.log('to dirName ', container.getAttribute('dirName'))
+					console.log('to dirId ', container.getAttribute('dirId'))
+					
+					console.log(el.children[0].getAttribute('data-id'));
+					console.log(el.children[0].getAttribute('data-name'));
+
 
 					//call api to edit file settings
 					let fileId = el.children[0].getAttribute('data-id');
-					let dirId = container.getAttribute('showFolderId');
+					let dirId = container.getAttribute('dirId');
+					
 					//console.log(fileId);
 					console.log(this.allFiles)
+
 					for (let key in this.allFiles) {
 						const file: any = this.allFiles[key];
 						if (file.id == fileId) {
@@ -133,8 +147,8 @@ export class FinderFileListComponent implements DoCheck {
 									modifiedUserId: file.modifiedUserId.toString(),
 									createdDate: file.createdDate,
 									modifiedDate: file.modifiedDate
-								}
-								console.log('test');
+								}								
+
 								this.fileService.putFile(payload).subscribe((data: any) => {
 
 								console.log(data);
@@ -151,8 +165,10 @@ export class FinderFileListComponent implements DoCheck {
 					};
 
 				} else (
-					el.children[0].getAttribute('data-dirId') == container.getAttribute('showFolderId'))
+					el.children[0].getAttribute('data-dirId') == container.getAttribute('dirId')
+					)
 				{
+				
 					//need delete this moving visual effect
 					source.appendChild(el);
 				}
@@ -161,24 +177,7 @@ export class FinderFileListComponent implements DoCheck {
 
 	}
 
-	ngDoCheck() {
-		if (this.showFolderPath != this.currentFolderDir) {
-			this.currentFolderId = this.showFolderId;
-			this.currentFolderDir = this.showFolderPath!;
-
-			let dirId: null = null;
-			this.dirs?.children?.forEach((dir: any) => {
-				//console.log(dir.data.dirName);
-				if (dir.data.dirName == this.currentFolderDir) {
-					dirId = dir.data.id;
-					this.showFolderId = dir.data.id;
-				}
-			});
-			//console.log('dirId = ' + dirId);
-
-			//need rerender files list where file.dirId == dirId
-			this.files = this.allFiles.filter((file: any) => file.dirId == dirId);
-		}
+	ngDoCheck() {		
 	}
 
 	//when click on dir in the list, need change currentFolderDir and open new file list
@@ -186,8 +185,8 @@ export class FinderFileListComponent implements DoCheck {
 	openDir(event: any, dir: any) {
 		//this.showFolderPath = dir.data.dirName;
 		//this.showFolderId = dir.data.id;
-		this.currentFolderDir = dir.data.dirName;
-		this.currentFolderId = dir.data.id;
+		this.currentDir = dir.data.dirName;
+		this.currentDirId = dir.data.id;
 
 		this.files = this.allFiles.filter((file: any) => file.dirId == dir.data.id);
 		//console.log(this.files);

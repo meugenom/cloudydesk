@@ -69,7 +69,7 @@ export class ContextMenuService {
 	add(context: any) {
 		// add context to the array of contexts
 		this.contexts.push(context);
-		console.log(this.contexts)
+		//console.log(this.contexts)
 	}
 
 }

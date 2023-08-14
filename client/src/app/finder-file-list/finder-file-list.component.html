@@ -2,17 +2,19 @@
 <div
   class="finder-item-container dragula"
   dragula="DRAGULA_FILE_LIST"
-  [attr.showFolderPath]="showFolderPath"
-  [attr.showFolderId]="showFolderId">
+  id="finder-file-list"
+  [attr.dirName] = "currentDir"
+  [attr.dirId] = "currentDirId"
+  >
 
   <!-- dir list -->  
   <div *ngFor="let dir of this.dirs; let i = index">
     <!-- dir item-->
     <div
       class="item"
-      id="item{{ dir.data.id }}"
+      id="item-{{ dir.data.id }}"
       [attr.data-id] = "dir.data.id"
-      [attr.data-name]="dir.data.dirName"
+      [attr.data-name]= "dir.data.dirName"
       (dblclick)="openDir($event, dir)">
         <div class="item-spinner"></div>
         <div class="item-icon" [attr.style]="this.style">

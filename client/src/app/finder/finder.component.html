@@ -7,7 +7,7 @@
       [attr.dataId]="folder.data.id"
       [attr.dataName]="folder.data.dirName"
       *ngIf="folder.data.dirName == activeFolderName"
-      (click)="changeFileList(folder.data.dirName, folder.data.id)"
+      (click)="setActiveFolder(folder.data.dirName, folder.data.id)"
       >
       <img
         src="../../assets/img/folder-desktop.svg"
@@ -51,7 +51,7 @@
       class="window-sidebar-item"
       id="{{ folder.data.dirName + '-sidebar' }}"
       *ngIf="folder.data.dirName != activeFolderName"
-      (click)="changeFileList(folder.data.dirName, folder.data.id)"
+      (click)="setActiveFolder(folder.data.dirName, folder.data.id)"
     >
       <img
         src="../../assets/img/folder-desktop.svg"
@@ -94,19 +94,20 @@
   </ng-container>
 </div>
 
+
 <div class="window-navbar">
   <div class="window-navbar-breadcrumbs">
-    <ng-container *ngFor="let dir of this.breadcrumbs; let i = index">
+    <ng-container *ngFor="let breadcrumb of this.breadcrumbs; let i = index">
       <a
         class="window-navbar-breadcrumbs-item"
-        id="{{ dir.dirName + '-breadcrumb' }}"
-        [attr.dataId]="dir.id"
-        [attr.dataName]="dir.name"
-        (click)="changeFileList(dir.name, dir.id)">
-        {{ dir.name }}
-    </a>
+        id="{{ breadcrumb.dirName + '-breadcrumb' }}"
+        [attr.dataId]="breadcrumb.id"
+        [attr.dataName]="breadcrumb.name"
+        (click)="setActiveFolder(breadcrumb.name, breadcrumb.id)">
+        {{ breadcrumb.name }}
+      </a>
       <span class="window-navbar-breadcrumbs-seperator" style="display: inline;">/</span>
-    </ng-container>
+    </ng-container>    
   </div>
 </div>
 
