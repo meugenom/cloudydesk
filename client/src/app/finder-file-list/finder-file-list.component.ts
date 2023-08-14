@@ -14,6 +14,7 @@ import { FileService } from '../services/file.service';
 import { loadFiles } from '../desktop/store/actions/file.actions';
 import { DirUtils} from '../utils/dir-utils';
 import { FinderState } from '../desktop/store/models/finder.state.model';
+import { AddFinder } from '../desktop/store/actions/finder.action';
 
 @Component({
 	selector: 'app-finder-file-list',
@@ -29,13 +30,14 @@ export class FinderFileListComponent implements DoCheck {
 	BAG = "DRAGULA_FILE_LIST";
 	subs = new Subscription();
 
-	allFiles: any;
-	files: any
-	allDirs: any;
-	dirs: any| undefined;
+	allFiles: any[];
+	files: any[];
+	allDirs: any| null;
+	dirs: any | null;
 
-	currentDir: String | undefined;
-	currentDirId: String | undefined;
+	currentDir: any | null;
+	currentDirId: any | null;
+	breadcrumbs: any[] = [];
 
 	// set input props for file-list component
 	@Input() style: string | undefined;
@@ -52,15 +54,34 @@ export class FinderFileListComponent implements DoCheck {
 		this.files = [];
 		this.allDirs = [];
 		this.dirs = [];
+		this.breadcrumbs = [];
 
 		this.store.select('finder').subscribe((data: any) => {
+			
 			//console.log(data);
+
 			this.currentDir = data.currentDir;
 			this.currentDirId = data.currentDirId;
+			this.breadcrumbs = data.breadcrumbs;
 			
 			//need rerender files list where file.dirId == dirId
 			this.files = this.allFiles.filter((file: any) => file.dirId == this.currentDirId);
+
+			//need rerender dirs list where dir.parentId == dirId						
+			//find dirs by id
+			if(this.currentDirId != undefined || this.allDirs != undefined || this,this.currentDirId != null) {				
+				const currentDir = DirUtils.getDir(this.allDirs, Number.parseInt(this.currentDirId.toString()));
+				console.log(currentDir)
+				if(currentDir && currentDir.children && currentDir.children.length != 0){
+					this.dirs = currentDir.children;
+				}else{
+					this.dirs = [];
+				}
+			}
+			
 		});
+
+
 
 		//add dblclk event listeenr for every item
 		const items = document.getElementsByClassName("item");
@@ -76,11 +97,11 @@ export class FinderFileListComponent implements DoCheck {
 			//console.log(data.files);
 			this.dirs = data.dirs;
 
-			let dirId: null = null;
+			//let dirId: null = null;
 			this.dirs?.children?.forEach((dir: any) => {
 				//console.log(dir.data.dirName);
 				if (dir.data.dirName == this.currentDir) {
-					dirId = dir.data.id;
+					//dirId = dir.data.id;
 					this.currentDirId = dir.data.id;
 				}
 			});
@@ -88,12 +109,13 @@ export class FinderFileListComponent implements DoCheck {
 			this.allFiles = data.files;
 			this.allDirs  = data.dirs;
 			
-			this.files = data.files.filter((file: any) => file.dirId == dirId);
+			this.files = data.files.filter((file: any) => file.dirId == this.currentDirId);
+			console.log(this.files)
 			//console.log(data.dirs);
 			
 			//find dirs by id
-			if(dirId != undefined) {				
-				const currentDir = DirUtils.getDir(this.allDirs, dirId);
+			if(this.currentDirId != undefined) {				
+				const currentDir = DirUtils.getDir(this.allDirs, Number.parseInt(this.currentDirId.toString()));
 				//console.log(currentDir)
 				if(currentDir.children.length != 0){
 					this.dirs = currentDir.children;
@@ -151,14 +173,16 @@ export class FinderFileListComponent implements DoCheck {
 
 								this.fileService.putFile(payload).subscribe((data: any) => {
 
-								console.log(data);
+								//console.log(data);
 
 								//need update store files
-								this.fileService.ls("").subscribe((data: any) => {
-									//need call action to update store files
-									this.store.dispatch(loadFiles());
+									this.fileService.ls("").subscribe((data: any) => {
+										//need call action to update store files
+										this.store.dispatch(loadFiles());
+									});
 								});
-							});
+
+								
 
 							}
 						}
@@ -183,25 +207,43 @@ export class FinderFileListComponent implements DoCheck {
 	//when click on dir in the list, need change currentFolderDir and open new file list
 	//save old dir in the linked list for bread crumbs
 	openDir(event: any, dir: any) {
+		
 		//this.showFolderPath = dir.data.dirName;
 		//this.showFolderId = dir.data.id;
+		
 		this.currentDir = dir.data.dirName;
 		this.currentDirId = dir.data.id;
+
+		console.log(this.breadcrumbs);
+		this.breadcrumbs = [...this.breadcrumbs];
+		this.breadcrumbs.push({name: dir.data.dirName, id: dir.data.id});
+		console.log(this.breadcrumbs);
+		
 
 		this.files = this.allFiles.filter((file: any) => file.dirId == dir.data.id);
 		//console.log(this.files);
 
 		//find dirs by id
-		if(dir.data.id != undefined) {
+		if (dir && dir.data && dir.data.id != undefined) {
 			const currentDir = DirUtils.getDir(this.allDirs, dir.data.id);
 			//console.log(currentDir);
-			if(currentDir.children.length != 0){
+			if(currentDir && currentDir.children && currentDir.children.length != 0){
 				this.dirs = currentDir.children;
 			}else{
 				this.dirs = [];
 			}
 		}
-		console.log(this.dirs)
+		//console.log(this.dirs)
+
+		//set store for finder
+		const finder: { currentDir: any, currentDirId: any, breadcrumbs: any } = {
+            currentDir : this.currentDir,
+			currentDirId : this.currentDirId,
+			breadcrumbs: this.breadcrumbs
+          }
+  
+      	// add to the store
+      	this.store.dispatch( AddFinder(finder));
 	}
 
 	getItem(event: any, file: any) {

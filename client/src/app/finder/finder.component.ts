@@ -52,15 +52,30 @@ export class FinderComponent implements OnInit {
 						//console.log(folder.data.id);
 					}				
 				})
-				//set active folder
-				//console.log(this.activeFolderName, this.activeFolderId)
-				//this.setActiveFolder(this.activeFolderName, this.activeFolderId);
+
+				this.breadcrumbs = [];
+				this.breadcrumbs.push({name: this.activeFolderName, id: this.activeFolderId});
+				
+				//set store for finder
+				const finder: { currentDir: any, currentDirId: any, breadcrumbs: any } = {
+					currentDir : this.activeFolderName,
+					currentDirId : this.activeFolderId,
+					breadcrumbs: this.breadcrumbs
+				  }
+	  
+				  // add to the store
+				  this.store.dispatch( AddFinder(finder));
+				
 
 			}else{			
 				this.activeFolderId = data.currentDirId;
 				this.activeFolderName = data.currentDir;
-				//this.setActiveFolder(this.activeFolderName, this.activeFolderId);
+				
+				//need breadcrumbs to be set here
+				//console.log('need breadcrumbs to be set here')
+				this.breadcrumbs = data.breadcrumbs;
 			}
+
 		})
 
 		//set breadcrumbs
@@ -68,7 +83,6 @@ export class FinderComponent implements OnInit {
 			{name : this.activeFolderName,
 			id: this.activeFolderId }];
 		this.setActiveFolder(this.activeFolderName, this.activeFolderId);
-
 		
 	}
 
@@ -83,7 +97,7 @@ export class FinderComponent implements OnInit {
 	 */
 	setActiveFolder(name : any, id: any) {
 
-		//console.log(name, id);
+		console.log(name, id);
 		
 		//remove old active folder by css
 		document.getElementById(this.activeFolderName + '-sidebar')?.classList.remove('window-sidebar-item-active');
@@ -91,22 +105,44 @@ export class FinderComponent implements OnInit {
 		//set new active folder by css
 		document.getElementById(name + '-sidebar')?.classList.add('window-sidebar-item-active');
 		
-		//put active folder name in to this.activeFolderName
-		this.activeFolderName = name;
-		this.activeFolderId = id;
+		if(id == this.activeFolderId){
+			
+			//make nothing active
+
+		}else{
+			let trigger = false;
+			//check if the folder is already in the breadcrumbs array
+			//if it is then remove all the breadcrumbs after that folder
+			this.breadcrumbs.forEach((crumb, index) => {
+				console.log(crumb.id, id);
+				if(crumb.id == id){					
+					this.breadcrumbs = [...this.breadcrumbs]
+					this.breadcrumbs.splice(index + 1, this.breadcrumbs.length - index);
+					trigger = true;
+				}
+			});
+
+			if(!trigger){
+				//add to new breadcrumbs
+				this.breadcrumbs = [];
+				this.breadcrumbs.push({name : name, id: id });
+			}
 		
-		this.breadcrumbs = [];
-		this.breadcrumbs.push({name : name, id: id});
+			//put active folder name in to this.activeFolderName
+			this.activeFolderName = name;
+			this.activeFolderId = id;
+
 		
-		  //set store for finder
-		  const finder: { currentDir: any, currentDirId: any, breadcrumbs: any } = {
-            currentDir : name,
-			currentDirId : id,
-			breadcrumbs: this.breadcrumbs
-          }
+		  	//set store for finder
+		  	const finder: { currentDir: any, currentDirId: any, breadcrumbs: any } = {
+            	currentDir : name,
+				currentDirId : id,
+				breadcrumbs: this.breadcrumbs
+          	}
   
-      // add to the store
-      this.store.dispatch( AddFinder(finder));
+      		// add to the store
+      		this.store.dispatch( AddFinder(finder));
+		}
 		
 	}
 
