@@ -9,6 +9,64 @@
 
   <!-- file list -->
   <div *ngFor="let file of this.files ; let i = index">
+    
+    <!-- dir item-->
+    <div      
+      class="item"
+      id="item-{{ file.data.id }}"
+      [attr.data-id] = "file.data.id"
+      [attr.data-name]= "file.data.dirName"
+      (dblclick)="openDir($event, file)"
+      *ngIf="file?.data?.directory==true"
+      >
+        <div class="item-spinner"></div>
+        <div class="item-icon" [attr.style]="this.style">
+          <img
+            src="../../assets/img/folders.svg"
+            class="item-icon-icon"
+            [attr.data-dataitem]="'dirItem-' + file.data.id"/>
+          <div class="item-badges" [attr.data-dataitem]="'item-' + file.data.id">
+            <img
+                    class="item-badge item-has-website-badge"
+                    src="../../assets/img/world.svg"
+                    data-item-id="0"
+            />
+            <img
+                    class="item-badge item-badge-has-permission"
+                    style="display: none; background-color: #ffffff; padding: 2px"
+                    src="../../assets/img/shared-file.svg"
+                    data-item-id="0"
+            />
+
+            <img
+                    class="item-badge item-is-shared"
+                    style="background-color: #ffffff; padding: 2px; display: none"
+                    src="../../assets/img/shared-owner.svg"
+                    data-item-id="0"
+            />
+            <!--
+            <img
+              class="item-badge item-shortcut"
+              style="background-color: #ffffff; padding: 2px"
+              src="../../assets/img/shortcut.svg"
+              data-item-id="0"
+              title="Shortcut"
+            />
+            -->
+          </div>
+        </div>
+          <span class="item-name" data-item-id="0" title="">{{ file.data.dirName }}</span>
+          <textarea
+            class="item-name-editor"
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            data-gramm_editor="false"
+            style="display: none; width: 60px; height: 18px">
+            {{file.data.dirName}}
+          </textarea>
+    </div>
     <!-- file item-->
     <div
       class="item"
@@ -22,8 +80,11 @@
       [attr.data-modifiedDate]="file.modifiedDate"
       [attr.data-createdUserId]="file.createdUserId"
       [attr.data-modifiedUserId]="file.modifiedUserId"
+
       
-      (dblclick)="getItem($event, file)">
+      (dblclick)="getItem($event, file)"
+      *ngIf="file.directory==false"
+      >
 
       <div class="item-spinner"></div>
 

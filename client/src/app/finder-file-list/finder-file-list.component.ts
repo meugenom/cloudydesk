@@ -60,7 +60,7 @@ export class FinderFileListComponent {
 		this.store.select('finder').subscribe((data: any) => {
 			
 			console.log('finder store call');
-			//if(this.currentDirId != data.currentDirId) {
+			
 
 				this.currentDir = data.currentDir;
 				this.currentDirId = data.currentDirId;
@@ -87,7 +87,9 @@ export class FinderFileListComponent {
 						this.dirs = [];
 					}
 				}
-			//}
+
+				//need merge files and dirs to files list
+				this.files = this.files.concat(this.dirs);
 			
 		});
 
@@ -135,7 +137,10 @@ export class FinderFileListComponent {
 				if(currentDir.children.length != 0){
 					this.dirs = currentDir.children;
 				}
-			}			
+			}
+			
+			//need merge files and dirs to files list
+			this.files = this.files.concat(this.dirs);
 			
 		})
 

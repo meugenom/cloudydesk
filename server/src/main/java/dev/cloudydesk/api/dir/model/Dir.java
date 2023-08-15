@@ -32,11 +32,10 @@ public class Dir {
 	public Dir(
 			String name,
 			Long parentId,
-			Long createdUserId,
-			boolean isDirectory) {
+			Long createdUserId) {
 		this.dirName = name;
 		this.parentId = parentId;
 		this.createdUserId = createdUserId;
-		this.isDirectory = isDirectory;
+		this.isDirectory = true;
 	}
 }

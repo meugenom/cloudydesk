@@ -44,6 +44,9 @@ public class Files {
 	@Column(name = "modified_user_id", nullable = false)
 	private Long modifiedUserId;
 
+	@Column(name = "is_directory")
+	private boolean isDirectory;
+
 	// default constructor
 	public Files(   String name, 
 					String type, 
@@ -61,5 +64,6 @@ public class Files {
 		this.modifiedDate = LocalDate.now();
 		this.createdUserId = createdUserId;
 		this.modifiedUserId = modifiedUserId;
+		this.isDirectory = false;
 	}
 }
