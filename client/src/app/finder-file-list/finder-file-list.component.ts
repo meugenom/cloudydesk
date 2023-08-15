@@ -9,9 +9,9 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import { environment } from '../../environments/environment';
 import { DirState } from '../desktop/store/models/dir.state.model';
-import { Subscription } from 'rxjs';
+import { Subscription, catchError, map, of } from 'rxjs';
 import { FileService } from '../services/file.service';
-import { loadFiles } from '../desktop/store/actions/file.actions';
+import { loadFilesSuccess, loadFiles, setFiles, loadFilesError } from '../desktop/store/actions/file.actions';
 import { DirUtils} from '../utils/dir-utils';
 import { FinderState } from '../desktop/store/models/finder.state.model';
 import { AddFinder } from '../desktop/store/actions/finder.action';
@@ -22,7 +22,7 @@ import { AddFinder } from '../desktop/store/actions/finder.action';
 	styleUrls: ['./finder-file-list.component.sass']
 })
 
-export class FinderFileListComponent implements DoCheck {
+export class FinderFileListComponent {
 
 	@ViewChild('container') input: ElementRef | undefined;
 
@@ -41,6 +41,7 @@ export class FinderFileListComponent implements DoCheck {
 
 	// set input props for file-list component
 	@Input() style: string | undefined;
+	
 
 	constructor(
 		private dragulaService: DragulaService,
@@ -58,26 +59,35 @@ export class FinderFileListComponent implements DoCheck {
 
 		this.store.select('finder').subscribe((data: any) => {
 			
-			//console.log(data);
+			console.log('finder store call');
+			//if(this.currentDirId != data.currentDirId) {
 
-			this.currentDir = data.currentDir;
-			this.currentDirId = data.currentDirId;
-			this.breadcrumbs = data.breadcrumbs;
+				this.currentDir = data.currentDir;
+				this.currentDirId = data.currentDirId;
+				this.breadcrumbs = data.breadcrumbs;
 			
-			//need rerender files list where file.dirId == dirId
-			this.files = this.allFiles.filter((file: any) => file.dirId == this.currentDirId);
+				console.log('-------finder store changes------------')
+				console.log('files before')
+				console.dir(this.files);
+				console.log('files after')
+			
+				//need rerender files list where file.dirId == dirId
+				this.files = this.allFiles.filter((file: any) => file.dirId == this.currentDirId);												
+				console.dir(this.files);
+				console.log('-------------------')
 
-			//need rerender dirs list where dir.parentId == dirId						
-			//find dirs by id
-			if(this.currentDirId != undefined || this.allDirs != undefined || this,this.currentDirId != null) {				
-				const currentDir = DirUtils.getDir(this.allDirs, Number.parseInt(this.currentDirId.toString()));
-				console.log(currentDir)
-				if(currentDir && currentDir.children && currentDir.children.length != 0){
-					this.dirs = currentDir.children;
-				}else{
-					this.dirs = [];
+				//need rerender dirs list where dir.parentId == dirId						
+				//find dirs by id
+				if(this.currentDirId != undefined || this.allDirs != undefined || this,this.currentDirId != null) {				
+					const currentDir = DirUtils.getDir(this.allDirs, Number.parseInt(this.currentDirId.toString()));
+					console.log(currentDir)
+					if(currentDir && currentDir.children && currentDir.children.length != 0){
+						this.dirs = currentDir.children;
+					}else{
+						this.dirs = [];
+					}
 				}
-			}
+			//}
 			
 		});
 
@@ -106,12 +116,17 @@ export class FinderFileListComponent implements DoCheck {
 				}
 			});
 
-			this.allFiles = data.files;
+			this.allFiles = data.files;	
 			this.allDirs  = data.dirs;
 			
-			this.files = data.files.filter((file: any) => file.dirId == this.currentDirId);
-			console.log(this.files)
-			//console.log(data.dirs);
+			console.log('-------files store changes------------')
+			console.log('files before')
+			console.dir(this.files);
+			console.log('files after')
+
+			this.files = data.files.filter((file: any) => file.dirId == this.currentDirId);									
+			console.dir(this.files);
+			console.log('-------------------')			
 			
 			//find dirs by id
 			if(this.currentDirId != undefined) {				
@@ -123,16 +138,14 @@ export class FinderFileListComponent implements DoCheck {
 			}			
 			
 		})
-		
-		
+
 		this.subs.add(dragulaService.out(this.BAG)
 			.subscribe(({ el, container, source }) => {
-				console.log('file moving');
-				if (
-					//source.getAttribute('dirId') != container.getAttribute('dirId') &&
-					container.getAttribute('dirId') != null &&
-					el.children[0].getAttribute('data-dirId') != container.getAttribute('dirId')
 
+				if (					
+					container.getAttribute('dirId') != null &&
+					el.children[0].getAttribute('data-dirId') != container.getAttribute('dirId') &&
+					source.getAttribute('dirId') != container.getAttribute('dirId')
 				) {
 					
 					//info about file transfer from to
@@ -171,17 +184,28 @@ export class FinderFileListComponent implements DoCheck {
 									modifiedDate: file.modifiedDate
 								}								
 
+								
 								this.fileService.putFile(payload).subscribe((data: any) => {
-
-								//console.log(data);
-
-								//need update store files
-									this.fileService.ls("").subscribe((data: any) => {
-										//need call action to update store files
+									// when success
+									
+									this.fileService.ls("").subscribe((res: any) => {                                        										
+										console.log(res);
+										//add to the store files and dirs
+										//this.store.dispatch(setFiles(res));										
 										this.store.dispatch(loadFiles());
+										//next for store files
+										
+										
+									}, (error) => {
+										console.error('Error listing files:', error);
 									});
-								});
+									
 
+	  
+								}, (error) => {
+									// when error
+									console.error('Error updating file:', error);
+								});																
 								
 
 							}
@@ -189,20 +213,30 @@ export class FinderFileListComponent implements DoCheck {
 					};
 
 				} else (
-					el.children[0].getAttribute('data-dirId') == container.getAttribute('dirId')
+					source.getAttribute('dirId') === container.getAttribute('dirId')
 					)
-				{
-				
+				{									
+									
 					//need delete this moving visual effect
 					source.appendChild(el);
+					//container.removeChild(el);
+					
+					
+
 				}
+				
 			})
 		);
 
 	}
-
-	ngDoCheck() {		
+	ngOnDestroy() {
+		// destroy dragula subscription
+		this.subs.unsubscribe();
 	}
+
+	//ngDoCheck() {		
+		
+	//}
 
 	//when click on dir in the list, need change currentFolderDir and open new file list
 	//save old dir in the linked list for bread crumbs

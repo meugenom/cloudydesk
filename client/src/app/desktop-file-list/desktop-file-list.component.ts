@@ -106,7 +106,7 @@ export class DesktopFileListComponent implements OnInit  {
 
 	ngOnDestroy() {
 		// destroy dragula subscription
-		this.subs.unsubscribe();
+		//this.subs.unsubscribe();
 	}
 	
 	ngOnInit(): void {

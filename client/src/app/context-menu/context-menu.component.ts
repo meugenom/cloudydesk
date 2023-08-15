@@ -104,7 +104,7 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 			
 			if(dirId == null || dirName == null){
 				// we clicked on the same file
-				console.log(container.getAttribute('data-dataitem'));
+				//console.log(container.getAttribute('data-dataitem'));
 				context.usedFile = (container.getAttribute('data-dataitem') as string).substring(5);
 			}else{
 				//we clicked on the folder

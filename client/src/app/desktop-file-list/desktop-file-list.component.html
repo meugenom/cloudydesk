@@ -5,19 +5,19 @@
   [attr.dirName] = "currentFolderPath"
   [attr.dirId] = "currentFolderId"
   >
-  <div *ngFor="let file of this.files; let i = index">
+  <div *ngFor="let file of files ; let j = index">
     <div
       class="item"
-      id="item-{{ file.id }}"
+      id = "item-{{ file.id }}"
       [attr.data-id] = "file.id"      
-      [attr.data-name]="file.name"
-      [attr.data-dirId]="file.dirId"
-      [attr.data-size]="file.size"
-      [attr.data-type]="file.type"
-      [attr.data-createdDate]="file.createdDate"
-      [attr.data-createdDate]="file.modifiedDate"
-      [attr.data-createdUser]="file.createdUser"
-      [attr.data-modifiedUser]="file.modifiedUser"
+      [attr.data-name]= "file.name"
+      [attr.data-dirId]= "file.dirId"
+      [attr.data-size]= "file.size"
+      [attr.data-type]= "file.type"
+      [attr.data-createdDate]= "file.createdDate"
+      [attr.data-modifiedDate]= "file.modifiedDate"
+      [attr.data-createdUserId]= "file.createdUserId"
+      [attr.data-modifiedUserUd]= "file.modifiedUserId"
       (dblclick)="getItem($event, file)"
     >
       <div class="item-spinner"></div>
