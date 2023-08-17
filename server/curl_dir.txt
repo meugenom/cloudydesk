@@ -1,0 +1,22 @@
+# create new dir
+curl -i -X POST \
+     -H "Content-Type: application/json" \
+     -d '{"dirName" :"new Dir", "parentId" : "3", "createdUserId" : "1"}' \
+     -b "jwt = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxsb0BtZXVnZW5vbS5jb20iLCJleHAiOjE2OTMxMzQyNzUsImlhdCI6MTY5MTkyNDY3NSwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XX0.2aaAYY-sKI0opn5P5qDoL7WLjsDeMtZvRzxyjrMBiCA;" \
+     "http://localhost:8080/api/v1/dirs/dir"
+
+
+# edit dir
+curl -i -X PUT \
+     -H "Content-Type: application/json" \
+     -d '{"id":"9","dirName" :"old Dir", "parentId": "3", "createdUserId":"1"}' \
+     -b "jwt = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxsb0BtZXVnZW5vbS5jb20iLCJleHAiOjE2OTMxMzQyNzUsImlhdCI6MTY5MTkyNDY3NSwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XX0.2aaAYY-sKI0opn5P5qDoL7WLjsDeMtZvRzxyjrMBiCA;" \
+     "http://localhost:8080/api/v1/dirs/dir"
+
+
+# delete dir
+curl -i -X DELETE \
+     -H "Content-Type: application/json" \
+     -d '{"id" : "8", "dirName" :"Created Dir"}' \
+     -b "jwt = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWxsb0BtZXVnZW5vbS5jb20iLCJleHAiOjE2OTMxMzQyNzUsImlhdCI6MTY5MTkyNDY3NSwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XX0.2aaAYY-sKI0opn5P5qDoL7WLjsDeMtZvRzxyjrMBiCA;" \
+     "http://localhost:8080/api/v1/dirs/dir"
