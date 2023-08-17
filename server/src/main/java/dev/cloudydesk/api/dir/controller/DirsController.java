@@ -63,10 +63,12 @@ public class DirsController {
 		Users currentUser = usersRepository.getIdByEmail(authentication.getName());
 
 		if (currentUser != null && body.get("dirName") != null) {
+			
+			//get id from currentUser
+			Long createUserId = currentUser.getId();
 
 			//casting string data to Long
-			Long parentId = Long.parseLong(body.get("parentId"));
-			Long createUserId = Long.parseLong(body.get("createdUserId"));
+			Long parentId = Long.parseLong(body.get("parentId"));			
 
 			//TODO: need to check if dirName is not  unique and save it with new name + (1) or (2) etc
 
