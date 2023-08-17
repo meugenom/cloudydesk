@@ -7,7 +7,7 @@
   [attr.dirId] = "currentDirId"
   >
 
-  <!-- file list -->
+  <!-- items list -->
   <div *ngFor="let file of this.files ; let i = index">
     
     <!-- dir item-->
@@ -67,6 +67,7 @@
             {{file.data.dirName}}
           </textarea>
     </div>
+
     <!-- file item-->
     <div
       class="item"

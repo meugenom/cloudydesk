@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
 import { DirState } from '../desktop/store/models/dir.state.model';
 import { Subscription, catchError, map, of } from 'rxjs';
 import { FileService } from '../services/file.service';
-import { loadFilesSuccess, loadFiles, setFiles, loadFilesError } from '../desktop/store/actions/file.actions';
+import { loadFiles } from '../desktop/store/actions/file.actions';
 import { DirUtils} from '../utils/dir-utils';
 import { FinderState } from '../desktop/store/models/finder.state.model';
 import { AddFinder } from '../desktop/store/actions/finder.action';
@@ -275,10 +275,17 @@ export class FinderFileListComponent {
 		//console.log(this.dirs)
 
 		//set store for finder
-		const finder: { currentDir: any, currentDirId: any, breadcrumbs: any } = {
+		const finder: { currentDir: any, 
+						currentDirId: any, 
+						breadcrumbs: any,
+						items: number,
+						selectedItems: number
+					} = {
             currentDir : this.currentDir,
 			currentDirId : this.currentDirId,
-			breadcrumbs: this.breadcrumbs
+			breadcrumbs: this.breadcrumbs,
+			items: this.files?.length + this.dirs?.length,
+			selectedItems: 0
           }
   
       	// add to the store

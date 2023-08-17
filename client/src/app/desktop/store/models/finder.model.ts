@@ -1,5 +1,7 @@
 export interface Finder {
     currentDir: string,
     currentDirId: string,
-    breadcrumbs: any[]
+    breadcrumbs: any[],
+    items: number,
+    selectedItems: number
 }

@@ -17,6 +17,9 @@ export class FinderComponent implements OnInit {
 	activeFolderName: string | undefined;
 	activeFolderId: string | undefined;
 
+	items: number = 0;
+	selectedItems: number = 0;
+
 	files: any;
 	dirs: any;
 
@@ -57,10 +60,12 @@ export class FinderComponent implements OnInit {
 				this.breadcrumbs.push({name: this.activeFolderName, id: this.activeFolderId});
 				
 				//set store for finder
-				const finder: { currentDir: any, currentDirId: any, breadcrumbs: any } = {
+				const finder: { currentDir: any, currentDirId: any, breadcrumbs: any, items: number, selectedItems: number } = {
 					currentDir : this.activeFolderName,
 					currentDirId : this.activeFolderId,
-					breadcrumbs: this.breadcrumbs
+					breadcrumbs: this.breadcrumbs,
+					items: this.items,
+					selectedItems: this.selectedItems
 				  }
 	  
 				  // add to the store
@@ -74,6 +79,8 @@ export class FinderComponent implements OnInit {
 				//need breadcrumbs to be set here
 				//console.log('need breadcrumbs to be set here')
 				this.breadcrumbs = data.breadcrumbs;
+				this.items = data.items;
+				this.selectedItems = data.selectedItems;
 			}
 
 		})
@@ -134,10 +141,12 @@ export class FinderComponent implements OnInit {
 
 		
 		  	//set store for finder
-		  	const finder: { currentDir: any, currentDirId: any, breadcrumbs: any } = {
+		  	const finder: { currentDir: any, currentDirId: any, breadcrumbs: any, items: number, selectedItems: number } = {
             	currentDir : name,
 				currentDirId : id,
-				breadcrumbs: this.breadcrumbs
+				breadcrumbs: this.breadcrumbs,
+				items: this.items,
+				selectedItems: this.selectedItems
           	}
   
       		// add to the store

@@ -8,7 +8,9 @@ const initialState: Finder =
 {
     currentDir: '',
     currentDirId: '',
-    breadcrumbs: []
+    breadcrumbs: [],
+    items: 0,
+    selectedItems: 0
 };
 
 export const FinderReducer = createReducer(
@@ -17,7 +19,9 @@ export const FinderReducer = createReducer(
         {
             currentDir: action.currentDir,
             currentDirId: action.currentDirId,
-            breadcrumbs: action.breadcrumbs
+            breadcrumbs: action.breadcrumbs,
+            items: action.items,
+            selectedItems: action.selectedItems
         }
     ))
 );

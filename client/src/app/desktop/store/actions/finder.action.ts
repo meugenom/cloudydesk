@@ -4,5 +4,7 @@ export const AddFinder = createAction('[Finder Component] AddFinder',
 	props<{
 		currentDir: string,
 		currentDirId: string,
-		breadcrumbs: any[]
+		breadcrumbs: any[],
+		items: number,
+		selectedItems: number
 	}>());

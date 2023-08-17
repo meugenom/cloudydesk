@@ -1,6 +1,6 @@
 
 import {
-	loadFiles, loadFilesSuccess, loadFilesError, setFiles
+	loadFiles, loadFilesSuccess, loadFilesError
 } from '../actions/file.actions';
 import { FileState } from "../models/file.state.model";
 import { Action, createReducer, on } from '@ngrx/store';
@@ -18,12 +18,6 @@ export const fileReducer = createReducer(
 			dirs: action.dirs
 
 
-		}
-	)),
-	on(setFiles, (state, action) => (		
-		{
-			files: action.files,
-			dirs: action.dirs
 		}
 	)),
 	on(loadFilesError, (state) => (
