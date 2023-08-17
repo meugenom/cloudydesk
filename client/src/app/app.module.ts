@@ -74,6 +74,7 @@ import { FileMenuComponent } from './file-menu/file-menu.component';
 import {ThemesModule} from "./themes/themes.module";
 import {ThemesDirective} from "./themes/themes.directive";
 import {PersistanceService} from "./services/persistance.service";
+import {DirService} from "./services/dir.service";
 
 @NgModule({
 	declarations: [
@@ -129,7 +130,8 @@ import {PersistanceService} from "./services/persistance.service";
 		{ provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
 		AuthGuard,
 		NotificationService,
-		PersistanceService
+		PersistanceService,
+		DirService
 	],
 	bootstrap: [AppComponent]
 })
