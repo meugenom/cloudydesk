@@ -1,5 +1,7 @@
 <!--start moving and make active window-->
-<div class="window" [attr.id]="id" (click)="active(); $event.stopPropagation()">
+<div class="window" [attr.id]="id" (click)="active(); $event.stopPropagation()"
+(click)="closeContextMenu($event); $event.stopPropagation()"
+  >
   <span class="window-action-btn">
     <img
       (click)="close($event); $event.stopPropagation()"

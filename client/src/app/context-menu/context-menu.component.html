@@ -1,48 +1,145 @@
-<li data-action="0"
+<li *ngIf="isFolder"
+	data-action="0"
   	data-menu-id="0"
   	data-parent-element-id="0"
   	class="context-menu-item-submenu context-menu-item">
   	<span class="context-menu-item-icon"></span>
   	<span class="context-menu-item-icon-active"></span>
   	Sort by
+  	<img class="submenu-arrow"
+		[src]="togleSubMenu ? '../../assets/img/chevron-down.svg' : '../../assets/img/chevron-right.svg'"
+		/>
+</li>
+<li *ngIf="isFile"
+	data-action="0"
+  	data-menu-id="0"
+  	data-parent-element-id="0"
+  	class="context-menu-item-submenu context-menu-item context-menu-item-icon-disabled">
+  	<span class="context-menu-item-icon"></span>
+  	<span class="context-menu-item-icon-active"></span>
+  	Sort by
   	<img class="submenu-arrow" src="../../assets/img/chevron-right.svg" />
 </li>
-<li class="context-menu-divider">
+
+<li class="context-menu-divider">	
 	<hr/>
 </li>
-<li data-action="1" class="context-menu-item"
+
+
+<li *ngIf="isFolder"
+	data-action="1" class="context-menu-item"
 	AddNewFolder
 	>
 	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
   	New Folder
 </li>
-<li data-action="2" class="context-menu-item"
+<li *ngIf="isFile"
+	data-action="1" class="context-menu-item context-menu-item-disabled"
+	AddNewFolder
+	>
+	<span class="context-menu-item-icon"></span>
+	<span class="context-menu-item-icon-active"></span>
+  	New Folder
+</li>
+
+
+<li *ngIf="isFolder"
+	data-action="2" class="context-menu-item"
 	AddNewFile
 	>
 	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
 	New File
 </li>
+<li *ngIf="isFile"
+	data-action="2" class="context-menu-item context-menu-item-disabled"
+	AddNewFile
+	>
+	<span class="context-menu-item-icon"></span>
+	<span class="context-menu-item-icon-active"></span>
+	New File
+</li>
+
+
 <li class="context-menu-divider">
 	<hr />
 </li>
+
 <li data-action="3" 
+	*ngIf="isFolder"
 	UploadingFile 
 	class="context-menu-item">
 	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
 	Uploading File
 </li>
-<li data-action="4" class="context-menu-item">
+<li data-action="3" 
+	*ngIf="isFile"
+	UploadingFile 
+	class="context-menu-item context-menu-item-disabled">
+	<span class="context-menu-item-icon"></span>
+	<span class="context-menu-item-icon-active"></span>
+	Uploading File
+</li>
+
+
+<li *ngIf="isFolder" data-action="4" class="context-menu-item context-menu-item-disabled">
 	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
 	Copy
 </li>
-<li
+<li *ngIf="isFile" data-action="4" class="context-menu-item">
+	<span class="context-menu-item-icon"></span>
+	<span class="context-menu-item-icon-active"></span>
+	Copy
+</li>
+
+<li *ngIf="isFolder"
 	data-action="5"
-	class="context-menu-item context-menu-item-disabled context-menu-item-active">
+	class="context-menu-item context-menu-item-disabled">
   	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
   	Paste
+</li>
+<li *ngIf="isFile"
+	data-action="5"
+	class="context-menu-item">
+  	<span class="context-menu-item-icon"></span>
+	<span class="context-menu-item-icon-active"></span>
+  	Paste
+</li>
+
+
+<li *ngIf="isFolder"
+	data-action="5"
+	class="context-menu-item context-menu-item-disabled">
+  	<span class="context-menu-item-icon"></span>
+	<span class="context-menu-item-icon-active"></span>
+  	Remove to Trash
+</li>
+<li *ngIf="isFile"
+	data-action="5"
+	class="context-menu-item">
+  	<span class="context-menu-item-icon"></span>
+	<span class="context-menu-item-icon-active"></span>
+	Remove to Trash
+</li>
+
+
+<li
+	*ngIf="isFolder"
+	data-action="7"
+	class="context-menu-item context-menu-item-disabled">
+  	<span class="context-menu-item-icon"></span>
+	<span class="context-menu-item-icon-active"></span>
+  	Get Info
+</li>
+<li
+	*ngIf="isFile"
+	data-action="7"
+	class="context-menu-item">
+  	<span class="context-menu-item-icon"></span>
+	<span class="context-menu-item-icon-active"></span>
+  	Get Info
 </li>

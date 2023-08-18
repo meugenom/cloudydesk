@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ViewEncapsulation, ElementRef, HostListener } from "@angular/core";
 import { ModService } from "./mod.service";
 import { Globals } from "../global";
+import { ContextMenuService } from '../context-menu/context-menu.service';
 
 
 const enum Status {
@@ -34,7 +35,8 @@ export class ModComponent implements OnInit, AfterViewInit {
 	constructor(
 		private el: ElementRef,
 		private modService: ModService,
-		private globals : Globals
+		private globals : Globals,
+		private contextMenuService: ContextMenuService
 		) {
 
 		this.element = el.nativeElement;
@@ -102,7 +104,6 @@ export class ModComponent implements OnInit, AfterViewInit {
 	 */
 	active(): void {
 		//console.log(this.element.classList)
-
 		//if window minimized and saved in the store
 		if (this.element.classList.contains('minimized')) {
 
@@ -379,6 +380,23 @@ export class ModComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+	/**
+	 * close context menu from modal window
+	 * @param event 
+	 * hard code to remove context menu from modal window
+	 * first - remove component from html tree
+	 * second - remove context identificator from context service
+	 */
+	closeContextMenu(event:any): void {
+		console.log('close context menu')
+		//this.contextMenuService.closeContextMenu.emit(event);
+		//find element with class context-menu
+		let contextMenu = document.getElementsByClassName('context-menu');
+		//disable this element
+		contextMenu[0].remove();
+		this.contextMenuService.removeAllFromContext();
+	}
+
 
 	@HostListener("document:mouseup")
 	stopMove() {
@@ -403,4 +421,3 @@ function getPosition(elem: HTMLElement) {
 		left: box.left + scrollX
 	};
 }
-

@@ -20,6 +20,10 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 
 	private element: any;
 
+	isFolder: boolean = false;
+	isFile: boolean = false;
+	togleSubMenu: boolean = false;
+
 	constructor(
 		private el: ElementRef,
 		private contextMenuService: ContextMenuService,
@@ -67,10 +71,16 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 	ngAfterViewInit(): void {
 	}
 
+
 	//if click on the desktop then automatic close opened context menu window
 	@HostListener("document:click", ["$event"])
 	close(event: Event) {
+
+		console.log('context menu close');
+		console.log(event.target)
 		this.closeContext.emit(event); //automatic removing context from dom and store
+	
+		
 	}
 
 	@HostListener("document:contextmenu", ["$event"])
@@ -90,11 +100,14 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 			
 			//find parent element and some attribute to know id and path			
 			console.log(event.target)
+
 			let container = event.target as HTMLElement;
 			let dirId = container.getAttribute('dirId');
+			
 			console.log(dirId)
 			
 			let dirName = container.getAttribute('dirName');
+			
 			console.log(dirName)
 
 			const context: Context = {
@@ -105,10 +118,13 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 			if(dirId == null || dirName == null){
 				// we clicked on the same file
 				//console.log(container.getAttribute('data-dataitem'));
+				this.isFile = true;
+				this.isFolder = false;
 				context.usedFile = (container.getAttribute('data-dataitem') as string).substring(5);
 			}else{
 				//we clicked on the folder
-				
+				this.isFile = false;
+				this.isFolder = true;
 				//set store for context				
 				context.usedFolder = dirId;
 			}
