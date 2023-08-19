@@ -393,8 +393,11 @@ export class ModComponent implements OnInit, AfterViewInit {
 		//find element with class context-menu
 		let contextMenu = document.getElementsByClassName('context-menu');
 		//disable this element
-		contextMenu[0].remove();
-		this.contextMenuService.removeAllFromContext();
+		if(contextMenu[0] != null){
+			contextMenu[0].remove();
+			this.contextMenuService.removeAllFromContext();
+		}
+
 	}
 
 

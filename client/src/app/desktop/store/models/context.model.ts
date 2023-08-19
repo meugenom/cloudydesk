@@ -1,4 +1,5 @@
 export interface Context {
-	usedFolder: string,
-    usedFile: string
+	folderSpaceId: string,
+    itemId: string,
+    isItemDirectory: boolean
 }

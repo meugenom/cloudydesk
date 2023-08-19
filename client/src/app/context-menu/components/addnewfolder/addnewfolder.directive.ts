@@ -11,8 +11,7 @@ import { DirService } from 'src/app/services/dir.service';
 })
 export class AddNewFolderDirective {
 
-	usedFolder: string = '';
-	newFolder: string = 'New Folder';
+	newFolderName: string = 'New Folder';
 
 	constructor(
 		private store: Store<{ file: FileState, context: ContextState }>,
@@ -36,11 +35,13 @@ export class AddNewFolderDirective {
 		//get the current folder from the store
 		this.store.select('context').pipe(take(1)).subscribe		
 		   ((context:any) => {
-			if(context.usedFolder != null || context.usedFolder != ''){
-				this.usedFolder = context.usedFolder;
+			if(context.folderSpaceId != '' &&
+			   context.itemId == '' &&
+			   context.isItemDirectory == false
+			){
 				const dirData = {
-					dirName: this.newFolder,
-					parentId: this.usedFolder
+					dirName: this.newFolderName,
+					parentId: context.folderSpaceId
 				}
 				this.dirService.createDir(dirData).subscribe((res:any) => {
 					console.log(res);
@@ -52,14 +53,4 @@ export class AddNewFolderDirective {
 		});
 		}			
 	}
-
-	open() {
-
-
-	}
-
-	close() {
-
-	}
-
 }

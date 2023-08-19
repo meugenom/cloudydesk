@@ -6,8 +6,9 @@ import { createReducer, on } from '@ngrx/store';
 //create a dummy initial state
 const initialState: Context =
 {
-    usedFolder: '',
-    usedFile: ''
+    folderSpaceId: '',
+    itemId: '',
+    isItemDirectory: false
 
 };
 
@@ -17,8 +18,9 @@ export const ContextReducer = createReducer(
 
         {
 
-            usedFolder: action.usedFolder,
-            usedFile: action.usedFile
+            folderSpaceId: action.folderSpaceId,
+            itemId: action.itemId,
+            isItemDirectory: action.isItemDirectory
         }
     ))
 )

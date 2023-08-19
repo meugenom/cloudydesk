@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
 
@@ -15,5 +15,15 @@ import { environment } from "../../environments/environment";
 	putFile(fileData: any){
 		return this.http.put(`${environment.apiUrl}/api/v1/files/file`, fileData);
 	};
+
+	/**
+     * 
+     * @param fileData
+     * @returns true if file was deleted
+     */
+    deleteFile(fileData: any){
+		const headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this.http.delete(`${environment.apiUrl}/api/v1/files/file`, { headers, body: fileData });
+	  }
     
   }

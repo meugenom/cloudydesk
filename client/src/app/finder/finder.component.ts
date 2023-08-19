@@ -43,7 +43,7 @@ export class FinderComponent implements OnInit {
 
 		//set active folder from the store
 		this.store.select('finder').subscribe((data: any) => {
-			//console.log(data);
+			console.log(data);
 			if(data.currentDir == undefined || data.currentDir == ''){
 				//by default set active folder to desktop
 				this.activeFolderName = 'Desktop';
@@ -78,17 +78,19 @@ export class FinderComponent implements OnInit {
 				
 				//need breadcrumbs to be set here
 				//console.log('need breadcrumbs to be set here')
+				
 				this.breadcrumbs = data.breadcrumbs;
 				this.items = data.items;
 				this.selectedItems = data.selectedItems;
+				
 			}
 
 		})
 
 		//set breadcrumbs
-		this.breadcrumbs = [
-			{name : this.activeFolderName,
-			id: this.activeFolderId }];
+		//this.breadcrumbs = [
+		//	{name : this.activeFolderName,
+		//	id: this.activeFolderId }];
 		this.setActiveFolder(this.activeFolderName, this.activeFolderId);
 		
 	}

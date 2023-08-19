@@ -1,4 +1,4 @@
-<li *ngIf="isFolder"
+<li *ngIf="isFolderSpace"
 	data-action="0"
   	data-menu-id="0"
   	data-parent-element-id="0"
@@ -10,7 +10,7 @@
 		[src]="togleSubMenu ? '../../assets/img/chevron-down.svg' : '../../assets/img/chevron-right.svg'"
 		/>
 </li>
-<li *ngIf="isFile"
+<li *ngIf="isItem"
 	data-action="0"
   	data-menu-id="0"
   	data-parent-element-id="0"
@@ -26,7 +26,7 @@
 </li>
 
 
-<li *ngIf="isFolder"
+<li *ngIf="isFolderSpace"
 	data-action="1" class="context-menu-item"
 	AddNewFolder
 	>
@@ -34,7 +34,7 @@
 	<span class="context-menu-item-icon-active"></span>
   	New Folder
 </li>
-<li *ngIf="isFile"
+<li *ngIf="isItem"
 	data-action="1" class="context-menu-item context-menu-item-disabled"
 	AddNewFolder
 	>
@@ -44,7 +44,7 @@
 </li>
 
 
-<li *ngIf="isFolder"
+<li *ngIf="isFolderSpace"
 	data-action="2" class="context-menu-item"
 	AddNewFile
 	>
@@ -52,9 +52,8 @@
 	<span class="context-menu-item-icon-active"></span>
 	New File
 </li>
-<li *ngIf="isFile"
+<li *ngIf="isItem"
 	data-action="2" class="context-menu-item context-menu-item-disabled"
-	AddNewFile
 	>
 	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
@@ -67,7 +66,7 @@
 </li>
 
 <li data-action="3" 
-	*ngIf="isFolder"
+	*ngIf="isFolderSpace"
 	UploadingFile 
 	class="context-menu-item">
 	<span class="context-menu-item-icon"></span>
@@ -75,8 +74,7 @@
 	Uploading File
 </li>
 <li data-action="3" 
-	*ngIf="isFile"
-	UploadingFile 
+	*ngIf="isItem"
 	class="context-menu-item context-menu-item-disabled">
 	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
@@ -84,25 +82,25 @@
 </li>
 
 
-<li *ngIf="isFolder" data-action="4" class="context-menu-item context-menu-item-disabled">
+<li *ngIf="isFolderSpace" data-action="4" class="context-menu-item context-menu-item-disabled">
 	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
 	Copy
 </li>
-<li *ngIf="isFile" data-action="4" class="context-menu-item">
+<li *ngIf="isItem" data-action="4" class="context-menu-item">
 	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
 	Copy
 </li>
 
-<li *ngIf="isFolder"
+<li *ngIf="isFolderSpace"
 	data-action="5"
 	class="context-menu-item context-menu-item-disabled">
   	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
   	Paste
 </li>
-<li *ngIf="isFile"
+<li *ngIf="isItem"
 	data-action="5"
 	class="context-menu-item">
   	<span class="context-menu-item-icon"></span>
@@ -111,24 +109,27 @@
 </li>
 
 
-<li *ngIf="isFolder"
+<li *ngIf="isItem"
 	data-action="5"
-	class="context-menu-item context-menu-item-disabled">
+	class="context-menu-item"
+	DeleteItem
+	>
   	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
-  	Remove to Trash
+  	Delete
 </li>
-<li *ngIf="isFile"
+<li *ngIf="isFolderSpace"
 	data-action="5"
-	class="context-menu-item">
+	class="context-menu-item context-menu-item-disabled"
+	>
   	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
-	Remove to Trash
+  	Delete
 </li>
 
 
 <li
-	*ngIf="isFolder"
+	*ngIf="isFolderSpace"
 	data-action="7"
 	class="context-menu-item context-menu-item-disabled">
   	<span class="context-menu-item-icon"></span>
@@ -136,7 +137,7 @@
   	Get Info
 </li>
 <li
-	*ngIf="isFile"
+	*ngIf="isItem"
 	data-action="7"
 	class="context-menu-item">
   	<span class="context-menu-item-icon"></span>

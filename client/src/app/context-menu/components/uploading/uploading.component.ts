@@ -68,13 +68,17 @@ export class UploadingComponent implements OnInit {
 
 
 			let dirId = '';
+			let itemId = '';
+			let isDirectory = false;
 
 			//get from store context param usedFolder 
 			this.store.select('context').subscribe((data: any) => {
-				dirId = data.usedFolder;
+				dirId = data.folderSpaceId;
+				itemId = data.itemId;
+				isDirectory = data.isItemDirectory;
 			})
 			
-			if (dirId != '') {
+			if (dirId != '' && itemId == '' && isDirectory == false) {
 				const upload$ = this.http.post(`${environment.apiUrl}/api/v1/files/uploadFile?dirId=${dirId}`,
 					formData, {
 					reportProgress: true,

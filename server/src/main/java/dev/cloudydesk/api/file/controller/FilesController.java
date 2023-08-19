@@ -296,9 +296,6 @@ public class FilesController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Users currentUser = usersRepository.getIdByEmail(authentication.getName());
 
-		Long createUserId = Long.parseLong(body.get("createdUserId"));
-		Long modifiedUserId = Long.parseLong(body.get("modifiedUserId"));
-
 		//if user exists
 		if (currentUser != null ) {
 

@@ -56,8 +56,8 @@ export class ContextMenuService {
 
 	removeDynamicComponent(component: any, id: string) {
 
-		console.log('remove context menu in the service')
-		console.log(component);
+		//console.log('remove context menu in the service')
+		//console.log(component);
 
 		component.destroy();
 

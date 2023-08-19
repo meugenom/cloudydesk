@@ -20,8 +20,9 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 
 	private element: any;
 
-	isFolder: boolean = false;
-	isFile: boolean = false;
+	isFolderSpace: boolean = true;
+	isItem: boolean = false;
+
 	togleSubMenu: boolean = false;
 
 	constructor(
@@ -93,47 +94,95 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 			//console.log(event.clientX)
 			//console.log(event.clientY)
 			
-			console.log(event)
+			//console.log(event)
 			
 			this.element.style.top = event.clientY + 'px';
 			this.element.style.left = event.clientX + 'px';
 			
 			//find parent element and some attribute to know id and path			
-			console.log(event.target)
+			//console.log(event.target)
 
-			let container = event.target as HTMLElement;
-			let dirId = container.getAttribute('dirId');
-			
-			console.log(dirId)
-			
-			let dirName = container.getAttribute('dirName');
-			
-			console.log(dirName)
+			let container = event.target as HTMLElement;						
+			console.log(container)
 
+			//get attributes id and isItemDirectory
+			let isDirectory = container.getAttribute('data-isDirectory');
+			
+			// context for the store
 			const context: Context = {
-				usedFolder: '',
-				usedFile: ''
+				folderSpaceId: '',
+				itemId: '',
+				isItemDirectory: false
+			}			
+
+			if(isDirectory=='true'){
+				//this is a directory
+
+				this.isFolderSpace = false;
+				this.isItem = true;
+				
+				context.isItemDirectory = true;
+				context.itemId = (container.getAttribute('data-dataitem') as string).substring(8);
+
+				if(context.itemId!=null){
+					this.addContext(context);
+				}else{
+					console.log('error')
+					context.folderSpaceId = '';
+					context.itemId = '';
+					context.isItemDirectory = false;
+					this.addContext(context);
+				}
+
+			}else if(isDirectory=='false'){
+				
+				//this is a file
+
+				this.isFolderSpace = false;
+				this.isItem = true;
+
+				context.itemId = (container.getAttribute('data-dataitem') as string).substring(5);
+				context.isItemDirectory = false;
+
+				if(context.itemId!=null){
+					this.addContext(context);
+				}else{
+					console.log('error')
+					context.folderSpaceId = '';
+					context.itemId = '';
+					context.isItemDirectory = false;
+					this.addContext(context);
+				}
+
+			}else if(isDirectory==null || isDirectory==undefined){
+				
+				//this is a desktop space
+
+				this.isFolderSpace = true;
+				this.isItem = false;
+
+				//console.log('folder space id')
+				//console.log(container)
+				context.folderSpaceId = container.getAttribute('dirid') as string;
+				if(context.folderSpaceId!=null){
+					this.addContext(context);
+				}else{
+					console.log('error')
+					context.folderSpaceId = '';
+					context.itemId = '';
+					context.isItemDirectory = false;
+					this.addContext(context);
+				}
 			}
-			
-			if(dirId == null || dirName == null){
-				// we clicked on the same file
-				//console.log(container.getAttribute('data-dataitem'));
-				this.isFile = true;
-				this.isFolder = false;
-				context.usedFile = (container.getAttribute('data-dataitem') as string).substring(5);
-			}else{
-				//we clicked on the folder
-				this.isFile = false;
-				this.isFolder = true;
-				//set store for context				
-				context.usedFolder = dirId;
-			}
-			//put to the store
-			this.store.dispatch(
-				AddContext(
-					context))		
-			
+
 		}
+	}
+
+	//add new context to the store
+	addContext(context: Context) {
+		this.store.dispatch(
+			AddContext(
+				context))		
 	}
 
 }

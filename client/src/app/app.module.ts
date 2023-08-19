@@ -14,6 +14,7 @@ import { DesktopComponent } from './desktop/desktop.component';
 import { DesktopFullscreenDirective } from './desktop-fullscreen/desktop-fullscreen.directive';
 import { UploadingDirective } from './context-menu/components/uploading/uploading.directive';
 import { AddNewFolderDirective } from './context-menu/components/addnewfolder/addnewfolder.directive';
+import {DeleteItemDirective} from './context-menu/components/deletefolder/deleteitem.directive';
 
 import { TaskbarComponent } from './taskbar/taskbar.component';
 import { FinderComponent } from './finder/finder.component';
@@ -95,8 +96,11 @@ import {DirService} from "./services/dir.service";
 		AuthenticateComponent,
 		RegisterComponent,
 		LogoutComponent,
+		
 		UploadingDirective,
 		AddNewFolderDirective,
+		DeleteItemDirective,
+
 		WidgetPanelComponent,
 		ClockComponent,
 		UploadingComponent,

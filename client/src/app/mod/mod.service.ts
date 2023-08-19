@@ -88,4 +88,9 @@ export class ModService {
 		modal.maximize();
 	}
 
+	//get modal by id to know if it exists
+	isModalExists(id: string) {
+		return this.modals.find(x => x.id === id);
+	}
+
 }
