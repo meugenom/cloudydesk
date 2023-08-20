@@ -35,6 +35,8 @@ export class FinderFileListComponent {
 	allDirs: any| null;
 	dirs: any | null;
 
+	items: any[];
+
 	currentDir: any | null;
 	currentDirId: any | null;
 	breadcrumbs: any[] = [];
@@ -55,6 +57,7 @@ export class FinderFileListComponent {
 		this.files = [];
 		this.allDirs = [];
 		this.dirs = [];
+		this.items = [];
 		this.breadcrumbs = [];
 
 		this.store.select('finder').subscribe((data: any) => {
@@ -88,8 +91,9 @@ export class FinderFileListComponent {
 					}
 				}
 
-				//need merge files and dirs to files list
-				this.files = this.files.concat(this.dirs);
+				//need merge files and dirs to items list
+				this.items = this.files;
+				this.items = this.items.concat(this.dirs);
 			
 		});
 
@@ -139,8 +143,9 @@ export class FinderFileListComponent {
 				}
 			}
 			
-			//need merge files and dirs to files list
-			this.files = this.files.concat(this.dirs);
+			//need merge files and dirs to items list
+			this.items = this.files;
+			this.items = this.items.concat(this.dirs);
 			
 		})
 
@@ -239,16 +244,9 @@ export class FinderFileListComponent {
 		this.subs.unsubscribe();
 	}
 
-	//ngDoCheck() {		
-		
-	//}
-
 	//when click on dir in the list, need change currentFolderDir and open new file list
 	//save old dir in the linked list for bread crumbs
 	openDir(event: any, dir: any) {
-		
-		//this.showFolderPath = dir.data.dirName;
-		//this.showFolderId = dir.data.id;
 		
 		this.currentDir = dir.data.dirName;
 		this.currentDirId = dir.data.id;
@@ -260,7 +258,6 @@ export class FinderFileListComponent {
 		
 
 		this.files = this.allFiles.filter((file: any) => file.dirId == dir.data.id);
-		//console.log(this.files);
 
 		//find dirs by id
 		if (dir && dir.data && dir.data.id != undefined) {

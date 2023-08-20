@@ -98,7 +98,7 @@ export class DesktopFileListComponent implements OnInit  {
 
 			this.items = this.files;
 			this.items = this.items.concat(this.dirs);
-			console.log(this.items);
+			//console.log(this.items);
 
 		})
 
