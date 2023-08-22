@@ -103,7 +103,7 @@ export class Terminal extends TerminalPrompt{
 	};
 
 	public scrollBottom() {
-		this.html.scrollTop = this.html.scrollHeight;
+			this.html.scrollTop = this.html.scrollHeight;
 	};
 
 	public print(message: string, color: string) {
@@ -168,7 +168,7 @@ export class Terminal extends TerminalPrompt{
 	};
 
 	public getVersion() {
-		console.info(`neetcloud.dev-terminal ${this.VERSION}`);
+		console.info(`cloudydesk.de-terminal ${this.VERSION}`);
 		return this.VERSION;
 	};
 
