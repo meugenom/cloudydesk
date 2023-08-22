@@ -194,6 +194,9 @@ export class FinderFileListComponent {
 			
 		})
 
+		/**
+		 * subscribe on dragula events when file is moved or directory is moved
+		 */
 		this.subs.add(dragulaService.out(this.BAG)
 			.subscribe(({ el, container, source }) => {
 
@@ -215,13 +218,19 @@ export class FinderFileListComponent {
 					console.log(el.children[0].getAttribute('data-id'));
 					console.log(el.children[0].getAttribute('data-name'));
 
+					console.log('file or dir: ', el.children[0].getAttribute('data-isDirectory'));
+					console.log(el.children[0]);
 
 					//call api to edit file settings
 					let fileId = el.children[0].getAttribute('data-id');
 					let dirId = container.getAttribute('dirId');
 					
-					//console.log(fileId);
-					console.log(this.allFiles)
+					//need to know file or dir what we move 
+						//file
+						//console.log(fileId);
+						//console.log(this.allFiles)
+
+					if(el.children[0].getAttribute('data-isDirectory')== 'false'){
 
 					for (let key in this.allFiles) {
 						const file: any = this.allFiles[key];
@@ -252,7 +261,7 @@ export class FinderFileListComponent {
 										
 										
 									}, (error) => {
-										console.error('Error listing files:', error);
+										console.error('Error listing files and dirs: ', error);
 									});
 									
 
@@ -260,12 +269,42 @@ export class FinderFileListComponent {
 								}, (error) => {
 									// when error
 									console.error('Error updating file:', error);
-								});																
-								
+								});		
 
 							}
 						}
 					};
+					
+				} else {
+					//dir move to another dir
+
+					console.log(el.children[0]);					
+
+					const folderName = el.children[0].getAttribute('data-name');
+					const currentDirId = el.children[0].getAttribute('data-id');
+					const payload = {
+						id: currentDirId?.toString(),
+						dirName: folderName,
+						parentId: dirId?.toString()
+					}
+
+					this.dirService.updateDir(payload).subscribe((data: any) => {
+						// when success
+						
+						this.fileService.ls("").subscribe((res: any) => {                                        																								
+							this.store.dispatch(loadFiles());							
+						}, (error) => {
+							console.error('Error listing dirs and files:', error);
+						});
+						
+					}, (error) => {
+						// when error
+						console.error('Error updating dir:', error);
+					});
+
+
+				}
+				
 
 				} else (
 					source.getAttribute('dirId') === container.getAttribute('dirId')

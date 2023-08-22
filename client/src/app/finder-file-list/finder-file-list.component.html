@@ -15,6 +15,7 @@
       class="item"
       id="item-{{ item.data.id }}"
       [attr.data-id] = "item.data.id"
+      [attr.data-dataitem]="'dirItem-' + item.data.id"
       [attr.data-name]= "item.data.dirName"
       [attr.data-isDirectory] = "item.data.directory"
       (dblclick)="openDir($event, item)"
@@ -108,7 +109,8 @@
       [attr.data-createdDate]="item.createdDate"
       [attr.data-modifiedDate]="item.modifiedDate"
       [attr.data-createdUserId]="item.createdUserId"
-      [attr.data-modifiedUserId]="item.modifiedUserId"      
+      [attr.data-modifiedUserId]="item.modifiedUserId" 
+      [attr.data-isDirectory]="item.directory"     
       (dblclick)="getItem($event, item)"
       *ngIf="item.directory==false"
       >

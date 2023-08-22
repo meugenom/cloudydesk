@@ -13,6 +13,7 @@
       class="item"
       id="item-{{ item.data.id }}"
       [attr.data-id] = "item.data.id"
+      [attr.data-dataitem]="'dirItem-' + item.data.id"
       [attr.data-name]= "item.data.dirName"
       [attr.data-isDirectory] = "item.data.directory"
       (dblclick)="openFinder($event, 'finder', 'Finder', item)"
