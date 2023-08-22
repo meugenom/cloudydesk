@@ -1,3 +1,4 @@
+import { clone, cloneDeep } from 'lodash';
 export class DirUtils {
 
   static getDirName(dirs: any) {
@@ -5,6 +6,12 @@ export class DirUtils {
     return dirs.data.dirName;
   }
 
+  /**
+   * 
+   * @param dirs 
+   * @param id 
+   * @returns dir object where id matches or null if not found
+   */
   static getDir(dirs: any, id: number): any {
     if (!dirs) {
         return null;
@@ -22,11 +29,9 @@ export class DirUtils {
               return result;
           }
       }
-  }
+    }
   
     return null;
 }
 
-
 }
-

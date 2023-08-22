@@ -97,7 +97,10 @@ export class DesktopFileListComponent implements OnInit  {
 					const currentDir = DirUtils.getDir(this.allDirs, Number.parseInt(this.currentFolderId.toString()));
 					console.log(currentDir)
 					if(currentDir && currentDir.children && currentDir.children.length != 0){
-						this.dirs = currentDir.children;
+						if(currentDir.data.dirName != '/'){
+							this.dirs = currentDir.children;
+						}
+						
 					}else{
 						this.dirs = [];
 					}
@@ -119,7 +122,7 @@ export class DesktopFileListComponent implements OnInit  {
 				//need merge files and dirs to items list
 				this.items = this.files;			
 				this.items = this.items.concat(this.dirs);
-				console.log(this.items);
+				//console.log(this.items);
 
 		})
 
@@ -153,7 +156,7 @@ export class DesktopFileListComponent implements OnInit  {
 
 	ngOnDestroy() {
 		// destroy dragula subscription
-		//this.subs.unsubscribe();
+		this.subs.unsubscribe();
 	}
 	
 	ngOnInit(): void {

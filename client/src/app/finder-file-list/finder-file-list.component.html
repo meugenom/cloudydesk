@@ -65,20 +65,35 @@
             -->
           </div>
         </div>
-          <span class="item-name" data-item-id="0" title="">{{ item.data.dirName }}</span>
+          <span class="item-name" 
+            [attr.data-dataitem]="'dirItem-' + item.data.id"
+            [attr.data-isDirectory] = "item.data.directory"
+            *ngIf="item.data.editable==false"
+            (click)="item.data.editable = true">
+            {{ item.data.dirName }}
+          </span>
           <textarea
             class="item-name-editor"
+            placeholder="Enter folder name"
+            type="text"
+
             spellcheck="false"
             autocomplete="off"
             autocorrect="off"
             autocapitalize="off"
             data-gramm_editor="false"
-            style="display: none; width: 60px; height: 18px"
+            
+            style="display: flex; width: 120px; white-space: nowrap;"
+            rows="1"
+            
             [attr.data-dataitem]="'dirItem-' + item.data.id"
             [attr.data-isDirectory] = "item.data.directory"
-            >
-            {{item.data.dirName}}
-          </textarea>
+
+            *ngIf="item.data.editable==true"
+            [(ngModel)]="item.data.dirName"
+            (blur)="saveDirChanges(item)"
+            (keydown.enter)="saveDirChanges(item)"
+            ></textarea>
     </div>
 
     <!-- file item-->
@@ -183,20 +198,35 @@
         />
 		-->
       </div>
-      <span class="item-name" data-item-id="0" title="">{{item.name}}</span>
+      <span class="item-name" 
+          [attr.data-dataitem]="'item-' + item.id"
+          [attr.data-isDirectory]= "item.directory"
+          *ngIf="item.editable==false"
+          (click)="item.editable = true">
+          {{item.name}}
+        </span>
       <textarea
         class="item-name-editor"
+        placeholder="Enter file name"
+        type="text"
+
         spellcheck="false"
         autocomplete="off"
         autocorrect="off"
         autocapitalize="off"
         data-gramm_editor="false"
-        style="display: none; width: 60px; height: 18px"
+        
+        style="display: block; width: 120px; white-space: nowrap;"
+        rows="1"
+
         [attr.data-dataitem]="'item-' + item.id"
-          [attr.data-isDirectory]= "item.directory"
-        >
-			{{item.name}}
-		</textarea>
+        [attr.data-isDirectory]= "item.directory"
+        
+        *ngIf="item.editable==true"
+        [(ngModel)]="item.name"
+        (blur)="saveFileChanges(item)"
+        (keydown.enter)="saveFileChanges(item)"
+        ></textarea>
     </div>
   </div>
-</div>
+</div>  

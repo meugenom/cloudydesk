@@ -15,6 +15,8 @@ import { loadFiles } from '../desktop/store/actions/file.actions';
 import { DirUtils} from '../utils/dir-utils';
 import { FinderState } from '../desktop/store/models/finder.state.model';
 import { AddFinder } from '../desktop/store/actions/finder.action';
+import { DirService } from '../services/dir.service';
+import { clone, cloneDeep } from 'lodash';
 
 @Component({
 	selector: 'app-finder-file-list',
@@ -50,7 +52,8 @@ export class FinderFileListComponent {
 		private element: ElementRef,
 		private store: Store<{ files: FileState, dirs: DirState, finder: FinderState }>,
 		private http: HttpClient,
-		private fileService: FileService
+		private fileService: FileService,
+		private dirService: DirService
 	) {
 		
 		this.allFiles = [];
@@ -85,11 +88,31 @@ export class FinderFileListComponent {
 					const currentDir = DirUtils.getDir(this.allDirs, Number.parseInt(this.currentDirId.toString()));
 					console.log(currentDir)
 					if(currentDir && currentDir.children && currentDir.children.length != 0){
-						this.dirs = currentDir.children;
+						if(currentDir.data.dirName != '/'){
+							this.dirs = currentDir.children;
+						}						
 					}else{
 						this.dirs = [];
 					}
 				}
+
+				//add editable prop to files uses lodash clone
+				this.files = this.files.map((file: any) => {
+					const newFile = clone(file);
+					newFile.editable = false;
+					return newFile;
+				  });
+
+				//add editable prop to dirs uses lodash clone
+				this.dirs = this.dirs.map((dir: any) => {
+					const newDir = cloneDeep(dir);
+					newDir.data.editable = false;
+					return newDir;
+				});
+
+				
+
+				console.log(this.dirs)
 
 				//need merge files and dirs to items list
 				this.items = this.files;
@@ -111,7 +134,7 @@ export class FinderFileListComponent {
 		//subscribe on events for store 'files'
 		this.store.select('files').subscribe((data: any) => {
 			//console.log(data.files);
-			this.dirs = data.dirs;
+			this.dirs = data.dirs;			
 
 			//let dirId: null = null;
 			this.dirs?.children?.forEach((dir: any) => {
@@ -138,10 +161,32 @@ export class FinderFileListComponent {
 			if(this.currentDirId != undefined) {				
 				const currentDir = DirUtils.getDir(this.allDirs, Number.parseInt(this.currentDirId.toString()));
 				//console.log(currentDir)
-				if(currentDir.children.length != 0){
+				if(currentDir.children.length != 0 || currentDir.data.dirName != '/'){
 					this.dirs = currentDir.children;
 				}
 			}
+
+				//add editable prop to files uses lodash clone
+				if(this.files.length != 0){
+					this.files = this.files.map((file: any) => {
+						const newFile = clone(file);
+						newFile.editable = false;
+						return newFile;
+					  });
+	
+				}
+
+				//add editable prop to dirs uses lodash clone								
+				if(this.dirs.length != 0){
+					console.log('dirs',this.dirs)
+					this.dirs = this.dirs.map((dir: any) => {
+						const newDir = cloneDeep(dir);
+						newDir.data.editable = false;
+						return newDir;
+					});
+				}
+				console.log(this.dirs)
+
 			
 			//need merge files and dirs to items list
 			this.items = this.files;
@@ -299,6 +344,86 @@ export class FinderFileListComponent {
 					saveAs(blob, file.name);
 				}
 			)
+	}
+
+	saveDirChanges(item: any) {
+		item.data.editable = false;
+		//console.log('save changes');
+		//console.log(item);
+		
+		let newName = item.data.dirName;		
+
+		//if name is empty
+		if(newName.length == 0){
+			newName = 'New Folder';
+		}
+
+		//remove from the name all symbols sql injection and html injection and stay - _, space, +, =, ( , )
+		newName = newName.replace(/[^a-zA-Z0-9-_+=()., ]/g, '');
+
+		//remove symbols when length > 50
+		if(newName.length > 50){
+			newName = newName.substring(0, 50);
+		}		
+
+		item.data.dirName = newName;
+		
+		//need to save changes in the store but before need to know similar dir or file and add to the new name (1) or (2) or (3) etc
+		const similarItems = this.items.filter((i: any) => i?.data?.dirName == newName);
+		//console.log(similarItems);
+		if(similarItems.length > 1){
+			//need to add (1) or (2) or (3) etc
+			const newSimilarName = newName + '(' + similarItems.length + ')';
+			console.log(newSimilarName);
+			item.data.dirName = newSimilarName;
+		}
+
+		//need save changes in the store and in the server
+		this.dirService.updateDir(item.data).subscribe((data: any) => {
+			//if res is true need to update store
+			if(data){				
+				//update store and ls
+				this.store.dispatch((loadFiles()))				
+			}
+		});
+	}
+
+	saveFileChanges(item: any) {
+		let newName = item.name;		
+
+		//if name is empty
+		if(newName.length == 0){
+			newName = 'New File';
+		}
+
+		//remove from the name all symbols sql injection and html injection and stay - _, space, +, =, ( , )
+		newName = newName.replace(/[^a-zA-Z0-9-_+=()., ]/g, '');
+
+		//remove symbols when length > 50
+		if(newName.length > 50){
+			newName = newName.substring(0, 50);
+		}		
+
+		item.name = newName;
+		
+		//need to save changes in the store but before need to know similar dir or file and add to the new name (1) or (2) or (3) etc
+		const similarItems = this.items.filter((i: any) => i?.name == newName);
+		//console.log(similarItems);
+		if(similarItems.length > 1){
+			//need to add (1) or (2) or (3) etc
+			const newSimilarName = newName + '(' + similarItems.length + ')';
+			console.log(newSimilarName);
+			item.name = newSimilarName;
+		}
+
+		//need save changes in the store and in the server
+		this.fileService.updateFile(item).subscribe((data: any) => {
+			//if res is true need to update store
+			if(data){				
+				//update store and ls
+				this.store.dispatch((loadFiles()))		
+			}
+		});
 	}
 
 }
