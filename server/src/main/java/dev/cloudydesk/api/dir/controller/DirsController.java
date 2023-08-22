@@ -71,6 +71,7 @@ public class DirsController {
 			Long parentId = Long.parseLong(body.get("parentId"));			
 
 			//TODO: need to check if dirName is not  unique and save it with new name + (1) or (2) etc
+			// made it on frontend
 
 			try{
 
@@ -135,6 +136,7 @@ public class DirsController {
 			String dirName = body.get("dirName");
 
 			//TODO: need check if new dirName is not  unique and save it with new name + (1) or (2) etc
+			//made it on frontend
 
 			try{
 

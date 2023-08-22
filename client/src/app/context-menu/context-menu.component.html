@@ -60,12 +60,11 @@
 	New File
 </li>
 
-
 <li class="context-menu-divider">
 	<hr />
 </li>
 
-<li data-action="3" 
+<li data-action="4" 
 	*ngIf="isFolderSpace"
 	UploadingFile 
 	class="context-menu-item">
@@ -73,21 +72,40 @@
 	<span class="context-menu-item-icon-active"></span>
 	Uploading File
 </li>
-<li data-action="3" 
+<li data-action="4" 
 	*ngIf="isItem"
 	class="context-menu-item context-menu-item-disabled">
 	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
 	Uploading File
 </li>
+<li data-action="5" 
+	*ngIf="isItem"
+	DownloadingFile 
+	class="context-menu-item">
+	<span class="context-menu-item-icon"></span>
+	<span class="context-menu-item-icon-active"></span>
+	Downloading File
+</li>
+<li data-action="5" 
+	*ngIf="isFolderSpace"
+	class="context-menu-item context-menu-item-disabled">
+	<span class="context-menu-item-icon"></span>
+	<span class="context-menu-item-icon-active"></span>
+	Downloading File
+</li>
+
+<li class="context-menu-divider">
+	<hr />
+</li>
 
 
-<li *ngIf="isFolderSpace" data-action="4" class="context-menu-item context-menu-item-disabled">
+<li *ngIf="isFolderSpace" data-action="6" class="context-menu-item context-menu-item-disabled">
 	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
 	Copy
 </li>
-<li *ngIf="isItem" data-action="4" class="context-menu-item">
+<li *ngIf="isItem" data-action="6" class="context-menu-item">
 	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
 	Copy
@@ -110,7 +128,7 @@
 
 
 <li *ngIf="isItem"
-	data-action="5"
+	data-action="7"
 	class="context-menu-item"
 	DeleteItem
 	>
@@ -119,7 +137,7 @@
   	Delete
 </li>
 <li *ngIf="isFolderSpace"
-	data-action="5"
+	data-action="7"
 	class="context-menu-item context-menu-item-disabled"
 	>
   	<span class="context-menu-item-icon"></span>
@@ -130,7 +148,7 @@
 
 <li
 	*ngIf="isFolderSpace"
-	data-action="7"
+	data-action="8"
 	class="context-menu-item context-menu-item-disabled">
   	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>
@@ -138,7 +156,7 @@
 </li>
 <li
 	*ngIf="isItem"
-	data-action="7"
+	data-action="8"
 	class="context-menu-item">
   	<span class="context-menu-item-icon"></span>
 	<span class="context-menu-item-icon-active"></span>

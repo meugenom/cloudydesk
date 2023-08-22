@@ -195,7 +195,7 @@ export class FinderFileListComponent {
 								}								
 
 								
-								this.fileService.putFile(payload).subscribe((data: any) => {
+								this.fileService.updateFile(payload).subscribe((data: any) => {
 									// when success
 									
 									this.fileService.ls("").subscribe((res: any) => {                                        										

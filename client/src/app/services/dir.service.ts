@@ -6,16 +6,26 @@ import { environment } from "../../environments/environment";
 	providedIn: 'root'
   })
   export class DirService {
-	constructor (private http: HttpClient) {}
+
+	constructor (private http: HttpClient) { }
     /**
      *  
      * @param dirData 
      * @returns new directory created in the database
      */
-    createDir(dirData: any){
+    createDir(dirData: any){        
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this.http.post(`${environment.apiUrl}/api/v1/dirs/dir`, dirData, {headers});
     };
+    /**
+     * 
+     * @param dirData 
+     * @returns true if directory was updated
+     */
+    updateDir(dirData: any){
+        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this.http.put(`${environment.apiUrl}/api/v1/dirs/dir`, dirData, {headers});
+    }
     /**
      * 
      * @param dirData 
