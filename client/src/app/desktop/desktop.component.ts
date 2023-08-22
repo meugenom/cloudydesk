@@ -44,8 +44,7 @@ export class DesktopComponent {
 	isRegisterForm: boolean;
 
 	constructor(
-		private modService: ModService,
-		private authService: AuthService,
+	
 		private contextMenuService: ContextMenuService,
 		private viewContainerRef: ViewContainerRef,
 		private globals: Globals,
