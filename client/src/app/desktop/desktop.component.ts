@@ -9,7 +9,7 @@ import { WidgetPanel } from '../desktop/store/models/widgetpanel.model';
 import { OpenPanel } from '../desktop/store/actions/widgetpanel.action';
 import { AuthStateInterface } from '../auth/store/models/auth.state.model';
 import { AuthService } from '../services/auth.service';
-import { checkUserAction} from '../auth/store/actions/auth.action';
+import { authenticateAction, checkUserAction} from '../auth/store/actions/auth.action';
 import { FileState } from './store/models/file.state.model';
 import { loadFiles } from './store/actions/file.actions';
 import { Router } from '@angular/router';
@@ -24,6 +24,7 @@ import {
 	WIDGET_PANEL_IS_ACTIVE,
 	WIDGET_PANEL_IS_NOT_ACTIVE
 } from './store/models/widgetpanel.constants'
+import { User } from '../user/models/user';
 
 @Component({
 	selector: 'app-desktop',
@@ -58,16 +59,19 @@ export class DesktopComponent {
 		this.isActive = false;
 		this.email = "unknown"
 
-		//need check our localstorage and find authtoken
-		
-		//console.log(isAuthenticated);
-		
-		//if(!isAuthenticated){
+		//default login		
+		const user = new User("", "", "", "", "", true);
 
-			//feature for the reloads or first time loading
-			this.store.dispatch((checkUserAction()));
+		user.setEmail(globals.defaultEmail);
+		user.setPassword(globals.defaultPassword);		
+
+		// Dispatch action to the store anf then sucess or error
+		this.store.dispatch(authenticateAction({ user }))
+		
+		//feature for the reloads or first time loading
+		this.store.dispatch((checkUserAction()));
 			
-		//}
+		
 
 		
 		store.select('auth').subscribe(data => {
