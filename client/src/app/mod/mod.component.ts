@@ -102,18 +102,20 @@ export class ModComponent implements OnInit, AfterViewInit {
 	/**
 	 * set modal active, when it was minimized before or by click on the window
 	 */
-	active(): void {
+	active(): void {		
 		//console.log(this.element.classList)
 		//if window minimized and saved in the store
 		if (this.element.classList.contains('minimized')) {
 
-			this.element.childNodes[0].style.minWidth = '300px'; //we need this hack for resizing
-			this.element.childNodes[0].style.minHeight = '200px'; //we need this hack for resizing
-			this.element.childNodes[0].style.width = '600px';
-			this.element.childNodes[0].style.height = '350px';
-			this.element.childNodes[0].style.top = 'calc(15% + 0px)';
-			this.element.childNodes[0].style.left = '405px';
-			this.element.childNodes[0].classList.remove('minimized');
+			this.element.classList.remove('minimized');
+
+			//this.element.childNodes[0].style.minWidth = '300px'; //we need this hack for resizing
+			//this.element.childNodes[0].style.minHeight = '200px'; //we need this hack for resizing
+			//this.element.childNodes[0].style.width = '600px';
+			//this.element.childNodes[0].style.height = '350px';
+			//this.element.childNodes[0].style.top = 'calc(15% + 0px)';
+			//this.element.childNodes[0].style.left = '405px';
+			//this.element.childNodes[0].classList.remove('minimized');
 
 
 		} else {
@@ -205,13 +207,9 @@ export class ModComponent implements OnInit, AfterViewInit {
 	 */
 	minimize(): void {
 		//minimized window
-		console.log('minimized')
-		//console.log(this.element.childNodes[0])
+		console.log('minimized')		
 		this.element.classList.add('minimized');
-		this.element.childNodes[0].style.minWidth = '0px';
-		this.element.childNodes[0].style.minHeight = '0px';
-		this.element.childNodes[0].style.width = '0px';
-		this.element.childNodes[0].style.height = '0px';
+		
 	}
 
 	/**
