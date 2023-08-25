@@ -106,25 +106,9 @@ export class ModComponent implements OnInit, AfterViewInit {
 		//console.log(this.element.classList)
 		//if window minimized and saved in the store
 		if (this.element.classList.contains('minimized')) {
-
 			this.element.classList.remove('minimized');
-
-			//this.element.childNodes[0].style.minWidth = '300px'; //we need this hack for resizing
-			//this.element.childNodes[0].style.minHeight = '200px'; //we need this hack for resizing
-			//this.element.childNodes[0].style.width = '600px';
-			//this.element.childNodes[0].style.height = '350px';
-			//this.element.childNodes[0].style.top = 'calc(15% + 0px)';
-			//this.element.childNodes[0].style.left = '405px';
-			//this.element.childNodes[0].classList.remove('minimized');
-
-
 		} else {
-			//when window hasn't minimized state and need to be again active 
-			//this.setNewPosition();
-			//this.element.classList.add('app-modal-opened');
-			//this.element.classList.add('scale-in-center');
-
-			
+			//when window hasn't minimized state and need to be again active 						
 			let opened = document.getElementsByClassName('app-modal-opened');
 			//for all modals are state z-index = 0
 			for (var i = 0; i < opened.length; i++) {
