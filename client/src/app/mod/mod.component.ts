@@ -60,13 +60,33 @@ export class ModComponent implements OnInit, AfterViewInit {
 		this.element.classList.add('app-modal-opened');
 		this.element.classList.add('scale-in-center');
 
-		this.element.childNodes[0].style.minWidth = '300px';
-		this.element.childNodes[0].style.minHeight = '200px';
-		this.element.childNodes[0].style.width = '600px';
-		this.element.childNodes[0].style.height = '350px';
-		this.element.childNodes[0].style.top = 'calc(15% + 0px)';
-		this.element.childNodes[0].style.left = '405px';
-		this.element.childNodes[0].style.zIndex = '1';
+		//need to know info about current desktop size and set up new modal window
+		const calcWidth = document.body.clientWidth
+		const calcHeight = document.body.clientHeight;
+
+		let modalWindow = this.element.childNodes[0];
+
+		//by default
+		modalWindow.style.minWidth = '300px';
+		modalWindow.style.minHeight = '200px';
+		modalWindow.style.width = '600px';
+		modalWindow.style.height = '350px';
+
+		if(calcHeight < 350){
+			modalWindow.style.top = 10 + 'px';
+			modalWindow.style.height = calcHeight - 20 + 'px';
+		}else{
+			modalWindow.style.top = (calcHeight - 350)/2 + 'px';
+		}
+		
+		if(calcWidth < 600){
+			modalWindow.style.left = 10 + 'px';	
+			modalWindow.style.width = calcWidth - 20 + 'px';			
+		}else{
+			modalWindow.style.left = (calcWidth - 600)/2 + 'px';
+		}
+		
+		modalWindow.style.zIndex = '1';
 
 
 		//set new position for new window +30px top and +30px left
@@ -206,10 +226,30 @@ export class ModComponent implements OnInit, AfterViewInit {
 
 			this.element.classList.remove('maximized');
 
-			this.element.childNodes[0].style.top = 'calc(15% + 0px)';
-			this.element.childNodes[0].style.left = '405px';
-			this.element.childNodes[0].style.width = '600px';
-			this.element.childNodes[0].style.height = '350px';
+		//need to know info about current desktop size and set up new modal window
+		const calcWidth = document.body.clientWidth
+		const calcHeight = document.body.clientHeight;
+
+		let modalWindow = this.element.childNodes[0];
+
+		//by default
+		modalWindow.style.width = '600px';
+		modalWindow.style.height = '350px';
+
+		if(calcHeight < 350){
+			modalWindow.style.top = 10 + 'px';
+			modalWindow.style.height = calcHeight - 20 + 'px';
+		}else{
+			modalWindow.style.top = (calcHeight - 350)/2 + 'px';
+		}
+		
+		if(calcWidth < 600){
+			modalWindow.style.left = 10 + 'px';	
+			modalWindow.style.width = calcWidth - 20 + 'px';			
+		}else{
+			modalWindow.style.left = (calcWidth - 600)/2 + 'px';
+		}
+		
 
 		} else {
 			//when window get maximization at the first
