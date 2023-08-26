@@ -50,9 +50,8 @@ CloudyDesk App is Open Source App. You can download the code and make your chang
 - A loading spinner is activated to indicate ongoing processes.
 
 ### Please read this
-- There is currently no demo available on the website [https://cloudydesk.de](https://cloudydesk.de). Please use the following login credentials:
-	login: muster@muster.muster
-	password: muster
+- There is currently no demo available on the website [https://cloudydesk.de](https://cloudydesk.de).
+- Logging into the demo website automatically as the user hallo@meugenom.com
 - After loading the Docker image to start, please follow the instructions below.
 - If you have started the Docker image and the database is empty, create your own account and upload your files. The default file upload size limit is 10 MB.
 - In the Docker image, the path 'upload-dir' is set by default. Please refer to the file 'server/src/main/resources/application.yml' to select your own directory to work locally, to which you have access.
