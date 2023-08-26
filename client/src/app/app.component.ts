@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ModService } from './mod/mod.service';
 import { Store } from '@ngrx/store';
 import { Navigator } from './desktop/store/models/navigator.model';
@@ -42,6 +42,11 @@ export class AppComponent implements OnInit {
 
 	}
 
+	//when window resize update store
+	@HostListener('window:resize', ['$event'])
+	onResize(event: any) {
+		this.addDevice(event.target.innerHeight, event.target.innerWidth, false, navigator.userAgent)
+	}
 
 	addDevice(width: any, height: any, isMobile: any,
 		browser: any

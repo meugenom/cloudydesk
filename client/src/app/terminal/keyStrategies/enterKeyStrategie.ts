@@ -47,13 +47,13 @@ export class EnterKeyStrategy implements KeyStrategy {
 			case '':
 				terminal.print(terminal._inputLine.textContent, 'white');
 				terminal._inputLine.textContent = terminal.promptText;
-				terminal.scrollBottom();	
+				//terminal.scrollBottom();	
 				break;
 			default:
 				terminal.print(terminal._inputLine.textContent, 'white');
 				terminal._inputLine.textContent = terminal.promptText;
 				terminal.print("Error: Command not found: ", 'red');
-				terminal.scrollBottom();
+				//terminal.scrollBottom();
 				break;
 		}
 

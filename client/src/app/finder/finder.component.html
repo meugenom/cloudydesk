@@ -4,8 +4,10 @@
     <div
       class="window-sidebar-item window-sidebar-item-active"
       id="{{ folder.data.dirName + '-sidebar' }}"
+      [attr.dataId]="folder.data.id"
+      [attr.dataName]="folder.data.dirName"
       *ngIf="folder.data.dirName == activeFolderName"
-      (click)="changeFileList(folder.data.dirName)"
+      (click)="setActiveFolder(folder.data.dirName, folder.data.id)"
       >
       <img
         src="../../assets/img/folder-desktop.svg"
@@ -49,7 +51,7 @@
       class="window-sidebar-item"
       id="{{ folder.data.dirName + '-sidebar' }}"
       *ngIf="folder.data.dirName != activeFolderName"
-      (click)="changeFileList(folder.data.dirName)"
+      (click)="setActiveFolder(folder.data.dirName, folder.data.id)"
     >
       <img
         src="../../assets/img/folder-desktop.svg"
@@ -91,17 +93,29 @@
     </div>
   </ng-container>
 </div>
-<div class="window-navbar"></div>
+
+
+<div class="window-navbar">
+  <div class="window-navbar-breadcrumbs">
+    <ng-container *ngFor="let breadcrumb of this.breadcrumbs; let i = index">
+      <a
+        class="window-navbar-breadcrumbs-item"
+        id="{{ breadcrumb.dirName + '-breadcrumb' }}"
+        [attr.dataId]="breadcrumb.id"
+        [attr.dataName]="breadcrumb.name"
+        (click)="setActiveFolder(breadcrumb.name, breadcrumb.id)">
+        {{ breadcrumb.name }}
+      </a>
+      <span class="window-navbar-breadcrumbs-seperator" style="display: inline;">/</span>
+    </ng-container>    
+  </div>
+</div>
+
 <div class="window-body">
-  <app-finder-file-list
-    #container 
-    [showFolderPath]="showFolderPath"
-    [showFolderId]="showFolderId"
-    >
-  </app-finder-file-list>
+  <app-finder-file-list #container></app-finder-file-list>
 </div>
 <div class="finder-footer">
-	<span class="finder-footer-item-count">4 items</span>
+	<span class="finder-footer-item-count">{{items}} items</span>
 	<span class="finder-footer-seperator" style="display: inline;">|</span>
-	<span class="finder-footer-selected-items-count" style="display: inline;">1 item selected</span>
+	<span class="finder-footer-selected-items-count" style="display: inline;">{{selectedItems}} selected</span>
 </div>

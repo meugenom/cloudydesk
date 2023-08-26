@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { ContextState } from '../desktop/store/models/context.state.model';
 import { Context } from '../desktop/store/models/context.model';
 import { AddContext } from '../desktop/store/actions/context.action';
+import { FinderState } from '../desktop/store/models/finder.state.model';
 
 @Component({
 	selector: 'div[app-context-menu]',
@@ -19,10 +20,15 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 
 	private element: any;
 
+	isFolderSpace: boolean = true;
+	isItem: boolean = false;
+
+	togleSubMenu: boolean = false;
+
 	constructor(
 		private el: ElementRef,
 		private contextMenuService: ContextMenuService,
-		private store: Store<{ context: ContextState}>,
+		private store: Store<{ context: ContextState, finder: FinderState }>,
 	) {
 		this.element = el.nativeElement;
 
@@ -66,10 +72,16 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 	ngAfterViewInit(): void {
 	}
 
+
 	//if click on the desktop then automatic close opened context menu window
 	@HostListener("document:click", ["$event"])
 	close(event: Event) {
+
+		console.log('context menu close');
+		console.log(event.target)
 		this.closeContext.emit(event); //automatic removing context from dom and store
+	
+		
 	}
 
 	@HostListener("document:contextmenu", ["$event"])
@@ -79,48 +91,98 @@ export class ContextMenuComponent implements OnInit, AfterViewInit {
 		// in js we have event.target.tagName 
 		//but ts needs default handler, so !important
 		if (event instanceof MouseEvent) {
-			console.log(event.clientX)
-			console.log(event.clientY)
-			console.log(event)
+			//console.log(event.clientX)
+			//console.log(event.clientY)
+			
+			//console.log(event)
+			
 			this.element.style.top = event.clientY + 'px';
 			this.element.style.left = event.clientX + 'px';
 			
-			//find parent element and some attribute 
+			//find parent element and some attribute to know id and path			
 			//console.log(event.target)
-			let foundElem : any = event.target;
-			let path = '';
-			let id = '';
-			//if desktop or finder then set store for lastDir
-			if(foundElem.getAttribute('showFolderPath') == null
-				&& foundElem.getAttribute('showFolderId') == null
-			){
-				// finder
-				path = foundElem.children[0].children[0].getAttribute('showFolderPath');
-				id = foundElem.children[0].children[0].getAttribute('showFolderId');
-				//console.log(path);
-				//console.log(id);
 
-			}else{
-				// desktop 
-				//console.log(foundElem);
-				console.log(foundElem.getAttribute('showFolderPath'));
-				console.log(foundElem.getAttribute('showFolderId'));
-				
-				id = foundElem.getAttribute('showFolderId');
-				path = foundElem.getAttribute('showFolderPath');
-				
-			}
+			let container = event.target as HTMLElement;						
+			console.log(container)
 
-			//set store for context
-			const context: Context = {
-				usedFolder: id,
-				usedFile: ''
-			}
-	
-			this.store.dispatch(
-				AddContext(
-					context))		
+			//get attributes id and isItemDirectory
+			let isDirectory = container.getAttribute('data-isDirectory');
 			
+			// context for the store
+			const context: Context = {
+				folderSpaceId: '',
+				itemId: '',
+				isItemDirectory: false
+			}			
+
+			if(isDirectory=='true'){
+				//this is a directory
+
+				this.isFolderSpace = false;
+				this.isItem = true;
+				
+				context.isItemDirectory = true;
+				context.itemId = (container.getAttribute('data-dataitem') as string).substring(8);
+
+				if(context.itemId!=null){
+					this.addContext(context);
+				}else{
+					console.log('error')
+					context.folderSpaceId = '';
+					context.itemId = '';
+					context.isItemDirectory = false;
+					this.addContext(context);
+				}
+
+			}else if(isDirectory=='false'){
+				
+				//this is a file
+
+				this.isFolderSpace = false;
+				this.isItem = true;
+
+				context.itemId = (container.getAttribute('data-dataitem') as string).substring(5);
+				context.isItemDirectory = false;
+
+				if(context.itemId!=null){
+					this.addContext(context);
+				}else{
+					console.log('error')
+					context.folderSpaceId = '';
+					context.itemId = '';
+					context.isItemDirectory = false;
+					this.addContext(context);
+				}
+
+			}else if(isDirectory==null || isDirectory==undefined){
+				
+				//this is a desktop space
+
+				this.isFolderSpace = true;
+				this.isItem = false;
+
+				//console.log('folder space id')
+				//console.log(container)
+				context.folderSpaceId = container.getAttribute('dirid') as string;
+				if(context.folderSpaceId!=null){
+					this.addContext(context);
+				}else{
+					console.log('error')
+					context.folderSpaceId = '';
+					context.itemId = '';
+					context.isItemDirectory = false;
+					this.addContext(context);
+				}
+			}
+
 		}
 	}
+
+	//add new context to the store
+	addContext(context: Context) {
+		this.store.dispatch(
+			AddContext(
+				context))		
+	}
+
 }

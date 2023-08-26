@@ -9,8 +9,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DesktopComponent } from './desktop/desktop.component';
+
+//directives
 import { DesktopFullscreenDirective } from './desktop-fullscreen/desktop-fullscreen.directive';
-import { UploadingDirective } from './uploading/uploading.directive';
+import { UploadingDirective } from './context-menu/components/uploading/uploading.directive';
+import { AddNewFolderDirective } from './context-menu/components/addnewfolder/addnewfolder.directive';
+import {DeleteItemDirective} from './context-menu/components/deletefolder/deleteitem.directive';
+
 import { TaskbarComponent } from './taskbar/taskbar.component';
 import { FinderComponent } from './finder/finder.component';
 import { DrawComponent } from './draw/draw.component';
@@ -58,8 +63,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DesktopModule } from './desktop/desktop.module';
 import { WidgetPanelComponent } from './widget-panel/widget-panel.component';
 import { ClockComponent } from './clock/clock.component';
-import { UploadingComponent } from './uploading/uploading.component';
-import { uploadingModule } from './uploading/uploading.module';
+import { UploadingComponent } from './context-menu/components/uploading/uploading.component';
+import { uploadingModule } from './context-menu/components/uploading/uploading.module';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
 import { MobileComponent } from './mobile/mobile.component';
@@ -70,6 +75,7 @@ import { FileMenuComponent } from './file-menu/file-menu.component';
 import {ThemesModule} from "./themes/themes.module";
 import {ThemesDirective} from "./themes/themes.directive";
 import {PersistanceService} from "./services/persistance.service";
+import {DirService} from "./services/dir.service";
 
 @NgModule({
 	declarations: [
@@ -90,7 +96,11 @@ import {PersistanceService} from "./services/persistance.service";
 		AuthenticateComponent,
 		RegisterComponent,
 		LogoutComponent,
+		
 		UploadingDirective,
+		AddNewFolderDirective,
+		DeleteItemDirective,
+
 		WidgetPanelComponent,
 		ClockComponent,
 		UploadingComponent,
@@ -124,7 +134,8 @@ import {PersistanceService} from "./services/persistance.service";
 		{ provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
 		AuthGuard,
 		NotificationService,
-		PersistanceService
+		PersistanceService,
+		DirService
 	],
 	bootstrap: [AppComponent]
 })

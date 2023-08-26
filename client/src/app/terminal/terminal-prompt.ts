@@ -27,7 +27,7 @@ export class TerminalPrompt {
 
 	constructor(
 	) {
-		this.VERSION = "0.2.1";
+		this.VERSION = "0.2.5";
 		this.PROMPT_INPUT = 1;
 		this.PROMPT_PASSWORD = 2;
 		this.PROMPT_CONFIRM = 3;

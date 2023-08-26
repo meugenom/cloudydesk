@@ -1,6 +1,6 @@
 ## Web-based desktop client (backend code)
 
-see **[Demo - https://neetcloud.dev](https://neetcloud.dev)**
+see **[Demo - https://cloudydesk.de](https://cloudydesk.de)**
 
 This project was generated with:
 
@@ -23,14 +23,21 @@ This project was generated with:
     - **api/v1/users/list**[GET] get users list only when user has ROLE_ADMIN
 	- 
     - **api/v1/files/ls**[GET] files and directories list for current user
-    - **api/v1/files/file**[GET] get file info by id
-    - **api/v1/files/file**[POST] create new file info without file content
+    -
+	- **api/v1/files/file**[GET] get file info by id
+    -
+	- **api/v1/files/file**[POST] create new file info without file content
     - **api/v1/files/file**[PUT] update file info without file content
     - **api/v1/files/file**[DELETE] delete file info by id
+	-
+	- **api/v1/dirs/dir**[POST] create new folder
+    - **api/v1/dirs/dire**[PUT] update folder's info
+    - **api/v1/dirs/dir**[DELETE] delete folder
+	-
     - **api/v1/files/file/{fileId}** delete file by id
 	- **api/v1/files/uploadFile:**[POST] uploading file to the storage and get file info
 	- **api/v1/files/downloadFile/{fileId}**[GET] downloading file from the storage (by web desktop - double click on icon of file)
-	... other in progress
+	- ... other in progress
 
 ### Development server
 
@@ -46,10 +53,14 @@ Install and run `Docker`
 	# see this images in the list
 	docker images
 	# start new docker container
-	docker run -d --name postgres-container -e POSTGRES_USER=neetcloud -e POSTGRES_PASSWORD=password -p 5432:5432 -v data:/var/lib/postgresql/data postgres
+	docker run -d --name postgres-container -e POSTGRES_USER=cloudydesk -e POSTGRES_PASSWORD=password -p 5432:5432 -v data:/var/lib/postgresql/data postgres
 	# see started containers, in your case is postgres-container
 	docker ps
 ```
+### DB Scheme in progress
+<p align="center">
+  <img src="./assets/cloudydesk_db _diagram.svg" data-canonical-src="./assets/cloudydesk_db_diagram.svg" width="800" height="600" />
+</p>
 
 ### Build
 

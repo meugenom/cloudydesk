@@ -1,89 +1,189 @@
 <div
-  class="item-container dragula"
-  dragula="DRAGULA_FILE_LIST"
-  [attr.showFolderPath]="showFolderPath"
-  [attr.showFolderId]="showFolderId"
->
-  <div *ngFor="let file of this.files; let i = index">
-    <div
+  class = "item-container dragula"
+  dragula = "DRAGULA_FILE_LIST"
+  id = "desktop-file-list"
+  [attr.dirName] = "currentFolderPath"
+  [attr.dirId] = "currentFolderId"
+  >
+  <div *ngFor="let item of items ; let j = index">
+    
+    <!-- dir item-->
+    <div      
+      *ngIf="item?.data?.directory==true"
       class="item"
-      id="item-{{ file.id }}"
-      [attr.data-id] = "file.id"      
-      [attr.data-name]="file.name"
-      [attr.data-dirId]="file.dirId"
-      [attr.data-size]="file.size"
-      [attr.data-type]="file.type"
-      [attr.data-createdDate]="file.createdDate"
-      [attr.data-createdDate]="file.modifiedDate"
-      [attr.data-createdUser]="file.createdUser"
-      [attr.data-modifiedUser]="file.modifiedUser"
-      (dblclick)="getItem($event, file)"
+      id="item-{{ item.data.id }}"
+      [attr.data-id] = "item.data.id"
+      [attr.data-dataitem]="'dirItem-' + item.data.id"
+      [attr.data-name]= "item.data.dirName"
+      [attr.data-isDirectory] = "item.data.directory"
+      (dblclick)="openFinder($event, 'finder', 'Finder', item)"
+      >
+        <div class="item-spinner"></div>
+        <div class="item-icon" [attr.style]="this.style">
+          <img
+            src="../../assets/img/folders.svg"
+            class="item-icon-icon"
+            [attr.data-dataitem]="'dirItem-' + item.data.id"
+            [attr.data-isDirectory] = "item.data.directory"
+            />
+          <div class="item-badges">
+            <img
+                    class="item-badge item-has-website-badge"
+                    src="../../assets/img/world.svg"
+                    [attr.data-dataitem]="'dirItem-' + item.data.id"
+                    [attr.data-isDirectory] = "item.data.directory"
+            />
+            <img
+                    class="item-badge item-badge-has-permission"
+                    style="display: none; background-color: #ffffff; padding: 2px"
+                    src="../../assets/img/shared-file.svg"
+                    [attr.data-dataitem]="'dirItem-' + item.data.id"
+                    [attr.data-isDirectory] = "item.data.directory"
+            />
+
+            <img
+                    class="item-badge item-is-shared"
+                    style="background-color: #ffffff; padding: 2px; display: none"
+                    src="../../assets/img/shared-owner.svg"
+                    [attr.data-dataitem]="'dirItem-' + item.data.id"
+                    [attr.data-isDirectory] = "item.data.directory"
+            />
+            <!--
+            <img
+              class="item-badge item-shortcut"
+              style="background-color: #ffffff; padding: 2px"
+              src="../../assets/img/shortcut.svg"
+              data-item-id="0"
+              title="Shortcut"
+            />
+            -->
+          </div>
+        </div>
+          <span class="item-name" 
+          [attr.data-dataitem]="'dirItem-' + item.data.id"
+          [attr.data-isDirectory] = "item.data.directory"
+          *ngIf="item.data.editable==false"
+          (click)="item.data.editable = true">
+            {{ item.data.dirName }}
+          </span>
+          <textarea
+            class="item-name-editor"
+            placeholder="Enter folder name"
+            type="text"
+
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            data-gramm_editor="false"
+            
+            style="display: flex; width: 120px; white-space: nowrap;"
+            rows="1"
+            
+            [attr.data-dataitem]="'dirItem-' + item.data.id"
+            [attr.data-isDirectory] = "item.data.directory"
+            
+            *ngIf="item.data.editable==true"
+            [(ngModel)]="item.data.dirName"
+            (blur)="saveDirChanges(item)"
+            (keydown.enter)="saveDirChanges(item)"
+            ></textarea>
+    </div>
+
+    <!-- file item-->
+    <div
+      *ngIf="item?.directory==false"
+      class="item"
+      id = "item-{{ item.id }}"
+      [attr.data-id] = "item.id"      
+      [attr.data-name]= "item.name"
+      [attr.data-dirId]= "item.dirId"
+      [attr.data-size]= "item.size"
+      [attr.data-type]= "item.type"
+      [attr.data-createdDate]= "item.createdDate"
+      [attr.data-modifiedDate]= "item.modifiedDate"
+      [attr.data-createdUserId]= "item.createdUserId"
+      [attr.data-modifiedUserUd]= "item.modifiedUserId"
+      [attr.data-isDirectory]= "item.directory"
+      (dblclick)="getItem($event, item)"
     >
       <div class="item-spinner"></div>
 
       <div class="item-icon" [attr.style]="this.style">
         <img
           src="../../assets/img/file-pdf.svg"
-          *ngIf="file.type == 'application/pdf'"
-          [attr.data-dataitem]="'item-' + file.id"
+          *ngIf="item.type == 'application/pdf'"
+          [attr.data-dataitem]="'item-' + item.id"
+          [attr.data-isDirectory]= "item.directory"
           class="item-icon-icon"
         />
         <img
           src="../../assets/img/file-png.svg"
-          [attr.data-dataitem]="'item-' + file.id"
-          *ngIf="file.type == 'image/png'"
+          [attr.data-dataitem]="'item-' + item.id"
+          [attr.data-isDirectory]= "item.directory"
+          *ngIf="item.type == 'image/png'"
           class="item-icon-icon"
         />
         <img
           src="../../assets/img/file-jpeg.svg"
-          [attr.data-dataitem]="'item-' + file.id"
-          *ngIf="file.type == 'image/jpeg'"
+          [attr.data-dataitem]="'item-' + item.id"
+          [attr.data-isDirectory]= "item.directory"
+          *ngIf="item.type == 'image/jpeg'"
           class="item-icon-icon"
         />
         <img
           src="../../assets/img/file-rtf.svg"
-          [attr.data-dataitem]="'item-' + file.id"
-          *ngIf="file.type == 'text/rtf'"
+          [attr.data-dataitem]="'item-' + item.id"
+          [attr.data-isDirectory]= "item.directory"
+          *ngIf="item.type == 'text/rtf'"
           class="item-icon-icon"
         />
         <img
           src="../../assets/img/file-zip.svg"
-          [attr.data-dataitem]="'item-' + file.id"
-          *ngIf="file.type == 'application/zip'"
+          [attr.data-dataitem]="'item-' + item.id"
+          [attr.data-isDirectory]= "item.directory"
+          *ngIf="item.type == 'application/zip'"
           class="item-icon-icon"
         />
         <img
           src="../../assets/img/file-txt.svg"
           *ngIf="
-            file.type != 'image/png' &&
-            file.type != 'application/pdf' &&
-            file.type != 'image/jpeg' &&
-            file.type != 'text/rtf' &&
-            file.type != 'application/zip'
+            item.type != 'image/png' &&
+            item.type != 'application/pdf' &&
+            item.type != 'image/jpeg' &&
+            item.type != 'text/rtf' &&
+            item.type != 'application/zip'
           "
           class="item-icon-icon"
-          [attr.data-dataitem]="'item-' + file.id"
+          [attr.data-dataitem]="'item-' + item.id"
+          [attr.data-isDirectory]= "item.directory"
         />
       </div>
 
-      <div class="item-badges" [attr.data-dataitem]="'item-' + file.id">
+      <div class="item-badges" 
+        [attr.data-dataitem]="'item-' + item.id"
+        [attr.data-isDirectory]= "item.directory"
+        >
         <img
           class="item-badge item-has-website-badge"
           src="../../assets/img/world.svg"
-          data-item-id="0"
+          [attr.data-dataitem]="'item-' + item.id"
+          [attr.data-isDirectory]= "item.directory"
         />
         <img
           class="item-badge item-badge-has-permission"
           style="display: none; background-color: #ffffff; padding: 2px"
           src="../../assets/img/shared-file.svg"
-          data-item-id="0"
+          [attr.data-dataitem]="'item-' + item.id"
+          [attr.data-isDirectory]= "item.directory"
         />
 
         <img
           class="item-badge item-is-shared"
           style="background-color: #ffffff; padding: 2px; display: none"
           src="../../assets/img/shared-owner.svg"
-          data-item-id="0"
+          [attr.data-dataitem]="'item-' + item.id"
+          [attr.data-isDirectory]= "item.directory"
         />
 		<!--
         <img
@@ -95,19 +195,34 @@
         />
 		-->
       </div>
-      <span class="item-name" data-item-id="0" title="">{{ file.name }}</span>
+      <span class="item-name"
+      [attr.data-dataitem]="'item-' + item.id"
+      [attr.data-isDirectory]= "item.directory"
+      *ngIf="item.editable==false"
+      (click)="item.editable = true">
+        {{ item.name }}</span>
       <textarea
         class="item-name-editor"
+        placeholder="Enter file name"
+        type="text"
+
         spellcheck="false"
         autocomplete="off"
         autocorrect="off"
         autocapitalize="off"
         data-gramm_editor="false"
-        style="display: none; width: 60px; height: 18px"
-      >
-			{{file.name}}
-		</textarea
-      >
+
+        style="display: flex; width: 120px; white-space: nowrap;"
+        rows="1"
+        
+        [attr.data-dataitem]="'item-' + item.id"
+        [attr.data-isDirectory]= "item.directory"
+
+        *ngIf="item.editable==true"
+        [(ngModel)]="item.name"
+        (blur)="saveFileChanges(item)"
+        (keydown.enter)="saveFileChanges(item)"
+      ></textarea>
     </div>
   </div>
 </div>

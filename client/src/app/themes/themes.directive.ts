@@ -5,10 +5,13 @@ import { Directive,
 } from '@angular/core';
 import { SpaceComponent } from './components/space/space.component';
 import { AmongComponent } from './components/among/among.component';
-import { MoonComponent } from './components/moon/moon.component'
-import { OceanComponent } from './components/ocean/ocean.component';
+import { MoonComponent } from './components/moon/moon.component';
+import { SolarSystemComponent } from './components/solarsystem/solarsystem.component';
 import {Store} from "@ngrx/store";
 import {EnvironmentState} from "../desktop/store/models/environment.state.model";
+import { PersistanceService } from '../services/persistance.service';
+import { Globals } from '../global';
+import { AddEnvironment } from '../desktop/store/actions/environment.action';
 
 
 @Directive({
@@ -17,30 +20,33 @@ import {EnvironmentState} from "../desktop/store/models/environment.state.model"
 export class ThemesDirective {
 
     desktop: Element | any;
+    theme: string | any;
 
 
     constructor(
         private componentFactoryResolver: ComponentFactoryResolver,
         private viewContainerRef: ViewContainerRef,
         private el: ElementRef,
-        private store: Store<{ environment: EnvironmentState}>
+        private store: Store<{ environment: EnvironmentState}>,
+        private persistanceService: PersistanceService,
+        private globals: Globals
     ) {
 
-        //desktop by default
-        const desktop = this.el.nativeElement;
+        if(persistanceService.getItem('theme')!= null){
+            this.theme = persistanceService.getItem('theme');
+            this.onThemeChange(this.theme);
+        }else{
+            this.theme = globals.currentTheme;
+            this.onThemeChange(this.theme);
+        }
 
-        desktop.style.backgroundImage = 'url("../../../../assets/img/background-gary-scott-space-unsplash.jpg")';
-        desktop.style.backgroundSize = 'contain';
-        
-
-        // Create a component factory for the SpaceComponent
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(SpaceComponent);
-
-        // Create an instance of the SpaceComponent
-        const componentRef = this.viewContainerRef.createComponent(componentFactory);
-
-        // Append the component's root element to the desktop element
-        desktop.appendChild(componentRef.location.nativeElement);
+        //set store for environment
+        const environment: { theme: string } = {
+            theme : this.theme!=null?this.theme:'space',
+        }
+  
+      // add to the store
+      this.store.dispatch( AddEnvironment(environment));
 
 
         //subscribe to theme change from redux store environment
@@ -58,7 +64,7 @@ export class ThemesDirective {
     ngOnDestroy(): void {
     }
 
-    onThemeChange(theme: string) {
+    onThemeChange(theme: any) {
 
         console.log('Selected theme changed:', theme);
         const desktop = this.el.nativeElement;
@@ -113,14 +119,14 @@ export class ThemesDirective {
             // Append the component's root element to the desktop element
             desktop.appendChild(componentRef.location.nativeElement);
 
-        } else if(theme === "ocean"){
+        } else if(theme === "solarsystem"){
 
             desktop.style.backgroundImage = '';
             desktop.style.backgroundSize = '';
-            desktop.style.background ='radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #B7E8EB 100%)';
+            desktop.style.background ='';
 
             // Create a component factory for the CirclesComponent
-            const componentFactory = this.componentFactoryResolver.resolveComponentFactory(OceanComponent);
+            const componentFactory = this.componentFactoryResolver.resolveComponentFactory(SolarSystemComponent);
 
             // Create an instance of the CirclesComponent
             const componentRef = this.viewContainerRef.createComponent(componentFactory);

@@ -15,11 +15,15 @@ import {ContextReducer} from './context.reducer'
 import {Environment} from "../models/environment.model";
 import {EnvironmentReducer} from './environment.reducer'
 
+import {Finder} from "../models/finder.model";
+import {FinderReducer} from './finder.reducer'
+
 export interface AppState {
   widgetPanel: WidgetPanel;
   navigator: Navigator;
   files: FileState,
   context: Context,
+  finder: Finder,
 environment: Environment
 }
 
@@ -28,6 +32,7 @@ export const reducers: ActionReducerMap<AppState> = {
   	navigator: NavigatorReducer,
     files: fileReducer,
     context: ContextReducer,
-    environment: EnvironmentReducer
+    environment: EnvironmentReducer,
+    finder: FinderReducer
 };
 	

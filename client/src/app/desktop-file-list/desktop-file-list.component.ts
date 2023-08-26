@@ -9,8 +9,14 @@ import { saveAs } from 'file-saver';
 import { environment } from 'src/environments/environment';
 import { DirState } from '../desktop/store/models/dir.state.model';
 import { Dir } from '../desktop/store/models/dir.model';
-import { File } from '../desktop/store/models/file.model';
 import { Subscription } from 'rxjs';
+import { DirUtils } from '../utils/dir-utils';
+import { ModService } from '../mod/mod.service';
+import { FinderState } from '../desktop/store/models/finder.state.model';
+import { AddFinder } from '../desktop/store/actions/finder.action';
+import { clone, cloneDeep } from 'lodash';
+import { DirService } from '../services/dir.service';
+import { loadFiles } from '../desktop/store/actions/file.actions';
 
 @Component({
 	selector: 'app-desktop-file-list',
@@ -18,23 +24,25 @@ import { Subscription } from 'rxjs';
 	styleUrls: ['./desktop-file-list.component.sass']
 })
 
-export class DesktopFileListComponent implements DoCheck, OnInit  {
+export class DesktopFileListComponent implements OnInit  {
 
 	@ViewChild('container') input: ElementRef | undefined;
 	
 	allFiles: any;
 	files: any
-	dirs: Dir | undefined;
+
+	dirs: any;
+	allDirs: any;
+
+	items: any;
 
 	currentFolderPath: String | undefined;
 	currentFolderId: String | undefined;
 	
-	//input props for file-list component
-	@Input() showFolderPath: string | undefined;
-	@Input() showFolderId: string | undefined;
-	
 	@Input() style: string | undefined;
 
+	// editable props for file-list component
+	editable: boolean = false;
 
 	// declare for dragula service
 	BAG = "DRAGULA_FILE_LIST";
@@ -44,14 +52,20 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 		private dragulaService: DragulaService,
 		private element: ElementRef,
 		private fileService: FileService,
-		private store: Store<{files: FileState, dirs: DirState}>,
+		private dirService: DirService,
+		private store: Store<{files: FileState, dirs: DirState, finder: FinderState}>,
 		private http: HttpClient,
+		private modService: ModService,
+		private viewContainerRef: ViewContainerRef
 	) {
 		//by default is 'Desktop'
 		this.currentFolderPath = 'Desktop';
 		this.currentFolderId = '';
+		
 		this.allFiles = [];
 		this.files = [];
+
+		this.allDirs = [];
 
 		//add dblclk event listeenr for every item
 		const items = document.getElementsByClassName("item");
@@ -65,22 +79,51 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 		//subscribe on events for store 'files'
 		this.store.select('files').subscribe((data: any) => {			
 			//console.log(data.files);
-			this.dirs = data.dirs;
+			this.allDirs = data.dirs;
 
-			let dirId: null = null;
-			this.dirs?.children?.forEach((dir: any) => {
+			this.allDirs?.children?.forEach((dir: any) => {
 				//console.log(dir.data.dirName);
-				if(dir.data.dirName == this.currentFolderPath){
-					dirId = dir.data.id;
-					this.showFolderPath = dir.data.dirName;
-					this.showFolderId = dir.data.id;
+				if(dir.data.dirName == this.currentFolderPath){					
 					this.currentFolderId = dir.data.id;
 				}
 			});
 
 			this.allFiles = data.files;
-			this.files = data.files.filter((file: any) => file.dirId == dirId);
+			this.files = data.files.filter((file: any) => file.dirId == this.currentFolderId);
 			
+			//need rerender dirs list where dir.parentId == dirId						
+				//find dirs by id
+				if(this.currentFolderId != undefined || this.allDirs != undefined || this,this.currentFolderId != null) {				
+					const currentDir = DirUtils.getDir(this.allDirs, Number.parseInt(this.currentFolderId.toString()));
+					console.log(currentDir)
+					if(currentDir && currentDir.children && currentDir.children.length != 0){
+						if(currentDir.data.dirName != '/'){
+							this.dirs = currentDir.children;
+						}
+						
+					}else{
+						this.dirs = [];
+					}
+				}
+				//add editable prop to files uses lodash clone
+				this.files = this.files.map((file: any) => {
+					const newFile = clone(file);
+					newFile.editable = false;
+					return newFile;
+				  });
+
+				//add editable prop to dirs uses lodash clone
+				this.dirs = this.dirs.map((dir: any) => {
+					const newDir = cloneDeep(dir);
+					newDir.data.editable = false;
+					return newDir;
+				});
+
+				//need merge files and dirs to items list
+				this.items = this.files;			
+				this.items = this.items.concat(this.dirs);
+				//console.log(this.items);
+
 		})
 
 		//dragula subscription
@@ -115,44 +158,14 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 		// destroy dragula subscription
 		this.subs.unsubscribe();
 	}
-
-	//dragula methods
-	/*
-	addClass(el: any, name: any) {
-		el.classList.add(name);
-	};
-
-	removeClass(el: any, name: any) {
-		el.classList.remove(name);
-	};
-	*/
-
-	ngDoCheck() {
-		if(this.showFolderId != this.currentFolderId){ 
-			this.currentFolderId = this.showFolderId;
-			this.currentFolderPath = this.showFolderPath!;
-			
-			let dirId: null = null;
-			this.dirs?.children?.forEach((dir: any) => {
-				//console.log(dir.data.dirName);
-				if(dir.data.dirName == this.currentFolderPath){
-					dirId = dir.data.id;
-				}
-			});
-			//console.log('dirId = ' + dirId);
 	
-			//need rerender files list where file.dirId == dirId
-			this.files = this.allFiles.filter((file: any) => file.dirId == dirId);
-		}
-	  }
-
 	ngOnInit(): void {
 
 	}
 
 	ngAfterViewInit() {
 		//if (this.element.nativeElement.attributes.childToMaster == 'Desktop') {
-			console.log('childToMaster = ' + this.element.nativeElement.attributes.childToMaster)
+			//console.log('childToMaster = ' + this.element.nativeElement.attributes.childToMaster)
 		//}
 	}
 
@@ -165,6 +178,121 @@ export class DesktopFileListComponent implements DoCheck, OnInit  {
 					saveAs(blob, file.name);
 				}
 			)
+	}
+	
+	//open dir in the finder
+	openFinder(e: MouseEvent, id: String, name: String, item: any) {
+		e.preventDefault();
+		
+		//if finder is not opened
+		if(!this.modService.isModalExists('finder')){
+
+			//console.log(item);
+			
+			// set store finder
+			let breadcrumbs : any  = [];
+			breadcrumbs.push({name: 'Desktop', id: item.data.parentId});
+			breadcrumbs = [...breadcrumbs];
+			breadcrumbs.push({name: item.data.dirName, id: item.data.id});
+
+			//console.log(breadcrumbs);
+			
+			//set store for finder
+			const finder: { currentDir: any, currentDirId: any, breadcrumbs: any, items: number, selectedItems: number } = {
+				currentDir : item.data.dirName,
+				currentDirId : item.data.id,
+				breadcrumbs: breadcrumbs,
+				items: 0,
+				selectedItems: 0
+				}
+
+			// add to the store
+			this.store.dispatch( AddFinder(finder));
+			
+			// open dir in the finder
+			this.modService.setRootViewContainerRef(this.viewContainerRef);
+			this.modService.addDynamicComponent(id.toString(), name.toString());
+		}
+	}
+
+	saveDirChanges(item: any) {
+		item.data.editable = false;
+		//console.log('save changes');
+		//console.log(item);
+		
+		let newName = item.data.dirName;		
+
+		//if name is empty
+		if(newName.length == 0){
+			newName = 'New Folder';
+		}
+
+		//remove from the name all symbols sql injection and html injection and stay - _, space, +, =, ( , )
+		newName = newName.replace(/[^a-zA-Z0-9-_+=()., ]/g, '');
+
+		//remove symbols when length > 50
+		if(newName.length > 50){
+			newName = newName.substring(0, 50);
+		}		
+
+		item.data.dirName = newName;
+		
+		//need to save changes in the store but before need to know similar dir or file and add to the new name (1) or (2) or (3) etc
+		const similarItems = this.items.filter((i: any) => i?.data?.dirName == newName);
+		//console.log(similarItems);
+		if(similarItems.length > 1){
+			//need to add (1) or (2) or (3) etc
+			const newSimilarName = newName + '(' + similarItems.length + ')';
+			console.log(newSimilarName);
+			item.data.dirName = newSimilarName;
+		}
+
+		//need save changes in the store and in the server
+		this.dirService.updateDir(item.data).subscribe((data: any) => {
+			//if res is true need to update store
+			if(data){				
+				//update store and ls
+				this.store.dispatch((loadFiles()))				
+			}
+		});
+	}
+
+	saveFileChanges(item: any) {
+		let newName = item.name;		
+
+		//if name is empty
+		if(newName.length == 0){
+			newName = 'New File';
+		}
+
+		//remove from the name all symbols sql injection and html injection and stay - _, space, +, =, ( , )
+		newName = newName.replace(/[^a-zA-Z0-9-_+=()., ]/g, '');
+
+		//remove symbols when length > 50
+		if(newName.length > 50){
+			newName = newName.substring(0, 50);
+		}		
+
+		item.name = newName;
+		
+		//need to save changes in the store but before need to know similar dir or file and add to the new name (1) or (2) or (3) etc
+		const similarItems = this.items.filter((i: any) => i?.name == newName);
+		//console.log(similarItems);
+		if(similarItems.length > 1){
+			//need to add (1) or (2) or (3) etc
+			const newSimilarName = newName + '(' + similarItems.length + ')';
+			console.log(newSimilarName);
+			item.name = newSimilarName;
+		}
+
+		//need save changes in the store and in the server
+		this.fileService.updateFile(item).subscribe((data: any) => {
+			//if res is true need to update store
+			if(data){				
+				//update store and ls
+				this.store.dispatch((loadFiles()))				
+			}
+		});
 	}
 
 }

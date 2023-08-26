@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ViewEncapsulation, ElementRef, HostListener } from "@angular/core";
 import { ModService } from "./mod.service";
 import { Globals } from "../global";
+import { ContextMenuService } from '../context-menu/context-menu.service';
 
 
 const enum Status {
@@ -34,7 +35,8 @@ export class ModComponent implements OnInit, AfterViewInit {
 	constructor(
 		private el: ElementRef,
 		private modService: ModService,
-		private globals : Globals
+		private globals : Globals,
+		private contextMenuService: ContextMenuService
 		) {
 
 		this.element = el.nativeElement;
@@ -58,13 +60,33 @@ export class ModComponent implements OnInit, AfterViewInit {
 		this.element.classList.add('app-modal-opened');
 		this.element.classList.add('scale-in-center');
 
-		this.element.childNodes[0].style.minWidth = '300px';
-		this.element.childNodes[0].style.minHeight = '200px';
-		this.element.childNodes[0].style.width = '600px';
-		this.element.childNodes[0].style.height = '350px';
-		this.element.childNodes[0].style.top = 'calc(15% + 0px)';
-		this.element.childNodes[0].style.left = '405px';
-		this.element.childNodes[0].style.zIndex = '1';
+		//need to know info about current desktop size and set up new modal window
+		const calcWidth = document.body.clientWidth
+		const calcHeight = document.body.clientHeight;
+
+		let modalWindow = this.element.childNodes[0];
+
+		//by default
+		modalWindow.style.minWidth = '300px';
+		modalWindow.style.minHeight = '200px';
+		modalWindow.style.width = '600px';
+		modalWindow.style.height = '350px';
+
+		if(calcHeight < 350){
+			modalWindow.style.top = 10 + 'px';
+			modalWindow.style.height = calcHeight - 20 + 'px';
+		}else{
+			modalWindow.style.top = (calcHeight - 350)/2 + 'px';
+		}
+		
+		if(calcWidth < 600){
+			modalWindow.style.left = 10 + 'px';	
+			modalWindow.style.width = calcWidth - 20 + 'px';			
+		}else{
+			modalWindow.style.left = (calcWidth - 600)/2 + 'px';
+		}
+		
+		modalWindow.style.zIndex = '1';
 
 
 		//set new position for new window +30px top and +30px left
@@ -100,28 +122,13 @@ export class ModComponent implements OnInit, AfterViewInit {
 	/**
 	 * set modal active, when it was minimized before or by click on the window
 	 */
-	active(): void {
+	active(): void {		
 		//console.log(this.element.classList)
-
 		//if window minimized and saved in the store
 		if (this.element.classList.contains('minimized')) {
-
-			this.element.childNodes[0].style.minWidth = '300px'; //we need this hack for resizing
-			this.element.childNodes[0].style.minHeight = '200px'; //we need this hack for resizing
-			this.element.childNodes[0].style.width = '600px';
-			this.element.childNodes[0].style.height = '350px';
-			this.element.childNodes[0].style.top = 'calc(15% + 0px)';
-			this.element.childNodes[0].style.left = '405px';
-			this.element.childNodes[0].classList.remove('minimized');
-
-
+			this.element.classList.remove('minimized');
 		} else {
-			//when window hasn't minimized state and need to be again active 
-			//this.setNewPosition();
-			//this.element.classList.add('app-modal-opened');
-			//this.element.classList.add('scale-in-center');
-
-			
+			//when window hasn't minimized state and need to be again active 						
 			let opened = document.getElementsByClassName('app-modal-opened');
 			//for all modals are state z-index = 0
 			for (var i = 0; i < opened.length; i++) {
@@ -204,13 +211,9 @@ export class ModComponent implements OnInit, AfterViewInit {
 	 */
 	minimize(): void {
 		//minimized window
-		console.log('minimized')
-		//console.log(this.element.childNodes[0])
+		console.log('minimized')		
 		this.element.classList.add('minimized');
-		this.element.childNodes[0].style.minWidth = '0px';
-		this.element.childNodes[0].style.minHeight = '0px';
-		this.element.childNodes[0].style.width = '0px';
-		this.element.childNodes[0].style.height = '0px';
+		
 	}
 
 	/**
@@ -218,15 +221,37 @@ export class ModComponent implements OnInit, AfterViewInit {
 	 */
 	maximize(): void {
 
+		console.log('maximized')
+
 		//if window was maximized -> to normal state
 		if (this.element.classList.contains('maximized')) {
 
 			this.element.classList.remove('maximized');
 
-			this.element.childNodes[0].style.top = 'calc(15% + 0px)';
-			this.element.childNodes[0].style.left = '405px';
-			this.element.childNodes[0].style.width = '600px';
-			this.element.childNodes[0].style.height = '350px';
+		//need to know info about current desktop size and set up new modal window
+		const calcWidth = document.body.clientWidth
+		const calcHeight = document.body.clientHeight;
+
+		let modalWindow = this.element.childNodes[0];
+
+		//by default
+		modalWindow.style.width = '600px';
+		modalWindow.style.height = '350px';
+
+		if(calcHeight < 350){
+			modalWindow.style.top = 10 + 'px';
+			modalWindow.style.height = calcHeight - 20 + 'px';
+		}else{
+			modalWindow.style.top = (calcHeight - 350)/2 + 'px';
+		}
+		
+		if(calcWidth < 600){
+			modalWindow.style.left = 10 + 'px';	
+			modalWindow.style.width = calcWidth - 20 + 'px';			
+		}else{
+			modalWindow.style.left = (calcWidth - 600)/2 + 'px';
+		}
+		
 
 		} else {
 			//when window get maximization at the first
@@ -379,6 +404,26 @@ export class ModComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+	/**
+	 * close context menu from modal window
+	 * @param event 
+	 * hard code to remove context menu from modal window
+	 * first - remove component from html tree
+	 * second - remove context identificator from context service
+	 */
+	closeContextMenu(event:any): void {
+		console.log('close context menu')
+		//this.contextMenuService.closeContextMenu.emit(event);
+		//find element with class context-menu
+		let contextMenu = document.getElementsByClassName('context-menu');
+		//disable this element
+		if(contextMenu[0] != null){
+			contextMenu[0].remove();
+			this.contextMenuService.removeAllFromContext();
+		}
+
+	}
+
 
 	@HostListener("document:mouseup")
 	stopMove() {
@@ -403,4 +448,3 @@ function getPosition(elem: HTMLElement) {
 		left: box.left + scrollX
 	};
 }
-

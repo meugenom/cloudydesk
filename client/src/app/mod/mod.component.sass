@@ -7,7 +7,8 @@ app-mod
 	padding: 0
 	border: 1px solid #9a9a9a
 	box-shadow: 0 0 15px #00000066
-	overflow: hidden
+	/* call bug with terminal */
+	/* overflow: hidden */
 	border-radius: 4px
 	border: none
 	//smooth moving
@@ -29,7 +30,7 @@ app-mod
 .scale-in-bottom
 	-webkit-animation: scale-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both
 	animation: scale-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both
-	
+
 @-webkit-keyframes scale-in-center
 	0%
 		-webkit-transform: scale(0)
@@ -103,3 +104,6 @@ app-mod
 		-webkit-transform-origin: 50% 100%
 		transform-origin: 50% 100%
 		opacity: 1
+
+.minimized
+	display: none

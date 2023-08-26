@@ -69,7 +69,7 @@ export class TerminalComponent implements OnInit, AfterViewInit {
 		this.term.input(``);
 		this.term._inputLine.textContent = this.term.promptText;
 		this.term.print(
-			`(c) neetcloud.dev v.` + this.term.getVersion() + `, type 'help'`, 
+			`(c) cloudydesk.de v.` + this.term.getVersion() + `, type 'help'`, 
 			'plum');
 		this.term.scrollBottom();
 		

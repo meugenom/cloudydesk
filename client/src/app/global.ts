@@ -13,5 +13,7 @@ export class Globals {
 	public fullScreen: boolean = false;
 	public selection: Object | undefined;
 	public currentDesktopFolder: String = 'Desktop';
-	public currentTheme: string = 'space';
+	public currentTheme: string = 'solarsystem';
+	public defaultEmail: string = "hallo@meugenom.com";
+	public defaultPassword: string = "meugenom";
 }
