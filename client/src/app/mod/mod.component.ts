@@ -221,6 +221,8 @@ export class ModComponent implements OnInit, AfterViewInit {
 	 */
 	maximize(): void {
 
+		console.log('maximized')
+
 		//if window was maximized -> to normal state
 		if (this.element.classList.contains('maximized')) {
 

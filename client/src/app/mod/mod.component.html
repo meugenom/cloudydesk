@@ -2,23 +2,26 @@
 <div class="window" [attr.id]="id" (click)="active(); $event.stopPropagation()"
 (click)="closeContextMenu($event); $event.stopPropagation()"
   >
-  <span class="window-action-btn">
-    <img
-      (click)="close($event); $event.stopPropagation()"
+  <span class="window-action-btn btn-close"
+    (click)="close($event); $event.stopPropagation()"
+    >
+    <img      
       src="../../assets/img/btn-close.svg"
       alt="btn-close-icon"
     />
   </span>
-  <span class="window-action-btn" style="left: 20px">
+  <span class="window-action-btn btn-minimize" style="left: 20px"
+    (click)="minimize(); $event.stopPropagation()"
+    >
     <img
-      (click)="minimize(); $event.stopPropagation()"
       src="../../assets/img/btn-minimize.svg"
       alt="btn-minimize-icon"
     />
   </span>
-  <span class="window-action-btn" style="left: 40px">
+  <span class="window-action-btn btn-maximize" style="left: 40px"
+    (click)="maximize(); $event.stopPropagation()"
+    >
     <img
-      (click)="maximize(); $event.stopPropagation()"
       src="../../assets/img/btn-open.svg"
       alt="btn-maximize-icon"
     />

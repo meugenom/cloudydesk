@@ -1,0 +1,62 @@
+.window-action-btn
+  position: absolute
+  margin-right: 5px
+  margin-left: 5px
+  padding-bottom: 3px
+  opacity: 1
+  z-index: 1
+
+//close button
+.btn-close::before, .btn-close::after
+  content: ""
+  position: absolute
+  width: 1px
+  height: 25%
+  background-color: black
+  top: 11px
+  left: 50%
+  transform: translateX(-50%)
+  opacity: 0
+  transition: opacity 0.3s ease-in
+
+.btn-close:hover::before, .btn-close:hover::after
+  opacity: 1
+
+.btn-close::before
+  transform: translateX(-50%) rotate(45deg)
+
+.btn-close::after
+  transform: translateX(-50%) rotate(-45deg)
+
+//button minimize
+.btn-minimize::before
+  content: ""
+  position: absolute
+  width: 30%
+  height: 1px
+  background-color: black
+  top: 52%
+  left: 7px
+  transform: translateY(-50%)
+  opacity: 0 //start with opacity 0
+  transition: opacity 0.3s ease-in
+
+.btn-minimize:hover::before
+  opacity: 1
+
+//button maximize
+.btn-maximize::before
+  content: ""
+  position: absolute
+  width: 6px
+  height: 6px
+  border: 1px solid black
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  opacity: 0 //start with opacity 0
+  transition: opacity 0.3s ease-in
+
+.btn-maximize:hover::before
+  opacity: 1
+
