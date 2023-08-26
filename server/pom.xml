@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>dev.cloudydesk</groupId>
 	<artifactId>api-cloudydesk</artifactId>
-	<version>0.2.4-SNAPSHOT</version>
+	<version>0.3.0-SNAPSHOT</version>
 	<name>api-cloudydesk</name>
 	<description>CloudyDesk API</description>
 	<properties>
