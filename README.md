@@ -70,11 +70,11 @@ Here is a way to run the project locally:
 
 ```bash
 	# install docker and download image using command below
-	docker pull meugenom/cloudydesk:0.2.4
+	docker pull meugenom/cloudydesk:0.3.0
 	# see images
 	docker images
 	# run image with the folowing command
-	docker run -d --name cloudydesk-container -e POSTGRES_USER=cloudydesk -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 cloudydesk:0.2.5
+	docker run -d --name cloudydesk-container -e POSTGRES_USER=cloudydesk -e POSTGRES_PASSWORD=password -p 5432:5432 -p 8080:8080 -p 8081:8081 cloudydesk:0.3.0
 	# see started containers
 	docker ps
 	# after wann container is launched, run the command to connect to the container
