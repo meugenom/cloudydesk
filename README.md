@@ -14,16 +14,10 @@
 <p align="center">
   	<a href="https://cloudydesk.de" >See Demo</a>
   	<br>
-  	<b>Anonymous User was deleted. Please create own account or use current:</b>
+  	<b>Logging into the demo site automatically as the user hallo@meugenom.com</b>
 </p>
 <p align="center">
-	<b>login: muster@muster.muster</b>
-</p>
-<p align="center">
-	<b>password: muster</b>
-</p>
-<p align="center">
-  <img src="./assets/screenshot08062023.png" data-canonical-src="./assets/screenshot08062023.png"/>
+  <img src="./assets/screenshot26082023.png" data-canonical-src="./assets/screenshot26082023.png"/>
 </p>
 
 ## About
