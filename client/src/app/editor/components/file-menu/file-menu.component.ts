@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-file-menu',
+  selector: 'editor-file-menu',
   templateUrl: './file-menu.component.html',
   styleUrls: ['./file-menu.component.sass']
 })
