@@ -37,8 +37,23 @@ export class TaskbarComponent implements OnInit {
 	
 	openMod(e: MouseEvent, id: String, name: String) {
 		e.preventDefault();
+
 		this.modService.setRootViewContainerRef(this.viewContainerRef);
 		this.modService.addDynamicComponent(id.toString(), name.toString());
+
+		/**
+		 * Lazy load editor module and editor service
+		 */
+		if(id=='editor'){
+			//lazy load module and service
+			import('../editor/editor.module').then(m => {			
+				console.log('Lazy module loaded');
+		  	});
+
+			import ('../editor/editor.service').then(m => {
+				console.log('Lazy service loaded');
+		  	});
+		}
 	}
 
 	notify() {
