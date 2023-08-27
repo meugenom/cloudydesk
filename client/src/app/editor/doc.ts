@@ -133,7 +133,7 @@ export default {
 		content: [
 		  {
 			type: "text",
-			text: "To start using neetcloud.dev, simply visit the website at "
+			text: "To start using cloudydesk.de, simply visit the website at "
 		  },
 		  {
 			type: "text",
@@ -141,13 +141,13 @@ export default {
 			  {
 				type: "link",
 				attrs: {
-				  href: "https://neetcloud.dev",
-				  title: "https://neetcloud.dev",
+				  href: "https://cloudydesk.de",
+				  title: "https://cloudydesk.de",
 				  target: "_blank"
 				}
 			  }
 			],
-			text: "https://neetcloud.dev"
+			text: "https://cloudydesk.de"
 		  },
 		  {
 			type: "text",
