@@ -27,6 +27,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { DesktopFileListModule } from './desktop-file-list/desktop-file-list.module';
 import { FinderFileListModule } from './finder-file-list/finder-file-list.module';
 
+import { EditorComponent } from './editor/editor.component';
+
 
 //global values
 import { Globals } from './global';
@@ -65,12 +67,10 @@ import { UploadingComponent } from './context-menu/components/uploading/uploadin
 import { uploadingModule } from './context-menu/components/uploading/uploading.module';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
+import { MobileComponent } from './mobile/mobile.component';
 
-import { EditorModule } from './editor/editor.module';
-import { EditorService } from './editor/editor.service';
-//import { NgxEditorModule } from 'ngx-editor';
-//import { FileMenuComponent } from './editor/components/file-menu/file-menu.component';
-//import { EditorComponent } from './editor/editor.component';
+import { NgxEditorModule } from 'ngx-editor';
+import { FileMenuComponent } from './file-menu/file-menu.component';
 
 import {ThemesModule} from "./themes/themes.module";
 import {ThemesDirective} from "./themes/themes.directive";
@@ -87,6 +87,7 @@ import {DirService} from "./services/dir.service";
 		FinderComponent,
 		DrawComponent,
 		TerminalComponent,
+		EditorComponent,
 		CameraComponent,
 		SettingsComponent,
 		ModComponent,
@@ -104,6 +105,8 @@ import {DirService} from "./services/dir.service";
 		ClockComponent,
 		UploadingComponent,
   		NotificationComponent,
+    MobileComponent,
+    FileMenuComponent
 	],
 	imports: [
 		AppRoutingModule,
@@ -123,7 +126,7 @@ import {DirService} from "./services/dir.service";
 			autoPause: true, // Pauses recording actions and state changes when the extension window is not open
 		}),
 		EffectsModule.forRoot([]),
-		EditorModule,
+		NgxEditorModule,
 		ThemesModule
 	],
 	providers: [ModService, Globals, ContextMenuService,
@@ -132,8 +135,7 @@ import {DirService} from "./services/dir.service";
 		AuthGuard,
 		NotificationService,
 		PersistanceService,
-		DirService,
-		EditorService
+		DirService
 	],
 	bootstrap: [AppComponent]
 })

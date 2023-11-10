@@ -43,10 +43,10 @@ export class EditorComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		this.editor = new Editor();
-		console.log('EditorComponent - ngOnInit');
 	}
 
 	ngOnDestroy(): void {
 		this.editor.destroy();
-	}
+	  }
+
 }

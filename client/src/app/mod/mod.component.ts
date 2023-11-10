@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ViewEncapsulation, ElementRef, HostListener, ViewChild, ViewContainerRef } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ViewEncapsulation, ElementRef, HostListener } from "@angular/core";
 import { ModService } from "./mod.service";
 import { Globals } from "../global";
 import { ContextMenuService } from '../context-menu/context-menu.service';
-import { EditorService } from "../editor/editor.service";
 
 
 const enum Status {
@@ -32,17 +31,12 @@ export class ModComponent implements OnInit, AfterViewInit {
 	resizing = false
 	shift = { x: 0, y: 0 }
 	styleArr : String[];
-	
-	//lazy loading editor component
-	@ViewChild('editorContainer', { read: ViewContainerRef }) editorContainer!: ViewContainerRef;
-
 
 	constructor(
 		private el: ElementRef,
 		private modService: ModService,
 		private globals : Globals,
-		private contextMenuService: ContextMenuService,
-		private editorService: EditorService
+		private contextMenuService: ContextMenuService
 		) {
 
 		this.element = el.nativeElement;
@@ -118,14 +112,6 @@ export class ModComponent implements OnInit, AfterViewInit {
 	ngAfterViewInit(): void {
 		//console.log('Add element to modals store')
 		this.modService.add(this);
-		
-		// lazy load editor component
-		if(this.id == 'editor'){
-			setTimeout(() => 
-			this.editorService.loadEditorComponent(this.editorContainer)
-			, 0);
-
-		}
 	}
 
 

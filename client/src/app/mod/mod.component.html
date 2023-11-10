@@ -41,8 +41,9 @@
   <ng-container *ngIf="id == 'finder'">
     <app-finder [attr.showFolder]="this.folder"></app-finder>
   </ng-container>
-
-  <ng-container *ngIf="id == 'editor'" #editorContainer></ng-container>
+  <ng-container *ngIf="id == 'editor'">
+    <app-editor></app-editor>
+  </ng-container>
   <ng-container *ngIf="id == 'draw'">
     <app-draw></app-draw>
   </ng-container>
