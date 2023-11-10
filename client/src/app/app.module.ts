@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -64,6 +66,12 @@ import { uploadingModule } from './context-menu/components/uploading/uploading.m
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
 
+import { EditorModule } from './editor/editor.module';
+import { EditorService } from './editor/editor.service';
+//import { NgxEditorModule } from 'ngx-editor';
+//import { FileMenuComponent } from './editor/components/file-menu/file-menu.component';
+//import { EditorComponent } from './editor/editor.component';
+
 import {ThemesModule} from "./themes/themes.module";
 import {ThemesDirective} from "./themes/themes.directive";
 import {PersistanceService} from "./services/persistance.service";
@@ -115,6 +123,7 @@ import {DirService} from "./services/dir.service";
 			autoPause: true, // Pauses recording actions and state changes when the extension window is not open
 		}),
 		EffectsModule.forRoot([]),
+		EditorModule,
 		ThemesModule
 	],
 	providers: [ModService, Globals, ContextMenuService,
@@ -123,7 +132,8 @@ import {DirService} from "./services/dir.service";
 		AuthGuard,
 		NotificationService,
 		PersistanceService,
-		DirService
+		DirService,
+		EditorService
 	],
 	bootstrap: [AppComponent]
 })
