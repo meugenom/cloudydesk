@@ -66,22 +66,7 @@
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "production",
-          
-          "optimization": {
-            "minimizer": [
-              {
-                "name": "terser",
-                "options": {
-                   "mangle": true,
-                   "keep_fnames": false,
-                   "output": {
-                      "comments": false
-                   }
-                }
-              }
-            ]
-          }
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
