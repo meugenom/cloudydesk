@@ -6,6 +6,10 @@ This project was written in 2023 — **before the AI** era.
 It represents a fullstack approach (Spring Boot + Angular) 
 that I no longer pursue.
 
+> Last commit: November 2023.
+> Code written entirely without AI assistance.
+> Archived as-is — a snapshot of that time.
+
 **Why archived:**
 The backend dependency made it heavy.
 The world changed. I changed.
