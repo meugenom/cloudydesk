@@ -1,5 +1,29 @@
 # CloudyDesk App
 
+## ⚠️ Project Status: Archived
+
+This project was written in 2023 — **before the AI** era.
+It represents a fullstack approach (Spring Boot + Angular) 
+that I no longer pursue.
+
+**Why archived:**
+The backend dependency made it heavy.
+The world changed. I changed.
+
+**What comes next:**
+A new desktop concept — same idea, different philosophy:
+- No backend
+- IndexedDB only — everything local
+- WebAssembly interface for native apps
+- SDL3/C++ SIL drone simulator as first embedded app
+
+> Old code is not bad code.
+> It shows where you were.
+> New code shows where you're going.
+
+— Eugen, March 2026
+
+
 [![Version](https://img.shields.io/badge/version-0.3.0-yellow.svg)](https://semver.org/spec/v1.0.0.html)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
