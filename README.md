@@ -11,7 +11,7 @@ The backend dependency made it heavy.
 The world changed. I changed.
 
 **What comes next:**
-A new desktop concept — same idea, different philosophy:
+A [new desktop concept](https://github.com/meugenom/ng-desktop) — same idea, different philosophy:
 - No backend
 - IndexedDB only — everything local
 - WebAssembly interface for native apps
